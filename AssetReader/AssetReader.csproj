@@ -5,4 +5,14 @@
     <RootNamespace>SoarCraft.QYun.AssetReader</RootNamespace>
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="NewFile1.txt" />
+    <None Remove="NewFile2.txt" />
+    <None Remove="NewFile3.txt" />
+    <None Remove="Unity3D\NewFile1.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Structs\" />
+    <Folder Include="Unity3D\" />
+  </ItemGroup>
 </Project>
