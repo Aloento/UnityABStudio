@@ -1,6 +1,5 @@
-﻿namespace SoarCraft.QYun.AssetReader.Entities.Enums {
-    public enum ClassIDType
-    {
+namespace SoarCraft.QYun.AssetReader.Entities.Enums {
+    public enum ClassIDType {
         UnknownType = -1,
         Object = 0,
         GameObject = 1,

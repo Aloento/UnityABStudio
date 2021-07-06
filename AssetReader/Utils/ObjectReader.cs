@@ -1,36 +1,36 @@
-namespace SoarCraft.QYun.AssetReader.Unity3D {
+namespace SoarCraft.QYun.AssetReader.Utils {
     using System;
     using Entities.Enums;
-    using Utils;
+    using Entities.Structs;
 
     public sealed class ObjectReader : UnityReader {
-        public SerializedFile AssetsFile;
-        public long MPathId;
-        public long ByteStart;
-        public uint ByteSize;
-        public ClassIdType Type;
-        public SerializedType SerializedType;
-        public BuildTarget Platform;
-        public SerializedFileFormatVersion MVersion;
+        public SerializedFile assetsFile;
+        public long m_PathID;
+        public long byteStart;
+        public uint byteSize;
+        public ClassIDType type;
+        public SerializedType serializedType;
+        public BuildTarget platform;
+        public SerializedFileFormatVersion m_Version;
 
-        public int[] Version => this.AssetsFile.Version;
-        public BuildType BuildType => this.AssetsFile.BuildType;
+        public int[] version => this.assetsFile.version;
+        public BuildType buildType => this.assetsFile.buildType;
 
-        public ObjectReader(EndianBinaryReader reader, SerializedFile assetsFile, ObjectInfo objectInfo) : base(reader.BaseStream, reader.endian) {
-            this.AssetsFile = assetsFile;
-            this.MPathId = objectInfo.m_PathID;
-            this.ByteStart = objectInfo.byteStart;
-            this.ByteSize = objectInfo.byteSize;
-            if (Enum.IsDefined(typeof(ClassIdType), objectInfo.classID)) {
-                this.Type = (ClassIdType)objectInfo.classID;
+        public ObjectReader(UnityReader reader, SerializedFile assetsFile, ObjectInfo objectInfo) : base(reader) {
+            this.assetsFile = assetsFile;
+            this.m_PathID = objectInfo.m_PathID;
+            this.byteStart = objectInfo.byteStart;
+            this.byteSize = objectInfo.byteSize;
+            if (Enum.IsDefined(typeof(ClassIDType), objectInfo.classID)) {
+                this.type = (ClassIDType)objectInfo.classID;
             } else {
-                this.Type = ClassIdType.UnknownType;
+                this.type = ClassIDType.UnknownType;
             }
-            this.SerializedType = objectInfo.serializedType;
-            this.Platform = assetsFile.MTargetPlatform;
-            this.MVersion = assetsFile.Header.m_Version;
+            this.serializedType = objectInfo.serializedType;
+            this.platform = assetsFile.m_TargetPlatform;
+            this.m_Version = assetsFile.header.m_Version;
         }
 
-        public void Reset() => Position = this.ByteStart;
+        public void Reset() => this.Position = this.byteStart;
     }
 }

@@ -1,69 +1,67 @@
 namespace SoarCraft.QYun.AssetReader {
     using System.IO;
+    using Utils;
 
-    public class ResourceReader
-    {
+    public class ResourceReader {
         private bool needSearch;
         private string path;
         private SerializedFile assetsFile;
         private long offset;
-        private int size;
-        private BinaryReader reader;
+        private long size;
+        private UnityReader reader;
 
-
-        public ResourceReader(string path, SerializedFile assetsFile, ulong offset, int size)
-        {
+        public ResourceReader(string path, SerializedFile assetsFile, long offset, long size) {
             needSearch = true;
             this.path = path;
             this.assetsFile = assetsFile;
-            this.offset = (long)offset;
+            this.offset = offset;
             this.size = size;
         }
 
-        public ResourceReader(BinaryReader reader, long offset, int size)
-        {
+        public ResourceReader(UnityReader reader, long offset, long size) {
             this.reader = reader;
             this.offset = offset;
             this.size = size;
         }
 
-        public byte[] GetData()
-        {
-            if (needSearch)
-            {
+        private UnityReader GetReader() {
+            if (needSearch) {
                 var resourceFileName = Path.GetFileName(path);
-
-                if (assetsFile.AssetsManager.ResourceFileReaders.TryGetValue(resourceFileName, out reader))
-                {
+                if (assetsFile.assetsManager.resourceFileReaders.TryGetValue(resourceFileName, out reader)) {
                     needSearch = false;
-                    reader.BaseStream.Position = offset;
-                    return reader.ReadBytes(size);
+                    return reader;
                 }
-
-                var assetsFileDirectory = Path.GetDirectoryName(assetsFile.FullName);
-                var resourceFilePath = assetsFileDirectory + Path.DirectorySeparatorChar + resourceFileName;
-                if (!File.Exists(resourceFilePath))
-                {
+                var assetsFileDirectory = Path.GetDirectoryName(assetsFile.fullName);
+                var resourceFilePath = Path.Combine(assetsFileDirectory, resourceFileName);
+                if (!File.Exists(resourceFilePath)) {
                     var findFiles = Directory.GetFiles(assetsFileDirectory, resourceFileName, SearchOption.AllDirectories);
-                    if (findFiles.Length > 0)
-                    {
+                    if (findFiles.Length > 0) {
                         resourceFilePath = findFiles[0];
                     }
                 }
-                if (File.Exists(resourceFilePath))
-                {
-                    reader = new BinaryReader(File.OpenRead(resourceFilePath));
+                if (File.Exists(resourceFilePath)) {
                     needSearch = false;
-                    assetsFile.AssetsManager.ResourceFileReaders.Add(resourceFileName, reader);
-                    reader.BaseStream.Position = offset;
-                    return reader.ReadBytes(size);
+                    reader = new UnityReader(File.OpenRead(resourceFilePath));
+                    assetsFile.assetsManager.resourceFileReaders.Add(resourceFileName, reader);
+                    return reader;
                 }
-
                 throw new FileNotFoundException($"Can't find the resource file {resourceFileName}");
             }
 
-            reader.BaseStream.Position = offset;
-            return reader.ReadBytes(size);
+            return this.reader;
+        }
+
+        public byte[] GetData() {
+            var binaryReader = GetReader();
+            binaryReader.BaseStream.Position = offset;
+            return binaryReader.ReadBytes((int)size);
+        }
+
+        public void WriteData(string path) {
+            var binaryReader = GetReader();
+            binaryReader.BaseStream.Position = offset;
+            using var writer = File.OpenWrite(path);
+            binaryReader.BaseStream.CopyTo(writer, this.size);
         }
     }
 }

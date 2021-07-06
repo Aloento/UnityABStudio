@@ -2,6 +2,8 @@ namespace SoarCraft.QYun.AssetReader.Helpers {
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Entities.Enums;
+    using Utils;
 
     public static class ImportHelper {
         public static void MergeSplitAssets(string path, bool subDirectories = false) {
@@ -34,24 +36,20 @@ namespace SoarCraft.QYun.AssetReader.Helpers {
             return selectFile.Distinct().ToArray();
         }
 
-        public static FileType CheckFileType(Stream stream, out EndianBinaryReader reader)
-        {
-            reader = new EndianBinaryReader(stream);
+        public static FileType CheckFileType(Stream stream, out UnityReader reader) {
+            reader = new UnityReader(stream);
             return CheckFileType(reader);
         }
 
-        public static FileType CheckFileType(string fileName, out EndianBinaryReader reader)
-        {
-            reader = new EndianBinaryReader(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
+        public static FileType CheckFileType(string fileName, out UnityReader reader) {
+            reader = new UnityReader(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite));
             return CheckFileType(reader);
         }
 
-        private static FileType CheckFileType(EndianBinaryReader reader)
-        {
+        private static FileType CheckFileType(UnityReader reader) {
             var signature = reader.ReadStringToNull(20);
             reader.Position = 0;
-            switch (signature)
-            {
+            switch (signature) {
                 case "UnityWeb":
                 case "UnityRaw":
                 case "UnityArchive":
@@ -59,30 +57,20 @@ namespace SoarCraft.QYun.AssetReader.Helpers {
                     return FileType.BundleFile;
                 case "UnityWebData1.0":
                     return FileType.WebFile;
-                default:
-                    {
-                        var magic = reader.ReadBytes(2);
-                        reader.Position = 0;
-                        if (WebFile.GzipMagic.SequenceEqual(magic))
-                        {
-                            return FileType.WebFile;
-                        }
-                        reader.Position = 0x20;
-                        magic = reader.ReadBytes(6);
-                        reader.Position = 0;
-                        if (WebFile.BrotliMagic.SequenceEqual(magic))
-                        {
-                            return FileType.WebFile;
-                        }
-                        if (SerializedFile.IsSerializedFile(reader))
-                        {
-                            return FileType.AssetsFile;
-                        }
-                        else
-                        {
-                            return FileType.ResourceFile;
-                        }
+                default: {
+                    var magic = reader.ReadBytes(2);
+                    reader.Position = 0;
+                    if (WebFile.GzipMagic.SequenceEqual(magic)) {
+                        return FileType.WebFile;
                     }
+                    reader.Position = 0x20;
+                    magic = reader.ReadBytes(6);
+                    reader.Position = 0;
+                    if (WebFile.BrotliMagic.SequenceEqual(magic)) {
+                        return FileType.WebFile;
+                    }
+                    return SerializedFile.IsSerializedFile(reader) ? FileType.AssetsFile : FileType.ResourceFile;
+                }
             }
         }
     }
