@@ -444,3 +444,9 @@ dotnet_naming_rule.parameters_rule.severity             = warning
 
 # IDE1006: 命名样式
 dotnet_diagnostic.IDE1006.severity = none
+
+# CA1051: 不要声明可见实例字段
+dotnet_diagnostic.CA1051.severity = none
+
+# CA1305: 指定 IFormatProvider
+dotnet_diagnostic.CA1305.severity = none

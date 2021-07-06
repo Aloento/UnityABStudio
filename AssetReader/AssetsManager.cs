@@ -1,49 +1,59 @@
 namespace SoarCraft.QYun.AssetReader {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.IO;
     using System.Linq;
     using System.Text;
     using Entities.Enums;
+    using Unity3D;
+    using Unity3D.Objects;
+    using Unity3D.Objects.AnimationClips;
     using Utils;
     using static Helpers.ImportHelper;
 
     public class AssetsManager {
-        public readonly List<SerializedFile> AssetFileList = new();
+        public string SpecifyUnityVersion;
+        public List<SerializedFile> assetsFileList = new();
 
-        internal Dictionary<string, int> AssetsFileIndexCache = new(StringComparer.OrdinalIgnoreCase);
-        internal Dictionary<string, BinaryReader> ResourceFileReaders = new(StringComparer.OrdinalIgnoreCase);
+        internal Dictionary<string, int> assetsFileIndexCache = new(StringComparer.OrdinalIgnoreCase);
+        internal Dictionary<string, UnityReader> resourceFileReaders = new(StringComparer.OrdinalIgnoreCase);
 
         private readonly List<string> importFiles = new();
         private readonly HashSet<string> importFilesHash = new(StringComparer.OrdinalIgnoreCase);
         private readonly HashSet<string> assetsFileListHash = new(StringComparer.OrdinalIgnoreCase);
 
         public void LoadFiles(params string[] files) {
-            MergeSplitAssets(Path.GetDirectoryName(files[0]));
-            this.Load(ProcessingSplitFiles(files.ToList()));
+            var path = Path.GetDirectoryName(files[0]);
+            MergeSplitAssets(path);
+            var toReadFile = ProcessingSplitFiles(files.ToList());
+            Load(toReadFile);
         }
 
         public void LoadFolder(string path) {
             MergeSplitAssets(path, true);
-            this.Load(ProcessingSplitFiles(Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList()));
+            var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList();
+            var toReadFile = ProcessingSplitFiles(files);
+            Load(toReadFile);
         }
 
         private void Load(IEnumerable<string> files) {
             foreach (var file in files) {
-                this.importFiles.Add(file);
-                _ = this.importFilesHash.Add(Path.GetFileName(file));
+                importFiles.Add(file);
+                _ = importFilesHash.Add(Path.GetFileName(file));
             }
 
+            //use a for loop because list size can change
             foreach (var file in this.importFiles) {
                 this.LoadFile(file);
             }
 
-            this.importFiles.Clear();
-            this.importFilesHash.Clear();
-            this.assetsFileListHash.Clear();
+            importFiles.Clear();
+            importFilesHash.Clear();
+            assetsFileListHash.Clear();
 
-            this.ReadAssets();
-            this.ProcessAssets();
+            ReadAssets();
+            ProcessAssets();
         }
 
         private void LoadFile(string fullName) {
@@ -61,35 +71,35 @@ namespace SoarCraft.QYun.AssetReader {
             }
         }
 
-        private void LoadAssetsFile(string fullName, EndianBinaryReader reader) {
-            var fileName = Path.GetFileName(fullName);
-            if (!this.assetsFileListHash.Contains(fileName)) {
-                Logger.Info($"Loading {fileName}");
+        private void LoadAssetsFile(UnityReader reader) {
+            if (!assetsFileListHash.Contains(reader.FileName)) {
+                Console.WriteLine($"Loading {reader.FileName}");
                 try {
-                    var assetsFile = new SerializedFile(this, fullName, reader);
+                    var assetsFile = new SerializedFile(reader, this);
+                    CheckStrippedVersion(assetsFile);
                     assetsFileList.Add(assetsFile);
-                    this.assetsFileListHash.Add(assetsFile.FileName);
+                    _ = assetsFileListHash.Add(assetsFile.fileName);
 
-                    foreach (var sharedFile in assetsFile.MExternals) {
-                        var sharedFilePath = Path.Combine(Path.GetDirectoryName(fullName), sharedFile.fileName);
+                    foreach (var sharedFile in assetsFile.m_Externals) {
                         var sharedFileName = sharedFile.fileName;
 
-                        if (!this.importFilesHash.Contains(sharedFileName)) {
+                        if (!importFilesHash.Contains(sharedFileName)) {
+                            var sharedFilePath = Path.Combine(Path.GetDirectoryName(reader.FullPath), sharedFileName);
                             if (!File.Exists(sharedFilePath)) {
-                                var findFiles = Directory.GetFiles(Path.GetDirectoryName(fullName), sharedFileName, SearchOption.AllDirectories);
+                                var findFiles = Directory.GetFiles(Path.GetDirectoryName(reader.FullPath), sharedFileName, SearchOption.AllDirectories);
                                 if (findFiles.Length > 0) {
                                     sharedFilePath = findFiles[0];
                                 }
                             }
 
                             if (File.Exists(sharedFilePath)) {
-                                this.importFiles.Add(sharedFilePath);
-                                this.importFilesHash.Add(sharedFileName);
+                                importFiles.Add(sharedFilePath);
+                                _ = importFilesHash.Add(sharedFileName);
                             }
                         }
                     }
-                } catch (Exception e) {
-                    Logger.Error($"Error while reading assets file {fileName}", e);
+                } catch (IOException e) {
+                    Console.WriteLine($"Error while reading assets file {reader.FileName}", e);
                     reader.Dispose();
                 }
             } else {
@@ -97,75 +107,84 @@ namespace SoarCraft.QYun.AssetReader {
             }
         }
 
-        private void LoadAssetsFromMemory(string fullName, EndianBinaryReader reader, string originalPath, string unityVersion = null) {
-            var fileName = Path.GetFileName(fullName);
-            if (!this.assetsFileListHash.Contains(fileName)) {
+        private void LoadAssetsFromMemory(UnityReader reader, string originalPath, string unityVersion = null) {
+            if (!assetsFileListHash.Contains(reader.FileName)) {
                 try {
-                    var assetsFile = new SerializedFile(this, fullName, reader);
-                    assetsFile.OriginalPath = originalPath;
-                    if (assetsFile.Header.m_Version < SerializedFileFormatVersion.kUnknown_7) {
+                    var assetsFile = new SerializedFile(reader, this) {
+                        originalPath = originalPath
+                    };
+                    if (!string.IsNullOrEmpty(unityVersion) && assetsFile.header.m_Version < SerializedFileFormatVersion.kUnknown_7) {
                         assetsFile.SetVersion(unityVersion);
                     }
+                    CheckStrippedVersion(assetsFile);
                     assetsFileList.Add(assetsFile);
-                    this.assetsFileListHash.Add(assetsFile.FileName);
+                    _ = assetsFileListHash.Add(assetsFile.fileName);
                 } catch (Exception e) {
-                    Logger.Error($"Error while reading assets file {fileName} from {Path.GetFileName(originalPath)}", e);
-                    this.ResourceFileReaders.Add(fileName, reader);
+                    Console.WriteLine($"Error while reading assets file {reader.FileName} from {Path.GetFileName(originalPath)}", e);
+                    resourceFileReaders.Add(reader.FileName, reader);
                 }
             }
         }
 
-        private void LoadBundleFile(string fullName, EndianBinaryReader reader, string parentPath = null) {
-            var fileName = Path.GetFileName(fullName);
-            Logger.Info("Loading " + fileName);
+        private void LoadBundleFile(UnityReader reader, string originalPath = null) {
+            Console.WriteLine("Loading " + reader.FileName);
             try {
-                var bundleFile = new BundleFile(reader, fullName);
-                foreach (var file in bundleFile.FileList) {
-                    var subReader = new EndianBinaryReader(file.Stream);
-                    if (SerializedFile.IsSerializedFile(subReader)) {
-                        var dummyPath = Path.GetDirectoryName(fullName) + Path.DirectorySeparatorChar + file.FileName;
-                        LoadAssetsFromMemory(dummyPath, subReader, parentPath ?? fullName, bundleFile.MHeader.UnityRevision);
+                var bundleFile = new BundleFile(reader);
+                foreach (var file in bundleFile.fileList) {
+                    var dummyPath = Path.Combine(Path.GetDirectoryName(reader.FullPath), file.fileName);
+                    var subReader = new UnityReader(dummyPath, file.stream);
+                    if (subReader.FileType == FileType.AssetsFile) {
+                        LoadAssetsFromMemory(subReader, originalPath ?? reader.FullPath, bundleFile.m_Header.unityRevision);
                     } else {
-                        this.ResourceFileReaders[file.FileName] = subReader; //TODO
+                        resourceFileReaders[file.fileName] = subReader; //TODO
                     }
                 }
-            } catch (Exception e) {
-                var str = $"Error while reading bundle file {fileName}";
-                if (parentPath != null) {
-                    str += $" from {Path.GetFileName(parentPath)}";
+            } catch (IOException e) {
+                var str = $"Error while reading bundle file {reader.FileName}";
+                if (originalPath != null) {
+                    str += $" from {Path.GetFileName(originalPath)}";
                 }
-                Logger.Error(str, e);
+                Console.WriteLine(str, e);
             } finally {
                 reader.Dispose();
             }
         }
 
-        private void LoadWebFile(string fullName, EndianBinaryReader reader) {
-            var fileName = Path.GetFileName(fullName);
-            Logger.Info("Loading " + fileName);
+        private void LoadWebFile(UnityReader reader) {
+            Console.WriteLine("Loading " + reader.FileName);
             try {
                 var webFile = new WebFile(reader);
-                foreach (var file in webFile.FileList) {
-                    var dummyPath = Path.Combine(Path.GetDirectoryName(fullName), file.FileName);
-                    switch (CheckFileType(file.Stream, out var fileReader)) {
+                foreach (var file in webFile.fileList) {
+                    var dummyPath = Path.Combine(Path.GetDirectoryName(reader.FullPath), file.fileName);
+                    var subReader = new UnityReader(dummyPath, file.stream);
+                    switch (subReader.FileType) {
                         case FileType.AssetsFile:
-                            LoadAssetsFromMemory(dummyPath, fileReader, fullName);
+                            LoadAssetsFromMemory(subReader, reader.FullPath);
                             break;
                         case FileType.BundleFile:
-                            LoadBundleFile(dummyPath, fileReader, fullName);
+                            LoadBundleFile(subReader, reader.FullPath);
                             break;
                         case FileType.WebFile:
-                            LoadWebFile(dummyPath, fileReader);
+                            LoadWebFile(subReader);
                             break;
                         case FileType.ResourceFile:
-                            this.ResourceFileReaders[file.FileName] = fileReader; //TODO
+                            resourceFileReaders[file.fileName] = subReader; //TODO
                             break;
                     }
                 }
             } catch (Exception e) {
-                Logger.Error($"Error while reading web file {fileName}", e);
+                Console.WriteLine($"Error while reading web file {reader.FileName}", e);
             } finally {
                 reader.Dispose();
+            }
+        }
+
+        public void CheckStrippedVersion(SerializedFile assetsFile) {
+            if (assetsFile.IsVersionStripped && string.IsNullOrEmpty(SpecifyUnityVersion)) {
+                throw new VersionNotFoundException("The Unity version has been stripped, please set the version in the options");
+            }
+            if (!string.IsNullOrEmpty(SpecifyUnityVersion)) {
+                assetsFile.SetVersion(SpecifyUnityVersion);
             }
         }
 
@@ -176,107 +195,100 @@ namespace SoarCraft.QYun.AssetReader {
             }
             assetsFileList.Clear();
 
-            foreach (var resourceFileReader in this.ResourceFileReaders) {
+            foreach (var resourceFileReader in resourceFileReaders) {
                 resourceFileReader.Value.Close();
             }
-            this.ResourceFileReaders.Clear();
+            resourceFileReaders.Clear();
 
-            this.AssetsFileIndexCache.Clear();
+            assetsFileIndexCache.Clear();
         }
 
         private void ReadAssets() {
-            Logger.Info("Read assets...");
+            Console.WriteLine("Read assets...");
 
-            var progressCount = assetsFileList.Sum(x => x.m_Objects.Count);
-            var i = 0;
-            Progress.Reset();
             foreach (var assetsFile in assetsFileList) {
                 foreach (var objectInfo in assetsFile.m_Objects) {
                     var objectReader = new ObjectReader(assetsFile.reader, assetsFile, objectInfo);
                     try {
-                        object obj = (object)objectReader.type switch {
-                            ClassIdType.Animation => new Animation(objectReader),
-                            ClassIdType.AnimationClip => new AnimationClip(objectReader),
-                            ClassIdType.Animator => new Animator(objectReader),
-                            ClassIdType.AnimatorController => new AnimatorController(objectReader),
-                            ClassIdType.AnimatorOverrideController => new AnimatorOverrideController(objectReader),
-                            ClassIdType.AssetBundle => new AssetBundle(objectReader),
-                            ClassIdType.AudioClip => new AudioClip(objectReader),
-                            ClassIdType.Avatar => new Avatar(objectReader),
-                            ClassIdType.Font => new Font(objectReader),
-                            ClassIdType.GameObject => new GameObject(objectReader),
-                            ClassIdType.Material => new Material(objectReader),
-                            ClassIdType.Mesh => new Mesh(objectReader),
-                            ClassIdType.MeshFilter => new MeshFilter(objectReader),
-                            ClassIdType.MeshRenderer => new MeshRenderer(objectReader),
-                            ClassIdType.MonoBehaviour => new MonoBehaviour(objectReader),
-                            ClassIdType.MonoScript => new MonoScript(objectReader),
-                            ClassIdType.MovieTexture => new MovieTexture(objectReader),
-                            ClassIdType.PlayerSettings => new PlayerSettings(objectReader),
-                            ClassIdType.RectTransform => new RectTransform(objectReader),
-                            ClassIdType.Shader => new Shader(objectReader),
-                            ClassIdType.SkinnedMeshRenderer => new SkinnedMeshRenderer(objectReader),
-                            ClassIdType.Sprite => new Sprite(objectReader),
-                            ClassIdType.SpriteAtlas => new SpriteAtlas(objectReader),
-                            ClassIdType.TextAsset => new TextAsset(objectReader),
-                            ClassIdType.Texture2D => new Texture2D(objectReader),
-                            ClassIdType.Transform => new Transform(objectReader),
-                            ClassIdType.VideoClip => new VideoClip(objectReader),
-                            ClassIdType.ResourceManager => new ResourceManager(objectReader),
-                            _ => new Object(objectReader),
+                        UObject obj = objectReader.type switch {
+                            ClassIDType.Animation => new Animation(objectReader),
+                            ClassIDType.AnimationClip => new AnimationClip(objectReader),
+                            ClassIDType.Animator => new Animator(objectReader),
+                            ClassIDType.AnimatorController => new AnimatorController(objectReader),
+                            ClassIDType.AnimatorOverrideController => new AnimatorOverrideController(objectReader),
+                            ClassIDType.AssetBundle => new AssetBundle(objectReader),
+                            ClassIDType.AudioClip => new AudioClip(objectReader),
+                            ClassIDType.Avatar => new Avatar(objectReader),
+                            ClassIDType.Font => new Font(objectReader),
+                            ClassIDType.GameObject => new GameObject(objectReader),
+                            ClassIDType.Material => new Material(objectReader),
+                            ClassIDType.Mesh => new Mesh(objectReader),
+                            ClassIDType.MeshFilter => new MeshFilter(objectReader),
+                            ClassIDType.MeshRenderer => new MeshRenderer(objectReader),
+                            ClassIDType.MonoBehaviour => new MonoBehaviour(objectReader),
+                            ClassIDType.MonoScript => new MonoScript(objectReader),
+                            ClassIDType.MovieTexture => new MovieTexture(objectReader),
+                            ClassIDType.PlayerSettings => new PlayerSettings(objectReader),
+                            ClassIDType.RectTransform => new RectTransform(objectReader),
+                            ClassIDType.Shader => new Shader(objectReader),
+                            ClassIDType.SkinnedMeshRenderer => new SkinnedMeshRenderer(objectReader),
+                            ClassIDType.Sprite => new Sprite(objectReader),
+                            ClassIDType.SpriteAtlas => new SpriteAtlas(objectReader),
+                            ClassIDType.TextAsset => new TextAsset(objectReader),
+                            ClassIDType.Texture2D => new Texture2D(objectReader),
+                            ClassIDType.Transform => new Transform(objectReader),
+                            ClassIDType.VideoClip => new VideoClip(objectReader),
+                            ClassIDType.ResourceManager => new ResourceManager(objectReader),
+                            _ => new UObject(objectReader)
                         };
                         assetsFile.AddObject(obj);
                     } catch (Exception e) {
                         var sb = new StringBuilder();
-                        sb.AppendLine("Unable to load object")
+                        _ = sb.AppendLine("Unable to load object")
                             .AppendLine($"Assets {assetsFile.fileName}")
                             .AppendLine($"Type {objectReader.type}")
                             .AppendLine($"PathID {objectInfo.m_PathID}")
                             .Append(e);
-                        Logger.Error(sb.ToString());
+                        Console.WriteLine(sb.ToString());
                     }
-
-                    Progress.Report(++i, progressCount);
                 }
             }
         }
 
         private void ProcessAssets() {
-            Logger.Info("Process Assets...");
+            Console.WriteLine("Process Assets...");
 
-            foreach (var assetsFile in assetsFileList) {
-                foreach (var obj in assetsFile.Objects) {
-                    if (obj is GameObject m_GameObject) {
-                        foreach (var pptr in m_GameObject.m_Components) {
-                            if (pptr.TryGet(out var m_Component)) {
-                                switch (m_Component) {
-                                    case Transform m_Transform:
-                                        m_GameObject.m_Transform = m_Transform;
-                                        break;
-                                    case MeshRenderer m_MeshRenderer:
-                                        m_GameObject.m_MeshRenderer = m_MeshRenderer;
-                                        break;
-                                    case MeshFilter m_MeshFilter:
-                                        m_GameObject.m_MeshFilter = m_MeshFilter;
-                                        break;
-                                    case SkinnedMeshRenderer m_SkinnedMeshRenderer:
-                                        m_GameObject.m_SkinnedMeshRenderer = m_SkinnedMeshRenderer;
-                                        break;
-                                    case Animator m_Animator:
-                                        m_GameObject.m_Animator = m_Animator;
-                                        break;
-                                    case Animation m_Animation:
-                                        m_GameObject.m_Animation = m_Animation;
-                                        break;
-                                }
+            foreach (var obj in this.assetsFileList.SelectMany(assetsFile => assetsFile.Objects)) {
+                if (obj is GameObject m_GameObject) {
+                    foreach (var pptr in m_GameObject.m_Components) {
+                        if (pptr.TryGet(out var m_Component)) {
+                            switch (m_Component) {
+                                case Transform m_Transform:
+                                    m_GameObject.m_Transform = m_Transform;
+                                    break;
+                                case MeshRenderer m_MeshRenderer:
+                                    m_GameObject.m_MeshRenderer = m_MeshRenderer;
+                                    break;
+                                case MeshFilter m_MeshFilter:
+                                    m_GameObject.m_MeshFilter = m_MeshFilter;
+                                    break;
+                                case SkinnedMeshRenderer m_SkinnedMeshRenderer:
+                                    m_GameObject.m_SkinnedMeshRenderer = m_SkinnedMeshRenderer;
+                                    break;
+                                case Animator m_Animator:
+                                    m_GameObject.m_Animator = m_Animator;
+                                    break;
+                                case Animation m_Animation:
+                                    m_GameObject.m_Animation = m_Animation;
+                                    break;
                             }
                         }
-                    } else if (obj is SpriteAtlas m_SpriteAtlas) {
-                        foreach (var m_PackedSprite in m_SpriteAtlas.m_PackedSprites) {
-                            if (m_PackedSprite.TryGet(out var m_Sprite)) {
-                                if (m_Sprite.m_SpriteAtlas.IsNull) {
-                                    m_Sprite.m_SpriteAtlas.Set(m_SpriteAtlas);
-                                }
+                    }
+                } else if (obj is SpriteAtlas m_SpriteAtlas) {
+                    foreach (var m_PackedSprite in m_SpriteAtlas.m_PackedSprites) {
+                        if (m_PackedSprite.TryGet(out var m_Sprite)) {
+                            if (m_Sprite.m_SpriteAtlas.IsNull) {
+                                m_Sprite.m_SpriteAtlas.Set(m_SpriteAtlas);
                             }
                         }
                     }
