@@ -1,5 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
     using Contracts;
+    using Entities.Enums;
     using Utils;
 
     public sealed class AnimationClip : NamedObject {
@@ -21,7 +22,6 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
         public ClipMuscleConstant m_MuscleClip;
         public AnimationClipBindingConstant m_ClipBindingConstant;
         public AnimationEvent[] m_Events;
-
 
         public AnimationClip(ObjectReader reader) : base(reader) {
             switch (this.version[0]) {

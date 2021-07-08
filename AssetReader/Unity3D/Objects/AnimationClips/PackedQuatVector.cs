@@ -37,7 +37,6 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
                 }
                 flags &= 7;
 
-
                 var q = new Quaternion();
                 float sum = 0;
                 for (int j = 0; j < 4; j++) {

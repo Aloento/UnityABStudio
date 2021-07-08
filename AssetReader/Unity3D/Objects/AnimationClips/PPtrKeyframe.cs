@@ -4,7 +4,6 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
         public float time;
         public PPtr<UObject> value;
 
-
         public PPtrKeyframe(ObjectReader reader) {
             time = reader.ReadSingle();
             value = new PPtr<UObject>(reader);

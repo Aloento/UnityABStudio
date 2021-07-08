@@ -18,10 +18,11 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
             data = reader.ReadAlignedString();
             objectReferenceParameter = new PPtr<UObject>(reader);
             floatParameter = reader.ReadSingle();
-            if (version[0] >= 3) //3 and up
-            {
+            if (version[0] >= 3) {
+                //3 and up
                 intParameter = reader.ReadInt32();
             }
+
             messageOptions = reader.ReadInt32();
         }
     }
