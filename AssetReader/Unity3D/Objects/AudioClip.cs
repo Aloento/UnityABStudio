@@ -23,8 +23,8 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
         public AudioCompressionFormat m_CompressionFormat;
 
         public string m_Source;
-        public ulong m_Offset;
-        public long m_Size;
+        public long m_Offset; //ulong
+        public long m_Size; //ulong
         public ResourceReader m_AudioData;
 
         public AudioClip(ObjectReader reader) : base(reader) {
@@ -35,8 +35,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
                 m_UseHardware = reader.ReadBoolean();
                 reader.AlignStream();
 
-                if (version[0] >= 4 || (version[0] == 3 && version[1] >= 2)) //3.2.0 to 5
-                {
+                if (version[0] >= 4 || (version[0] == 3 && version[1] >= 2)) { //3.2.0 to 5
                     var m_Stream = reader.ReadInt32();
                     m_Size = reader.ReadInt32();
                     var tsize = m_Size % 4 != 0 ? m_Size + 4 - m_Size % 4 : m_Size;
@@ -63,17 +62,14 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
 
                 //StreamedResource m_Resource
                 m_Source = reader.ReadAlignedString();
-                m_Offset = reader.ReadUInt64();
+                m_Offset = reader.ReadInt64();
                 m_Size = reader.ReadInt64();
                 m_CompressionFormat = (AudioCompressionFormat)reader.ReadInt32();
             }
 
-            ResourceReader resourceReader;
-            if (!string.IsNullOrEmpty(m_Source)) {
-                resourceReader = new ResourceReader(m_Source, assetsFile, m_Offset, (int)m_Size);
-            } else {
-                resourceReader = new ResourceReader(reader, reader.BaseStream.Position, (int)m_Size);
-            }
+            var resourceReader = !string.IsNullOrEmpty(this.m_Source) ?
+                new ResourceReader(this.m_Source, this.assetsFile, this.m_Offset, (int)this.m_Size) :
+                new ResourceReader(reader, reader.BaseStream.Position, (int)this.m_Size);
             m_AudioData = resourceReader;
         }
     }
