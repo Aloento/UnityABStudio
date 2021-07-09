@@ -64,9 +64,7 @@ namespace SoarCraft.QYun.AssetReader {
             }
 
             // ReadMetadata
-            if (m_FileEndianess != 0) {
-                reader.IsBigEndian = true;
-            }
+            reader.IsBigEndian = this.m_FileEndianess != 0;
             if (header.m_Version >= SerializedFileFormatVersion.kUnknown_7) {
                 unityVersion = reader.ReadStringToNull();
                 SetVersion(unityVersion);

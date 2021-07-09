@@ -207,21 +207,17 @@ namespace SoarCraft.QYun.AssetReader {
 
         private void ReadBlocks(EndianBinaryReader reader, Stream blocksStream) {
             foreach (var blockInfo in m_BlocksInfo) {
-                switch (blockInfo.flags & 0x3F) //kStorageBlockCompressionTypeMask
-                {
-                    default: //None
-                        {
+                switch (blockInfo.flags & 0x3F) { //kStorageBlockCompressionTypeMask
+                    default: { //None
                         reader.BaseStream.CopyTo(blocksStream, blockInfo.compressedSize);
                         break;
                     }
-                    case 1: //LZMA
-                        {
+                    case 1: { //LZMA
                         SevenZipHelper.StreamDecompress(reader.BaseStream, blocksStream, blockInfo.compressedSize, blockInfo.uncompressedSize);
                         break;
                     }
                     case 2: //LZ4
-                    case 3: //LZ4HC
-                        {
+                    case 3: { //LZ4HC
                         var compressedStream = new MemoryStream(reader.ReadBytes((int)blockInfo.compressedSize));
                         using var lz4Stream = new Lz4DecoderStream(compressedStream);
                         lz4Stream.CopyTo(blocksStream, blockInfo.uncompressedSize);
