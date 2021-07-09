@@ -7,17 +7,17 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Avatars {
         public Axes[] m_AxesArray;
 
         public Skeleton(ObjectReader reader) {
-            int numNodes = reader.ReadInt32();
+            var numNodes = reader.ReadInt32();
             m_Node = new Node[numNodes];
-            for (int i = 0; i < numNodes; i++) {
+            for (var i = 0; i < numNodes; i++) {
                 m_Node[i] = new Node(reader);
             }
 
             m_ID = reader.ReadUInt32Array();
 
-            int numAxes = reader.ReadInt32();
+            var numAxes = reader.ReadInt32();
             m_AxesArray = new Axes[numAxes];
-            for (int i = 0; i < numAxes; i++) {
+            for (var i = 0; i < numAxes; i++) {
                 m_AxesArray[i] = new Axes(reader);
             }
         }

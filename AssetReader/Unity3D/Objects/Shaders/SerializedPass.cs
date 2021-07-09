@@ -28,9 +28,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
             var version = reader.version;
 
             if (version[0] > 2020 || (version[0] == 2020 && version[1] >= 2)) { //2020.2 and up
-                int numEditorDataHash = reader.ReadInt32();
+                var numEditorDataHash = reader.ReadInt32();
                 m_EditorDataHash = new Hash128[numEditorDataHash];
-                for (int i = 0; i < numEditorDataHash; i++) {
+                for (var i = 0; i < numEditorDataHash; i++) {
                     m_EditorDataHash[i] = new Hash128(reader);
                 }
                 reader.AlignStream();
@@ -42,9 +42,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
                 reader.AlignStream();
             }
 
-            int numIndices = reader.ReadInt32();
+            var numIndices = reader.ReadInt32();
             m_NameIndices = new KeyValuePair<string, int>[numIndices];
-            for (int i = 0; i < numIndices; i++) {
+            for (var i = 0; i < numIndices; i++) {
                 m_NameIndices[i] = new KeyValuePair<string, int>(reader.ReadAlignedString(), reader.ReadInt32());
             }
 

@@ -9,15 +9,15 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
         public ValueArray m_DefaultValues;
 
         public ControllerConstant(ObjectReader reader) {
-            int numLayers = reader.ReadInt32();
+            var numLayers = reader.ReadInt32();
             m_LayerArray = new LayerConstant[numLayers];
-            for (int i = 0; i < numLayers; i++) {
+            for (var i = 0; i < numLayers; i++) {
                 m_LayerArray[i] = new LayerConstant(reader);
             }
 
-            int numStates = reader.ReadInt32();
+            var numStates = reader.ReadInt32();
             m_StateMachineArray = new StateMachineConstant[numStates];
-            for (int i = 0; i < numStates; i++) {
+            for (var i = 0; i < numStates; i++) {
                 m_StateMachineArray[i] = new StateMachineConstant(reader);
             }
 

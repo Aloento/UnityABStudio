@@ -3,8 +3,6 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
     public class Hash128 {
         public byte[] bytes;
 
-        public Hash128(UnityReader reader) {
-            bytes = reader.ReadBytes(16);
-        }
+        public Hash128(UnityReader reader) => bytes = reader.ReadBytes(16);
     }
 }

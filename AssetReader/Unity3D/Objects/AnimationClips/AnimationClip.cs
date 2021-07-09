@@ -44,48 +44,48 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
                 m_UseHighQualityCurve = reader.ReadBoolean();
             }
             reader.AlignStream();
-            int numRCurves = reader.ReadInt32();
+            var numRCurves = reader.ReadInt32();
             m_RotationCurves = new QuaternionCurve[numRCurves];
-            for (int i = 0; i < numRCurves; i++) {
+            for (var i = 0; i < numRCurves; i++) {
                 m_RotationCurves[i] = new QuaternionCurve(reader);
             }
 
-            int numCRCurves = reader.ReadInt32();
+            var numCRCurves = reader.ReadInt32();
             m_CompressedRotationCurves = new CompressedAnimationCurve[numCRCurves];
-            for (int i = 0; i < numCRCurves; i++) {
+            for (var i = 0; i < numCRCurves; i++) {
                 m_CompressedRotationCurves[i] = new CompressedAnimationCurve(reader);
             }
 
             if (version[0] > 5 || (version[0] == 5 && version[1] >= 3)) { //5.3 and up
-                int numEulerCurves = reader.ReadInt32();
+                var numEulerCurves = reader.ReadInt32();
                 m_EulerCurves = new Vector3Curve[numEulerCurves];
-                for (int i = 0; i < numEulerCurves; i++) {
+                for (var i = 0; i < numEulerCurves; i++) {
                     m_EulerCurves[i] = new Vector3Curve(reader);
                 }
             }
 
-            int numPCurves = reader.ReadInt32();
+            var numPCurves = reader.ReadInt32();
             m_PositionCurves = new Vector3Curve[numPCurves];
-            for (int i = 0; i < numPCurves; i++) {
+            for (var i = 0; i < numPCurves; i++) {
                 m_PositionCurves[i] = new Vector3Curve(reader);
             }
 
-            int numSCurves = reader.ReadInt32();
+            var numSCurves = reader.ReadInt32();
             m_ScaleCurves = new Vector3Curve[numSCurves];
-            for (int i = 0; i < numSCurves; i++) {
+            for (var i = 0; i < numSCurves; i++) {
                 m_ScaleCurves[i] = new Vector3Curve(reader);
             }
 
-            int numFCurves = reader.ReadInt32();
+            var numFCurves = reader.ReadInt32();
             m_FloatCurves = new FloatCurve[numFCurves];
-            for (int i = 0; i < numFCurves; i++) {
+            for (var i = 0; i < numFCurves; i++) {
                 m_FloatCurves[i] = new FloatCurve(reader);
             }
 
             if (version[0] > 4 || (version[0] == 4 && version[1] >= 3)) { //4.3 and up
-                int numPtrCurves = reader.ReadInt32();
+                var numPtrCurves = reader.ReadInt32();
                 m_PPtrCurves = new PPtrCurve[numPtrCurves];
-                for (int i = 0; i < numPtrCurves; i++) {
+                for (var i = 0; i < numPtrCurves; i++) {
                     m_PPtrCurves[i] = new PPtrCurve(reader);
                 }
             }
@@ -107,9 +107,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
                 var m_HasMotionFloatCurves = reader.ReadBoolean();
                 reader.AlignStream();
             }
-            int numEvents = reader.ReadInt32();
+            var numEvents = reader.ReadInt32();
             m_Events = new AnimationEvent[numEvents];
-            for (int i = 0; i < numEvents; i++) {
+            for (var i = 0; i < numEvents; i++) {
                 m_Events[i] = new AnimationEvent(reader);
             }
             if (version[0] >= 2017) { //2017 and up

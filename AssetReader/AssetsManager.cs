@@ -9,6 +9,17 @@ namespace SoarCraft.QYun.AssetReader {
     using Unity3D;
     using Unity3D.Objects;
     using Unity3D.Objects.AnimationClips;
+    using Unity3D.Objects.AnimatorControllers;
+    using Unity3D.Objects.AnimatorOverrideControllers;
+    using Unity3D.Objects.AssetBundles;
+    using Unity3D.Objects.Avatars;
+    using Unity3D.Objects.Materials;
+    using Unity3D.Objects.Meshes;
+    using Unity3D.Objects.Shaders;
+    using Unity3D.Objects.Sprites;
+    using Unity3D.Objects.SpriteAtlases;
+    using Unity3D.Objects.Texture2Ds;
+    using Unity3D.Objects.VideoClips;
     using Utils;
     using static Helpers.ImportHelper;
 
@@ -210,7 +221,7 @@ namespace SoarCraft.QYun.AssetReader {
                 foreach (var objectInfo in assetsFile.m_Objects) {
                     var objectReader = new ObjectReader(assetsFile.reader, assetsFile, objectInfo);
                     try {
-                        UObject obj = objectReader.type switch {
+                        var obj = objectReader.type switch {
                             ClassIDType.Animation => new Animation(objectReader),
                             ClassIDType.AnimationClip => new AnimationClip(objectReader),
                             ClassIDType.Animator => new Animator(objectReader),

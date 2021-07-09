@@ -19,7 +19,7 @@ namespace System {
 
         // Transforms the subnormal representation to a normalized one. 
         private static uint ConvertMantissa(int i) {
-            uint m = (uint)(i << 13); // Zero pad mantissa bits
+            var m = (uint)(i << 13); // Zero pad mantissa bits
             uint e = 0; // Zero exponent
 
             // While not normalized
@@ -33,26 +33,26 @@ namespace System {
         }
 
         private static uint[] GenerateMantissaTable() {
-            uint[] mantissaTable = new uint[2048];
+            var mantissaTable = new uint[2048];
             mantissaTable[0] = 0;
-            for (int i = 1; i < 1024; i++) {
+            for (var i = 1; i < 1024; i++) {
                 mantissaTable[i] = ConvertMantissa(i);
             }
-            for (int i = 1024; i < 2048; i++) {
+            for (var i = 1024; i < 2048; i++) {
                 mantissaTable[i] = (uint)(0x38000000 + ((i - 1024) << 13));
             }
 
             return mantissaTable;
         }
         private static uint[] GenerateExponentTable() {
-            uint[] exponentTable = new uint[64];
+            var exponentTable = new uint[64];
             exponentTable[0] = 0;
-            for (int i = 1; i < 31; i++) {
+            for (var i = 1; i < 31; i++) {
                 exponentTable[i] = (uint)(i << 23);
             }
             exponentTable[31] = 0x47800000;
             exponentTable[32] = 0x80000000;
-            for (int i = 33; i < 63; i++) {
+            for (var i = 33; i < 63; i++) {
                 exponentTable[i] = (uint)(0x80000000 + ((i - 32) << 23));
             }
             exponentTable[63] = 0xc7800000;
@@ -60,22 +60,22 @@ namespace System {
             return exponentTable;
         }
         private static ushort[] GenerateOffsetTable() {
-            ushort[] offsetTable = new ushort[64];
+            var offsetTable = new ushort[64];
             offsetTable[0] = 0;
-            for (int i = 1; i < 32; i++) {
+            for (var i = 1; i < 32; i++) {
                 offsetTable[i] = 1024;
             }
             offsetTable[32] = 0;
-            for (int i = 33; i < 64; i++) {
+            for (var i = 33; i < 64; i++) {
                 offsetTable[i] = 1024;
             }
 
             return offsetTable;
         }
         private static ushort[] GenerateBaseTable() {
-            ushort[] baseTable = new ushort[512];
-            for (int i = 0; i < 256; ++i) {
-                sbyte e = (sbyte)(127 - i);
+            var baseTable = new ushort[512];
+            for (var i = 0; i < 256; ++i) {
+                var e = (sbyte)(127 - i);
                 if (e > 24) { // Very small numbers map to zero
                     baseTable[i | 0x000] = 0x0000;
                     baseTable[i | 0x100] = 0x8000;
@@ -97,9 +97,9 @@ namespace System {
             return baseTable;
         }
         private static sbyte[] GenerateShiftTable() {
-            sbyte[] shiftTable = new sbyte[512];
-            for (int i = 0; i < 256; ++i) {
-                sbyte e = (sbyte)(127 - i);
+            var shiftTable = new sbyte[512];
+            for (var i = 0; i < 256; ++i) {
+                var e = (sbyte)(127 - i);
                 if (e > 24) { // Very small numbers map to zero
                     shiftTable[i | 0x000] = 24;
                     shiftTable[i | 0x100] = 24;
@@ -134,35 +134,27 @@ namespace System {
             return Half.ToHalf(result);
         }*/
         public static float HalfToSingle(Half half) {
-            uint result = mantissaTable[offsetTable[half.value >> 10] + (half.value & 0x3ff)] + exponentTable[half.value >> 10];
-            byte[] uintBytes = BitConverter.GetBytes(result);
+            var result = mantissaTable[offsetTable[half.value >> 10] + (half.value & 0x3ff)] + exponentTable[half.value >> 10];
+            var uintBytes = BitConverter.GetBytes(result);
             return BitConverter.ToSingle(uintBytes, 0);
         }
         public static Half SingleToHalf(float single) {
-            byte[] singleBytes = BitConverter.GetBytes(single);
-            uint value = BitConverter.ToUInt32(singleBytes, 0);
-            ushort result = (ushort)(baseTable[(value >> 23) & 0x1ff] + ((value & 0x007fffff) >> shiftTable[value >> 23]));
+            var singleBytes = BitConverter.GetBytes(single);
+            var value = BitConverter.ToUInt32(singleBytes, 0);
+            var result = (ushort)(baseTable[(value >> 23) & 0x1ff] + ((value & 0x007fffff) >> shiftTable[value >> 23]));
             return Half.ToHalf(result);
         }
 
-        public static Half Negate(Half half) {
-            return Half.ToHalf((ushort)(half.value ^ 0x8000));
-        }
-        public static Half Abs(Half half) {
-            return Half.ToHalf((ushort)(half.value & 0x7fff));
-        }
+        public static Half Negate(Half half) => Half.ToHalf((ushort)(half.value ^ 0x8000));
 
-        public static bool IsNaN(Half half) {
-            return ((half.value & 0x7fff) > 0x7c00);
-        }
-        public static bool IsInfinity(Half half) {
-            return ((half.value & 0x7fff) == 0x7c00);
-        }
-        public static bool IsPositiveInfinity(Half half) {
-            return (half.value == 0x7c00);
-        }
-        public static bool IsNegativeInfinity(Half half) {
-            return (half.value == 0xfc00);
-        }
+        public static Half Abs(Half half) => Half.ToHalf((ushort)(half.value & 0x7fff));
+
+        public static bool IsNaN(Half half) => (half.value & 0x7fff) > 0x7c00;
+
+        public static bool IsInfinity(Half half) => (half.value & 0x7fff) == 0x7c00;
+
+        public static bool IsPositiveInfinity(Half half) => half.value == 0x7c00;
+
+        public static bool IsNegativeInfinity(Half half) => half.value == 0xfc00;
     }
 }

@@ -22,7 +22,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
             if (version[0] >= 4) { //4.0 and up
                 var m_ChannelsSize = reader.ReadInt32();
                 m_Channels = new ChannelInfo[m_ChannelsSize];
-                for (int i = 0; i < m_ChannelsSize; i++) {
+                for (var i = 0; i < m_ChannelsSize; i++) {
                     m_Channels[i] = new ChannelInfo(reader);
                 }
             }
@@ -34,7 +34,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                     m_Streams = new StreamInfo[reader.ReadInt32()];
                 }
 
-                for (int i = 0; i < m_Streams.Length; i++) {
+                for (var i = 0; i < m_Streams.Length; i++) {
                     m_Streams[i] = new StreamInfo(reader);
                 }
 
@@ -53,10 +53,10 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
             var streamCount = m_Channels.Max(x => x.stream) + 1;
             m_Streams = new StreamInfo[streamCount];
             uint offset = 0;
-            for (int s = 0; s < streamCount; s++) {
+            for (var s = 0; s < streamCount; s++) {
                 uint chnMask = 0;
                 uint stride = 0;
-                for (int chn = 0; chn < m_Channels.Length; chn++) {
+                for (var chn = 0; chn < m_Channels.Length; chn++) {
                     var m_Channel = m_Channels[chn];
                     if (m_Channel.stream == s) {
                         if (m_Channel.dimension > 0) {
@@ -80,14 +80,14 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
 
         private void GetChannels(int[] version) {
             m_Channels = new ChannelInfo[6];
-            for (int i = 0; i < 6; i++) {
+            for (var i = 0; i < 6; i++) {
                 m_Channels[i] = new ChannelInfo();
             }
             for (var s = 0; s < m_Streams.Length; s++) {
                 var m_Stream = m_Streams[s];
                 var channelMask = new BitArray(new[] { (int)m_Stream.channelMask });
                 byte offset = 0;
-                for (int i = 0; i < 6; i++) {
+                for (var i = 0; i < 6; i++) {
                     if (channelMask.Get(i)) {
                         var m_Channel = m_Channels[i];
                         m_Channel.stream = (byte)s;

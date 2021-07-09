@@ -14,21 +14,21 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
 
             m_NameIndex = reader.ReadInt32();
 
-            int numMatrixParams = reader.ReadInt32();
+            var numMatrixParams = reader.ReadInt32();
             m_MatrixParams = new MatrixParameter[numMatrixParams];
-            for (int i = 0; i < numMatrixParams; i++) {
+            for (var i = 0; i < numMatrixParams; i++) {
                 m_MatrixParams[i] = new MatrixParameter(reader);
             }
 
-            int numVectorParams = reader.ReadInt32();
+            var numVectorParams = reader.ReadInt32();
             m_VectorParams = new VectorParameter[numVectorParams];
-            for (int i = 0; i < numVectorParams; i++) {
+            for (var i = 0; i < numVectorParams; i++) {
                 m_VectorParams[i] = new VectorParameter(reader);
             }
             if (version[0] > 2017 || (version[0] == 2017 && version[1] >= 3)) { //2017.3 and up
-                int numStructParams = reader.ReadInt32();
+                var numStructParams = reader.ReadInt32();
                 m_StructParams = new StructParameter[numStructParams];
-                for (int i = 0; i < numStructParams; i++) {
+                for (var i = 0; i < numStructParams; i++) {
                     m_StructParams[i] = new StructParameter(reader);
                 }
             }

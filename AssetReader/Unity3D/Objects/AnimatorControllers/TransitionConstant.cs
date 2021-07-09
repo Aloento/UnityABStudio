@@ -20,9 +20,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
         public TransitionConstant(ObjectReader reader) {
             var version = reader.version;
 
-            int numConditions = reader.ReadInt32();
+            var numConditions = reader.ReadInt32();
             m_ConditionConstantArray = new ConditionConstant[numConditions];
-            for (int i = 0; i < numConditions; i++) {
+            for (var i = 0; i < numConditions; i++) {
                 m_ConditionConstantArray[i] = new ConditionConstant(reader);
             }
 

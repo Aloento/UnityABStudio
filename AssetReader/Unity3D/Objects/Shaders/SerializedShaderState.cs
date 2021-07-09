@@ -34,7 +34,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
 
             m_Name = reader.ReadAlignedString();
             rtBlend = new SerializedShaderRTBlendState[8];
-            for (int i = 0; i < 8; i++) {
+            for (var i = 0; i < 8; i++) {
                 rtBlend[i] = new SerializedShaderRTBlendState(reader);
             }
             rtSeparateBlend = reader.ReadBoolean();

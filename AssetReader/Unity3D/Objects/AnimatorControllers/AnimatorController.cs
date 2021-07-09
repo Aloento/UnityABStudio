@@ -10,15 +10,15 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
             var m_ControllerSize = reader.ReadUInt32();
             var m_Controller = new ControllerConstant(reader);
 
-            int tosSize = reader.ReadInt32();
+            var tosSize = reader.ReadInt32();
             var m_TOS = new KeyValuePair<uint, string>[tosSize];
-            for (int i = 0; i < tosSize; i++) {
+            for (var i = 0; i < tosSize; i++) {
                 m_TOS[i] = new KeyValuePair<uint, string>(reader.ReadUInt32(), reader.ReadAlignedString());
             }
 
-            int numClips = reader.ReadInt32();
+            var numClips = reader.ReadInt32();
             m_AnimationClips = new PPtr<AnimationClip>[numClips];
-            for (int i = 0; i < numClips; i++) {
+            for (var i = 0; i < numClips; i++) {
                 m_AnimationClips[i] = new PPtr<AnimationClip>(reader);
             }
         }

@@ -1,5 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Materials {
     using Contracts;
+    using Shaders;
     using Utils;
 
     public sealed class Material : NamedObject {
@@ -30,7 +31,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Materials {
 
             if (version[0] > 5 || (version[0] == 5 && version[1] >= 1)) { //5.1 and up
                 var stringTagMapSize = reader.ReadInt32();
-                for (int i = 0; i < stringTagMapSize; i++) {
+                for (var i = 0; i < stringTagMapSize; i++) {
                     var first = reader.ReadAlignedString();
                     var second = reader.ReadAlignedString();
                 }

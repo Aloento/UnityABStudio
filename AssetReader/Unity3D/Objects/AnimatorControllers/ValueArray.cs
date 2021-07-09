@@ -24,17 +24,17 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
             if (version[0] < 4 || (version[0] == 4 && version[1] < 3)) { //4.3 down
                 m_VectorValues = reader.ReadVector4Array();
             } else {
-                int numPosValues = reader.ReadInt32();
+                var numPosValues = reader.ReadInt32();
                 m_PositionValues = new Vector3[numPosValues];
-                for (int i = 0; i < numPosValues; i++) {
+                for (var i = 0; i < numPosValues; i++) {
                     m_PositionValues[i] = version[0] > 5 || (version[0] == 5 && version[1] >= 4) ? reader.ReadVector3() : reader.ReadVector4(); //5.4 and up
                 }
 
                 m_QuaternionValues = reader.ReadVector4Array();
 
-                int numScaleValues = reader.ReadInt32();
+                var numScaleValues = reader.ReadInt32();
                 m_ScaleValues = new Vector3[numScaleValues];
-                for (int i = 0; i < numScaleValues; i++) {
+                for (var i = 0; i < numScaleValues; i++) {
                     m_ScaleValues[i] = version[0] > 5 || (version[0] == 5 && version[1] >= 4) ? reader.ReadVector3() : reader.ReadVector4(); //5.4 and up
                 }
 

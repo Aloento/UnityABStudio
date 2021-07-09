@@ -1,5 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Contracts {
     using Objects;
+    using Objects.Materials;
     using Utils;
 
     public abstract class Renderer : Component {

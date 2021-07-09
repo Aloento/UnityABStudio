@@ -1,6 +1,8 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.SpriteAtlases {
     using Texture2Ds;
     using Math;
+    using Sprites;
+    using Utils;
 
     public class SpriteAtlasData {
         public PPtr<Texture2D> texture;
@@ -19,18 +21,16 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.SpriteAtlases {
             alphaTexture = new PPtr<Texture2D>(reader);
             textureRect = new Rectf(reader);
             textureRectOffset = reader.ReadVector2();
-            if (version[0] > 2017 || (version[0] == 2017 && version[1] >= 2)) //2017.2 and up
-            {
+            if (version[0] > 2017 || (version[0] == 2017 && version[1] >= 2)) { //2017.2 and up
                 atlasRectOffset = reader.ReadVector2();
             }
             uvTransform = reader.ReadVector4();
             downscaleMultiplier = reader.ReadSingle();
             settingsRaw = new SpriteSettings(reader);
-            if (version[0] > 2020 || (version[0] == 2020 && version[1] >= 2)) //2020.2 and up
-            {
+            if (version[0] > 2020 || (version[0] == 2020 && version[1] >= 2)) { //2020.2 and up
                 var secondaryTexturesSize = reader.ReadInt32();
                 secondaryTextures = new SecondarySpriteTexture[secondaryTexturesSize];
-                for (int i = 0; i < secondaryTexturesSize; i++) {
+                for (var i = 0; i < secondaryTexturesSize; i++) {
                     secondaryTextures[i] = new SecondarySpriteTexture(reader);
                 }
                 reader.AlignStream();

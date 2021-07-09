@@ -11,22 +11,22 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
         public StateMachineConstant(ObjectReader reader) {
             var version = reader.version;
 
-            int numStates = reader.ReadInt32();
+            var numStates = reader.ReadInt32();
             m_StateConstantArray = new StateConstant[numStates];
-            for (int i = 0; i < numStates; i++) {
+            for (var i = 0; i < numStates; i++) {
                 m_StateConstantArray[i] = new StateConstant(reader);
             }
 
-            int numAnyStates = reader.ReadInt32();
+            var numAnyStates = reader.ReadInt32();
             m_AnyStateTransitionConstantArray = new TransitionConstant[numAnyStates];
-            for (int i = 0; i < numAnyStates; i++) {
+            for (var i = 0; i < numAnyStates; i++) {
                 m_AnyStateTransitionConstantArray[i] = new TransitionConstant(reader);
             }
 
             if (version[0] >= 5) { //5.0 and up
-                int numSelectors = reader.ReadInt32();
+                var numSelectors = reader.ReadInt32();
                 m_SelectorStateConstantArray = new SelectorStateConstant[numSelectors];
-                for (int i = 0; i < numSelectors; i++) {
+                for (var i = 0; i < numSelectors; i++) {
                     m_SelectorStateConstantArray[i] = new SelectorStateConstant(reader);
                 }
             }

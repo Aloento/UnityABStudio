@@ -1,6 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.VideoClips {
     using Contracts;
     using Utils;
+    using Unity3D.Objects.Shaders;
 
     public sealed class VideoClip : NamedObject {
         public ResourceReader m_VideoData;
@@ -25,27 +26,20 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.VideoClips {
             reader.AlignStream();
             var m_AudioSampleRate = reader.ReadUInt32Array();
             var m_AudioLanguage = reader.ReadStringArray();
-            if (version[0] >= 2020) //2020.1 and up
-            {
+            if (version[0] >= 2020) { //2020.1 and up
                 var m_VideoShadersSize = reader.ReadInt32();
                 var m_VideoShaders = new PPtr<Shader>[m_VideoShadersSize];
-                for (int i = 0; i < m_VideoShadersSize; i++) {
+                for (var i = 0; i < m_VideoShadersSize; i++) {
                     m_VideoShaders[i] = new PPtr<Shader>(reader);
                 }
             }
             m_ExternalResources = new StreamedResource(reader);
             var m_HasSplitAlpha = reader.ReadBoolean();
-            if (version[0] >= 2020) //2020.1 and up
-            {
+            if (version[0] >= 2020) { //2020.1 and up
                 var m_sRGB = reader.ReadBoolean();
             }
 
-            ResourceReader resourceReader;
-            if (!string.IsNullOrEmpty(m_ExternalResources.m_Source)) {
-                resourceReader = new ResourceReader(m_ExternalResources.m_Source, assetsFile, m_ExternalResources.m_Offset, (int)m_ExternalResources.m_Size);
-            } else {
-                resourceReader = new ResourceReader(reader, reader.BaseStream.Position, (int)m_ExternalResources.m_Size);
-            }
+            var resourceReader = !string.IsNullOrEmpty(this.m_ExternalResources.m_Source) ? new ResourceReader(this.m_ExternalResources.m_Source, this.assetsFile, this.m_ExternalResources.m_Offset, (int)this.m_ExternalResources.m_Size) : new ResourceReader(reader, reader.BaseStream.Position, (int)this.m_ExternalResources.m_Size);
             m_VideoData = resourceReader;
         }
     }

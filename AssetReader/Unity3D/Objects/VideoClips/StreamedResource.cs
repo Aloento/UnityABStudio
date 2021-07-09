@@ -3,13 +3,13 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.VideoClips {
 
     public class StreamedResource {
         public string m_Source;
-        public ulong m_Offset;
-        public ulong m_Size;
+        public long m_Offset;
+        public long m_Size;
 
         public StreamedResource(UnityReader reader) {
             m_Source = reader.ReadAlignedString();
-            m_Offset = reader.ReadUInt64();
-            m_Size = reader.ReadUInt64();
+            m_Offset = reader.ReadInt64();
+            m_Size = reader.ReadInt64();
         }
     }
 }

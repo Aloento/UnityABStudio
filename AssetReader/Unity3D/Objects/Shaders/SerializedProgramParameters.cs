@@ -12,51 +12,51 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
         public SamplerParameter[] m_Samplers;
 
         public SerializedProgramParameters(ObjectReader reader) {
-            int numVectorParams = reader.ReadInt32();
+            var numVectorParams = reader.ReadInt32();
             m_VectorParams = new VectorParameter[numVectorParams];
-            for (int i = 0; i < numVectorParams; i++) {
+            for (var i = 0; i < numVectorParams; i++) {
                 m_VectorParams[i] = new VectorParameter(reader);
             }
 
-            int numMatrixParams = reader.ReadInt32();
+            var numMatrixParams = reader.ReadInt32();
             m_MatrixParams = new MatrixParameter[numMatrixParams];
-            for (int i = 0; i < numMatrixParams; i++) {
+            for (var i = 0; i < numMatrixParams; i++) {
                 m_MatrixParams[i] = new MatrixParameter(reader);
             }
 
-            int numTextureParams = reader.ReadInt32();
+            var numTextureParams = reader.ReadInt32();
             m_TextureParams = new TextureParameter[numTextureParams];
-            for (int i = 0; i < numTextureParams; i++) {
+            for (var i = 0; i < numTextureParams; i++) {
                 m_TextureParams[i] = new TextureParameter(reader);
             }
 
-            int numBufferParams = reader.ReadInt32();
+            var numBufferParams = reader.ReadInt32();
             m_BufferParams = new BufferBinding[numBufferParams];
-            for (int i = 0; i < numBufferParams; i++) {
+            for (var i = 0; i < numBufferParams; i++) {
                 m_BufferParams[i] = new BufferBinding(reader);
             }
 
-            int numConstantBuffers = reader.ReadInt32();
+            var numConstantBuffers = reader.ReadInt32();
             m_ConstantBuffers = new ConstantBuffer[numConstantBuffers];
-            for (int i = 0; i < numConstantBuffers; i++) {
+            for (var i = 0; i < numConstantBuffers; i++) {
                 m_ConstantBuffers[i] = new ConstantBuffer(reader);
             }
 
-            int numConstantBufferBindings = reader.ReadInt32();
+            var numConstantBufferBindings = reader.ReadInt32();
             m_ConstantBufferBindings = new BufferBinding[numConstantBufferBindings];
-            for (int i = 0; i < numConstantBufferBindings; i++) {
+            for (var i = 0; i < numConstantBufferBindings; i++) {
                 m_ConstantBufferBindings[i] = new BufferBinding(reader);
             }
 
-            int numUAVParams = reader.ReadInt32();
+            var numUAVParams = reader.ReadInt32();
             m_UAVParams = new UAVParameter[numUAVParams];
-            for (int i = 0; i < numUAVParams; i++) {
+            for (var i = 0; i < numUAVParams; i++) {
                 m_UAVParams[i] = new UAVParameter(reader);
             }
 
-            int numSamplers = reader.ReadInt32();
+            var numSamplers = reader.ReadInt32();
             m_Samplers = new SamplerParameter[numSamplers];
-            for (int i = 0; i < numSamplers; i++) {
+            for (var i = 0; i < numSamplers; i++) {
                 m_Samplers[i] = new SamplerParameter(reader);
             }
         }

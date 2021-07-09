@@ -1,4 +1,5 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
+    using System.Collections.Generic;
     using Utils;
 
     public class ResourceManager : UObject {

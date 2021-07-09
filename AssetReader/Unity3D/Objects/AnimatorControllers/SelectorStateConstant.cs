@@ -7,9 +7,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
         public bool m_isEntry;
 
         public SelectorStateConstant(ObjectReader reader) {
-            int numTransitions = reader.ReadInt32();
+            var numTransitions = reader.ReadInt32();
             m_TransitionConstantArray = new SelectorTransitionConstant[numTransitions];
-            for (int i = 0; i < numTransitions; i++) {
+            for (var i = 0; i < numTransitions; i++) {
                 m_TransitionConstantArray[i] = new SelectorTransitionConstant(reader);
             }
 

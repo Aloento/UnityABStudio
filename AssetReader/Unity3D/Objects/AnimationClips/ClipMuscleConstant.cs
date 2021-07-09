@@ -67,9 +67,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
                 var m_AdditionalCurveIndexArray = reader.ReadInt32Array();
             }
 
-            int numDeltas = reader.ReadInt32();
+            var numDeltas = reader.ReadInt32();
             m_ValueArrayDelta = new ValueDelta[numDeltas];
-            for (int i = 0; i < numDeltas; i++) {
+            for (var i = 0; i < numDeltas; i++) {
                 m_ValueArrayDelta[i] = new ValueDelta(reader);
             }
 

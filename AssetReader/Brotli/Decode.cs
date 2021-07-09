@@ -94,7 +94,7 @@ namespace Org.Brotli.Dec {
 
         /// <summary>Decodes the next Huffman code from bit-stream.</summary>
         private static int ReadSymbol(int[] table, int offset, BitReader br) {
-            var val = (int)((long)(((ulong)br.accumulator) >> br.bitOffset));
+            var val = (int)(long)((ulong)br.accumulator >> br.bitOffset);
             offset += val & HuffmanTableMask;
             var bits = table[offset] >> 16;
             var sym = table[offset] & unchecked(0xFFFF);
@@ -104,8 +104,8 @@ namespace Org.Brotli.Dec {
             }
             offset += sym;
             var mask = (1 << bits) - 1;
-            offset += (int)(((uint)(val & mask)) >> HuffmanTableBits);
-            br.bitOffset += ((table[offset] >> 16) + HuffmanTableBits);
+            offset += (int)((uint)(val & mask) >> HuffmanTableBits);
+            br.bitOffset += (table[offset] >> 16) + HuffmanTableBits;
             return table[offset] & unchecked(0xFFFF);
         }
 
@@ -158,7 +158,7 @@ namespace Org.Brotli.Dec {
             while (symbol < numSymbols && space > 0) {
                 BitReader.ReadMoreInput(br);
                 BitReader.FillBitWindow(br);
-                var p = (int)(((long)(((ulong)br.accumulator) >> br.bitOffset))) & 31;
+                var p = (int)(long)((ulong)br.accumulator >> br.bitOffset) & 31;
                 br.bitOffset += table[p] >> 16;
                 var codeLen = table[p] & unchecked(0xFFFF);
                 if (codeLen < CodeLengthRepeatCode) {
@@ -266,17 +266,17 @@ namespace Org.Brotli.Dec {
                 for (var i = simpleCodeOrSkip; i < CodeLengthCodes && space > 0; i++) {
                     var codeLenIdx = CodeLengthCodeOrder[i];
                     BitReader.FillBitWindow(br);
-                    var p = (int)((long)(((ulong)br.accumulator) >> br.bitOffset)) & 15;
+                    var p = (int)(long)((ulong)br.accumulator >> br.bitOffset) & 15;
                     // TODO: Demultiplex FIXED_TABLE.
                     br.bitOffset += FixedTable[p] >> 16;
                     var v = FixedTable[p] & unchecked(0xFFFF);
                     codeLengthCodeLengths[codeLenIdx] = v;
                     if (v != 0) {
-                        space -= (32 >> v);
+                        space -= 32 >> v;
                         numCodes++;
                     }
                 }
-                ok = (numCodes == 1 || space == 0);
+                ok = numCodes == 1 || space == 0;
                 ReadHuffmanCodeLengths(codeLengthCodeLengths, alphabetSize, codeLengths, br);
             }
             if (!ok) {
@@ -376,7 +376,7 @@ namespace Org.Brotli.Dec {
             if (newSize > state.expectedTotalSize) {
                 /* TODO: Handle 2GB+ cases more gracefully. */
                 var minimalNewSize = (int)state.expectedTotalSize + state.customDictionary.Length;
-                while ((newSize >> 1) > minimalNewSize) {
+                while (newSize >> 1 > minimalNewSize) {
                     newSize >>= 1;
                 }
                 if (!state.inputEnd && newSize < 16384 && state.maxRingBufferSize >= 16384) {
@@ -541,7 +541,7 @@ namespace Org.Brotli.Dec {
         }
 
         internal static void SetCustomDictionary(State state, byte[] data) {
-            state.customDictionary = (data == null) ? new byte[0] : data;
+            state.customDictionary = data == null ? new byte[0] : data;
         }
 
         /// <summary>Actual decompress implementation.</summary>
@@ -588,13 +588,13 @@ namespace Org.Brotli.Dec {
                         state.blockLength[1]--;
                         BitReader.FillBitWindow(br);
                         var cmdCode = ReadSymbol(state.hGroup1.codes, state.treeCommandOffset, br);
-                        var rangeIdx = (int)(((uint)cmdCode) >> 6);
+                        var rangeIdx = (int)((uint)cmdCode >> 6);
                         state.distanceCode = 0;
                         if (rangeIdx >= 2) {
                             rangeIdx -= 2;
                             state.distanceCode = -1;
                         }
-                        var insertCode = Prefix.InsertRangeLut[rangeIdx] + (((int)(((uint)cmdCode) >> 3)) & 7);
+                        var insertCode = Prefix.InsertRangeLut[rangeIdx] + ((int)((uint)cmdCode >> 3) & 7);
                         var copyCode = Prefix.CopyRangeLut[rangeIdx] + (cmdCode & 7);
                         state.insertLength = Prefix.InsertLengthOffset[insertCode] + BitReader.ReadBits(br, Prefix.InsertLengthNBits[insertCode]);
                         state.copyLength = Prefix.CopyLengthOffset[copyCode] + BitReader.ReadBits(br, Prefix.CopyLengthNBits[copyCode]);
@@ -666,8 +666,8 @@ namespace Org.Brotli.Dec {
                             if (state.distanceCode >= state.numDirectDistanceCodes) {
                                 state.distanceCode -= state.numDirectDistanceCodes;
                                 var postfix = state.distanceCode & state.distancePostfixMask;
-                                state.distanceCode = (int)(((uint)state.distanceCode) >> state.distancePostfixBits);
-                                var n = ((int)(((uint)state.distanceCode) >> 1)) + 1;
+                                state.distanceCode = (int)((uint)state.distanceCode >> state.distancePostfixBits);
+                                var n = (int)((uint)state.distanceCode >> 1) + 1;
                                 var offset = ((2 + (state.distanceCode & 1)) << n) - 4;
                                 state.distanceCode = state.numDirectDistanceCodes + postfix + ((offset + BitReader.ReadBits(br, n)) << state.distancePostfixBits);
                             }
@@ -707,7 +707,7 @@ namespace Org.Brotli.Dec {
                         var src = (state.pos - state.distance) & ringBufferMask;
                         var dst = state.pos;
                         var copyLength = state.copyLength - state.j;
-                        if ((src + copyLength < ringBufferMask) && (dst + copyLength < ringBufferMask)) {
+                        if (src + copyLength < ringBufferMask && dst + copyLength < ringBufferMask) {
                             for (var k = 0; k < copyLength; ++k) {
                                 ringBuffer[dst++] = ringBuffer[src++];
                             }
@@ -741,7 +741,7 @@ namespace Org.Brotli.Dec {
                             var shift = Dictionary.SizeBitsByLength[state.copyLength];
                             var mask = (1 << shift) - 1;
                             var wordIdx = wordId & mask;
-                            var transformIdx = (int)(((uint)wordId) >> shift);
+                            var transformIdx = (int)((uint)wordId >> shift);
                             offset += wordIdx * state.copyLength;
                             if (transformIdx < Transform.Transforms.Length) {
                                 var len = Transform.TransformDictionaryWord(ringBuffer, state.copyDst, Dictionary.GetData(), offset, state.copyLength, Transform.Transforms[transformIdx]);
@@ -777,7 +777,7 @@ namespace Org.Brotli.Dec {
                         while (state.metaBlockLength > 0) {
                             BitReader.ReadMoreInput(br);
                             // Optimize
-                            BitReader.ReadBits(br, 8);
+                            _ = BitReader.ReadBits(br, 8);
                             state.metaBlockLength--;
                         }
                         state.runningState = RunningState.BlockStart;

@@ -13,9 +13,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Avatars {
             m_AvatarSize = reader.ReadUInt32();
             m_Avatar = new AvatarConstant(reader);
 
-            int numTOS = reader.ReadInt32();
+            var numTOS = reader.ReadInt32();
             m_TOS = new KeyValuePair<uint, string>[numTOS];
-            for (int i = 0; i < numTOS; i++) {
+            for (var i = 0; i < numTOS; i++) {
                 m_TOS[i] = new KeyValuePair<uint, string>(reader.ReadUInt32(), reader.ReadAlignedString());
             }
 

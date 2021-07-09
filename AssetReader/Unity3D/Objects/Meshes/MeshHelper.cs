@@ -84,7 +84,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
             var size = GetFormatSize(format);
             var len = inputBytes.Length / size;
             var result = new float[len];
-            for (int i = 0; i < len; i++) {
+            for (var i = 0; i < len; i++) {
                 result[i] = format switch {
                     VertexFormat.kVertexFormatFloat => BitConverter.ToSingle(inputBytes, i * 4),
                     VertexFormat.kVertexFormatFloat16 => Half.ToHalf(inputBytes, i * 2),
@@ -103,7 +103,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
             var size = GetFormatSize(format);
             var len = inputBytes.Length / size;
             var result = new int[len];
-            for (int i = 0; i < len; i++) {
+            for (var i = 0; i < len; i++) {
                 switch (format) {
                     case VertexFormat.kVertexFormatUInt8:
                     case VertexFormat.kVertexFormatSInt8:

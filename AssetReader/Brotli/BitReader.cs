@@ -93,7 +93,7 @@ namespace Org.Brotli.Dec {
             if (byteOffset > br.tailBytes) {
                 throw new BrotliRuntimeException("Read after end");
             }
-            if (endOfStream && (byteOffset != br.tailBytes)) {
+            if (endOfStream && byteOffset != br.tailBytes) {
                 throw new BrotliRuntimeException("Unused bytes after end");
             }
         }
@@ -101,7 +101,7 @@ namespace Org.Brotli.Dec {
         /// <summary>Advances the Read buffer by 5 bytes to make room for reading next 24 bits.</summary>
         internal static void FillBitWindow(BitReader br) {
             if (br.bitOffset >= 32) {
-                br.accumulator = ((long)br.intBuffer[br.intOffset++] << 32) | ((long)(((ulong)br.accumulator) >> 32));
+                br.accumulator = ((long)br.intBuffer[br.intOffset++] << 32) | (long)((ulong)br.accumulator >> 32);
                 br.bitOffset -= 32;
             }
         }
@@ -109,7 +109,7 @@ namespace Org.Brotli.Dec {
         /// <summary>Reads the specified number of bits from Read Buffer.</summary>
         internal static int ReadBits(BitReader br, int n) {
             FillBitWindow(br);
-            var val = (int)((long)(((ulong)br.accumulator) >> br.bitOffset)) & ((1 << n) - 1);
+            var val = (int)(long)((ulong)br.accumulator >> br.bitOffset) & ((1 << n) - 1);
             br.bitOffset += n;
             return val;
         }
@@ -180,8 +180,8 @@ namespace Org.Brotli.Dec {
                 throw new BrotliRuntimeException("Unaligned copyBytes");
             }
             // Drain accumulator.
-            while ((br.bitOffset != 64) && (length != 0)) {
-                data[offset++] = unchecked((byte)((long)(((ulong)br.accumulator) >> br.bitOffset)));
+            while (br.bitOffset != 64 && length != 0) {
+                data[offset++] = unchecked((byte)(long)((ulong)br.accumulator >> br.bitOffset));
                 br.bitOffset += 8;
                 length--;
             }
@@ -205,7 +205,7 @@ namespace Org.Brotli.Dec {
                 // length = 1..3
                 FillBitWindow(br);
                 while (length != 0) {
-                    data[offset++] = unchecked((byte)((long)(((ulong)br.accumulator) >> br.bitOffset)));
+                    data[offset++] = unchecked((byte)(long)((ulong)br.accumulator >> br.bitOffset));
                     br.bitOffset += 8;
                     length--;
                 }
