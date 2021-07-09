@@ -75,7 +75,7 @@ namespace SoarCraft.QYun.AssetReader.Utils {
 
         public Color ReadColor4() => new(ReadSingle(), ReadSingle(), ReadSingle(), ReadSingle());
 
-        public Matrix4X4 ReadMatrix() => new(ReadSingleArray(16));
+        public Matrix4x4 ReadMatrix() => new(ReadSingleArray(16));
 
         private static T[] ReadArray<T>(Func<T> del, int length) {
             var array = new T[length];
@@ -111,7 +111,7 @@ namespace SoarCraft.QYun.AssetReader.Utils {
 
         public Vector4[] ReadVector4Array() => ReadArray(this.ReadVector4, ReadInt32());
 
-        public Matrix4X4[] ReadMatrixArray() => ReadArray(this.ReadMatrix, ReadInt32());
+        public Matrix4x4[] ReadMatrixArray() => ReadArray(this.ReadMatrix, ReadInt32());
 
         private FileType CheckFileType() {
             var signature = ReadStringToNull(20);

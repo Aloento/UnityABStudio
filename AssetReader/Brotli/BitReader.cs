@@ -4,6 +4,8 @@ Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
 namespace Org.Brotli.Dec {
+    using System;
+
     /// <summary>Bit reading helpers.</summary>
     internal sealed class BitReader {
         /// <summary>
@@ -24,7 +26,7 @@ namespace Org.Brotli.Dec {
 
         private readonly int[] intBuffer = new int[IntBufferSize];
 
-        private readonly IntReader intReader = new IntReader();
+        private readonly IntReader intReader = new();
 
         private System.IO.Stream input;
 

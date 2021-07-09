@@ -17,8 +17,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
             var m_Component_size = reader.ReadInt32();
             m_Components = new PPtr<Component>[m_Component_size];
             for (var i = 0; i < m_Component_size; i++) {
-                if ((version[0] == 5 && version[1] < 5) || version[0] < 5) //5.5 down
-                {
+                if ((version[0] == 5 && version[1] < 5) || version[0] < 5) { //5.5 down
                     var first = reader.ReadInt32();
                 }
                 m_Components[i] = new PPtr<Component>(reader);

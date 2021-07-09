@@ -1,7 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Math {
     using System;
 
-    public struct Matrix4X4 : IEquatable<Matrix4X4> {
+    public struct Matrix4x4 : IEquatable<Matrix4x4> {
         public float M00;
         public float M10;
         public float M20;
@@ -22,7 +22,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
         public float M23;
         public float M33;
 
-        public Matrix4X4(float[] values) {
+        public Matrix4x4(float[] values) {
             if (values == null)
                 throw new ArgumentNullException(nameof(values));
             if (values.Length != 16)
@@ -134,9 +134,9 @@ namespace SoarCraft.QYun.AssetReader.Math {
 
         public override int GetHashCode() => GetColumn(0).GetHashCode() ^ (GetColumn(1).GetHashCode() << 2) ^ (GetColumn(2).GetHashCode() >> 2) ^ (GetColumn(3).GetHashCode() >> 1);
 
-        public override bool Equals(object obj) => obj is Matrix4X4 x4 && this.Equals(x4);
+        public override bool Equals(object obj) => obj is Matrix4x4 x4 && this.Equals(x4);
 
-        public bool Equals(Matrix4X4 other) =>
+        public bool Equals(Matrix4x4 other) =>
             GetColumn(0).Equals(other.GetColumn(0))
             && GetColumn(1).Equals(other.GetColumn(1))
             && GetColumn(2).Equals(other.GetColumn(2))
@@ -158,8 +158,8 @@ namespace SoarCraft.QYun.AssetReader.Math {
             _ => throw new IndexOutOfRangeException("Invalid row index!"),
         };
 
-        public static Matrix4X4 operator *(Matrix4X4 lhs, Matrix4X4 rhs) {
-            Matrix4X4 res;
+        public static Matrix4x4 operator *(Matrix4x4 lhs, Matrix4x4 rhs) {
+            Matrix4x4 res;
             res.M00 = (lhs.M00 * rhs.M00) + (lhs.M01 * rhs.M10) + (lhs.M02 * rhs.M20) + (lhs.M03 * rhs.M30);
             res.M01 = (lhs.M00 * rhs.M01) + (lhs.M01 * rhs.M11) + (lhs.M02 * rhs.M21) + (lhs.M03 * rhs.M31);
             res.M02 = (lhs.M00 * rhs.M02) + (lhs.M01 * rhs.M12) + (lhs.M02 * rhs.M22) + (lhs.M03 * rhs.M32);
@@ -183,15 +183,15 @@ namespace SoarCraft.QYun.AssetReader.Math {
             return res;
         }
 
-        public static bool operator ==(Matrix4X4 lhs, Matrix4X4 rhs) => lhs.GetColumn(0) == rhs.GetColumn(0)
+        public static bool operator ==(Matrix4x4 lhs, Matrix4x4 rhs) => lhs.GetColumn(0) == rhs.GetColumn(0)
                 && lhs.GetColumn(1) == rhs.GetColumn(1)
                 && lhs.GetColumn(2) == rhs.GetColumn(2)
                 && lhs.GetColumn(3) == rhs.GetColumn(3);
 
-        public static bool operator !=(Matrix4X4 lhs, Matrix4X4 rhs) => !(lhs == rhs);
+        public static bool operator !=(Matrix4x4 lhs, Matrix4x4 rhs) => !(lhs == rhs);
 
-        public static Matrix4X4 Scale(Vector3 vector) {
-            Matrix4X4 m;
+        public static Matrix4x4 Scale(Vector3 vector) {
+            Matrix4x4 m;
             m.M00 = vector.X;
             m.M01 = 0F;
             m.M02 = 0F;
@@ -211,8 +211,8 @@ namespace SoarCraft.QYun.AssetReader.Math {
             return m;
         }
 
-        public static Matrix4X4 Translate(Vector3 vector) {
-            Matrix4X4 m;
+        public static Matrix4x4 Translate(Vector3 vector) {
+            Matrix4x4 m;
             m.M00 = 1F;
             m.M01 = 0F;
             m.M02 = 0F;
@@ -232,7 +232,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
             return m;
         }
 
-        public static Matrix4X4 Rotate(Quaternion q) {
+        public static Matrix4x4 Rotate(Quaternion q) {
             var x = q.X * 2.0F;
             var y = q.Y * 2.0F;
             var z = q.Z * 2.0F;
@@ -246,7 +246,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
             var wy = q.W * y;
             var wz = q.W * z;
 
-            Matrix4X4 m;
+            Matrix4x4 m;
             m.M00 = 1.0f - (yy + zz);
             m.M10 = xy + wz;
             m.M20 = xz - wy;

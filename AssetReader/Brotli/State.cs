@@ -9,7 +9,7 @@ namespace Org.Brotli.Dec {
 
         internal int nextRunningState;
 
-        internal readonly BitReader br = new BitReader();
+        internal readonly BitReader br = new();
 
         internal byte[] ringBuffer;
 
@@ -25,11 +25,11 @@ namespace Org.Brotli.Dec {
 
         internal bool isMetadata;
 
-        internal readonly HuffmanTreeGroup hGroup0 = new HuffmanTreeGroup();
+        internal readonly HuffmanTreeGroup hGroup0 = new();
 
-        internal readonly HuffmanTreeGroup hGroup1 = new HuffmanTreeGroup();
+        internal readonly HuffmanTreeGroup hGroup1 = new();
 
-        internal readonly HuffmanTreeGroup hGroup2 = new HuffmanTreeGroup();
+        internal readonly HuffmanTreeGroup hGroup2 = new();
 
         internal readonly int[] blockLength = new int[3];
 

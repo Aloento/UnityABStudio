@@ -14,7 +14,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
             m_WeightT = reader.ReadSingle();
             m_WeightR = reader.ReadSingle();
             if (version[0] >= 5) { //5.0 and up
-                m_HintT = version[0] > 5 || (version[0] == 5 && version[1] >= 4) ? reader.ReadVector3() : (Vector3)reader.ReadVector4();//5.4 and up
+                m_HintT = version[0] > 5 || (version[0] == 5 && version[1] >= 4) ? reader.ReadVector3() : reader.ReadVector4();//5.4 and up
                 m_HintWeightT = reader.ReadSingle();
             }
         }

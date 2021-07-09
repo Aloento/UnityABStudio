@@ -52,7 +52,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
 
             m_AverageSpeed = version[0] > 5 || (version[0] == 5 && version[1] >= 4)
                 ? reader.ReadVector3()
-                : (Vector3)reader.ReadVector4(); //5.4 and up
+                : reader.ReadVector4(); //5.4 and up
             m_Clip = new Clip(reader);
             m_StartTime = reader.ReadSingle();
             m_StopTime = reader.ReadSingle();
