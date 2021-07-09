@@ -10,9 +10,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
 
         public AnimationCurve(ObjectReader reader, Func<T> readerFunc) {
             var version = reader.version;
-            int numCurves = reader.ReadInt32();
+            var numCurves = reader.ReadInt32();
             m_Curve = new Keyframe<T>[numCurves];
-            for (int i = 0; i < numCurves; i++) {
+            for (var i = 0; i < numCurves; i++) {
                 m_Curve[i] = new Keyframe<T>(reader, readerFunc);
             }
 

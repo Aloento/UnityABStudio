@@ -9,9 +9,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
         public BlendTreeConstant(ObjectReader reader) {
             var version = reader.version;
 
-            int numNodes = reader.ReadInt32();
+            var numNodes = reader.ReadInt32();
             m_NodeArray = new BlendTreeNodeConstant[numNodes];
-            for (int i = 0; i < numNodes; i++) {
+            for (var i = 0; i < numNodes; i++) {
                 m_NodeArray[i] = new BlendTreeNodeConstant(reader);
             }
 

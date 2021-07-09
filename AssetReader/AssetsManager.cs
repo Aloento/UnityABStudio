@@ -9,6 +9,17 @@ namespace SoarCraft.QYun.AssetReader {
     using Unity3D;
     using Unity3D.Objects;
     using Unity3D.Objects.AnimationClips;
+    using Unity3D.Objects.AnimatorControllers;
+    using Unity3D.Objects.AnimatorOverrideControllers;
+    using Unity3D.Objects.AssetBundles;
+    using Unity3D.Objects.Avatars;
+    using Unity3D.Objects.Materials;
+    using Unity3D.Objects.Meshes;
+    using Unity3D.Objects.Shaders;
+    using Unity3D.Objects.Sprites;
+    using Unity3D.Objects.SpriteAtlases;
+    using Unity3D.Objects.Texture2Ds;
+    using Unity3D.Objects.VideoClips;
     using Utils;
     using static Helpers.ImportHelper;
 
@@ -210,7 +221,7 @@ namespace SoarCraft.QYun.AssetReader {
                 foreach (var objectInfo in assetsFile.m_Objects) {
                     var objectReader = new ObjectReader(assetsFile.reader, assetsFile, objectInfo);
                     try {
-                        UObject obj = objectReader.type switch {
+                        var obj = objectReader.type switch {
                             ClassIDType.Animation => new Animation(objectReader),
                             ClassIDType.AnimationClip => new AnimationClip(objectReader),
                             ClassIDType.Animator => new Animator(objectReader),
@@ -259,38 +270,45 @@ namespace SoarCraft.QYun.AssetReader {
             Console.WriteLine("Process Assets...");
 
             foreach (var obj in this.assetsFileList.SelectMany(assetsFile => assetsFile.Objects)) {
-                if (obj is GameObject m_GameObject) {
-                    foreach (var pptr in m_GameObject.m_Components) {
-                        if (pptr.TryGet(out var m_Component)) {
-                            switch (m_Component) {
-                                case Transform m_Transform:
-                                    m_GameObject.m_Transform = m_Transform;
-                                    break;
-                                case MeshRenderer m_MeshRenderer:
-                                    m_GameObject.m_MeshRenderer = m_MeshRenderer;
-                                    break;
-                                case MeshFilter m_MeshFilter:
-                                    m_GameObject.m_MeshFilter = m_MeshFilter;
-                                    break;
-                                case SkinnedMeshRenderer m_SkinnedMeshRenderer:
-                                    m_GameObject.m_SkinnedMeshRenderer = m_SkinnedMeshRenderer;
-                                    break;
-                                case Animator m_Animator:
-                                    m_GameObject.m_Animator = m_Animator;
-                                    break;
-                                case Animation m_Animation:
-                                    m_GameObject.m_Animation = m_Animation;
-                                    break;
+                switch (obj) {
+                    case GameObject m_GameObject: {
+                        foreach (var pptr in m_GameObject.m_Components) {
+                            if (pptr.TryGet(out var m_Component)) {
+                                switch (m_Component) {
+                                    case Transform m_Transform:
+                                        m_GameObject.m_Transform = m_Transform;
+                                        break;
+                                    case MeshRenderer m_MeshRenderer:
+                                        m_GameObject.m_MeshRenderer = m_MeshRenderer;
+                                        break;
+                                    case MeshFilter m_MeshFilter:
+                                        m_GameObject.m_MeshFilter = m_MeshFilter;
+                                        break;
+                                    case SkinnedMeshRenderer m_SkinnedMeshRenderer:
+                                        m_GameObject.m_SkinnedMeshRenderer = m_SkinnedMeshRenderer;
+                                        break;
+                                    case Animator m_Animator:
+                                        m_GameObject.m_Animator = m_Animator;
+                                        break;
+                                    case Animation m_Animation:
+                                        m_GameObject.m_Animation = m_Animation;
+                                        break;
+                                }
                             }
                         }
+
+                        break;
                     }
-                } else if (obj is SpriteAtlas m_SpriteAtlas) {
-                    foreach (var m_PackedSprite in m_SpriteAtlas.m_PackedSprites) {
-                        if (m_PackedSprite.TryGet(out var m_Sprite)) {
-                            if (m_Sprite.m_SpriteAtlas.IsNull) {
-                                m_Sprite.m_SpriteAtlas.Set(m_SpriteAtlas);
+                    case SpriteAtlas m_SpriteAtlas: {
+                        foreach (var m_PackedSprite in m_SpriteAtlas.m_PackedSprites) {
+                            if (m_PackedSprite.TryGet(out var m_Sprite)) {
+                                if (m_Sprite.m_SpriteAtlas.IsNull) {
+                                    m_Sprite.m_SpriteAtlas.Set(m_SpriteAtlas);
+                                }
                             }
                         }
+
+                        break;
                     }
                 }
             }

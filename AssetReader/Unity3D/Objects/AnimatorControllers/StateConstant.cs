@@ -23,25 +23,25 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
         public StateConstant(ObjectReader reader) {
             var version = reader.version;
 
-            int numTransistions = reader.ReadInt32();
+            var numTransistions = reader.ReadInt32();
             m_TransitionConstantArray = new TransitionConstant[numTransistions];
-            for (int i = 0; i < numTransistions; i++) {
+            for (var i = 0; i < numTransistions; i++) {
                 m_TransitionConstantArray[i] = new TransitionConstant(reader);
             }
 
             m_BlendTreeConstantIndexArray = reader.ReadInt32Array();
 
             if (version[0] < 5 || (version[0] == 5 && version[1] < 2)) { //5.2 down
-                int numInfos = reader.ReadInt32();
+                var numInfos = reader.ReadInt32();
                 m_LeafInfoArray = new LeafInfoConstant[numInfos];
-                for (int i = 0; i < numInfos; i++) {
+                for (var i = 0; i < numInfos; i++) {
                     m_LeafInfoArray[i] = new LeafInfoConstant(reader);
                 }
             }
 
-            int numBlends = reader.ReadInt32();
+            var numBlends = reader.ReadInt32();
             m_BlendTreeConstantArray = new BlendTreeConstant[numBlends];
-            for (int i = 0; i < numBlends; i++) {
+            for (var i = 0; i < numBlends; i++) {
                 m_BlendTreeConstantArray[i] = new BlendTreeConstant(reader);
             }
 

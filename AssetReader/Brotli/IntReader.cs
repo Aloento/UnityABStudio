@@ -23,7 +23,7 @@ namespace Org.Brotli.Dec {
         /// </remarks>
         internal static void Convert(IntReader ir, int intLen) {
             for (var i = 0; i < intLen; ++i) {
-                ir.intBuffer[i] = ((ir.byteBuffer[i * 4] & unchecked(0xFF))) | ((ir.byteBuffer[(i * 4) + 1] & unchecked(0xFF)) << 8) | ((ir.byteBuffer[(i * 4) + 2] & unchecked(0xFF)) << 16) | ((ir.byteBuffer[(i * 4) + 3] & unchecked(
+                ir.intBuffer[i] = (ir.byteBuffer[i * 4] & unchecked(0xFF)) | ((ir.byteBuffer[(i * 4) + 1] & unchecked(0xFF)) << 8) | ((ir.byteBuffer[(i * 4) + 2] & unchecked(0xFF)) << 16) | ((ir.byteBuffer[(i * 4) + 3] & unchecked(
                     0xFF)) << 24);
             }
         }

@@ -1,4 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Sprites {
+    using Entities.Enums;
+    using Utils;
 
     public class SpriteSettings {
         public uint settingsRaw;

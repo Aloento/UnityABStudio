@@ -52,9 +52,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
             public StreamedFrame(UnityReader reader) {
                 time = reader.ReadSingle();
 
-                int numKeys = reader.ReadInt32();
+                var numKeys = reader.ReadInt32();
                 keyList = new StreamedCurveKey[numKeys];
-                for (int i = 0; i < numKeys; i++) {
+                for (var i = 0; i < numKeys; i++) {
                     keyList[i] = new StreamedCurveKey(reader);
                 }
             }
@@ -70,10 +70,10 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
                 }
             }
 
-            for (int frameIndex = 2; frameIndex < frameList.Count - 1; frameIndex++) {
+            for (var frameIndex = 2; frameIndex < frameList.Count - 1; frameIndex++) {
                 var frame = frameList[frameIndex];
                 foreach (var curveKey in frame.keyList) {
-                    for (int i = frameIndex - 1; i >= 0; i--) {
+                    for (var i = frameIndex - 1; i >= 0; i--) {
                         var preFrame = frameList[i];
                         var preCurveKey = preFrame.keyList.FirstOrDefault(x => x.index == curveKey.index);
                         if (preCurveKey != null) {

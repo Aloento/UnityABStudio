@@ -41,11 +41,11 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
             }
 
             if (version[0] == 2 && version[1] <= 5) { //2.5 and down
-                int m_IndexBuffer_size = reader.ReadInt32();
+                var m_IndexBuffer_size = reader.ReadInt32();
 
                 if (m_Use16BitIndices) {
                     m_IndexBuffer = new uint[m_IndexBuffer_size / 2];
-                    for (int i = 0; i < m_IndexBuffer_size / 2; i++) {
+                    for (var i = 0; i < m_IndexBuffer_size / 2; i++) {
                         m_IndexBuffer[i] = reader.ReadUInt16();
                     }
                     reader.AlignStream();
@@ -54,9 +54,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 }
             }
 
-            int m_SubMeshesSize = reader.ReadInt32();
+            var m_SubMeshesSize = reader.ReadInt32();
             m_SubMeshes = new SubMesh[m_SubMeshesSize];
-            for (int i = 0; i < m_SubMeshesSize; i++) {
+            for (var i = 0; i < m_SubMeshesSize; i++) {
                 m_SubMeshes[i] = new SubMesh(reader);
             }
 
@@ -74,7 +74,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 if (version[0] >= 2019) { //2019 and up
                     var m_BonesAABBSize = reader.ReadInt32();
                     var m_BonesAABB = new MinMaxAABB[m_BonesAABBSize];
-                    for (int i = 0; i < m_BonesAABBSize; i++) {
+                    for (var i = 0; i < m_BonesAABBSize; i++) {
                         m_BonesAABB[i] = new MinMaxAABB(reader);
                     }
 
@@ -93,18 +93,18 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 reader.AlignStream();
 
                 //Unity fixed it in 2017.3.1p1 and later versions
-                if ((version[0] > 2017 || (version[0] == 2017 && version[1] >= 4)) || //2017.4
-                    ((version[0] == 2017 && version[1] == 3 && version[2] == 1) && buildType.IsPatch) || //fixed after 2017.3.1px
-                    ((version[0] == 2017 && version[1] == 3) && m_MeshCompression == 0))//2017.3.xfx with no compression
+                if (this.version[0] > 2017 || (this.version[0] == 2017 && this.version[1] >= 4) || //2017.4
+                    (this.version[0] == 2017 && this.version[1] == 3 && this.version[2] == 1 && buildType.IsPatch) || //fixed after 2017.3.1px
+                    (this.version[0] == 2017 && this.version[1] == 3 && m_MeshCompression == 0))//2017.3.xfx with no compression
                 {
                     var m_IndexFormat = reader.ReadInt32();
                     m_Use16BitIndices = m_IndexFormat == 0;
                 }
 
-                int m_IndexBuffer_size = reader.ReadInt32();
+                var m_IndexBuffer_size = reader.ReadInt32();
                 if (m_Use16BitIndices) {
                     m_IndexBuffer = new uint[m_IndexBuffer_size / 2];
-                    for (int i = 0; i < m_IndexBuffer_size / 2; i++) {
+                    for (var i = 0; i < m_IndexBuffer_size / 2; i++) {
                         m_IndexBuffer[i] = reader.ReadUInt16();
                     }
                     reader.AlignStream();
@@ -118,7 +118,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 m_Vertices = reader.ReadSingleArray(m_VertexCount * 3); //Vector3
 
                 m_Skin = new BoneWeights4[reader.ReadInt32()];
-                for (int s = 0; s < m_Skin.Length; s++) {
+                for (var s = 0; s < m_Skin.Length; s++) {
                     m_Skin[s] = new BoneWeights4(reader);
                 }
 
@@ -129,10 +129,10 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 m_UV1 = reader.ReadSingleArray(reader.ReadInt32() * 2); //Vector2
 
                 if (version[0] == 2 && version[1] <= 5) { //2.5 and down
-                    int m_TangentSpace_size = reader.ReadInt32();
+                    var m_TangentSpace_size = reader.ReadInt32();
                     m_Normals = new float[m_TangentSpace_size * 3];
                     m_Tangents = new float[m_TangentSpace_size * 4];
-                    for (int v = 0; v < m_TangentSpace_size; v++) {
+                    for (var v = 0; v < m_TangentSpace_size; v++) {
                         m_Normals[v * 3] = reader.ReadSingle();
                         m_Normals[v * 3 + 1] = reader.ReadSingle();
                         m_Normals[v * 3 + 2] = reader.ReadSingle();
@@ -149,7 +149,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
             } else {
                 if (version[0] < 2018 || (version[0] == 2018 && version[1] < 2)) { //2018.2 down
                     m_Skin = new BoneWeights4[reader.ReadInt32()];
-                    for (int s = 0; s < m_Skin.Length; s++) {
+                    for (var s = 0; s < m_Skin.Length; s++) {
                         m_Skin[s] = new BoneWeights4(reader);
                     }
                 }
@@ -168,18 +168,18 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
             reader.Position += 24; //AABB m_LocalAABB
 
             if (version[0] < 3 || (version[0] == 3 && version[1] <= 4)) { //3.4.2 and earlier
-                int m_Colors_size = reader.ReadInt32();
+                var m_Colors_size = reader.ReadInt32();
                 m_Colors = new float[m_Colors_size * 4];
-                for (int v = 0; v < m_Colors_size * 4; v++) {
+                for (var v = 0; v < m_Colors_size * 4; v++) {
                     m_Colors[v] = (float)reader.ReadByte() / 0xFF;
                 }
 
-                int m_CollisionTriangles_size = reader.ReadInt32();
+                var m_CollisionTriangles_size = reader.ReadInt32();
                 reader.Position += m_CollisionTriangles_size * 4; //UInt32 indices
-                int m_CollisionVertexCount = reader.ReadInt32();
+                var m_CollisionVertexCount = reader.ReadInt32();
             }
 
-            int m_MeshUsageFlags = reader.ReadInt32();
+            var m_MeshUsageFlags = reader.ReadInt32();
 
             if (version[0] >= 5) { //5.0 and up
                 var m_BakedConvexCollisionMesh = reader.ReadUInt8Array();
@@ -236,9 +236,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                         var vertexFormat = MeshHelper.ToVertexFormat(m_Channel.format, version);
                         var componentByteSize = (int)MeshHelper.GetFormatSize(vertexFormat);
                         var componentBytes = new byte[m_VertexCount * m_Channel.dimension * componentByteSize];
-                        for (int v = 0; v < m_VertexCount; v++) {
+                        for (var v = 0; v < m_VertexCount; v++) {
                             var vertexOffset = (int)m_Stream.offset + m_Channel.offset + (int)m_Stream.stride * v;
-                            for (int d = 0; d < m_Channel.dimension; d++) {
+                            for (var d = 0; d < m_Channel.dimension; d++) {
                                 var componentOffset = vertexOffset + componentByteSize * d;
                                 Buffer.BlockCopy(m_VertexData.m_DataSize, componentOffset, componentBytes, componentByteSize * (v * m_Channel.dimension + d), componentByteSize);
                             }
@@ -303,8 +303,8 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                                     if (m_Skin == null) {
                                         InitMSkin();
                                     }
-                                    for (int i = 0; i < m_VertexCount; i++) {
-                                        for (int j = 0; j < m_Channel.dimension; j++) {
+                                    for (var i = 0; i < m_VertexCount; i++) {
+                                        for (var j = 0; j < m_Channel.dimension; j++) {
                                             m_Skin[i].weight[j] = componentsFloatArray[i * m_Channel.dimension + j];
                                         }
                                     }
@@ -313,8 +313,8 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                                     if (m_Skin == null) {
                                         InitMSkin();
                                     }
-                                    for (int i = 0; i < m_VertexCount; i++) {
-                                        for (int j = 0; j < m_Channel.dimension; j++) {
+                                    for (var i = 0; i < m_VertexCount; i++) {
+                                        for (var j = 0; j < m_Channel.dimension; j++) {
                                             m_Skin[i].boneIndex[j] = componentsIntArray[i * m_Channel.dimension + j];
                                         }
                                     }
@@ -372,8 +372,8 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                     const int kUVChannelExists = 4;
                     const int kMaxTexCoordShaderChannels = 8;
 
-                    int uvSrcOffset = 0;
-                    for (int uv = 0; uv < kMaxTexCoordShaderChannels; uv++) {
+                    var uvSrcOffset = 0;
+                    for (var uv = 0; uv < kMaxTexCoordShaderChannels; uv++) {
                         var texCoordBits = m_UVInfo >> (uv * kInfoBitsPerUV);
                         texCoordBits &= (1u << kInfoBitsPerUV) - 1u;
                         if ((texCoordBits & kUVChannelExists) != 0) {
@@ -396,7 +396,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                     m_BindPose = new Matrix4x4[m_CompressedMesh.m_BindPoses.m_NumItems / 16];
                     var m_BindPoses_Unpacked = m_CompressedMesh.m_BindPoses.UnpackFloats(16, 4 * 16);
                     var buffer = new float[16];
-                    for (int i = 0; i < m_BindPose.Length; i++) {
+                    for (var i = 0; i < m_BindPose.Length; i++) {
                         Array.Copy(m_BindPoses_Unpacked, i * 16, buffer, 0, 16);
                         m_BindPose[i] = new Matrix4x4(buffer);
                     }
@@ -407,7 +407,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 var normalData = m_CompressedMesh.m_Normals.UnpackFloats(2, 4 * 2);
                 var signs = m_CompressedMesh.m_NormalSigns.UnpackInts();
                 m_Normals = new float[m_CompressedMesh.m_Normals.m_NumItems / 2 * 3];
-                for (int i = 0; i < m_CompressedMesh.m_Normals.m_NumItems / 2; ++i) {
+                for (var i = 0; i < m_CompressedMesh.m_Normals.m_NumItems / 2; ++i) {
                     var x = normalData[i * 2 + 0];
                     var y = normalData[i * 2 + 1];
                     var zsqr = 1 - x * x - y * y;
@@ -434,7 +434,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 var tangentData = m_CompressedMesh.m_Tangents.UnpackFloats(2, 4 * 2);
                 var signs = m_CompressedMesh.m_TangentSigns.UnpackInts();
                 m_Tangents = new float[m_CompressedMesh.m_Tangents.m_NumItems / 2 * 4];
-                for (int i = 0; i < m_CompressedMesh.m_Tangents.m_NumItems / 2; ++i) {
+                for (var i = 0; i < m_CompressedMesh.m_Tangents.m_NumItems / 2; ++i) {
                     var x = tangentData[i * 2 + 0];
                     var y = tangentData[i * 2 + 1];
                     var zsqr = 1 - x * x - y * y;
@@ -471,12 +471,12 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
 
                 InitMSkin();
 
-                int bonePos = 0;
-                int boneIndexPos = 0;
-                int j = 0;
-                int sum = 0;
+                var bonePos = 0;
+                var boneIndexPos = 0;
+                var j = 0;
+                var sum = 0;
 
-                for (int i = 0; i < m_CompressedMesh.m_Weights.m_NumItems; i++) {
+                for (var i = 0; i < m_CompressedMesh.m_Weights.m_NumItems; i++) {
                     //read bone index and weight.
                     m_Skin[bonePos].weight[j] = weights[i] / 31.0f;
                     m_Skin[bonePos].boneIndex[j] = boneIndices[boneIndexPos++];
@@ -514,7 +514,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 m_CompressedMesh.m_Colors.m_BitSize /= 4;
                 var tempColors = m_CompressedMesh.m_Colors.UnpackInts();
                 m_Colors = new float[m_CompressedMesh.m_Colors.m_NumItems];
-                for (int v = 0; v < m_CompressedMesh.m_Colors.m_NumItems; v++) {
+                for (var v = 0; v < m_CompressedMesh.m_Colors.m_NumItems; v++) {
                     m_Colors[v] = tempColors[v] / 255f;
                 }
             }
@@ -529,7 +529,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 var indexCount = m_SubMesh.indexCount;
                 var topology = m_SubMesh.topology;
                 if (topology == GfxPrimitiveType.kPrimitiveTriangles) {
-                    for (int i = 0; i < indexCount; i += 3) {
+                    for (var i = 0; i < indexCount; i += 3) {
                         m_Indices.Add(m_IndexBuffer[firstIndex + i]);
                         m_Indices.Add(m_IndexBuffer[firstIndex + i + 1]);
                         m_Indices.Add(m_IndexBuffer[firstIndex + i + 2]);
@@ -537,7 +537,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                 } else if (version[0] < 4 || topology == GfxPrimitiveType.kPrimitiveTriangleStrip) {
                     // de-stripify :
                     uint triIndex = 0;
-                    for (int i = 0; i < indexCount - 2; i++) {
+                    for (var i = 0; i < indexCount - 2; i++) {
                         var a = m_IndexBuffer[firstIndex + i];
                         var b = m_IndexBuffer[firstIndex + i + 1];
                         var c = m_IndexBuffer[firstIndex + i + 2];
@@ -560,7 +560,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
                     //fix indexCount
                     m_SubMesh.indexCount = triIndex;
                 } else if (topology == GfxPrimitiveType.kPrimitiveQuads) {
-                    for (int q = 0; q < indexCount; q += 4) {
+                    for (var q = 0; q < indexCount; q += 4) {
                         m_Indices.Add(m_IndexBuffer[firstIndex + q]);
                         m_Indices.Add(m_IndexBuffer[firstIndex + q + 1]);
                         m_Indices.Add(m_IndexBuffer[firstIndex + q + 2]);
@@ -578,7 +578,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
 
         private void InitMSkin() {
             m_Skin = new BoneWeights4[m_VertexCount];
-            for (int i = 0; i < m_VertexCount; i++) {
+            for (var i = 0; i < m_VertexCount; i++) {
                 m_Skin[i] = new BoneWeights4();
             }
         }

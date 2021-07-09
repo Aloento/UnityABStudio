@@ -10,7 +10,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
         public PackedQuatVector(ObjectReader reader) {
             m_NumItems = reader.ReadUInt32();
 
-            int numData = reader.ReadInt32();
+            var numData = reader.ReadInt32();
             m_Data = reader.ReadBytes(numData);
 
             reader.AlignStream();
@@ -18,16 +18,16 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
 
         public Quaternion[] UnpackQuats() {
             var data = new Quaternion[m_NumItems];
-            int indexPos = 0;
-            int bitPos = 0;
+            var indexPos = 0;
+            var bitPos = 0;
 
-            for (int i = 0; i < m_NumItems; i++) {
+            for (var i = 0; i < m_NumItems; i++) {
                 uint flags = 0;
 
-                int bits = 0;
+                var bits = 0;
                 while (bits < 3) {
                     flags |= (uint)((m_Data[indexPos] >> bitPos) << bits);
-                    int num = Math.Min(3 - bits, 8 - bitPos);
+                    var num = Math.Min(3 - bits, 8 - bitPos);
                     bitPos += num;
                     bits += num;
                     if (bitPos == 8) {
@@ -39,15 +39,15 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
 
                 var q = new Quaternion();
                 float sum = 0;
-                for (int j = 0; j < 4; j++) {
+                for (var j = 0; j < 4; j++) {
                     if ((flags & 3) != j) {
-                        int bitSize = ((flags & 3) + 1) % 4 == j ? 9 : 10;
+                        var bitSize = ((flags & 3) + 1) % 4 == j ? 9 : 10;
                         uint x = 0;
 
                         bits = 0;
                         while (bits < bitSize) {
                             x |= (uint)((m_Data[indexPos] >> bitPos) << bits);
-                            int num = Math.Min(bitSize - bits, 8 - bitPos);
+                            var num = Math.Min(bitSize - bits, 8 - bitPos);
                             bitPos += num;
                             bits += num;
                             if (bitPos == 8) {
@@ -61,7 +61,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
                     }
                 }
 
-                int lastComponent = (int)(flags & 3);
+                var lastComponent = (int)(flags & 3);
                 q[lastComponent] = (float)Math.Sqrt(1 - sum);
                 if ((flags & 4) != 0u)
                     q[lastComponent] = -q[lastComponent];

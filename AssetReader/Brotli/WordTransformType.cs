@@ -54,11 +54,11 @@ namespace Org.Brotli.Dec {
         internal const int OmitFirst9 = 20;
 
         internal static int GetOmitFirst(int type) {
-            return type >= OmitFirst1 ? (type - OmitFirst1 + 1) : 0;
+            return type >= OmitFirst1 ? type - OmitFirst1 + 1 : 0;
         }
 
         internal static int GetOmitLast(int type) {
-            return type <= OmitLast9 ? (type - OmitLast1 + 1) : 0;
+            return type <= OmitLast9 ? type - OmitLast1 + 1 : 0;
         }
     }
 }

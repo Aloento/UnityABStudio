@@ -15,9 +15,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimatorControllers {
             m_ChildPairVectorArray = reader.ReadVector2Array();
             m_ChildPairAvgMagInvArray = reader.ReadSingleArray();
 
-            int numNeighbours = reader.ReadInt32();
+            var numNeighbours = reader.ReadInt32();
             m_ChildNeighborListArray = new MotionNeighborList[numNeighbours];
-            for (int i = 0; i < numNeighbours; i++) {
+            for (var i = 0; i < numNeighbours; i++) {
                 m_ChildNeighborListArray[i] = new MotionNeighborList(reader);
             }
         }

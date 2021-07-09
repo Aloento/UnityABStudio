@@ -8,9 +8,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
         public SerializedProgram(ObjectReader reader) {
             var version = reader.version;
 
-            int numSubPrograms = reader.ReadInt32();
+            var numSubPrograms = reader.ReadInt32();
             m_SubPrograms = new SerializedSubProgram[numSubPrograms];
-            for (int i = 0; i < numSubPrograms; i++) {
+            for (var i = 0; i < numSubPrograms; i++) {
                 m_SubPrograms[i] = new SerializedSubProgram(reader);
             }
 

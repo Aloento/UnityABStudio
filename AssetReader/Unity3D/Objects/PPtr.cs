@@ -1,5 +1,8 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
     using Utils;
+    using Entities.Enums;
+    using Entities.Structs;
+    using System;
 
     public sealed class PPtr<T> where T : UObject {
         public int m_FileID;
@@ -16,28 +19,30 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
 
         private bool TryGetAssetsFile(out SerializedFile result) {
             result = null;
-            if (m_FileID == 0) {
-                result = assetsFile;
-                return true;
-            }
-
-            if (m_FileID > 0 && m_FileID - 1 < assetsFile.m_Externals.Count) {
-                var assetsManager = assetsFile.assetsManager;
-                var assetsFileList = assetsManager.assetsFileList;
-                var assetsFileIndexCache = assetsManager.assetsFileIndexCache;
-
-                if (index == -2) {
-                    var m_External = assetsFile.m_Externals[m_FileID - 1];
-                    var name = m_External.fileName;
-                    if (!assetsFileIndexCache.TryGetValue(name, out index)) {
-                        index = assetsFileList.FindIndex(x => x.fileName.Equals(name, StringComparison.OrdinalIgnoreCase));
-                        assetsFileIndexCache.Add(name, index);
-                    }
-                }
-
-                if (index >= 0) {
-                    result = assetsFileList[index];
+            switch (this.m_FileID) {
+                case 0:
+                    result = this.assetsFile;
                     return true;
+                case > 0 when this.m_FileID - 1 < this.assetsFile.m_Externals.Count: {
+                    var assetsManager = this.assetsFile.assetsManager;
+                    var assetsFileList = assetsManager.assetsFileList;
+                    var assetsFileIndexCache = assetsManager.assetsFileIndexCache;
+
+                    if (this.index == -2) {
+                        var m_External = this.assetsFile.m_Externals[this.m_FileID - 1];
+                        var name = m_External.fileName;
+                        if (!assetsFileIndexCache.TryGetValue(name, out this.index)) {
+                            this.index = assetsFileList.FindIndex(x => x.fileName.Equals(name, StringComparison.OrdinalIgnoreCase));
+                            assetsFileIndexCache.Add(name, this.index);
+                        }
+                    }
+
+                    if (this.index >= 0) {
+                        result = assetsFileList[this.index];
+                        return true;
+                    }
+
+                    break;
                 }
             }
 

@@ -10,7 +10,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
         public PackedIntVector(ObjectReader reader) {
             m_NumItems = reader.ReadUInt32();
 
-            int numData = reader.ReadInt32();
+            var numData = reader.ReadInt32();
             m_Data = reader.ReadBytes(numData);
             reader.AlignStream();
 
@@ -20,14 +20,14 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
 
         public int[] UnpackInts() {
             var data = new int[m_NumItems];
-            int indexPos = 0;
-            int bitPos = 0;
-            for (int i = 0; i < m_NumItems; i++) {
-                int bits = 0;
+            var indexPos = 0;
+            var bitPos = 0;
+            for (var i = 0; i < m_NumItems; i++) {
+                var bits = 0;
                 data[i] = 0;
                 while (bits < m_BitSize) {
                     data[i] |= (m_Data[indexPos] >> bitPos) << bits;
-                    int num = Math.Min(m_BitSize - bits, 8 - bitPos);
+                    var num = Math.Min(m_BitSize - bits, 8 - bitPos);
                     bitPos += num;
                     bits += num;
                     if (bitPos == 8) {

@@ -1,6 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
     using Contracts;
     using Utils;
+    using Meshes;
 
     public sealed class SkinnedMeshRenderer : Renderer {
         public PPtr<Mesh> m_Mesh;
@@ -13,8 +14,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
             var m_SkinNormals = reader.ReadBoolean(); //3.1.0 and below
             reader.AlignStream();
 
-            if (version[0] == 2 && version[1] < 6) //2.6 down
-            {
+            if (version[0] == 2 && version[1] < 6) { //2.6 down
                 var m_DisableAnimationWhenOffscreen = new PPtr<Animation>(reader);
             }
 
@@ -25,8 +25,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
                 m_Bones[b] = new PPtr<Transform>(reader);
             }
 
-            if (version[0] > 4 || (version[0] == 4 && version[1] >= 3)) //4.3 and up
-            {
+            if (version[0] > 4 || (version[0] == 4 && version[1] >= 3)) { //4.3 and up
                 m_BlendShapeWeights = reader.ReadSingleArray();
             }
         }

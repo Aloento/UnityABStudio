@@ -60,18 +60,45 @@ namespace SoarCraft.QYun.AssetReader.Helpers {
                 default: {
                     var magic = reader.ReadBytes(2);
                     reader.Position = 0;
-                    if (WebFile.GzipMagic.SequenceEqual(magic)) {
+                    if (WebFile.gzipMagic.SequenceEqual(magic)) {
                         return FileType.WebFile;
                     }
                     reader.Position = 0x20;
                     magic = reader.ReadBytes(6);
                     reader.Position = 0;
-                    if (WebFile.BrotliMagic.SequenceEqual(magic)) {
+                    if (WebFile.brotliMagic.SequenceEqual(magic)) {
                         return FileType.WebFile;
                     }
-                    return SerializedFile.IsSerializedFile(reader) ? FileType.AssetsFile : FileType.ResourceFile;
+                    return IsSerializedFile(reader) ? FileType.AssetsFile : FileType.ResourceFile;
                 }
             }
+        }
+
+        private static bool IsSerializedFile(UnityReader reader) {
+            var fileSize = reader.BaseStream.Length;
+            if (fileSize < 20) {
+                return false;
+            }
+            var m_MetadataSize = reader.ReadUInt32();
+            long m_FileSize = reader.ReadUInt32();
+            var m_Version = reader.ReadUInt32();
+            long m_DataOffset = reader.ReadUInt32();
+            var m_Endianess = reader.ReadByte();
+            var m_Reserved = reader.ReadBytes(3);
+            if (m_Version >= 22) {
+                if (fileSize < 48) {
+                    reader.Position = 0;
+                    return false;
+                }
+                m_MetadataSize = reader.ReadUInt32();
+                m_FileSize = reader.ReadInt64();
+                m_DataOffset = reader.ReadInt64();
+            }
+            reader.Position = 0;
+            if (m_FileSize != fileSize) {
+                return false;
+            }
+            return m_DataOffset <= fileSize;
         }
     }
 }

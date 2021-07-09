@@ -18,9 +18,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
             m_LookAtPosition = version[0] > 5 || (version[0] == 5 && version[1] >= 4) ? reader.ReadVector3() : reader.ReadVector4();//5.4 and up
             m_LookAtWeight = reader.ReadVector4();
 
-            int numGoals = reader.ReadInt32();
+            var numGoals = reader.ReadInt32();
             m_GoalArray = new HumanGoal[numGoals];
-            for (int i = 0; i < numGoals; i++) {
+            for (var i = 0; i < numGoals; i++) {
                 m_GoalArray[i] = new HumanGoal(reader);
             }
 
@@ -30,9 +30,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
             m_DoFArray = reader.ReadSingleArray();
 
             if (version[0] > 5 || (version[0] == 5 && version[1] >= 2)) { //5.2 and up
-                int numTDof = reader.ReadInt32();
+                var numTDof = reader.ReadInt32();
                 m_TDoFArray = new Vector3[numTDof];
-                for (int i = 0; i < numTDof; i++) {
+                for (var i = 0; i < numTDof; i++) {
                     m_TDoFArray[i] = version[0] > 5 || (version[0] == 5 && version[1] >= 4) ? reader.ReadVector3() : reader.ReadVector4();//5.4 and up
                 }
             }

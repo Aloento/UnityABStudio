@@ -7,21 +7,21 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
         public PPtr<UObject>[] pptrCurveMapping;
 
         public AnimationClipBindingConstant(ObjectReader reader) {
-            int numBindings = reader.ReadInt32();
+            var numBindings = reader.ReadInt32();
             genericBindings = new GenericBinding[numBindings];
-            for (int i = 0; i < numBindings; i++) {
+            for (var i = 0; i < numBindings; i++) {
                 genericBindings[i] = new GenericBinding(reader);
             }
 
-            int numMappings = reader.ReadInt32();
+            var numMappings = reader.ReadInt32();
             pptrCurveMapping = new PPtr<UObject>[numMappings];
-            for (int i = 0; i < numMappings; i++) {
+            for (var i = 0; i < numMappings; i++) {
                 pptrCurveMapping[i] = new PPtr<UObject>(reader);
             }
         }
 
         public GenericBinding FindBinding(int index) {
-            int curves = 0;
+            var curves = 0;
             foreach (var b in genericBindings) {
                 if (b.typeID == ClassIDType.Transform) {
                     switch (b.attribute) {

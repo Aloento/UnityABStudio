@@ -34,15 +34,15 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
                 reader.AlignStream();
 
                 var m_DependenciesCount = reader.ReadInt32();
-                for (int i = 0; i < m_DependenciesCount; i++) {
-                    new PPtr<Shader>(reader);
+                for (var i = 0; i < m_DependenciesCount; i++) {
+                    _ = new PPtr<Shader>(reader);
                 }
 
                 if (version[0] >= 2018) {
                     var m_NonModifiableTexturesCount = reader.ReadInt32();
-                    for (int i = 0; i < m_NonModifiableTexturesCount; i++) {
+                    for (var i = 0; i < m_NonModifiableTexturesCount; i++) {
                         var first = reader.ReadAlignedString();
-                        new PPtr<Texture>(reader);
+                        _ = new PPtr<Texture>(reader);
                     }
                 }
 

@@ -34,15 +34,15 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Avatars {
             m_RightHand = new Hand(reader);
 
             if (version[0] < 2018 || (version[0] == 2018 && version[1] < 2)) { //2018.2 down
-                int numHandles = reader.ReadInt32();
+                var numHandles = reader.ReadInt32();
                 m_Handles = new Handle[numHandles];
-                for (int i = 0; i < numHandles; i++) {
+                for (var i = 0; i < numHandles; i++) {
                     m_Handles[i] = new Handle(reader);
                 }
 
-                int numColliders = reader.ReadInt32();
+                var numColliders = reader.ReadInt32();
                 m_ColliderArray = new Collider[numColliders];
-                for (int i = 0; i < numColliders; i++) {
+                for (var i = 0; i < numColliders; i++) {
                     m_ColliderArray[i] = new Collider(reader);
                 }
             }

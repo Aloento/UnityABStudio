@@ -7,9 +7,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
         public int m_LOD;
 
         public SerializedSubShader(ObjectReader reader) {
-            int numPasses = reader.ReadInt32();
+            var numPasses = reader.ReadInt32();
             m_Passes = new SerializedPass[numPasses];
-            for (int i = 0; i < numPasses; i++) {
+            for (var i = 0; i < numPasses; i++) {
                 m_Passes[i] = new SerializedPass(reader);
             }
 

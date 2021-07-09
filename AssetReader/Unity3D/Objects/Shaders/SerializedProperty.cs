@@ -1,4 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Shaders {
+    using Entities.Enums;
+    using Utils;
+
     public class SerializedProperty {
         public string m_Name;
         public string m_Description;
