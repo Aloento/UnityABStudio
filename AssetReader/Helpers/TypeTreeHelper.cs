@@ -4,7 +4,6 @@ namespace SoarCraft.QYun.AssetReader.Helpers {
     using System.Collections.Specialized;
     using System.Text;
     using Entities.Structs;
-    using Unity3D;
     using Utils;
 
     public static class TypeTreeHelper {

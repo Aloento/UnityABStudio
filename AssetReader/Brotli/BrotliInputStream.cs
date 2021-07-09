@@ -22,7 +22,7 @@ namespace Org.Brotli.Dec {
         private int bufferOffset;
 
         /// <summary>Decoder state.</summary>
-        private readonly State state = new State();
+        private readonly State state = new();
 
         /// <summary>
         /// Creates a
@@ -119,7 +119,7 @@ namespace Org.Brotli.Dec {
                     return -1;
                 }
             }
-            return buffer[bufferOffset++] & unchecked((int)(0xFF));
+            return buffer[bufferOffset++] & unchecked(0xFF);
         }
 
         /// <summary><inheritDoc/></summary>

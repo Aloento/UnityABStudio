@@ -1,9 +1,9 @@
 // CommandLineParser.cs
 
-using System;
-using System.Collections;
-
 namespace SevenZip.CommandLineParser {
+    using System;
+    using System.Collections;
+
     public enum SwitchType {
         Simple,
         PostMinus,
@@ -40,7 +40,7 @@ namespace SevenZip.CommandLineParser {
     public class SwitchResult {
         public bool ThereIs;
         public bool WithMinus;
-        public ArrayList PostStrings = new ArrayList();
+        public ArrayList PostStrings = new();
         public int PostCharIndex;
         public SwitchResult() {
             ThereIs = false;
@@ -48,7 +48,7 @@ namespace SevenZip.CommandLineParser {
     }
 
     public class Parser {
-        public ArrayList NonSwitchStrings = new ArrayList();
+        public ArrayList NonSwitchStrings = new();
         SwitchResult[] _switches;
 
         public Parser(int numSwitches) {
@@ -74,7 +74,7 @@ namespace SevenZip.CommandLineParser {
                     var switchLen = switchForms[switchIndex].IDString.Length;
                     if (switchLen <= maxLen || pos + switchLen > len)
                         continue;
-                    if (String.Compare(switchForms[switchIndex].IDString, 0,
+                    if (string.Compare(switchForms[switchIndex].IDString, 0,
                             srcString, pos, switchLen, true) == 0) {
                         matchedSwitchIndex = switchIndex;
                         maxLen = switchLen;

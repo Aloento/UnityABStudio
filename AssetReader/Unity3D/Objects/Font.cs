@@ -6,8 +6,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
         public byte[] m_FontData;
 
         public Font(ObjectReader reader) : base(reader) {
-            if ((version[0] == 5 && version[1] >= 5) || version[0] > 5)//5.5 and up
-            {
+            if ((version[0] == 5 && version[1] >= 5) || version[0] > 5) { //5.5 and up
                 var m_LineSpacing = reader.ReadSingle();
                 var m_DefaultMaterial = new PPtr<Material>(reader);
                 var m_FontSize = reader.ReadSingle();
