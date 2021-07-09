@@ -15,12 +15,13 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
             path = reader.ReadUInt32();
             attribute = reader.ReadUInt32();
             script = new PPtr<UObject>(reader);
-            if (version[0] > 5 || (version[0] == 5 && version[1] >= 6)) //5.6 and up
-            {
+            if (version[0] > 5 || (version[0] == 5 && version[1] >= 6)) {
+                //5.6 and up
                 typeID = (ClassIDType)reader.ReadInt32();
             } else {
                 typeID = (ClassIDType)reader.ReadUInt16();
             }
+
             customType = reader.ReadByte();
             isPPtrCurve = reader.ReadByte();
             reader.AlignStream();

@@ -1,4 +1,5 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
+    using Avatars;
     using Contracts;
     using Utils;
 
@@ -12,44 +13,36 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
             m_Controller = new PPtr<RuntimeAnimatorController>(reader);
             var m_CullingMode = reader.ReadInt32();
 
-            if (version[0] > 4 || (version[0] == 4 && version[1] >= 5)) //4.5 and up
-            {
+            if (version[0] > 4 || (version[0] == 4 && version[1] >= 5)) { //4.5 and up
                 var m_UpdateMode = reader.ReadInt32();
             }
 
             var m_ApplyRootMotion = reader.ReadBoolean();
-            if (version[0] == 4 && version[1] >= 5) //4.5 and up - 5.0 down
-            {
+            if (version[0] == 4 && version[1] >= 5) { //4.5 and up - 5.0 down
                 reader.AlignStream();
             }
 
-            if (version[0] >= 5) //5.0 and up
-            {
+            if (version[0] >= 5) { //5.0 and up
                 var m_LinearVelocityBlending = reader.ReadBoolean();
                 reader.AlignStream();
             }
 
-            if (version[0] < 4 || (version[0] == 4 && version[1] < 5)) //4.5 down
-            {
+            if (version[0] < 4 || (version[0] == 4 && version[1] < 5)) { //4.5 down
                 var m_AnimatePhysics = reader.ReadBoolean();
             }
 
-            if (version[0] > 4 || (version[0] == 4 && version[1] >= 3)) //4.3 and up
-            {
+            if (version[0] > 4 || (version[0] == 4 && version[1] >= 3)) { //4.3 and up
                 m_HasTransformHierarchy = reader.ReadBoolean();
             }
 
-            if (version[0] > 4 || (version[0] == 4 && version[1] >= 5)) //4.5 and up
-            {
+            if (version[0] > 4 || (version[0] == 4 && version[1] >= 5)) { //4.5 and up
                 var m_AllowConstantClipSamplingOptimization = reader.ReadBoolean();
             }
-            if (version[0] >= 5 && version[0] < 2018) //5.0 and up - 2018 down
-            {
+            if (version[0] is >= 5 and < 2018) { //5.0 and up - 2018 down
                 reader.AlignStream();
             }
 
-            if (version[0] >= 2018) //2018 and up
-            {
+            if (version[0] >= 2018) { //2018 and up
                 var m_KeepAnimatorControllerStateOnDisable = reader.ReadBoolean();
                 reader.AlignStream();
             }

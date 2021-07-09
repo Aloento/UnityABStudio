@@ -7,7 +7,6 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
         public int classID;
         public PPtr<MonoScript> script;
 
-
         public PPtrCurve(ObjectReader reader) {
             int numCurves = reader.ReadInt32();
             curve = new PPtrKeyframe[numCurves];
