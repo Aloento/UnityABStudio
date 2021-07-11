@@ -1,5 +1,4 @@
 namespace UnityABStudio.ViewModels {
-    using System;
     using System.Linq;
 
     using CommunityToolkit.Mvvm.ComponentModel;

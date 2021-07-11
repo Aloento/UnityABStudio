@@ -1,5 +1,4 @@
 namespace UnityABStudio.Activation {
-    using System;
     using System.Threading.Tasks;
 
     using Microsoft.UI.Xaml;

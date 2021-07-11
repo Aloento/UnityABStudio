@@ -1,5 +1,4 @@
 namespace UnityABStudio.Core.Helpers {
-    using System;
     using System.Threading.Tasks;
 
     using Newtonsoft.Json;

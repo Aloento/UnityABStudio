@@ -1,5 +1,4 @@
 namespace UnityABStudio.Core.Models {
-    using System;
     using System.Collections.Generic;
 
     // Remove this class once your pages/features are using your data.

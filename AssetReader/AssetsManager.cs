@@ -22,10 +22,11 @@ namespace SoarCraft.QYun.AssetReader {
     using Unity3D.Objects.VideoClips;
     using Utils;
     using static Helpers.ImportHelper;
+    using System.Threading.Tasks;
 
     public class AssetsManager {
         public string SpecifyUnityVersion;
-        public List<SerializedFile> assetsFileList = new();
+        public List<SerializedFile> AssetsFileList = new();
 
         internal Dictionary<string, int> assetsFileIndexCache = new(StringComparer.OrdinalIgnoreCase);
         internal Dictionary<string, UnityReader> resourceFileReaders = new(StringComparer.OrdinalIgnoreCase);
@@ -34,19 +35,19 @@ namespace SoarCraft.QYun.AssetReader {
         private readonly HashSet<string> importFilesHash = new(StringComparer.OrdinalIgnoreCase);
         private readonly HashSet<string> assetsFileListHash = new(StringComparer.OrdinalIgnoreCase);
 
-        public void LoadFiles(params string[] files) {
+        public async void LoadFilesAsync(params string[] files) => await Task.Run(() => {
             var path = Path.GetDirectoryName(files[0]);
             MergeSplitAssets(path);
             var toReadFile = ProcessingSplitFiles(files.ToList());
             Load(toReadFile);
-        }
+        });
 
-        public void LoadFolder(string path) {
+        public async void LoadFolderAsync(string path) => await Task.Run(() => {
             MergeSplitAssets(path, true);
             var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList();
             var toReadFile = ProcessingSplitFiles(files);
             Load(toReadFile);
-        }
+        });
 
         private void Load(IEnumerable<string> files) {
             foreach (var file in files) {
@@ -88,7 +89,7 @@ namespace SoarCraft.QYun.AssetReader {
                 try {
                     var assetsFile = new SerializedFile(reader, this);
                     CheckStrippedVersion(assetsFile);
-                    assetsFileList.Add(assetsFile);
+                    AssetsFileList.Add(assetsFile);
                     _ = assetsFileListHash.Add(assetsFile.fileName);
 
                     foreach (var sharedFile in assetsFile.m_Externals) {
@@ -128,7 +129,7 @@ namespace SoarCraft.QYun.AssetReader {
                         assetsFile.SetVersion(unityVersion);
                     }
                     CheckStrippedVersion(assetsFile);
-                    assetsFileList.Add(assetsFile);
+                    AssetsFileList.Add(assetsFile);
                     _ = assetsFileListHash.Add(assetsFile.fileName);
                 } catch (Exception e) {
                     Console.WriteLine($"Error while reading assets file {reader.FileName} from {Path.GetFileName(originalPath)}", e);
@@ -200,11 +201,11 @@ namespace SoarCraft.QYun.AssetReader {
         }
 
         public void Clear() {
-            foreach (var assetsFile in assetsFileList) {
+            foreach (var assetsFile in AssetsFileList) {
                 assetsFile.Objects.Clear();
                 assetsFile.reader.Close();
             }
-            assetsFileList.Clear();
+            AssetsFileList.Clear();
 
             foreach (var resourceFileReader in resourceFileReaders) {
                 resourceFileReader.Value.Close();
@@ -217,7 +218,7 @@ namespace SoarCraft.QYun.AssetReader {
         private void ReadAssets() {
             Console.WriteLine("Read assets...");
 
-            foreach (var assetsFile in assetsFileList) {
+            foreach (var assetsFile in AssetsFileList) {
                 foreach (var objectInfo in assetsFile.m_Objects) {
                     var objectReader = new ObjectReader(assetsFile.reader, assetsFile, objectInfo);
                     try {
@@ -269,7 +270,7 @@ namespace SoarCraft.QYun.AssetReader {
         private void ProcessAssets() {
             Console.WriteLine("Process Assets...");
 
-            foreach (var obj in this.assetsFileList.SelectMany(assetsFile => assetsFile.Objects)) {
+            foreach (var obj in this.AssetsFileList.SelectMany(assetsFile => assetsFile.Objects)) {
                 switch (obj) {
                     case GameObject m_GameObject: {
                         foreach (var pptr in m_GameObject.m_Components) {

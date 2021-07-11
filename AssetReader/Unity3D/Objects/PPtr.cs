@@ -25,7 +25,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
                     return true;
                 case > 0 when this.m_FileID - 1 < this.assetsFile.m_Externals.Count: {
                     var assetsManager = this.assetsFile.assetsManager;
-                    var assetsFileList = assetsManager.assetsFileList;
+                    var assetsFileList = assetsManager.AssetsFileList;
                     var assetsFileIndexCache = assetsManager.assetsFileIndexCache;
 
                     if (this.index == -2) {
@@ -94,7 +94,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
             }
 
             var assetsManager = assetsFile.assetsManager;
-            var assetsFileList = assetsManager.assetsFileList;
+            var assetsFileList = assetsManager.AssetsFileList;
             var assetsFileIndexCache = assetsManager.assetsFileIndexCache;
 
             if (!assetsFileIndexCache.TryGetValue(name, out index)) {
