@@ -1,0 +1,7 @@
+namespace UnityABStudio.Behaviors {
+    public enum NavigationViewHeaderMode {
+        Always,
+        Never,
+        Minimal
+    }
+}

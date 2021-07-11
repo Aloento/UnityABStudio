@@ -1,29 +1,75 @@
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using CommunityToolkit.Mvvm.DependencyInjection;
 
-namespace SoarCraft.QYun.UnityABStudio {
-    using Microsoft.UI.Xaml;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI.Xaml;
 
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
+using UnityABStudio.Activation;
+using UnityABStudio.Contracts.Services;
+using UnityABStudio.Core.Contracts.Services;
+using UnityABStudio.Core.Services;
+using UnityABStudio.Helpers;
+using UnityABStudio.Services;
+using UnityABStudio.ViewModels;
+using UnityABStudio.Views;
+
+// To learn more about WinUI3, see: https://docs.microsoft.com/windows/apps/winui/winui3/.
+namespace UnityABStudio {
     public partial class App : Application {
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        public App() => this.InitializeComponent();
+        public static Window MainWindow { get; set; } = new Window() { Title = "AppDisplayName".GetLocalized() };
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args) {
-            this.window = new MainWindow();
-            this.window.Activate();
+        public App() {
+            InitializeComponent();
+            UnhandledException += App_UnhandledException;
+            Ioc.Default.ConfigureServices(ConfigureServices());
         }
 
-        private Window window;
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
+            // TODO WTS: Please log and handle the exception as appropriate to your scenario
+            // For more info see https://docs.microsoft.com/windows/winui/api/microsoft.ui.xaml.unhandledexceptioneventargs
+        }
+
+        protected override async void OnLaunched(LaunchActivatedEventArgs args) {
+            base.OnLaunched(args);
+            var activationService = Ioc.Default.GetService<IActivationService>();
+            await activationService.ActivateAsync(args);
+        }
+
+        private System.IServiceProvider ConfigureServices() {
+            // TODO WTS: Register your services, viewmodels and pages here
+            var services = new ServiceCollection();
+
+            // Default Activation Handler
+            services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
+
+            // Other Activation Handlers
+
+            // Services
+            services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+            services.AddTransient<INavigationViewService, NavigationViewService>();
+
+            services.AddSingleton<IActivationService, ActivationService>();
+            services.AddSingleton<IPageService, PageService>();
+            services.AddSingleton<INavigationService, NavigationService>();
+
+            // Core Services
+            services.AddSingleton<ISampleDataService, SampleDataService>();
+
+            // Views and ViewModels
+            services.AddTransient<ShellPage>();
+            services.AddTransient<ShellViewModel>();
+            services.AddTransient<MainViewModel>();
+            services.AddTransient<MainPage>();
+            services.AddTransient<ListDetailsViewModel>();
+            services.AddTransient<ListDetailsPage>();
+            services.AddTransient<DataGridViewModel>();
+            services.AddTransient<DataGridPage>();
+            services.AddTransient<ContentGridViewModel>();
+            services.AddTransient<ContentGridPage>();
+            services.AddTransient<ContentGridDetailViewModel>();
+            services.AddTransient<ContentGridDetailPage>();
+            services.AddTransient<SettingsViewModel>();
+            services.AddTransient<SettingsPage>();
+            return services.BuildServiceProvider();
+        }
     }
 }
