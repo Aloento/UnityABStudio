@@ -14,7 +14,7 @@ namespace UnityABStudio.ViewModels {
 
         public SampleOrder Item {
             get { return _item; }
-            set { SetProperty(ref _item, value); }
+            set { _ = SetProperty(ref _item, value); }
         }
 
         public ContentGridDetailViewModel(ISampleDataService sampleDataService) {

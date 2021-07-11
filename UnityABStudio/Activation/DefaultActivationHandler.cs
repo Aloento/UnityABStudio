@@ -15,7 +15,7 @@ namespace UnityABStudio.Activation {
         }
 
         protected override async Task HandleInternalAsync(LaunchActivatedEventArgs args) {
-            _navigationService.NavigateTo(typeof(MainViewModel).FullName, args.Arguments);
+            _ = _navigationService.NavigateTo(typeof(MainViewModel).FullName, args.Arguments);
             await Task.CompletedTask;
         }
 

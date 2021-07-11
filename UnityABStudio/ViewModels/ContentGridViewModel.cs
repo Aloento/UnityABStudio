@@ -41,7 +41,7 @@ namespace UnityABStudio.ViewModels {
         private void OnItemClick(SampleOrder clickedItem) {
             if (clickedItem != null) {
                 _navigationService.SetListDataItemForNextConnectedAnimation(clickedItem);
-                _navigationService.NavigateTo(typeof(ContentGridDetailViewModel).FullName, clickedItem.OrderID);
+                _ = _navigationService.NavigateTo(typeof(ContentGridDetailViewModel).FullName, clickedItem.OrderID);
             }
         }
     }

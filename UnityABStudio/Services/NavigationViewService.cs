@@ -44,13 +44,13 @@ namespace UnityABStudio.Services {
 
         private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args) {
             if (args.IsSettingsInvoked) {
-                _navigationService.NavigateTo(typeof(SettingsViewModel).FullName);
+                _ = _navigationService.NavigateTo(typeof(SettingsViewModel).FullName);
             } else {
                 var selectedItem = args.InvokedItemContainer as NavigationViewItem;
                 var pageKey = selectedItem.GetValue(NavHelper.NavigateToProperty) as string;
 
                 if (pageKey != null) {
-                    _navigationService.NavigateTo(pageKey);
+                    _ = _navigationService.NavigateTo(pageKey);
                 }
             }
         }

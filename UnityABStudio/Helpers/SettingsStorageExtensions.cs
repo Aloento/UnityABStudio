@@ -83,7 +83,7 @@ namespace UnityABStudio.Helpers {
             if (file != null) {
                 using (IRandomAccessStream stream = await file.OpenReadAsync()) {
                     using (var reader = new DataReader(stream.GetInputStreamAt(0))) {
-                        await reader.LoadAsync((uint)stream.Size);
+                        _ = await reader.LoadAsync((uint)stream.Size);
                         var bytes = new byte[stream.Size];
                         reader.ReadBytes(bytes);
                         return bytes;

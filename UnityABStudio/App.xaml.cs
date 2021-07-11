@@ -39,36 +39,36 @@ namespace UnityABStudio {
             var services = new ServiceCollection();
 
             // Default Activation Handler
-            services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
+            _ = services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
             // Other Activation Handlers
 
             // Services
-            services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
-            services.AddTransient<INavigationViewService, NavigationViewService>();
+            _ = services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+            _ = services.AddTransient<INavigationViewService, NavigationViewService>();
 
-            services.AddSingleton<IActivationService, ActivationService>();
-            services.AddSingleton<IPageService, PageService>();
-            services.AddSingleton<INavigationService, NavigationService>();
+            _ = services.AddSingleton<IActivationService, ActivationService>();
+            _ = services.AddSingleton<IPageService, PageService>();
+            _ = services.AddSingleton<INavigationService, NavigationService>();
 
             // Core Services
-            services.AddSingleton<ISampleDataService, SampleDataService>();
+            _ = services.AddSingleton<ISampleDataService, SampleDataService>();
 
             // Views and ViewModels
-            services.AddTransient<ShellPage>();
-            services.AddTransient<ShellViewModel>();
-            services.AddTransient<MainViewModel>();
-            services.AddTransient<MainPage>();
-            services.AddTransient<ListDetailsViewModel>();
-            services.AddTransient<ListDetailsPage>();
-            services.AddTransient<DataGridViewModel>();
-            services.AddTransient<DataGridPage>();
-            services.AddTransient<ContentGridViewModel>();
-            services.AddTransient<ContentGridPage>();
-            services.AddTransient<ContentGridDetailViewModel>();
-            services.AddTransient<ContentGridDetailPage>();
-            services.AddTransient<SettingsViewModel>();
-            services.AddTransient<SettingsPage>();
+            _ = services.AddTransient<ShellPage>();
+            _ = services.AddTransient<ShellViewModel>();
+            _ = services.AddTransient<MainViewModel>();
+            _ = services.AddTransient<MainPage>();
+            _ = services.AddTransient<ListDetailsViewModel>();
+            _ = services.AddTransient<ListDetailsPage>();
+            _ = services.AddTransient<DataGridViewModel>();
+            _ = services.AddTransient<DataGridPage>();
+            _ = services.AddTransient<ContentGridViewModel>();
+            _ = services.AddTransient<ContentGridPage>();
+            _ = services.AddTransient<ContentGridDetailViewModel>();
+            _ = services.AddTransient<ContentGridDetailPage>();
+            _ = services.AddTransient<SettingsViewModel>();
+            _ = services.AddTransient<SettingsPage>();
             return services.BuildServiceProvider();
         }
     }

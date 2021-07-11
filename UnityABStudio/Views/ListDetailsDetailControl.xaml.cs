@@ -18,7 +18,7 @@ namespace UnityABStudio.Views {
 
         private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             var control = d as ListDetailsDetailControl;
-            control.ForegroundElement.ChangeView(0, 0, 1);
+            _ = control.ForegroundElement.ChangeView(0, 0, 1);
         }
     }
 }

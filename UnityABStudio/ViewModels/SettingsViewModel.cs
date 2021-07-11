@@ -19,7 +19,7 @@ namespace UnityABStudio.ViewModels {
         public ElementTheme ElementTheme {
             get { return _elementTheme; }
 
-            set { SetProperty(ref _elementTheme, value); }
+            set { _ = SetProperty(ref _elementTheme, value); }
         }
 
         private string _versionDescription;
@@ -27,7 +27,7 @@ namespace UnityABStudio.ViewModels {
         public string VersionDescription {
             get { return _versionDescription; }
 
-            set { SetProperty(ref _versionDescription, value); }
+            set { _ = SetProperty(ref _versionDescription, value); }
         }
 
         private ICommand _switchThemeCommand;

@@ -18,12 +18,12 @@ namespace UnityABStudio.ViewModels {
 
         public bool IsBackEnabled {
             get { return _isBackEnabled; }
-            set { SetProperty(ref _isBackEnabled, value); }
+            set { _ = SetProperty(ref _isBackEnabled, value); }
         }
 
         public object Selected {
             get { return _selected; }
-            set { SetProperty(ref _selected, value); }
+            set { _ = SetProperty(ref _selected, value); }
         }
 
         public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService) {
