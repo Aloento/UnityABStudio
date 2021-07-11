@@ -1,12 +1,12 @@
-using System;
-using System.Threading.Tasks;
-
-using Microsoft.UI.Xaml;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.ViewModels;
-
 namespace UnityABStudio.Activation {
+    using System;
+    using System.Threading.Tasks;
+
+    using Microsoft.UI.Xaml;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.ViewModels;
+
     public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventArgs> {
         private readonly INavigationService _navigationService;
 

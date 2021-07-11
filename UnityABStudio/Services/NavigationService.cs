@@ -1,14 +1,14 @@
-using CommunityToolkit.WinUI.UI.Animations;
-
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.Contracts.ViewModels;
-using UnityABStudio.Helpers;
-
 namespace UnityABStudio.Services {
+    using CommunityToolkit.WinUI.UI.Animations;
+
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Navigation;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.Contracts.ViewModels;
+    using UnityABStudio.Helpers;
+
     // For more information on navigation between pages see
     // https://github.com/Microsoft/WindowsTemplateStudio/blob/release/docs/WinUI/navigation.md
     public class NavigationService : INavigationService {

@@ -1,13 +1,13 @@
-using System;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-
-using Microsoft.UI.Xaml.Navigation;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.Views;
-
 namespace UnityABStudio.ViewModels {
+    using System;
+
+    using CommunityToolkit.Mvvm.ComponentModel;
+
+    using Microsoft.UI.Xaml.Navigation;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.Views;
+
     public class ShellViewModel : ObservableRecipient {
         private bool _isBackEnabled;
         private object _selected;

@@ -1,7 +1,7 @@
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-
 namespace UnityABStudio.Contracts.Services {
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Navigation;
+
     public interface INavigationService {
         event NavigatedEventHandler Navigated;
 

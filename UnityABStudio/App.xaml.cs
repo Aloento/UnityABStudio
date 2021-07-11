@@ -1,19 +1,19 @@
-using CommunityToolkit.Mvvm.DependencyInjection;
-
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI.Xaml;
-
-using UnityABStudio.Activation;
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.Core.Contracts.Services;
-using UnityABStudio.Core.Services;
-using UnityABStudio.Helpers;
-using UnityABStudio.Services;
-using UnityABStudio.ViewModels;
-using UnityABStudio.Views;
-
 // To learn more about WinUI3, see: https://docs.microsoft.com/windows/apps/winui/winui3/.
 namespace UnityABStudio {
+    using CommunityToolkit.Mvvm.DependencyInjection;
+
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.UI.Xaml;
+
+    using UnityABStudio.Activation;
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.Core.Contracts.Services;
+    using UnityABStudio.Core.Services;
+    using UnityABStudio.Helpers;
+    using UnityABStudio.Services;
+    using UnityABStudio.ViewModels;
+    using UnityABStudio.Views;
+
     public partial class App : Application {
         public static Window MainWindow { get; set; } = new Window() { Title = "AppDisplayName".GetLocalized() };
 

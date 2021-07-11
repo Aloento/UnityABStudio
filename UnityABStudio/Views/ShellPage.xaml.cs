@@ -1,14 +1,14 @@
-using CommunityToolkit.Mvvm.DependencyInjection;
-
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Input;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.ViewModels;
-
-using Windows.System;
-
 namespace UnityABStudio.Views {
+    using CommunityToolkit.Mvvm.DependencyInjection;
+
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Input;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.ViewModels;
+
+    using Windows.System;
+
     // TODO WTS: Change the icons and titles for all NavigationViewItems in ShellPage.xaml.
     public sealed partial class ShellPage : Page {
         private readonly KeyboardAccelerator _altLeftKeyboardAccelerator = BuildKeyboardAccelerator(VirtualKey.Left, VirtualKeyModifiers.Menu);

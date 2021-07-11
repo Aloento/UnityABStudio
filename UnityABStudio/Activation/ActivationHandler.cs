@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
-
 namespace UnityABStudio.Activation {
+    using System.Threading.Tasks;
+
     // For more information on understanding activation flow see
     // https://github.com/Microsoft/WindowsTemplateStudio/blob/release/docs/WinUI/activation.md
     //

@@ -1,8 +1,8 @@
-using System.Threading.Tasks;
-
-using Microsoft.UI.Xaml;
-
 namespace UnityABStudio.Contracts.Services {
+    using System.Threading.Tasks;
+
+    using Microsoft.UI.Xaml;
+
     public interface IThemeSelectorService {
         ElementTheme Theme { get; }
 

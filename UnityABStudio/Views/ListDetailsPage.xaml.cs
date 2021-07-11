@@ -1,11 +1,11 @@
-using CommunityToolkit.Mvvm.DependencyInjection;
-using CommunityToolkit.WinUI.UI.Controls;
-
-using Microsoft.UI.Xaml.Controls;
-
-using UnityABStudio.ViewModels;
-
 namespace UnityABStudio.Views {
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using CommunityToolkit.WinUI.UI.Controls;
+
+    using Microsoft.UI.Xaml.Controls;
+
+    using UnityABStudio.ViewModels;
+
     public sealed partial class ListDetailsPage : Page {
         public ListDetailsViewModel ViewModel { get; }
 

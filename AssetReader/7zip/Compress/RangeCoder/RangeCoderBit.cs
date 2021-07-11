@@ -1,6 +1,6 @@
-using System;
-
 namespace SevenZip.Compression.RangeCoder {
+    using System;
+
     struct BitEncoder {
         public const int kNumBitModelTotalBits = 11;
         public const uint kBitModelTotal = 1 << kNumBitModelTotalBits;

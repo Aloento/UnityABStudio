@@ -1,14 +1,14 @@
-using System;
-using System.Threading.Tasks;
-
-using Microsoft.UI.Xaml;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.Helpers;
-
-using Windows.Storage;
-
 namespace UnityABStudio.Services {
+    using System;
+    using System.Threading.Tasks;
+
+    using Microsoft.UI.Xaml;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.Helpers;
+
+    using Windows.Storage;
+
     public class ThemeSelectorService : IThemeSelectorService {
         private const string SettingsKey = "AppBackgroundRequestedTheme";
 

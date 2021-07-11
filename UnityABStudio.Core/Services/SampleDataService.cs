@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using UnityABStudio.Core.Contracts.Services;
-using UnityABStudio.Core.Models;
-
 namespace UnityABStudio.Core.Services {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using UnityABStudio.Core.Contracts.Services;
+    using UnityABStudio.Core.Models;
+
     // This class holds sample data used by some generated pages to show how they can be used.
     // TODO WTS: The following classes have been created to display sample data. Delete these files once your app is using real data.
     // 1. Contracts/Services/ISampleDataService.cs

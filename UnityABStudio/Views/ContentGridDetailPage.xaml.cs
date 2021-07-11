@@ -1,13 +1,13 @@
-using CommunityToolkit.Mvvm.DependencyInjection;
-using CommunityToolkit.WinUI.UI.Animations;
-
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.ViewModels;
-
 namespace UnityABStudio.Views {
+    using CommunityToolkit.Mvvm.DependencyInjection;
+    using CommunityToolkit.WinUI.UI.Animations;
+
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Navigation;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.ViewModels;
+
     public sealed partial class ContentGridDetailPage : Page {
         public ContentGridDetailViewModel ViewModel { get; }
 

@@ -1,17 +1,17 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using CommunityToolkit.Mvvm.DependencyInjection;
-
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-
-using UnityABStudio.Activation;
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.Views;
-
 namespace UnityABStudio.Services {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using CommunityToolkit.Mvvm.DependencyInjection;
+
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+
+    using UnityABStudio.Activation;
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.Views;
+
     public class ActivationService : IActivationService {
         private readonly ActivationHandler<LaunchActivatedEventArgs> _defaultHandler;
         private readonly IEnumerable<IActivationHandler> _activationHandlers;

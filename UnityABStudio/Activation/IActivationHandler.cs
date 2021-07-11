@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
-
 namespace UnityABStudio.Activation {
+    using System.Threading.Tasks;
+
     public interface IActivationHandler {
         bool CanHandle(object args);
 

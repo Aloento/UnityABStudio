@@ -1,9 +1,9 @@
-using System;
-using System.Threading.Tasks;
-
-using Newtonsoft.Json;
-
 namespace UnityABStudio.Core.Helpers {
+    using System;
+    using System.Threading.Tasks;
+
+    using Newtonsoft.Json;
+
     public static class Json {
         public static async Task<T> ToObjectAsync<T>(string value) {
             return await Task.Run<T>(() => {

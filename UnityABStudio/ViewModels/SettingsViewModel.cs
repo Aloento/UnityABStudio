@@ -1,17 +1,17 @@
-using System;
-using System.Windows.Input;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-
-using Microsoft.UI.Xaml;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.Helpers;
-
-using Windows.ApplicationModel;
-
 namespace UnityABStudio.ViewModels {
+    using System;
+    using System.Windows.Input;
+
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.Input;
+
+    using Microsoft.UI.Xaml;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.Helpers;
+
+    using Windows.ApplicationModel;
+
     public class SettingsViewModel : ObservableRecipient {
         private readonly IThemeSelectorService _themeSelectorService;
         private ElementTheme _elementTheme;

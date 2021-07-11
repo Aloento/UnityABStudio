@@ -1,16 +1,16 @@
-using System;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.Contracts.ViewModels;
-using UnityABStudio.Core.Contracts.Services;
-using UnityABStudio.Core.Models;
-
 namespace UnityABStudio.ViewModels {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Windows.Input;
+
+    using CommunityToolkit.Mvvm.ComponentModel;
+    using CommunityToolkit.Mvvm.Input;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.Contracts.ViewModels;
+    using UnityABStudio.Core.Contracts.Services;
+    using UnityABStudio.Core.Models;
+
     public class ContentGridViewModel : ObservableRecipient, INavigationAware {
         private readonly INavigationService _navigationService;
         private readonly ISampleDataService _sampleDataService;

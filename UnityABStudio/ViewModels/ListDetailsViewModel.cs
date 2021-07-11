@@ -1,14 +1,14 @@
-using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-
-using UnityABStudio.Contracts.ViewModels;
-using UnityABStudio.Core.Contracts.Services;
-using UnityABStudio.Core.Models;
-
 namespace UnityABStudio.ViewModels {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+
+    using CommunityToolkit.Mvvm.ComponentModel;
+
+    using UnityABStudio.Contracts.ViewModels;
+    using UnityABStudio.Core.Contracts.Services;
+    using UnityABStudio.Core.Models;
+
     public class ListDetailsViewModel : ObservableRecipient, INavigationAware {
         private readonly ISampleDataService _sampleDataService;
         private SampleOrder _selected;

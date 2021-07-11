@@ -1,9 +1,9 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-
-using UnityABStudio.Core.Models;
-
 namespace UnityABStudio.Views {
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+
+    using UnityABStudio.Core.Models;
+
     public sealed partial class ListDetailsDetailControl : UserControl {
         public SampleOrder ListDetailsMenuItem {
             get { return GetValue(ListDetailsMenuItemProperty) as SampleOrder; }

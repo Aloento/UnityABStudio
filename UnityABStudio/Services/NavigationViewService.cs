@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Microsoft.UI.Xaml.Controls;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.Helpers;
-using UnityABStudio.ViewModels;
-
 namespace UnityABStudio.Services {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Microsoft.UI.Xaml.Controls;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.Helpers;
+    using UnityABStudio.ViewModels;
+
     public class NavigationViewService : INavigationViewService {
         private readonly INavigationService _navigationService;
         private readonly IPageService _pageService;

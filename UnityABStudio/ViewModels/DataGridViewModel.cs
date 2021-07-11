@@ -1,13 +1,13 @@
-using System;
-using System.Collections.ObjectModel;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-
-using UnityABStudio.Contracts.ViewModels;
-using UnityABStudio.Core.Contracts.Services;
-using UnityABStudio.Core.Models;
-
 namespace UnityABStudio.ViewModels {
+    using System;
+    using System.Collections.ObjectModel;
+
+    using CommunityToolkit.Mvvm.ComponentModel;
+
+    using UnityABStudio.Contracts.ViewModels;
+    using UnityABStudio.Core.Contracts.Services;
+    using UnityABStudio.Core.Models;
+
     public class DataGridViewModel : ObservableRecipient, INavigationAware {
         private readonly ISampleDataService _sampleDataService;
 

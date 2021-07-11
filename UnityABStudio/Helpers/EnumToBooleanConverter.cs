@@ -1,9 +1,9 @@
-using System;
-
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Data;
-
 namespace UnityABStudio.Helpers {
+    using System;
+
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Data;
+
     public class EnumToBooleanConverter : IValueConverter {
         public EnumToBooleanConverter() {
         }

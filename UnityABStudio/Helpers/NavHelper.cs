@@ -1,7 +1,7 @@
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-
 namespace UnityABStudio.Helpers {
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+
     public class NavHelper {
         // This helper class allows to specify the page that will be shown when you click on a NavigationViewItem
         //

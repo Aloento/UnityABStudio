@@ -1,8 +1,8 @@
 // LzInWindow.cs
 
-using System;
-
 namespace SevenZip.Compression.LZ {
+    using System;
+
     public class InWindow {
         public Byte[] _bufferBase = null; // pointer to buffer with data
         System.IO.Stream _stream;

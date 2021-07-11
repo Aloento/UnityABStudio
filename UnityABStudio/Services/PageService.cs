@@ -1,16 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-
-using Microsoft.UI.Xaml.Controls;
-
-using UnityABStudio.Contracts.Services;
-using UnityABStudio.ViewModels;
-using UnityABStudio.Views;
-
 namespace UnityABStudio.Services {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using CommunityToolkit.Mvvm.ComponentModel;
+
+    using Microsoft.UI.Xaml.Controls;
+
+    using UnityABStudio.Contracts.Services;
+    using UnityABStudio.ViewModels;
+    using UnityABStudio.Views;
+
     public class PageService : IPageService {
         private readonly Dictionary<string, Type> _pages = new Dictionary<string, Type>();
 

@@ -1,13 +1,13 @@
-using CommunityToolkit.Mvvm.DependencyInjection;
-
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.Xaml.Interactivity;
-
-using UnityABStudio.Contracts.Services;
-
 namespace UnityABStudio.Behaviors {
+    using CommunityToolkit.Mvvm.DependencyInjection;
+
+    using Microsoft.UI.Xaml;
+    using Microsoft.UI.Xaml.Controls;
+    using Microsoft.UI.Xaml.Navigation;
+    using Microsoft.Xaml.Interactivity;
+
+    using UnityABStudio.Contracts.Services;
+
     public class NavigationViewHeaderBehavior : Behavior<NavigationView> {
         private static NavigationViewHeaderBehavior _current;
         private Page _currentPage;

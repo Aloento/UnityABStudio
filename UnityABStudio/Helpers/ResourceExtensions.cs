@@ -1,6 +1,6 @@
-using Microsoft.ApplicationModel.Resources;
-
 namespace UnityABStudio.Helpers {
+    using Microsoft.ApplicationModel.Resources;
+
     internal static class ResourceExtensions {
         private static ResourceLoader _resLoader = new ResourceLoader();
 
