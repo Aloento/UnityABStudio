@@ -35,14 +35,14 @@ namespace SoarCraft.QYun.AssetReader {
         private readonly HashSet<string> importFilesHash = new(StringComparer.OrdinalIgnoreCase);
         private readonly HashSet<string> assetsFileListHash = new(StringComparer.OrdinalIgnoreCase);
 
-        public async void LoadFilesAsync(params string[] files) => await Task.Run(() => {
+        public async Task LoadFilesAsync(params string[] files) => await Task.Run(() => {
             var path = Path.GetDirectoryName(files[0]);
             MergeSplitAssets(path);
             var toReadFile = ProcessingSplitFiles(files.ToList());
             Load(toReadFile);
         });
 
-        public async void LoadFolderAsync(string path) => await Task.Run(() => {
+        public async Task LoadFolderAsync(string path) => await Task.Run(() => {
             MergeSplitAssets(path, true);
             var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).ToList();
             var toReadFile = ProcessingSplitFiles(files);

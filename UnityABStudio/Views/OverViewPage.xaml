@@ -38,16 +38,16 @@
                             Click="FileButton_OnClick"
                             Margin="{StaticResource XXSmallTopMargin}"/>
                     <TextBlock x:Name="ImageText"
-                               Text="Please choose a Image"
+                               Text="Please choose a File"
                                Margin="{StaticResource XXSmallTopMargin}"/>
                 </StackPanel>
 
                 <StackPanel Margin="{StaticResource SmallTopMargin}">
                     <TextBlock Text="Save Location" />
-                    <Button Content="Set Export Image"
+                    <Button Content="Set Export"
                             Margin="{StaticResource XXSmallTopMargin}"/>
                     <TextBlock x:Name="ExportText"
-                               Text="Please set a Image"
+                               Text="Please set"
                                Margin="{StaticResource XXSmallTopMargin}"/>
                 </StackPanel>
 

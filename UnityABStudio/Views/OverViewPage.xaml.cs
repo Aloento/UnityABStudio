@@ -1,6 +1,10 @@
 namespace SoarCraft.QYun.UnityABStudio.Views {
-    using AssetReader;
+    using System;
+    using System.Collections.Generic;
+    using Windows.Storage;
+    using Windows.Storage.Pickers;
     using CommunityToolkit.Mvvm.DependencyInjection;
+    using Helpers;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Serilog;
@@ -17,10 +21,24 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
             this.InitializeComponent();
         }
 
-        private void FileButton_OnClick(object sender, RoutedEventArgs e) {
-            var manager = Ioc.Default.GetRequiredService<AssetsManager>();
-            logger.Information("OnClicked");
-            ((Button)sender).Content = manager.ToString();
+        private async void FileButton_OnClick(object sender, RoutedEventArgs e) {
+            ((Button)sender).IsEnabled = false;
+
+            var picker = new FileOpenPicker {
+                SuggestedStartLocation = PickerLocationId.ComputerFolder
+            };
+            picker.FileTypeFilter.Add(".ab");
+
+            WindowHelper.InitializeWithWindow(picker);
+            var abFile = await picker.PickSingleFileAsync();
+            ((Button)sender).IsEnabled = true;
+
+            if (abFile == null)
+                return;
+
+            logger.Information($"AB File chosen: {abFile.Path}");
+            this.ImageText.Text = abFile.Path;
+            await ViewModel.LoadAssetsDataAsync(new List<StorageFile> { abFile });
         }
     }
 }
