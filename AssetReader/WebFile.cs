@@ -4,8 +4,8 @@ namespace SoarCraft.QYun.AssetReader {
     using System.IO.Compression;
     using System.Linq;
     using System.Text;
+    using Brotli;
     using Entities.Structs;
-    using Org.Brotli.Dec;
     using Utils;
 
     public class WebFile {

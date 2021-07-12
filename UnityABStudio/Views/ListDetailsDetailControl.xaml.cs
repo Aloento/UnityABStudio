@@ -1,19 +1,18 @@
-namespace UnityABStudio.Views {
+namespace SoarCraft.QYun.UnityABStudio.Views {
+    using Core.Models;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
 
-    using UnityABStudio.Core.Models;
-
     public sealed partial class ListDetailsDetailControl : UserControl {
         public SampleOrder ListDetailsMenuItem {
-            get { return GetValue(ListDetailsMenuItemProperty) as SampleOrder; }
-            set { SetValue(ListDetailsMenuItemProperty, value); }
+            get { return this.GetValue(ListDetailsMenuItemProperty) as SampleOrder; }
+            set { this.SetValue(ListDetailsMenuItemProperty, value); }
         }
 
         public static readonly DependencyProperty ListDetailsMenuItemProperty = DependencyProperty.Register("ListDetailsMenuItem", typeof(SampleOrder), typeof(ListDetailsDetailControl), new PropertyMetadata(null, OnListDetailsMenuItemPropertyChanged));
 
         public ListDetailsDetailControl() {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         private static void OnListDetailsMenuItemPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {

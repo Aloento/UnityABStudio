@@ -1,0 +1,58 @@
+<Page
+    x:Class="SoarCraft.QYun.UnityABStudio.Views.OverViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:behaviors="using:SoarCraft.QYun.UnityABStudio.Behaviors"
+    behaviors:NavigationViewHeaderBehavior.HeaderContext="Quick Start!"
+    mc:Ignorable="d"
+    Style="{StaticResource PageStyle}">
+
+    <Grid Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+
+            <StackPanel Padding="20,0,0,0"
+                    HorizontalAlignment="Left">
+
+                <InfoBar
+                    Name="InfoBar"
+                    IsOpen="True"
+                    x:Uid="OverInfo"
+                    IsClosable="False"
+                    Margin="{StaticResource SmallTopBottomMargin}" >
+                    <InfoBar.Content>
+                        <StackPanel Margin="0, 0, 0, 12">
+                            <TextBlock x:Uid="InfoText"/>
+                            <Button Name="InfoButton"
+                                    Content="Waiting..."
+                                    IsEnabled="False"
+                                    Margin="{StaticResource SmallTopMargin}"/>
+                        </StackPanel>
+                    </InfoBar.Content>
+                </InfoBar>
+
+                <StackPanel Margin="{StaticResource SmallTopMargin}">
+                    <TextBlock Text="Open AssetBundle" />
+                    <Button Content="Open File"
+                            Click="FileButton_OnClick"
+                            Margin="{StaticResource XXSmallTopMargin}"/>
+                    <TextBlock x:Name="ImageText"
+                               Text="Please choose a Image"
+                               Margin="{StaticResource XXSmallTopMargin}"/>
+                </StackPanel>
+
+                <StackPanel Margin="{StaticResource SmallTopMargin}">
+                    <TextBlock Text="Save Location" />
+                    <Button Content="Set Export Image"
+                            Margin="{StaticResource XXSmallTopMargin}"/>
+                    <TextBlock x:Name="ExportText"
+                               Text="Please set a Image"
+                               Margin="{StaticResource XXSmallTopMargin}"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Page>

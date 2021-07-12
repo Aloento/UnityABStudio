@@ -1,11 +1,10 @@
-namespace UnityABStudio.Services {
+namespace SoarCraft.QYun.UnityABStudio.Services {
     using CommunityToolkit.WinUI.UI.Animations;
+    using Contracts.Services;
+    using Contracts.ViewModels;
+    using Helpers;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
-
-    using UnityABStudio.Contracts.Services;
-    using UnityABStudio.Contracts.ViewModels;
-    using UnityABStudio.Helpers;
 
     // For more information on navigation between pages see
     // https://github.com/Microsoft/WindowsTemplateStudio/blob/release/docs/WinUI/navigation.md
@@ -18,43 +17,43 @@ namespace UnityABStudio.Services {
 
         public Frame Frame {
             get {
-                if (_frame == null) {
-                    _frame = App.MainWindow.Content as Frame;
-                    RegisterFrameEvents();
+                if (this._frame == null) {
+                    this._frame = App.MainWindow.Content as Frame;
+                    this.RegisterFrameEvents();
                 }
 
-                return _frame;
+                return this._frame;
             }
 
             set {
-                UnregisterFrameEvents();
-                _frame = value;
-                RegisterFrameEvents();
+                this.UnregisterFrameEvents();
+                this._frame = value;
+                this.RegisterFrameEvents();
             }
         }
 
-        public bool CanGoBack => Frame.CanGoBack;
+        public bool CanGoBack => this.Frame.CanGoBack;
 
         public NavigationService(IPageService pageService) {
-            _pageService = pageService;
+            this._pageService = pageService;
         }
 
         private void RegisterFrameEvents() {
-            if (_frame != null) {
-                _frame.Navigated += OnNavigated;
+            if (this._frame != null) {
+                this._frame.Navigated += this.OnNavigated;
             }
         }
 
         private void UnregisterFrameEvents() {
-            if (_frame != null) {
-                _frame.Navigated -= OnNavigated;
+            if (this._frame != null) {
+                this._frame.Navigated -= this.OnNavigated;
             }
         }
 
         public bool GoBack() {
-            if (CanGoBack) {
-                var vmBeforeNavigation = _frame.GetPageViewModel();
-                _frame.GoBack();
+            if (this.CanGoBack) {
+                var vmBeforeNavigation = this._frame.GetPageViewModel();
+                this._frame.GoBack();
                 if (vmBeforeNavigation is INavigationAware navigationAware) {
                     navigationAware.OnNavigatedFrom();
                 }
@@ -66,14 +65,14 @@ namespace UnityABStudio.Services {
         }
 
         public bool NavigateTo(string pageKey, object parameter = null, bool clearNavigation = false) {
-            var pageType = _pageService.GetPageType(pageKey);
+            var pageType = this._pageService.GetPageType(pageKey);
 
-            if (_frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed))) {
-                _frame.Tag = clearNavigation;
-                var vmBeforeNavigation = _frame.GetPageViewModel();
-                var navigated = _frame.Navigate(pageType, parameter);
+            if (this._frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(this._lastParameterUsed))) {
+                this._frame.Tag = clearNavigation;
+                var vmBeforeNavigation = this._frame.GetPageViewModel();
+                var navigated = this._frame.Navigate(pageType, parameter);
                 if (navigated) {
-                    _lastParameterUsed = parameter;
+                    this._lastParameterUsed = parameter;
                     if (vmBeforeNavigation is INavigationAware navigationAware) {
                         navigationAware.OnNavigatedFrom();
                     }
@@ -86,7 +85,7 @@ namespace UnityABStudio.Services {
         }
 
         public void CleanNavigation()
-            => _frame.BackStack.Clear();
+            => this._frame.BackStack.Clear();
 
         private void OnNavigated(object sender, NavigationEventArgs e) {
             if (sender is Frame frame) {
@@ -99,11 +98,11 @@ namespace UnityABStudio.Services {
                     navigationAware.OnNavigatedTo(e.Parameter);
                 }
 
-                Navigated?.Invoke(sender, e);
+                this.Navigated?.Invoke(sender, e);
             }
         }
 
         public void SetListDataItemForNextConnectedAnimation(object item)
-            => Frame.SetListDataItemForNextConnectedAnimation(item);
+            => this.Frame.SetListDataItemForNextConnectedAnimation(item);
     }
 }

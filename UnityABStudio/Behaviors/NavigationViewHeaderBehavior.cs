@@ -1,12 +1,10 @@
-namespace UnityABStudio.Behaviors {
+namespace SoarCraft.QYun.UnityABStudio.Behaviors {
     using CommunityToolkit.Mvvm.DependencyInjection;
-
+    using Contracts.Services;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
     using Microsoft.Xaml.Interactivity;
-
-    using UnityABStudio.Contracts.Services;
 
     public class NavigationViewHeaderBehavior : Behavior<NavigationView> {
         private static NavigationViewHeaderBehavior _current;
@@ -15,8 +13,8 @@ namespace UnityABStudio.Behaviors {
         public DataTemplate DefaultHeaderTemplate { get; set; }
 
         public object DefaultHeader {
-            get { return GetValue(DefaultHeaderProperty); }
-            set { SetValue(DefaultHeaderProperty, value); }
+            get { return this.GetValue(DefaultHeaderProperty); }
+            set { this.SetValue(DefaultHeaderProperty, value); }
         }
 
         public static readonly DependencyProperty DefaultHeaderProperty = DependencyProperty.Register("DefaultHeader", typeof(object), typeof(NavigationViewHeaderBehavior), new PropertyMetadata(null, (d, e) => _current.UpdateHeader()));
@@ -58,52 +56,52 @@ namespace UnityABStudio.Behaviors {
             base.OnAttached();
             _current = this;
             var navigationService = Ioc.Default.GetService<INavigationService>();
-            navigationService.Navigated += OnNavigated;
+            navigationService.Navigated += this.OnNavigated;
         }
 
         protected override void OnDetaching() {
             base.OnDetaching();
             var navigationService = Ioc.Default.GetService<INavigationService>();
-            navigationService.Navigated -= OnNavigated;
+            navigationService.Navigated -= this.OnNavigated;
         }
 
         private void OnNavigated(object sender, NavigationEventArgs e) {
             var frame = sender as Frame;
             if (frame.Content is Page page) {
-                _currentPage = page;
+                this._currentPage = page;
 
-                UpdateHeader();
-                UpdateHeaderTemplate();
+                this.UpdateHeader();
+                this.UpdateHeaderTemplate();
             }
         }
 
         private void UpdateHeader() {
-            if (_currentPage != null) {
-                var headerMode = GetHeaderMode(_currentPage);
+            if (this._currentPage != null) {
+                var headerMode = GetHeaderMode(this._currentPage);
                 if (headerMode == NavigationViewHeaderMode.Never) {
-                    AssociatedObject.Header = null;
-                    AssociatedObject.AlwaysShowHeader = false;
+                    this.AssociatedObject.Header = null;
+                    this.AssociatedObject.AlwaysShowHeader = false;
                 } else {
-                    var headerFromPage = GetHeaderContext(_currentPage);
+                    var headerFromPage = GetHeaderContext(this._currentPage);
                     if (headerFromPage != null) {
-                        AssociatedObject.Header = headerFromPage;
+                        this.AssociatedObject.Header = headerFromPage;
                     } else {
-                        AssociatedObject.Header = DefaultHeader;
+                        this.AssociatedObject.Header = this.DefaultHeader;
                     }
 
                     if (headerMode == NavigationViewHeaderMode.Always) {
-                        AssociatedObject.AlwaysShowHeader = true;
+                        this.AssociatedObject.AlwaysShowHeader = true;
                     } else {
-                        AssociatedObject.AlwaysShowHeader = false;
+                        this.AssociatedObject.AlwaysShowHeader = false;
                     }
                 }
             }
         }
 
         private void UpdateHeaderTemplate() {
-            if (_currentPage != null) {
-                var headerTemplate = GetHeaderTemplate(_currentPage);
-                AssociatedObject.HeaderTemplate = headerTemplate ?? DefaultHeaderTemplate;
+            if (this._currentPage != null) {
+                var headerTemplate = GetHeaderTemplate(this._currentPage);
+                this.AssociatedObject.HeaderTemplate = headerTemplate ?? this.DefaultHeaderTemplate;
             }
         }
     }

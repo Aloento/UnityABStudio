@@ -1,4 +1,4 @@
-namespace UnityABStudio.Helpers {
+namespace SoarCraft.QYun.UnityABStudio.Helpers {
     using Microsoft.UI.Xaml.Controls;
 
     public static class FrameExtensions {

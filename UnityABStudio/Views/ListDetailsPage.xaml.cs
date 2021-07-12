@@ -1,22 +1,20 @@
-namespace UnityABStudio.Views {
+namespace SoarCraft.QYun.UnityABStudio.Views {
     using CommunityToolkit.Mvvm.DependencyInjection;
     using CommunityToolkit.WinUI.UI.Controls;
-
     using Microsoft.UI.Xaml.Controls;
-
-    using UnityABStudio.ViewModels;
+    using ViewModels;
 
     public sealed partial class ListDetailsPage : Page {
         public ListDetailsViewModel ViewModel { get; }
 
         public ListDetailsPage() {
-            ViewModel = Ioc.Default.GetService<ListDetailsViewModel>();
-            InitializeComponent();
+            this.ViewModel = Ioc.Default.GetService<ListDetailsViewModel>();
+            this.InitializeComponent();
         }
 
         private void OnViewStateChanged(object sender, ListDetailsViewState e) {
             if (e == ListDetailsViewState.Both) {
-                ViewModel.EnsureItemSelected();
+                this.ViewModel.EnsureItemSelected();
             }
         }
     }

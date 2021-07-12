@@ -1,4 +1,4 @@
-namespace UnityABStudio.Activation {
+namespace SoarCraft.QYun.UnityABStudio.Activation {
     using System.Threading.Tasks;
 
     // For more information on understanding activation flow see
@@ -11,12 +11,12 @@ namespace UnityABStudio.Activation {
         protected abstract Task HandleInternalAsync(T args);
 
         public async Task HandleAsync(object args) {
-            await HandleInternalAsync(args as T);
+            await this.HandleInternalAsync(args as T);
         }
 
         public bool CanHandle(object args) {
             // CanHandle checks the args is of type you have configured
-            return args is T && CanHandleInternal(args as T);
+            return args is T && this.CanHandleInternal(args as T);
         }
 
         // You can override this method to add extra validation on activation args

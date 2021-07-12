@@ -1,8 +1,7 @@
-namespace UnityABStudio.Core.Contracts.Services {
+namespace SoarCraft.QYun.UnityABStudio.Core.Contracts.Services {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using UnityABStudio.Core.Models;
+    using Models;
 
     // Remove this class once your pages/features are using your data.
     public interface ISampleDataService {

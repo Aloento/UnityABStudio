@@ -1,4 +1,4 @@
-namespace UnityABStudio.Core.Models {
+namespace SoarCraft.QYun.UnityABStudio.Core.Models {
     // Remove this class once your pages/features are using your data.
     // This is used by the SampleDataService.
     // It is the model class we use to display data on pages like Grid, Chart, and ListDetails.
@@ -21,6 +21,6 @@ namespace UnityABStudio.Core.Models {
 
         public double Total { get; set; }
 
-        public string ShortDescription => $"Product ID: {ProductID} - {ProductName}";
+        public string ShortDescription => $"Product ID: {this.ProductID} - {this.ProductName}";
     }
 }

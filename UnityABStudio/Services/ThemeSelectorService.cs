@@ -1,13 +1,10 @@
-namespace UnityABStudio.Services {
+namespace SoarCraft.QYun.UnityABStudio.Services {
     using System;
     using System.Threading.Tasks;
-
-    using Microsoft.UI.Xaml;
-
-    using UnityABStudio.Contracts.Services;
-    using UnityABStudio.Helpers;
-
     using Windows.Storage;
+    using Contracts.Services;
+    using Helpers;
+    using Microsoft.UI.Xaml;
 
     public class ThemeSelectorService : IThemeSelectorService {
         private const string SettingsKey = "AppBackgroundRequestedTheme";
@@ -15,20 +12,20 @@ namespace UnityABStudio.Services {
         public ElementTheme Theme { get; set; } = ElementTheme.Default;
 
         public async Task InitializeAsync() {
-            Theme = await LoadThemeFromSettingsAsync();
+            this.Theme = await this.LoadThemeFromSettingsAsync();
             await Task.CompletedTask;
         }
 
         public async Task SetThemeAsync(ElementTheme theme) {
-            Theme = theme;
+            this.Theme = theme;
 
-            await SetRequestedThemeAsync();
-            await SaveThemeInSettingsAsync(Theme);
+            await this.SetRequestedThemeAsync();
+            await this.SaveThemeInSettingsAsync(this.Theme);
         }
 
         public async Task SetRequestedThemeAsync() {
             if (App.MainWindow.Content is FrameworkElement rootElement) {
-                rootElement.RequestedTheme = Theme;
+                rootElement.RequestedTheme = this.Theme;
             }
 
             await Task.CompletedTask;

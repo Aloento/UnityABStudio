@@ -1,11 +1,10 @@
-namespace UnityABStudio.Core.Services {
+namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using UnityABStudio.Core.Contracts.Services;
-    using UnityABStudio.Core.Models;
+    using Contracts.Services;
+    using Models;
 
     // This class holds sample data used by some generated pages to show how they can be used.
     // TODO WTS: The following classes have been created to display sample data. Delete these files once your app is using real data.
@@ -26,11 +25,8 @@ namespace UnityABStudio.Core.Services {
             return companies.SelectMany(c => c.Orders);
         }
 
-        private static IEnumerable<SampleCompany> AllCompanies() {
-            return new List<SampleCompany>()
-            {
-                new SampleCompany()
-                {
+        private static IEnumerable<SampleCompany> AllCompanies() => new List<SampleCompany>() {
+                new() {
                     CompanyID = "ALFKI",
                     CompanyName = "Company A",
                     ContactName = "Maria Anders",
@@ -43,7 +39,7 @@ namespace UnityABStudio.Core.Services {
                     Fax = "030-0076545",
                     Orders = new List<SampleOrder>()
                     {
-                        new SampleOrder()
+                        new()
                         {
                             OrderID = 10643, // Symbol Globe
                             OrderDate = new DateTime(1997, 8, 25),
@@ -60,7 +56,7 @@ namespace UnityABStudio.Core.Services {
                             SymbolName = "Globe",
                             Details = new List<SampleOrderDetail>()
                             {
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 28,
                                     ProductName = "Rössle Sauerkraut",
@@ -72,7 +68,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Dried fruit and bean curd",
                                     Total = 513.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 39,
                                     ProductName = "Chartreuse verte",
@@ -84,7 +80,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Soft drinks, coffees, teas, beers, and ales",
                                     Total = 283.50
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 46,
                                     ProductName = "Spegesild",
@@ -98,7 +94,7 @@ namespace UnityABStudio.Core.Services {
                                 }
                             }
                         },
-                        new SampleOrder()
+                        new()
                         {
                             OrderID = 10835, // Symbol Music
                             OrderDate = new DateTime(1998, 1, 15),
@@ -115,7 +111,7 @@ namespace UnityABStudio.Core.Services {
                             SymbolName = "Audio",
                             Details = new List<SampleOrderDetail>()
                             {
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 59,
                                     ProductName = "Raclette Courdavault",
@@ -127,7 +123,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Cheeses",
                                     Total = 825.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 77,
                                     ProductName = "Original Frankfurter grüne Soße",
@@ -141,7 +137,7 @@ namespace UnityABStudio.Core.Services {
                                 }
                             }
                         },
-                        new SampleOrder()
+                        new()
                         {
                             OrderID = 10952, // Symbol Calendar
                             OrderDate = new DateTime(1998, 3, 16),
@@ -158,7 +154,7 @@ namespace UnityABStudio.Core.Services {
                             SymbolName = "Calendar",
                             Details = new List<SampleOrderDetail>()
                             {
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 6,
                                     ProductName = "Grandma's Boysenberry Spread",
@@ -170,7 +166,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Sweet and savory sauces, relishes, spreads, and seasonings",
                                     Total = 380.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 28,
                                     ProductName = "Rössle Sauerkraut",
@@ -186,7 +182,7 @@ namespace UnityABStudio.Core.Services {
                         }
                     }
                 },
-                new SampleCompany()
+                new()
                 {
                     CompanyID = "ANATR",
                     CompanyName = "Company F",
@@ -200,7 +196,7 @@ namespace UnityABStudio.Core.Services {
                     Fax = "(5) 555-3745",
                     Orders = new List<SampleOrder>()
                     {
-                        new SampleOrder()
+                        new()
                         {
                             OrderID = 10625, // Symbol Camera
                             OrderDate = new DateTime(1997, 8, 8),
@@ -217,7 +213,7 @@ namespace UnityABStudio.Core.Services {
                             SymbolName = "Camera",
                             Details = new List<SampleOrderDetail>()
                             {
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 14,
                                     ProductName = "Tofu",
@@ -229,7 +225,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Dried fruit and bean curd",
                                     Total = 69.75
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 42,
                                     ProductName = "Singaporean Hokkien Fried Mee",
@@ -241,7 +237,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Breads, crackers, pasta, and cereal",
                                     Total = 70.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 60,
                                     ProductName = "Camembert Pierrot",
@@ -255,7 +251,7 @@ namespace UnityABStudio.Core.Services {
                                 }
                             }
                         },
-                        new SampleOrder()
+                        new()
                         {
                             OrderID = 10926, // Symbol Clock
                             OrderDate = new DateTime(1998, 3, 4),
@@ -272,7 +268,7 @@ namespace UnityABStudio.Core.Services {
                             SymbolName = "Clock",
                             Details = new List<SampleOrderDetail>()
                             {
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 11,
                                     ProductName = "Queso Cabrales",
@@ -284,7 +280,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Cheeses",
                                     Total = 42.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 13,
                                     ProductName = "Konbu",
@@ -296,7 +292,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Seaweed and fish",
                                     Total = 60.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 19,
                                     ProductName = "Teatime Chocolate Biscuits",
@@ -308,7 +304,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Desserts, candies, and sweet breads",
                                     Total = 64.40
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 72,
                                     ProductName = "Mozzarella di Giovanni",
@@ -324,7 +320,7 @@ namespace UnityABStudio.Core.Services {
                         }
                     }
                 },
-                new SampleCompany()
+                new()
                 {
                     CompanyID = "ANTON",
                     CompanyName = "Company Z",
@@ -338,7 +334,7 @@ namespace UnityABStudio.Core.Services {
                     Fax = string.Empty,
                     Orders = new List<SampleOrder>()
                     {
-                        new SampleOrder()
+                        new()
                         {
                             OrderID = 10507, // Symbol Contact
                             OrderDate = new DateTime(1997, 4, 15),
@@ -355,7 +351,7 @@ namespace UnityABStudio.Core.Services {
                             SymbolName = "Contact",
                             Details = new List<SampleOrderDetail>()
                             {
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 43,
                                     ProductName = "Ipoh Coffee",
@@ -367,7 +363,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Soft drinks, coffees, teas, beers, and ales",
                                     Total = 816.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 48,
                                     ProductName = "Chocolade",
@@ -381,7 +377,7 @@ namespace UnityABStudio.Core.Services {
                                 }
                             }
                         },
-                        new SampleOrder()
+                        new()
                         {
                             OrderID = 10573, // Symbol Star
                             OrderDate = new DateTime(1997, 6, 19),
@@ -398,7 +394,7 @@ namespace UnityABStudio.Core.Services {
                             SymbolName = "Favorite",
                             Details = new List<SampleOrderDetail>()
                             {
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 17,
                                     ProductName = "Alice Mutton",
@@ -410,7 +406,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Prepared meats",
                                     Total = 702.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 34,
                                     ProductName = "Sasquatch Ale",
@@ -422,7 +418,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Soft drinks, coffees, teas, beers, and ales",
                                     Total = 560.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 53,
                                     ProductName = "Perth Pasties",
@@ -436,7 +432,7 @@ namespace UnityABStudio.Core.Services {
                                 }
                             }
                         },
-                        new SampleOrder()
+                        new()
                         {
                             OrderID = 10682, // Symbol Home
                             OrderDate = new DateTime(1997, 9, 25),
@@ -453,7 +449,7 @@ namespace UnityABStudio.Core.Services {
                             SymbolName = "Home",
                             Details = new List<SampleOrderDetail>()
                             {
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 33,
                                     ProductName = "Geitost",
@@ -465,7 +461,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Cheeses",
                                     Total = 75.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 66,
                                     ProductName = "Louisiana Hot Spiced Okra",
@@ -477,7 +473,7 @@ namespace UnityABStudio.Core.Services {
                                     CategoryDescription = "Sweet and savory sauces, relishes, spreads, and seasonings",
                                     Total = 68.00
                                 },
-                                new SampleOrderDetail()
+                                new()
                                 {
                                     ProductID = 75,
                                     ProductName = "Rhönbräu Klosterbier",
@@ -494,33 +490,32 @@ namespace UnityABStudio.Core.Services {
                     }
                 }
             };
-        }
 
         public async Task<IEnumerable<SampleOrder>> GetContentGridDataAsync() {
-            if (_allOrders == null) {
-                _allOrders = new List<SampleOrder>(AllOrders());
+            if (this._allOrders == null) {
+                this._allOrders = new List<SampleOrder>(AllOrders());
             }
 
             await Task.CompletedTask;
-            return _allOrders;
+            return this._allOrders;
         }
 
         public async Task<IEnumerable<SampleOrder>> GetGridDataAsync() {
-            if (_allOrders == null) {
-                _allOrders = new List<SampleOrder>(AllOrders());
+            if (this._allOrders == null) {
+                this._allOrders = new List<SampleOrder>(AllOrders());
             }
 
             await Task.CompletedTask;
-            return _allOrders;
+            return this._allOrders;
         }
 
         public async Task<IEnumerable<SampleOrder>> GetListDetailsDataAsync() {
-            if (_allOrders == null) {
-                _allOrders = new List<SampleOrder>(AllOrders());
+            if (this._allOrders == null) {
+                this._allOrders = new List<SampleOrder>(AllOrders());
             }
 
             await Task.CompletedTask;
-            return _allOrders;
+            return this._allOrders;
         }
     }
 }

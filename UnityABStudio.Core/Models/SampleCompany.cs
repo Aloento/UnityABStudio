@@ -1,4 +1,4 @@
-namespace UnityABStudio.Core.Models {
+namespace SoarCraft.QYun.UnityABStudio.Core.Models {
     using System.Collections.Generic;
 
     // Remove this class once your pages/features are using your data.

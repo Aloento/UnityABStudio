@@ -3,7 +3,7 @@
 Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
-namespace Org.Brotli.Dec {
+namespace SoarCraft.QYun.AssetReader.Brotli {
     /// <summary>API for Brotli decompression.</summary>
     internal sealed class Decode {
         private const int DefaultCodeLength = 8;

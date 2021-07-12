@@ -1,4 +1,4 @@
-namespace UnityABStudio.Contracts.ViewModels {
+namespace SoarCraft.QYun.UnityABStudio.Contracts.ViewModels {
     public interface INavigationAware {
         void OnNavigatedTo(object parameter);
 

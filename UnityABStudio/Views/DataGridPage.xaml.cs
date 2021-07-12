@@ -1,9 +1,7 @@
-namespace UnityABStudio.Views {
+namespace SoarCraft.QYun.UnityABStudio.Views {
     using CommunityToolkit.Mvvm.DependencyInjection;
-
     using Microsoft.UI.Xaml.Controls;
-
-    using UnityABStudio.ViewModels;
+    using ViewModels;
 
     // TODO WTS: Change the grid as appropriate to your app, adjust the column definitions on DataGridPage.xaml.
     // For more details see the documentation at https://docs.microsoft.com/windows/communitytoolkit/controls/datagrid
@@ -11,8 +9,8 @@ namespace UnityABStudio.Views {
         public DataGridViewModel ViewModel { get; }
 
         public DataGridPage() {
-            ViewModel = Ioc.Default.GetService<DataGridViewModel>();
-            InitializeComponent();
+            this.ViewModel = Ioc.Default.GetService<DataGridViewModel>();
+            this.InitializeComponent();
         }
     }
 }

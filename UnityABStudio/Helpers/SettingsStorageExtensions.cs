@@ -1,12 +1,10 @@
-namespace UnityABStudio.Helpers {
+namespace SoarCraft.QYun.UnityABStudio.Helpers {
     using System;
     using System.IO;
     using System.Threading.Tasks;
-
-    using UnityABStudio.Core.Helpers;
-
     using Windows.Storage;
     using Windows.Storage.Streams;
+    using Core.Helpers;
 
     // Use these extension methods to store and retrieve local and roaming app data
     // More details regarding storing and retrieving app data at https://docs.microsoft.com/windows/uwp/app-settings/store-and-retrieve-app-data

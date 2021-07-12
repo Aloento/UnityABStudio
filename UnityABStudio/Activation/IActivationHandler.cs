@@ -1,4 +1,4 @@
-namespace UnityABStudio.Activation {
+namespace SoarCraft.QYun.UnityABStudio.Activation {
     using System.Threading.Tasks;
 
     public interface IActivationHandler {

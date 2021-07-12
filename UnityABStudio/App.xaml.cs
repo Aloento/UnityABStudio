@@ -1,26 +1,25 @@
 // To learn more about WinUI3, see: https://docs.microsoft.com/windows/apps/winui/winui3/.
-namespace UnityABStudio {
+namespace SoarCraft.QYun.UnityABStudio {
+    using Activation;
+    using AssetReader;
     using CommunityToolkit.Mvvm.DependencyInjection;
-
+    using Contracts.Services;
+    using Core.Contracts.Services;
+    using Core.Services;
+    using Helpers;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
-
-    using UnityABStudio.Activation;
-    using UnityABStudio.Contracts.Services;
-    using UnityABStudio.Core.Contracts.Services;
-    using UnityABStudio.Core.Services;
-    using UnityABStudio.Helpers;
-    using UnityABStudio.Services;
-    using UnityABStudio.ViewModels;
-    using UnityABStudio.Views;
+    using Services;
+    using ViewModels;
+    using Views;
 
     public partial class App : Application {
-        public static Window MainWindow { get; set; } = new Window() { Title = "AppDisplayName".GetLocalized() };
+        public static Window MainWindow { get; set; } = new() { Title = "AppDisplayName".GetLocalized() };
 
         public App() {
             InitializeComponent();
-            UnhandledException += App_UnhandledException;
-            Ioc.Default.ConfigureServices(ConfigureServices());
+            this.UnhandledException += this.App_UnhandledException;
+            Ioc.Default.ConfigureServices(this.ConfigureServices());
         }
 
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
@@ -53,12 +52,15 @@ namespace UnityABStudio {
 
             // Core Services
             _ = services.AddSingleton<ISampleDataService, SampleDataService>();
+            _ = services.AddSingleton<IAssetDataService, AssetDataService>();
+            _ = services.AddSingleton<AssetsManager>();
+            _ = services.AddSingleton<LoggerService>();
 
             // Views and ViewModels
             _ = services.AddTransient<ShellPage>();
             _ = services.AddTransient<ShellViewModel>();
-            _ = services.AddTransient<MainViewModel>();
-            _ = services.AddTransient<MainPage>();
+            _ = services.AddTransient<OverViewModel>();
+            _ = services.AddTransient<OverViewPage>();
             _ = services.AddTransient<ListDetailsViewModel>();
             _ = services.AddTransient<ListDetailsPage>();
             _ = services.AddTransient<DataGridViewModel>();

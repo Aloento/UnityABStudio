@@ -1,14 +1,14 @@
-﻿<Page
-    x:Class="UnityABStudio.Views.ListDetailsPage"
+<Page
+    x:Class="SoarCraft.QYun.UnityABStudio.Views.ListDetailsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
-    xmlns:models="using:UnityABStudio.Core.Models"
-    xmlns:views="using:UnityABStudio.Views"
+    xmlns:behaviors="using:SoarCraft.QYun.UnityABStudio.Behaviors"
+    xmlns:views="using:SoarCraft.QYun.UnityABStudio.Views"
+    xmlns:models="using:SoarCraft.QYun.UnityABStudio.Core.Models"
     mc:Ignorable="d"
-    xmlns:behaviors="using:UnityABStudio.Behaviors"
     behaviors:NavigationViewHeaderBehavior.HeaderMode="Never"
     Style="{StaticResource PageStyle}">
     <Page.Resources>

@@ -1,6 +1,5 @@
-namespace UnityABStudio.Helpers {
+namespace SoarCraft.QYun.UnityABStudio.Helpers {
     using System;
-
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Data;
 

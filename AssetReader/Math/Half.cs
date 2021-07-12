@@ -1,6 +1,7 @@
-namespace System {
-    using Diagnostics;
-    using Globalization;
+namespace SoarCraft.QYun.AssetReader.Math {
+    using System;
+    using System.Diagnostics;
+    using System.Globalization;
 
     /// <summary>
     /// Represents a half-precision floating point number. 
@@ -459,7 +460,7 @@ namespace System {
                 result = 1;
             } else {
                 if (obj is Half) {
-                    result = CompareTo((Half)obj);
+                    result = this.CompareTo((Half)obj);
                 } else {
                     throw new ArgumentException("Object must be of type Half.");
                 }
@@ -495,7 +496,7 @@ namespace System {
         /// Returns the hash code for this instance.
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
-        public override int GetHashCode() => value.GetHashCode();
+        public override int GetHashCode() => this.value.GetHashCode();
 
         /// <summary>
         /// Returns the System.TypeCode for value type System.Half.
@@ -778,7 +779,7 @@ namespace System {
         #region IConvertible Members
         float IConvertible.ToSingle(IFormatProvider provider) => (float)this;
 
-        TypeCode IConvertible.GetTypeCode() => GetTypeCode();
+        TypeCode IConvertible.GetTypeCode() => this.GetTypeCode();
 
         bool IConvertible.ToBoolean(IFormatProvider provider) => Convert.ToBoolean((float)this);
 

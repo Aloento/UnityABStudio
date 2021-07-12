@@ -1,6 +1,6 @@
 // CommandLineParser.cs
 
-namespace SevenZip.CommandLineParser {
+namespace SoarCraft.QYun.AssetReader._7zip.Common {
     using System;
     using System.Collections;
 
@@ -22,12 +22,12 @@ namespace SevenZip.CommandLineParser {
 
         public SwitchForm(string idString, SwitchType type, bool multi,
             int minLen, int maxLen, string postCharSet) {
-            IDString = idString;
-            Type = type;
-            Multi = multi;
-            MinLen = minLen;
-            MaxLen = maxLen;
-            PostCharSet = postCharSet;
+            this.IDString = idString;
+            this.Type = type;
+            this.Multi = multi;
+            this.MinLen = minLen;
+            this.MaxLen = maxLen;
+            this.PostCharSet = postCharSet;
         }
         public SwitchForm(string idString, SwitchType type, bool multi, int minLen) :
             this(idString, type, multi, minLen, 0, "") {
@@ -43,7 +43,7 @@ namespace SevenZip.CommandLineParser {
         public ArrayList PostStrings = new();
         public int PostCharIndex;
         public SwitchResult() {
-            ThereIs = false;
+            this.ThereIs = false;
         }
     }
 
@@ -52,9 +52,9 @@ namespace SevenZip.CommandLineParser {
         SwitchResult[] _switches;
 
         public Parser(int numSwitches) {
-            _switches = new SwitchResult[numSwitches];
+            this._switches = new SwitchResult[numSwitches];
             for (var i = 0; i < numSwitches; i++)
-                _switches[i] = new SwitchResult();
+                this._switches[i] = new SwitchResult();
         }
 
         bool ParseString(string srcString, SwitchForm[] switchForms) {
@@ -70,7 +70,7 @@ namespace SevenZip.CommandLineParser {
                 const int kNoLen = -1;
                 var matchedSwitchIndex = 0;
                 var maxLen = kNoLen;
-                for (var switchIndex = 0; switchIndex < _switches.Length; switchIndex++) {
+                for (var switchIndex = 0; switchIndex < this._switches.Length; switchIndex++) {
                     var switchLen = switchForms[switchIndex].IDString.Length;
                     if (switchLen <= maxLen || pos + switchLen > len)
                         continue;
@@ -82,7 +82,7 @@ namespace SevenZip.CommandLineParser {
                 }
                 if (maxLen == kNoLen)
                     throw new Exception("maxLen == kNoLen");
-                var matchedSwitch = _switches[matchedSwitchIndex];
+                var matchedSwitch = this._switches[matchedSwitchIndex];
                 var switchForm = switchForms[matchedSwitchIndex];
                 if (!switchForm.Multi && matchedSwitch.ThereIs)
                     throw new Exception("switch must be single");
@@ -151,17 +151,17 @@ namespace SevenZip.CommandLineParser {
             for (var i = 0; i < numCommandStrings; i++) {
                 var s = commandStrings[i];
                 if (stopSwitch)
-                    _ = NonSwitchStrings.Add(s);
+                    _ = this.NonSwitchStrings.Add(s);
                 else
                     if (s == kStopSwitchParsing)
                     stopSwitch = true;
                 else
-                    if (!ParseString(s, switchForms))
-                    _ = NonSwitchStrings.Add(s);
+                    if (!this.ParseString(s, switchForms))
+                    _ = this.NonSwitchStrings.Add(s);
             }
         }
 
-        public SwitchResult this[int index] { get { return _switches[index]; } }
+        public SwitchResult this[int index] { get { return this._switches[index]; } }
 
         public static int ParseCommand(CommandForm[] commandForms, string commandString,
             out string postString) {
@@ -223,8 +223,8 @@ namespace SevenZip.CommandLineParser {
         public string IDString = "";
         public bool PostStringMode = false;
         public CommandForm(string idString, bool postStringMode) {
-            IDString = idString;
-            PostStringMode = postStringMode;
+            this.IDString = idString;
+            this.PostStringMode = postStringMode;
         }
     }
 

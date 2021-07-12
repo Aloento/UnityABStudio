@@ -1,4 +1,4 @@
-namespace SevenZip.Compression.RangeCoder {
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.RangeCoder {
     using System;
 
     class Encoder {
@@ -14,87 +14,87 @@ namespace SevenZip.Compression.RangeCoder {
         long StartPosition;
 
         public void SetStream(System.IO.Stream stream) {
-            Stream = stream;
+            this.Stream = stream;
         }
 
         public void ReleaseStream() {
-            Stream = null;
+            this.Stream = null;
         }
 
         public void Init() {
-            StartPosition = Stream.Position;
+            this.StartPosition = this.Stream.Position;
 
-            Low = 0;
-            Range = 0xFFFFFFFF;
-            _cacheSize = 1;
-            _cache = 0;
+            this.Low = 0;
+            this.Range = 0xFFFFFFFF;
+            this._cacheSize = 1;
+            this._cache = 0;
         }
 
         public void FlushData() {
             for (var i = 0; i < 5; i++)
-                ShiftLow();
+                this.ShiftLow();
         }
 
         public void FlushStream() {
-            Stream.Flush();
+            this.Stream.Flush();
         }
 
         public void CloseStream() {
-            Stream.Close();
+            this.Stream.Close();
         }
 
         public void Encode(uint start, uint size, uint total) {
-            Low += start * (Range /= total);
-            Range *= size;
-            while (Range < kTopValue) {
-                Range <<= 8;
-                ShiftLow();
+            this.Low += start * (this.Range /= total);
+            this.Range *= size;
+            while (this.Range < kTopValue) {
+                this.Range <<= 8;
+                this.ShiftLow();
             }
         }
 
         public void ShiftLow() {
-            if ((uint)Low < (uint)0xFF000000 || (uint)(Low >> 32) == 1) {
-                var temp = _cache;
+            if ((uint)this.Low < (uint)0xFF000000 || (uint)(this.Low >> 32) == 1) {
+                var temp = this._cache;
                 do {
-                    Stream.WriteByte((byte)(temp + (Low >> 32)));
+                    this.Stream.WriteByte((byte)(temp + (this.Low >> 32)));
                     temp = 0xFF;
                 }
-                while (--_cacheSize != 0);
-                _cache = (byte)((uint)this.Low >> 24);
+                while (--this._cacheSize != 0);
+                this._cache = (byte)((uint)this.Low >> 24);
             }
-            _cacheSize++;
-            Low = (uint)this.Low << 8;
+            this._cacheSize++;
+            this.Low = (uint)this.Low << 8;
         }
 
         public void EncodeDirectBits(uint v, int numTotalBits) {
             for (var i = numTotalBits - 1; i >= 0; i--) {
-                Range >>= 1;
+                this.Range >>= 1;
                 if (((v >> i) & 1) == 1)
-                    Low += Range;
-                if (Range < kTopValue) {
-                    Range <<= 8;
-                    ShiftLow();
+                    this.Low += this.Range;
+                if (this.Range < kTopValue) {
+                    this.Range <<= 8;
+                    this.ShiftLow();
                 }
             }
         }
 
         public void EncodeBit(uint size0, int numTotalBits, uint symbol) {
-            var newBound = (Range >> numTotalBits) * size0;
+            var newBound = (this.Range >> numTotalBits) * size0;
             if (symbol == 0)
-                Range = newBound;
+                this.Range = newBound;
             else {
-                Low += newBound;
-                Range -= newBound;
+                this.Low += newBound;
+                this.Range -= newBound;
             }
-            while (Range < kTopValue) {
-                Range <<= 8;
-                ShiftLow();
+            while (this.Range < kTopValue) {
+                this.Range <<= 8;
+                this.ShiftLow();
             }
         }
 
         public long GetProcessedSizeAdd() {
-            return _cacheSize +
-                Stream.Position - StartPosition + 4;
+            return this._cacheSize +
+                this.Stream.Position - this.StartPosition + 4;
             // (long)Stream.GetProcessedSize();
         }
     }
@@ -108,50 +108,50 @@ namespace SevenZip.Compression.RangeCoder {
 
         public void Init(System.IO.Stream stream) {
             // Stream.Init(stream);
-            Stream = stream;
+            this.Stream = stream;
 
-            Code = 0;
-            Range = 0xFFFFFFFF;
+            this.Code = 0;
+            this.Range = 0xFFFFFFFF;
             for (var i = 0; i < 5; i++)
-                Code = (Code << 8) | (byte)Stream.ReadByte();
+                this.Code = (this.Code << 8) | (byte)this.Stream.ReadByte();
         }
 
         public void ReleaseStream() {
             // Stream.ReleaseStream();
-            Stream = null;
+            this.Stream = null;
         }
 
         public void CloseStream() {
-            Stream.Close();
+            this.Stream.Close();
         }
 
         public void Normalize() {
-            while (Range < kTopValue) {
-                Code = (Code << 8) | (byte)Stream.ReadByte();
-                Range <<= 8;
+            while (this.Range < kTopValue) {
+                this.Code = (this.Code << 8) | (byte)this.Stream.ReadByte();
+                this.Range <<= 8;
             }
         }
 
         public void Normalize2() {
-            if (Range < kTopValue) {
-                Code = (Code << 8) | (byte)Stream.ReadByte();
-                Range <<= 8;
+            if (this.Range < kTopValue) {
+                this.Code = (this.Code << 8) | (byte)this.Stream.ReadByte();
+                this.Range <<= 8;
             }
         }
 
         public uint GetThreshold(uint total) {
-            return Code / (Range /= total);
+            return this.Code / (this.Range /= total);
         }
 
         public void Decode(uint start, uint size, uint total) {
-            Code -= start * Range;
-            Range *= size;
-            Normalize();
+            this.Code -= start * this.Range;
+            this.Range *= size;
+            this.Normalize();
         }
 
         public uint DecodeDirectBits(int numTotalBits) {
-            var range = Range;
-            var code = Code;
+            var range = this.Range;
+            var code = this.Code;
             uint result = 0;
             for (var i = numTotalBits; i > 0; i--) {
                 range >>= 1;
@@ -168,27 +168,27 @@ namespace SevenZip.Compression.RangeCoder {
                 result = (result << 1) | (1 - t);
 
                 if (range < kTopValue) {
-                    code = (code << 8) | (byte)Stream.ReadByte();
+                    code = (code << 8) | (byte)this.Stream.ReadByte();
                     range <<= 8;
                 }
             }
-            Range = range;
-            Code = code;
+            this.Range = range;
+            this.Code = code;
             return result;
         }
 
         public uint DecodeBit(uint size0, int numTotalBits) {
-            var newBound = (Range >> numTotalBits) * size0;
+            var newBound = (this.Range >> numTotalBits) * size0;
             uint symbol;
-            if (Code < newBound) {
+            if (this.Code < newBound) {
                 symbol = 0;
-                Range = newBound;
+                this.Range = newBound;
             } else {
                 symbol = 1;
-                Code -= newBound;
-                Range -= newBound;
+                this.Code -= newBound;
+                this.Range -= newBound;
             }
-            Normalize();
+            this.Normalize();
             return symbol;
         }
 

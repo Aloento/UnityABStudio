@@ -1,4 +1,4 @@
-namespace UnityABStudio.Contracts.Services {
+namespace SoarCraft.QYun.UnityABStudio.Contracts.Services {
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Navigation;
 

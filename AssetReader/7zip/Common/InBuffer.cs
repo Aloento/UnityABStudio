@@ -1,6 +1,6 @@
 // InBuffer.cs
 
-namespace SevenZip.Buffer {
+namespace SoarCraft.QYun.AssetReader._7zip.Common {
     public class InBuffer {
         byte[] m_Buffer;
         uint m_Pos;
@@ -11,54 +11,54 @@ namespace SevenZip.Buffer {
         ulong m_ProcessedSize;
 
         public InBuffer(uint bufferSize) {
-            m_Buffer = new byte[bufferSize];
-            m_BufferSize = bufferSize;
+            this.m_Buffer = new byte[bufferSize];
+            this.m_BufferSize = bufferSize;
         }
 
         public void Init(System.IO.Stream stream) {
-            m_Stream = stream;
-            m_ProcessedSize = 0;
-            m_Limit = 0;
-            m_Pos = 0;
-            m_StreamWasExhausted = false;
+            this.m_Stream = stream;
+            this.m_ProcessedSize = 0;
+            this.m_Limit = 0;
+            this.m_Pos = 0;
+            this.m_StreamWasExhausted = false;
         }
 
         public bool ReadBlock() {
-            if (m_StreamWasExhausted)
+            if (this.m_StreamWasExhausted)
                 return false;
-            m_ProcessedSize += m_Pos;
-            var aNumProcessedBytes = m_Stream.Read(m_Buffer, 0, (int)m_BufferSize);
-            m_Pos = 0;
-            m_Limit = (uint)aNumProcessedBytes;
-            m_StreamWasExhausted = aNumProcessedBytes == 0;
+            this.m_ProcessedSize += this.m_Pos;
+            var aNumProcessedBytes = this.m_Stream.Read(this.m_Buffer, 0, (int)this.m_BufferSize);
+            this.m_Pos = 0;
+            this.m_Limit = (uint)aNumProcessedBytes;
+            this.m_StreamWasExhausted = aNumProcessedBytes == 0;
             return !this.m_StreamWasExhausted;
         }
 
 
         public void ReleaseStream() {
             // m_Stream.Close(); 
-            m_Stream = null;
+            this.m_Stream = null;
         }
 
         public bool ReadByte(byte b) // check it
         {
-            if (m_Pos >= m_Limit)
-                if (!ReadBlock())
+            if (this.m_Pos >= this.m_Limit)
+                if (!this.ReadBlock())
                     return false;
-            b = m_Buffer[m_Pos++];
+            b = this.m_Buffer[this.m_Pos++];
             return true;
         }
 
         public byte ReadByte() {
             // return (byte)m_Stream.ReadByte();
-            if (m_Pos >= m_Limit)
-                if (!ReadBlock())
+            if (this.m_Pos >= this.m_Limit)
+                if (!this.ReadBlock())
                     return 0xFF;
-            return m_Buffer[m_Pos++];
+            return this.m_Buffer[this.m_Pos++];
         }
 
         public ulong GetProcessedSize() {
-            return m_ProcessedSize + m_Pos;
+            return this.m_ProcessedSize + this.m_Pos;
         }
     }
 }

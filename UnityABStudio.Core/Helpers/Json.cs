@@ -1,6 +1,5 @@
-namespace UnityABStudio.Core.Helpers {
+namespace SoarCraft.QYun.UnityABStudio.Core.Helpers {
     using System.Threading.Tasks;
-
     using Newtonsoft.Json;
 
     public static class Json {

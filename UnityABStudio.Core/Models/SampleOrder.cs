@@ -1,4 +1,4 @@
-namespace UnityABStudio.Core.Models {
+namespace SoarCraft.QYun.UnityABStudio.Core.Models {
     using System;
     using System.Collections.Generic;
 
@@ -28,7 +28,7 @@ namespace UnityABStudio.Core.Models {
 
         public string Status { get; set; }
 
-        public char Symbol => (char)SymbolCode;
+        public char Symbol => (char)this.SymbolCode;
 
         public int SymbolCode { get; set; }
 
@@ -37,9 +37,9 @@ namespace UnityABStudio.Core.Models {
         public ICollection<SampleOrderDetail> Details { get; set; }
 
         public override string ToString() {
-            return $"{Company} {Status}";
+            return $"{this.Company} {this.Status}";
         }
 
-        public string ShortDescription => $"Order ID: {OrderID}";
+        public string ShortDescription => $"Order ID: {this.OrderID}";
     }
 }

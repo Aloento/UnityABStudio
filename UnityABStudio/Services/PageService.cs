@@ -1,32 +1,29 @@
-namespace UnityABStudio.Services {
+namespace SoarCraft.QYun.UnityABStudio.Services {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using CommunityToolkit.Mvvm.ComponentModel;
-
+    using Contracts.Services;
     using Microsoft.UI.Xaml.Controls;
-
-    using UnityABStudio.Contracts.Services;
-    using UnityABStudio.ViewModels;
-    using UnityABStudio.Views;
+    using ViewModels;
+    using Views;
 
     public class PageService : IPageService {
-        private readonly Dictionary<string, Type> _pages = new Dictionary<string, Type>();
+        private readonly Dictionary<string, Type> _pages = new();
 
         public PageService() {
-            Configure<MainViewModel, MainPage>();
-            Configure<ListDetailsViewModel, ListDetailsPage>();
-            Configure<DataGridViewModel, DataGridPage>();
-            Configure<ContentGridViewModel, ContentGridPage>();
-            Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
-            Configure<SettingsViewModel, SettingsPage>();
+            this.Configure<OverViewModel, OverViewPage>();
+            this.Configure<ListDetailsViewModel, ListDetailsPage>();
+            this.Configure<DataGridViewModel, DataGridPage>();
+            this.Configure<ContentGridViewModel, ContentGridPage>();
+            this.Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
+            this.Configure<SettingsViewModel, SettingsPage>();
         }
 
         public Type GetPageType(string key) {
             Type pageType;
-            lock (_pages) {
-                if (!_pages.TryGetValue(key, out pageType)) {
+            lock (this._pages) {
+                if (!this._pages.TryGetValue(key, out pageType)) {
                     throw new ArgumentException($"Page not found: {key}. Did you forget to call PageService.Configure?");
                 }
             }
@@ -37,18 +34,18 @@ namespace UnityABStudio.Services {
         private void Configure<VM, V>()
             where VM : ObservableObject
             where V : Page {
-            lock (_pages) {
+            lock (this._pages) {
                 var key = typeof(VM).FullName;
-                if (_pages.ContainsKey(key)) {
+                if (this._pages.ContainsKey(key)) {
                     throw new ArgumentException($"The key {key} is already configured in PageService");
                 }
 
                 var type = typeof(V);
-                if (_pages.Any(p => p.Value == type)) {
-                    throw new ArgumentException($"This type is already configured with key {_pages.First(p => p.Value == type).Key}");
+                if (this._pages.Any(p => p.Value == type)) {
+                    throw new ArgumentException($"This type is already configured with key {this._pages.First(p => p.Value == type).Key}");
                 }
 
-                _pages.Add(key, type);
+                this._pages.Add(key, type);
             }
         }
     }

@@ -1,4 +1,4 @@
-namespace SevenZip.Compression.RangeCoder {
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.RangeCoder {
     using System;
 
     struct BitEncoder {
@@ -10,26 +10,26 @@ namespace SevenZip.Compression.RangeCoder {
 
         uint Prob;
 
-        public void Init() { Prob = kBitModelTotal >> 1; }
+        public void Init() { this.Prob = kBitModelTotal >> 1; }
 
         public void UpdateModel(uint symbol) {
             if (symbol == 0)
-                Prob += (kBitModelTotal - Prob) >> kNumMoveBits;
+                this.Prob += (kBitModelTotal - this.Prob) >> kNumMoveBits;
             else
-                Prob -= this.Prob >> kNumMoveBits;
+                this.Prob -= this.Prob >> kNumMoveBits;
         }
 
         public void Encode(Encoder encoder, uint symbol) {
             // encoder.EncodeBit(Prob, kNumBitModelTotalBits, symbol);
             // UpdateModel(symbol);
-            var newBound = (encoder.Range >> kNumBitModelTotalBits) * Prob;
+            var newBound = (encoder.Range >> kNumBitModelTotalBits) * this.Prob;
             if (symbol == 0) {
                 encoder.Range = newBound;
-                Prob += (kBitModelTotal - Prob) >> kNumMoveBits;
+                this.Prob += (kBitModelTotal - this.Prob) >> kNumMoveBits;
             } else {
                 encoder.Low += newBound;
                 encoder.Range -= newBound;
-                Prob -= this.Prob >> kNumMoveBits;
+                this.Prob -= this.Prob >> kNumMoveBits;
             }
             if (encoder.Range < Encoder.kTopValue) {
                 encoder.Range <<= 8;
@@ -51,10 +51,10 @@ namespace SevenZip.Compression.RangeCoder {
         }
 
         public uint GetPrice(uint symbol) {
-            return ProbPrices[(((Prob - symbol) ^ -(int)symbol) & (kBitModelTotal - 1)) >> kNumMoveReducingBits];
+            return ProbPrices[(((this.Prob - symbol) ^ -(int)symbol) & (kBitModelTotal - 1)) >> kNumMoveReducingBits];
         }
-        public uint GetPrice0() { return ProbPrices[Prob >> kNumMoveReducingBits]; }
-        public uint GetPrice1() { return ProbPrices[(kBitModelTotal - Prob) >> kNumMoveReducingBits]; }
+        public uint GetPrice0() { return ProbPrices[this.Prob >> kNumMoveReducingBits]; }
+        public uint GetPrice1() { return ProbPrices[(kBitModelTotal - this.Prob) >> kNumMoveReducingBits]; }
     }
 
     struct BitDecoder {
@@ -66,18 +66,18 @@ namespace SevenZip.Compression.RangeCoder {
 
         public void UpdateModel(int numMoveBits, uint symbol) {
             if (symbol == 0)
-                Prob += (kBitModelTotal - Prob) >> numMoveBits;
+                this.Prob += (kBitModelTotal - this.Prob) >> numMoveBits;
             else
-                Prob -= this.Prob >> numMoveBits;
+                this.Prob -= this.Prob >> numMoveBits;
         }
 
-        public void Init() { Prob = kBitModelTotal >> 1; }
+        public void Init() { this.Prob = kBitModelTotal >> 1; }
 
         public uint Decode(Decoder rangeDecoder) {
-            var newBound = (uint)(rangeDecoder.Range >> kNumBitModelTotalBits) * (uint)Prob;
+            var newBound = (uint)(rangeDecoder.Range >> kNumBitModelTotalBits) * (uint)this.Prob;
             if (rangeDecoder.Code < newBound) {
                 rangeDecoder.Range = newBound;
-                Prob += (kBitModelTotal - Prob) >> kNumMoveBits;
+                this.Prob += (kBitModelTotal - this.Prob) >> kNumMoveBits;
                 if (rangeDecoder.Range < Decoder.kTopValue) {
                     rangeDecoder.Code = (rangeDecoder.Code << 8) | (byte)rangeDecoder.Stream.ReadByte();
                     rangeDecoder.Range <<= 8;

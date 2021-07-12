@@ -1,4 +1,4 @@
-namespace UnityABStudio.Contracts.Services {
+namespace SoarCraft.QYun.UnityABStudio.Contracts.Services {
     using System.Threading.Tasks;
 
     public interface IActivationService {

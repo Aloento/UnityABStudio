@@ -1,29 +1,27 @@
-namespace UnityABStudio.ViewModels {
+namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using System.Linq;
-
     using CommunityToolkit.Mvvm.ComponentModel;
-
-    using UnityABStudio.Contracts.ViewModels;
-    using UnityABStudio.Core.Contracts.Services;
-    using UnityABStudio.Core.Models;
+    using Contracts.ViewModels;
+    using Core.Contracts.Services;
+    using Core.Models;
 
     public class ContentGridDetailViewModel : ObservableRecipient, INavigationAware {
         private readonly ISampleDataService _sampleDataService;
         private SampleOrder _item;
 
         public SampleOrder Item {
-            get { return _item; }
-            set { _ = SetProperty(ref _item, value); }
+            get { return this._item; }
+            set { _ = this.SetProperty(ref this._item, value); }
         }
 
         public ContentGridDetailViewModel(ISampleDataService sampleDataService) {
-            _sampleDataService = sampleDataService;
+            this._sampleDataService = sampleDataService;
         }
 
         public async void OnNavigatedTo(object parameter) {
             if (parameter is long orderID) {
-                var data = await _sampleDataService.GetContentGridDataAsync();
-                Item = data.First(i => i.OrderID == orderID);
+                var data = await this._sampleDataService.GetContentGridDataAsync();
+                this.Item = data.First(i => i.OrderID == orderID);
             }
         }
 

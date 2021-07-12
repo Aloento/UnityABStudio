@@ -1,5 +1,6 @@
-namespace System {
-    using Runtime.InteropServices;
+namespace SoarCraft.QYun.AssetReader.Math {
+    using System;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Helper class for Half conversions and some low level operations.

@@ -1,13 +1,11 @@
-namespace UnityABStudio.Services {
+namespace SoarCraft.QYun.UnityABStudio.Services {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using Contracts.Services;
+    using Helpers;
     using Microsoft.UI.Xaml.Controls;
-
-    using UnityABStudio.Contracts.Services;
-    using UnityABStudio.Helpers;
-    using UnityABStudio.ViewModels;
+    using ViewModels;
 
     public class NavigationViewService : INavigationViewService {
         private readonly INavigationService _navigationService;
@@ -15,53 +13,53 @@ namespace UnityABStudio.Services {
         private NavigationView _navigationView;
 
         public IList<object> MenuItems
-            => _navigationView.MenuItems;
+            => this._navigationView.MenuItems;
 
         public object SettingsItem
-            => _navigationView.SettingsItem;
+            => this._navigationView.SettingsItem;
 
         public NavigationViewService(INavigationService navigationService, IPageService pageService) {
-            _navigationService = navigationService;
-            _pageService = pageService;
+            this._navigationService = navigationService;
+            this._pageService = pageService;
         }
 
         public void Initialize(NavigationView navigationView) {
-            _navigationView = navigationView;
-            _navigationView.BackRequested += OnBackRequested;
-            _navigationView.ItemInvoked += OnItemInvoked;
+            this._navigationView = navigationView;
+            this._navigationView.BackRequested += this.OnBackRequested;
+            this._navigationView.ItemInvoked += this.OnItemInvoked;
         }
 
         public void UnregisterEvents() {
-            _navigationView.BackRequested -= OnBackRequested;
-            _navigationView.ItemInvoked -= OnItemInvoked;
+            this._navigationView.BackRequested -= this.OnBackRequested;
+            this._navigationView.ItemInvoked -= this.OnItemInvoked;
         }
 
         public NavigationViewItem GetSelectedItem(Type pageType)
-            => GetSelectedItem(_navigationView.MenuItems, pageType);
+            => this.GetSelectedItem(this._navigationView.MenuItems, pageType);
 
         private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
-            => _navigationService.GoBack();
+            => this._navigationService.GoBack();
 
         private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args) {
             if (args.IsSettingsInvoked) {
-                _ = _navigationService.NavigateTo(typeof(SettingsViewModel).FullName);
+                _ = this._navigationService.NavigateTo(typeof(SettingsViewModel).FullName);
             } else {
                 var selectedItem = args.InvokedItemContainer as NavigationViewItem;
                 var pageKey = selectedItem.GetValue(NavHelper.NavigateToProperty) as string;
 
                 if (pageKey != null) {
-                    _ = _navigationService.NavigateTo(pageKey);
+                    _ = this._navigationService.NavigateTo(pageKey);
                 }
             }
         }
 
         private NavigationViewItem GetSelectedItem(IEnumerable<object> menuItems, Type pageType) {
             foreach (var item in menuItems.OfType<NavigationViewItem>()) {
-                if (IsMenuItemForPageType(item, pageType)) {
+                if (this.IsMenuItemForPageType(item, pageType)) {
                     return item;
                 }
 
-                var selectedChild = GetSelectedItem(item.MenuItems, pageType);
+                var selectedChild = this.GetSelectedItem(item.MenuItems, pageType);
                 if (selectedChild != null) {
                     return selectedChild;
                 }
@@ -73,7 +71,7 @@ namespace UnityABStudio.Services {
         private bool IsMenuItemForPageType(NavigationViewItem menuItem, Type sourcePageType) {
             var pageKey = menuItem.GetValue(NavHelper.NavigateToProperty) as string;
             if (pageKey != null) {
-                return _pageService.GetPageType(pageKey) == sourcePageType;
+                return this._pageService.GetPageType(pageKey) == sourcePageType;
             }
 
             return false;

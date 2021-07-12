@@ -1,13 +1,10 @@
-namespace UnityABStudio.Views {
+namespace SoarCraft.QYun.UnityABStudio.Views {
+    using Windows.System;
     using CommunityToolkit.Mvvm.DependencyInjection;
-
+    using Contracts.Services;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Input;
-
-    using UnityABStudio.Contracts.Services;
-    using UnityABStudio.ViewModels;
-
-    using Windows.System;
+    using ViewModels;
 
     // TODO WTS: Change the icons and titles for all NavigationViewItems in ShellPage.xaml.
     public sealed partial class ShellPage : Page {
@@ -17,17 +14,17 @@ namespace UnityABStudio.Views {
         public ShellViewModel ViewModel { get; }
 
         public ShellPage(ShellViewModel viewModel) {
-            ViewModel = viewModel;
-            InitializeComponent();
-            ViewModel.NavigationService.Frame = shellFrame;
-            ViewModel.NavigationViewService.Initialize(navigationView);
+            this.ViewModel = viewModel;
+            this.InitializeComponent();
+            this.ViewModel.NavigationService.Frame = this.shellFrame;
+            this.ViewModel.NavigationViewService.Initialize(this.navigationView);
         }
 
         private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
             // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
             // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
-            KeyboardAccelerators.Add(_altLeftKeyboardAccelerator);
-            KeyboardAccelerators.Add(_backKeyboardAccelerator);
+            this.KeyboardAccelerators.Add(this._altLeftKeyboardAccelerator);
+            this.KeyboardAccelerators.Add(this._backKeyboardAccelerator);
         }
 
         private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null) {

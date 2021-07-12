@@ -1,36 +1,34 @@
-namespace UnityABStudio.ViewModels {
+namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using System.Collections.ObjectModel;
     using System.Linq;
-
     using CommunityToolkit.Mvvm.ComponentModel;
-
-    using UnityABStudio.Contracts.ViewModels;
-    using UnityABStudio.Core.Contracts.Services;
-    using UnityABStudio.Core.Models;
+    using Contracts.ViewModels;
+    using Core.Contracts.Services;
+    using Core.Models;
 
     public class ListDetailsViewModel : ObservableRecipient, INavigationAware {
         private readonly ISampleDataService _sampleDataService;
         private SampleOrder _selected;
 
         public SampleOrder Selected {
-            get { return _selected; }
-            set { _ = SetProperty(ref _selected, value); }
+            get { return this._selected; }
+            set { _ = this.SetProperty(ref this._selected, value); }
         }
 
-        public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new ObservableCollection<SampleOrder>();
+        public ObservableCollection<SampleOrder> SampleItems { get; private set; } = new();
 
         public ListDetailsViewModel(ISampleDataService sampleDataService) {
-            _sampleDataService = sampleDataService;
+            this._sampleDataService = sampleDataService;
         }
 
         public async void OnNavigatedTo(object parameter) {
-            SampleItems.Clear();
+            this.SampleItems.Clear();
 
             // Replace this with your actual data
-            var data = await _sampleDataService.GetListDetailsDataAsync();
+            var data = await this._sampleDataService.GetListDetailsDataAsync();
 
             foreach (var item in data) {
-                SampleItems.Add(item);
+                this.SampleItems.Add(item);
             }
         }
 
@@ -38,8 +36,8 @@ namespace UnityABStudio.ViewModels {
         }
 
         public void EnsureItemSelected() {
-            if (Selected == null) {
-                Selected = SampleItems.First();
+            if (this.Selected == null) {
+                this.Selected = this.SampleItems.First();
             }
         }
     }

@@ -1,6 +1,6 @@
 // IMatchFinder.cs
 
-namespace SevenZip.Compression.LZ {
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.LZ {
     using System;
 
     interface IInWindowStream {
