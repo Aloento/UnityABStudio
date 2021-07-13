@@ -3,9 +3,7 @@
 ## 程序入口
 **`AssetsManager`** 的 **`LoadFilesAsync`** 与 **`LoadFolderAsync`** 方法
 
-## 类成员结构
-
-***
+## `Reader` 类
 
 ### **`AssetsManager`**
 
@@ -19,8 +17,6 @@ public List<SerializedFile> AssetsFileList;
 本List中储存了所有用户导入的AssetFile  
 假设我们调用 `LoadFilesAsync` 方法时传入了 `string[0]`  
 则该 `AssetsFileList` 中的元素个数为 **1个**，每个元素为 `SerializedFile` 类型  
-
-***
 
 ### **`SerializedFile`**
 
@@ -81,15 +77,12 @@ public List<ObjectInfo> m_Objects;
 它们在 `AssetsManager` 中的 `readAssets` 方法中使用  
 用于生成对应的 `UObject` 实例  
 
-***
+## **`Unity3D` 类**
 
-### **`Unity3D` 类**
+### **`UObject`**
 
-***
-
-#### **`UObject`**
-
-此类是所有有关于 Unity3D 的类的**基类**，包含了一些基本的属性和方法
+此类是所有有关于 Unity3D 的类的**基类**，包含了一些基本的属性和方法  
+被 `EditorExtension` / `ResourceManager` / `PlayerSettings` / `BuildSettings` 直接继承
 
 ***
 
@@ -113,3 +106,55 @@ public ClassIDType type;
 ```
 `type` 成员代表这个 `UObject` 在 `ClassIDType` 中对应的类型  
 表明了这是一个什么类型的对象，如 `GameObject`、`MonoBehaviour`、`Texture2D` 等
+
+***
+
+```csharp
+public uint byteSize;
+```
+`byteSize` 成员代表这个 `UObject` 的一般大小，单位为字节  
+根据不同的 `type` 值可能不同  
+如 `AudioClip` 在 `m_Source` 不为空时的大小为 `byteSize + AudioClip.m_Size`
+
+#### **`EditorExtension`**
+
+抽象类，被 `Component` / `NamedObject` / `GameObject` 直接继承  
+所有有实际意义的游戏对象都是它的子类
+
+##### **`GameObject`**
+
+`Unity3D` 中所有的游戏物件都是这个类型的对象，场景中所有实体的基类  
+在 `UnityABStudio` 中此对象会导出为 `.fbx` 文件，没有类继承它  
+
+##### **`Component`**
+
+抽象类，附加到 `GameObject` 的所有内容的基本类  
+被 `Behaviour` / `MeshFilter` / `Transform` / `Renderer` 直接继承
+
+###### **`Behaviour`**
+
+Behaviour 是指可启用或禁用的组件  
+被 `Animator` / `MonoBehaviour` / `Animation` 直接继承
+
+###### **`Renderer`**
+抽象类，所有渲染器的常规功能  
+渲染器是使对象显示在屏幕上的工具  
+使用该类可以访问任何对象、网格或粒子系统的渲染器  
+被 `MeshRenderer` / `SkinnedMeshRenderer` 直接继承
+
+##### **`NamedObject`**
+
+命名的对象，表示这个对象有名字  
+一般从 `AssetBundle` 中获取的有用对象都是 `NamedObject` 的子类
+
+***
+
+```csharp
+public string m_Name;
+```
+`m_Name` 这个对象的名字
+
+## **`Unity3D` 实体**
+
+### **`Animator`**
+
