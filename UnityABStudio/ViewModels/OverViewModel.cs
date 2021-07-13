@@ -21,7 +21,9 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             var objectCount = this.manager.AssetsFileList.Sum(x => x.Objects.Count);
             var objectAssetsList = new List<AssetItem>(objectCount);
 
+            foreach (var serializedFile in this.manager.AssetsFileList) {
 
+            }
 
         }
     }
