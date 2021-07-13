@@ -5,8 +5,6 @@
 
 ## `Reader` 类
 
-***
-
 ### **`AssetsManager`**
 
 此类用来管理Asset文件，支持加载文件和文件夹
@@ -19,6 +17,8 @@ public List<SerializedFile> AssetsFileList;
 本List中储存了所有用户导入的AssetFile  
 假设我们调用 `LoadFilesAsync` 方法时传入了 `string[0]`  
 则该 `AssetsFileList` 中的元素个数为 **1个**，每个元素为 `SerializedFile` 类型  
+
+***
 
 ### **`SerializedFile`**
 
@@ -82,8 +82,6 @@ public List<ObjectInfo> m_Objects;
 ***
 
 ## **`Unity3D` 类**
-
-***
 
 ### **`UObject`**
 
@@ -175,8 +173,6 @@ public string m_Name;
 ***
 
 ## **`Unity3D` 实体**
-
-***
 
 ### **`Animator`**
 
