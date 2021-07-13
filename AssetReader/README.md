@@ -198,7 +198,7 @@ public string m_Name;
 
 ### **`Animator`**
 
-用于控制 Mecanim 动画系统的接口  
+用于控制 `Mecanim` 动画系统的接口  
 **可以导出**为 `.fbx` 文件，对象名称为对应 `GameObject` 的名称  
 
 ***
@@ -265,7 +265,176 @@ public PPtr<Transform> m_Father;
 
 ***
 
+### **`MeshRenderer`**
+渲染由 MeshFilter 或 TextMesh 插入的网格  
+不可导出，在 `UnityABStudio` 中无意义，本质是 `Renderer`  
+
+***
+
 ### **`SkinnedMeshRenderer`**
 
+蒙皮网格过滤器  
+本身不能导出，但是其成员 `Mesh` 可以导出为 `.obj` 文件
 
+```csharp
+public PPtr<Mesh> m_Mesh;
+```
+
+***
+
+### **`Material`**
+
+材质类  
+本身不能导出，但是其成员 `Shader` 可以导出为 `.shader` 文件  
+
+```csharp
+public PPtr<Shader> m_Shader;
+```
+
+***
+
+### **`Sprite`**
+
+表示在 2D 游戏中使用的精灵对象  
+精灵 是一种 2D 图形对象，用于 2D 游戏元素  
+图形是从位图图像 `Texture2D` 获取的  
+`Sprite` 类主要标识应该用于特定精灵的图像部分  
+`GameObject` 上的 `SpriteRenderer` 组件可以使用该信息来实际显示图形  
+**可以导出**为 `Jpeg`、`Png`、`Bmp` 或 `Tga` 图像文件  
+
+***
+
+### **`Avatar`**
+
+表示一个 `Mecanim` 化身，用于游戏中的角色  
+它可以是一个通用化身，也可以是一个人形化身  
+不可导出，在 `UnityABStudio` 中无意义  
+
+***
+
+### **`VideoClip`**
+
+一种视频数据的容器  
+在 `m_OriginalPath` 不为空时**可以导出**  
+导出格式为 `m_OriginalPath` 中的扩展名  
+数据的大小为 `byteSize + m_ExternalResources.m_Size;`  
+
+***
+
+### **`MovieTexture`**
+
+已弃用，电影纹理可用于播放电影序列的动画，或将电影渲染到场景中  
+**可以导出**为 `.ogv` 文件
+
+***
+
+### **`Texture2D`**
+
+用于纹理处理的类  
+当 `m_OriginalPath` 不为空时  
+数据的大小为 `byteSize + m_StreamData.size;`  
+**可以导出**为 `Jpeg`、`Png`、`Bmp`、`Tga` 或 `.tex` 文件
+
+***
+
+### **`AssetBundle`**
+`AssetBundle` 即是 `.ab` 资源文件  
+不可导出，其中 `m_Container` 会向 `AssetItem` 中的 `Container` 赋值   
+
+```csharp
+public KeyValuePair<string, AssetInfo>[] m_Container;
+```
+
+***
+
+### **`MonoScript`**
+
+该类表示存储在项目中的 C#、JavaScript 和 Boo 文件  
+在对应的 `MonoBehaviour` 中导出  
+
+***
+
+### **`Font`**
+
+font assets 的脚本接口  
+可使用此类动态切换 GUI 文本或文本网格上的字体  
+**可以导出**为 `.ttf` 或 `.otf` 文件  
+
+***
+
+### **`RuntimeAnimatorController`**
+
+`AnimatorController` 的运行时表示  
+使用此表示可在运行时期间更改 `Animator Controller`  
+不可导出，在 `UnityABStudio` 中没有意义  
+
+***
+
+### **`TextAsset`**
+
+文本文件资源，可以将项目中的原始文本文件用作资源，通过此类获取其内容  
+**可以导出**为 `.txt` 文件  
+
+***
+
+### **`Mesh`**
+
+用于通过脚本创建或修改网格的类  
+**可以导出**为 `.obj` 文件  
+
+***
+
+### **`AudioClip`**
+
+存储压缩为 `Ogg Vorbis` 或未压缩的音频文件  
+当 `m_Source` 不为空时  
+数据的大小为 `byteSize + m_Size;`  
+**可以导出**为 `.m4a` `.aif` `.it` `.mod` `.mp3` `.ogg` `.s3m` `.wav` `.xm` `.wav` `.vag` `.fsb` 文件
+
+***
+
+### **`Shader`**
+
+用于所有渲染的着色器脚本  
+对象名称为 `m_ParsedForm?.m_Name ?? m_Name;`  
+**可以导出**为 `.shader` 文件  
+
+***
+
+### **`AnimationClip`**
+
+保存基于关键帧的动画  
+**可以导出**为 `.fbx` 文件  
+
+***
+
+### **`AnimatorController`**
+
+通过具有状态机（由参数控制）的层来控制的动画控制器  
+本身不能导出，但是成员 `AnimationClip` 可以导出  
+
+```csharp
+public PPtr<AnimationClip>[] m_AnimationClips;
+```
+
+***
+
+### **`AnimatorOverrideController`**
+
+动画器重写控制器的用途是重写某个控制器的动画剪辑，从而为给定化身定制动画  
+不能导出  
+
+***
+
+### **`SpriteAtlas`**
+
+精灵图集是在 Unity 中创建的一种资源  
+它是内置精灵打包解决方案的一部分  
+本身不能导出，但是成员 `Sprite` 可以导出
+
+```csharp
+public PPtr<Sprite>[] m_PackedSprites;
+```
+
+***
 
