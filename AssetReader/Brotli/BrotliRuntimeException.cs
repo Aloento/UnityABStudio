@@ -3,7 +3,7 @@
 Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
-namespace Org.Brotli.Dec {
+namespace SoarCraft.QYun.AssetReader.Brotli {
     /// <summary>Unchecked exception used internally.</summary>
     [System.Serializable]
     internal class BrotliRuntimeException : System.Exception {

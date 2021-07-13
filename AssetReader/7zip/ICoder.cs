@@ -1,6 +1,6 @@
 // ICoder.h
 
-namespace SevenZip {
+namespace SoarCraft.QYun.AssetReader._7zip {
     using System;
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace SevenZip {
         /// <param name="progress">
         /// callback progress reference.
         /// </param>
-        /// <exception cref="SevenZip.DataErrorException">
+        /// <exception cref="DataErrorException">
         /// if input stream is not valid
         /// </exception>
         void Code(System.IO.Stream inStream, System.IO.Stream outStream,

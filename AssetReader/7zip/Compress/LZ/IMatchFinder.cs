@@ -1,8 +1,8 @@
 // IMatchFinder.cs
 
-using System;
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.LZ {
+    using System;
 
-namespace SevenZip.Compression.LZ {
     interface IInWindowStream {
         void SetStream(System.IO.Stream inStream);
         void Init();

@@ -1,8 +1,8 @@
 // LzInWindow.cs
 
-using System;
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.LZ {
+    using System;
 
-namespace SevenZip.Compression.LZ {
     public class InWindow {
         public Byte[] _bufferBase = null; // pointer to buffer with data
         System.IO.Stream _stream;
@@ -20,101 +20,101 @@ namespace SevenZip.Compression.LZ {
         public UInt32 _streamPos; // offset (from _buffer) of first not read byte from Stream
 
         public void MoveBlock() {
-            var offset = (UInt32)this._bufferOffset + _pos - _keepSizeBefore;
+            var offset = (UInt32)this._bufferOffset + this._pos - this._keepSizeBefore;
             // we need one additional byte, since MovePos moves on 1 byte.
             if (offset > 0)
                 offset--;
 
-            var numBytes = (UInt32)this._bufferOffset + _streamPos - offset;
+            var numBytes = (UInt32)this._bufferOffset + this._streamPos - offset;
 
             // check negative offset ????
             for (UInt32 i = 0; i < numBytes; i++)
-                _bufferBase[i] = _bufferBase[offset + i];
-            _bufferOffset -= offset;
+                this._bufferBase[i] = this._bufferBase[offset + i];
+            this._bufferOffset -= offset;
         }
 
         public virtual void ReadBlock() {
-            if (_streamEndWasReached)
+            if (this._streamEndWasReached)
                 return;
             while (true) {
-                var size = (int)(0 - this._bufferOffset + _blockSize - _streamPos);
+                var size = (int)(0 - this._bufferOffset + this._blockSize - this._streamPos);
                 if (size == 0)
                     return;
-                var numReadBytes = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPos), size);
+                var numReadBytes = this._stream.Read(this._bufferBase, (int)(this._bufferOffset + this._streamPos), size);
                 if (numReadBytes == 0) {
-                    _posLimit = _streamPos;
-                    var pointerToPostion = _bufferOffset + _posLimit;
-                    if (pointerToPostion > _pointerToLastSafePosition)
-                        _posLimit = (UInt32)(_pointerToLastSafePosition - _bufferOffset);
+                    this._posLimit = this._streamPos;
+                    var pointerToPostion = this._bufferOffset + this._posLimit;
+                    if (pointerToPostion > this._pointerToLastSafePosition)
+                        this._posLimit = (UInt32)(this._pointerToLastSafePosition - this._bufferOffset);
 
-                    _streamEndWasReached = true;
+                    this._streamEndWasReached = true;
                     return;
                 }
-                _streamPos += (UInt32)numReadBytes;
-                if (_streamPos >= _pos + _keepSizeAfter)
-                    _posLimit = _streamPos - _keepSizeAfter;
+                this._streamPos += (UInt32)numReadBytes;
+                if (this._streamPos >= this._pos + this._keepSizeAfter)
+                    this._posLimit = this._streamPos - this._keepSizeAfter;
             }
         }
 
-        void Free() { _bufferBase = null; }
+        void Free() { this._bufferBase = null; }
 
         public void Create(UInt32 keepSizeBefore, UInt32 keepSizeAfter, UInt32 keepSizeReserv) {
-            _keepSizeBefore = keepSizeBefore;
-            _keepSizeAfter = keepSizeAfter;
+            this._keepSizeBefore = keepSizeBefore;
+            this._keepSizeAfter = keepSizeAfter;
             var blockSize = keepSizeBefore + keepSizeAfter + keepSizeReserv;
-            if (_bufferBase == null || _blockSize != blockSize) {
-                Free();
-                _blockSize = blockSize;
-                _bufferBase = new Byte[_blockSize];
+            if (this._bufferBase == null || this._blockSize != blockSize) {
+                this.Free();
+                this._blockSize = blockSize;
+                this._bufferBase = new Byte[this._blockSize];
             }
-            _pointerToLastSafePosition = _blockSize - keepSizeAfter;
+            this._pointerToLastSafePosition = this._blockSize - keepSizeAfter;
         }
 
-        public void SetStream(System.IO.Stream stream) { _stream = stream; }
-        public void ReleaseStream() { _stream = null; }
+        public void SetStream(System.IO.Stream stream) { this._stream = stream; }
+        public void ReleaseStream() { this._stream = null; }
 
         public void Init() {
-            _bufferOffset = 0;
-            _pos = 0;
-            _streamPos = 0;
-            _streamEndWasReached = false;
-            ReadBlock();
+            this._bufferOffset = 0;
+            this._pos = 0;
+            this._streamPos = 0;
+            this._streamEndWasReached = false;
+            this.ReadBlock();
         }
 
         public void MovePos() {
-            _pos++;
-            if (_pos > _posLimit) {
-                var pointerToPostion = _bufferOffset + _pos;
-                if (pointerToPostion > _pointerToLastSafePosition)
-                    MoveBlock();
-                ReadBlock();
+            this._pos++;
+            if (this._pos > this._posLimit) {
+                var pointerToPostion = this._bufferOffset + this._pos;
+                if (pointerToPostion > this._pointerToLastSafePosition)
+                    this.MoveBlock();
+                this.ReadBlock();
             }
         }
 
-        public Byte GetIndexByte(Int32 index) { return _bufferBase[_bufferOffset + _pos + index]; }
+        public Byte GetIndexByte(Int32 index) { return this._bufferBase[this._bufferOffset + this._pos + index]; }
 
         // index + limit have not to exceed _keepSizeAfter;
         public UInt32 GetMatchLen(Int32 index, UInt32 distance, UInt32 limit) {
-            if (_streamEndWasReached)
-                if (this._pos + index + limit > _streamPos)
-                    limit = _streamPos - (UInt32)(_pos + index);
+            if (this._streamEndWasReached)
+                if (this._pos + index + limit > this._streamPos)
+                    limit = this._streamPos - (UInt32)(this._pos + index);
             distance++;
             // Byte *pby = _buffer + (size_t)_pos + index;
-            var pby = _bufferOffset + _pos + (UInt32)index;
+            var pby = this._bufferOffset + this._pos + (UInt32)index;
 
             UInt32 i;
-            for (i = 0; i < limit && _bufferBase[pby + i] == _bufferBase[pby + i - distance]; i++)
+            for (i = 0; i < limit && this._bufferBase[pby + i] == this._bufferBase[pby + i - distance]; i++)
                 ;
             return i;
         }
 
-        public UInt32 GetNumAvailableBytes() { return _streamPos - _pos; }
+        public UInt32 GetNumAvailableBytes() { return this._streamPos - this._pos; }
 
         public void ReduceOffsets(Int32 subValue) {
-            _bufferOffset += (UInt32)subValue;
-            _posLimit -= (UInt32)subValue;
-            _pos -= (UInt32)subValue;
-            _streamPos -= (UInt32)subValue;
+            this._bufferOffset += (UInt32)subValue;
+            this._posLimit -= (UInt32)subValue;
+            this._pos -= (UInt32)subValue;
+            this._streamPos -= (UInt32)subValue;
         }
     }
 }

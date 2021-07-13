@@ -1,5 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
     using System;
+    using Half = Math.Half;
 
     public static class MeshHelper {
         public enum VertexChannelFormat {

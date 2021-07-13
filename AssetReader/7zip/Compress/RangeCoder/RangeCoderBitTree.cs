@@ -1,35 +1,35 @@
-using System;
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.RangeCoder {
+    using System;
 
-namespace SevenZip.Compression.RangeCoder {
     struct BitTreeEncoder {
         BitEncoder[] Models;
         int NumBitLevels;
 
         public BitTreeEncoder(int numBitLevels) {
-            NumBitLevels = numBitLevels;
-            Models = new BitEncoder[1 << numBitLevels];
+            this.NumBitLevels = numBitLevels;
+            this.Models = new BitEncoder[1 << numBitLevels];
         }
 
         public void Init() {
             for (uint i = 1; i < 1 << this.NumBitLevels; i++)
-                Models[i].Init();
+                this.Models[i].Init();
         }
 
         public void Encode(Encoder rangeEncoder, UInt32 symbol) {
             UInt32 m = 1;
-            for (var bitIndex = NumBitLevels; bitIndex > 0;) {
+            for (var bitIndex = this.NumBitLevels; bitIndex > 0;) {
                 bitIndex--;
                 var bit = (symbol >> bitIndex) & 1;
-                Models[m].Encode(rangeEncoder, bit);
+                this.Models[m].Encode(rangeEncoder, bit);
                 m = (m << 1) | bit;
             }
         }
 
         public void ReverseEncode(Encoder rangeEncoder, UInt32 symbol) {
             UInt32 m = 1;
-            for (UInt32 i = 0; i < NumBitLevels; i++) {
+            for (UInt32 i = 0; i < this.NumBitLevels; i++) {
                 var bit = symbol & 1;
-                Models[m].Encode(rangeEncoder, bit);
+                this.Models[m].Encode(rangeEncoder, bit);
                 m = (m << 1) | bit;
                 symbol >>= 1;
             }
@@ -38,10 +38,10 @@ namespace SevenZip.Compression.RangeCoder {
         public UInt32 GetPrice(UInt32 symbol) {
             UInt32 price = 0;
             UInt32 m = 1;
-            for (var bitIndex = NumBitLevels; bitIndex > 0;) {
+            for (var bitIndex = this.NumBitLevels; bitIndex > 0;) {
                 bitIndex--;
                 var bit = (symbol >> bitIndex) & 1;
-                price += Models[m].GetPrice(bit);
+                price += this.Models[m].GetPrice(bit);
                 m = (m << 1) + bit;
             }
             return price;
@@ -50,10 +50,10 @@ namespace SevenZip.Compression.RangeCoder {
         public UInt32 ReverseGetPrice(UInt32 symbol) {
             UInt32 price = 0;
             UInt32 m = 1;
-            for (var i = NumBitLevels; i > 0; i--) {
+            for (var i = this.NumBitLevels; i > 0; i--) {
                 var bit = symbol & 1;
                 symbol >>= 1;
-                price += Models[m].GetPrice(bit);
+                price += this.Models[m].GetPrice(bit);
                 m = (m << 1) | bit;
             }
             return price;
@@ -89,27 +89,27 @@ namespace SevenZip.Compression.RangeCoder {
         int NumBitLevels;
 
         public BitTreeDecoder(int numBitLevels) {
-            NumBitLevels = numBitLevels;
-            Models = new BitDecoder[1 << numBitLevels];
+            this.NumBitLevels = numBitLevels;
+            this.Models = new BitDecoder[1 << numBitLevels];
         }
 
         public void Init() {
             for (uint i = 1; i < 1 << this.NumBitLevels; i++)
-                Models[i].Init();
+                this.Models[i].Init();
         }
 
         public uint Decode(Decoder rangeDecoder) {
             uint m = 1;
-            for (var bitIndex = NumBitLevels; bitIndex > 0; bitIndex--)
-                m = (m << 1) + Models[m].Decode(rangeDecoder);
-            return m - ((uint)1 << NumBitLevels);
+            for (var bitIndex = this.NumBitLevels; bitIndex > 0; bitIndex--)
+                m = (m << 1) + this.Models[m].Decode(rangeDecoder);
+            return m - ((uint)1 << this.NumBitLevels);
         }
 
         public uint ReverseDecode(Decoder rangeDecoder) {
             uint m = 1;
             uint symbol = 0;
-            for (var bitIndex = 0; bitIndex < NumBitLevels; bitIndex++) {
-                var bit = Models[m].Decode(rangeDecoder);
+            for (var bitIndex = 0; bitIndex < this.NumBitLevels; bitIndex++) {
+                var bit = this.Models[m].Decode(rangeDecoder);
                 m <<= 1;
                 m += bit;
                 symbol |= bit << bitIndex;

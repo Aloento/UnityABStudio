@@ -1,6 +1,5 @@
-namespace SoarCraft.QYun.AssetReader {
+namespace SoarCraft.QYun.AssetReader.Utils {
     using System.IO;
-    using Utils;
 
     public class ResourceReader {
         private bool needSearch;
@@ -11,7 +10,7 @@ namespace SoarCraft.QYun.AssetReader {
         private UnityReader reader;
 
         public ResourceReader(string path, SerializedFile assetsFile, long offset, long size) {
-            needSearch = true;
+            this.needSearch = true;
             this.path = path;
             this.assetsFile = assetsFile;
             this.offset = offset;
@@ -25,13 +24,13 @@ namespace SoarCraft.QYun.AssetReader {
         }
 
         private UnityReader GetReader() {
-            if (needSearch) {
-                var resourceFileName = Path.GetFileName(path);
-                if (assetsFile.assetsManager.resourceFileReaders.TryGetValue(resourceFileName, out reader)) {
-                    needSearch = false;
-                    return reader;
+            if (this.needSearch) {
+                var resourceFileName = Path.GetFileName(this.path);
+                if (this.assetsFile.assetsManager.resourceFileReaders.TryGetValue(resourceFileName, out this.reader)) {
+                    this.needSearch = false;
+                    return this.reader;
                 }
-                var assetsFileDirectory = Path.GetDirectoryName(assetsFile.fullName);
+                var assetsFileDirectory = Path.GetDirectoryName(this.assetsFile.fullName);
                 var resourceFilePath = Path.Combine(assetsFileDirectory, resourceFileName);
                 if (!File.Exists(resourceFilePath)) {
                     var findFiles = Directory.GetFiles(assetsFileDirectory, resourceFileName, SearchOption.AllDirectories);
@@ -40,10 +39,10 @@ namespace SoarCraft.QYun.AssetReader {
                     }
                 }
                 if (File.Exists(resourceFilePath)) {
-                    needSearch = false;
-                    reader = new UnityReader(File.OpenRead(resourceFilePath));
-                    assetsFile.assetsManager.resourceFileReaders.Add(resourceFileName, reader);
-                    return reader;
+                    this.needSearch = false;
+                    this.reader = new UnityReader(File.OpenRead(resourceFilePath));
+                    this.assetsFile.assetsManager.resourceFileReaders.Add(resourceFileName, this.reader);
+                    return this.reader;
                 }
                 throw new FileNotFoundException($"Can't find the resource file {resourceFileName}");
             }
@@ -52,14 +51,14 @@ namespace SoarCraft.QYun.AssetReader {
         }
 
         public byte[] GetData() {
-            var binaryReader = GetReader();
-            binaryReader.BaseStream.Position = offset;
-            return binaryReader.ReadBytes((int)size);
+            var binaryReader = this.GetReader();
+            binaryReader.BaseStream.Position = this.offset;
+            return binaryReader.ReadBytes((int)this.size);
         }
 
         public void WriteData(string path) {
-            var binaryReader = GetReader();
-            binaryReader.BaseStream.Position = offset;
+            var binaryReader = this.GetReader();
+            binaryReader.BaseStream.Position = this.offset;
             using var writer = File.OpenWrite(path);
             binaryReader.BaseStream.CopyTo(writer, this.size);
         }

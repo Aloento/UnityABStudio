@@ -1,6 +1,6 @@
 // Common/CRC.cs
 
-namespace SevenZip {
+namespace SoarCraft.QYun.AssetReader._7zip.Common {
     class CRC {
         public static readonly uint[] Table;
 
@@ -20,18 +20,18 @@ namespace SevenZip {
 
         uint _value = 0xFFFFFFFF;
 
-        public void Init() { _value = 0xFFFFFFFF; }
+        public void Init() { this._value = 0xFFFFFFFF; }
 
         public void UpdateByte(byte b) {
-            _value = Table[(byte)this._value ^ b] ^ (_value >> 8);
+            this._value = Table[(byte)this._value ^ b] ^ (this._value >> 8);
         }
 
         public void Update(byte[] data, uint offset, uint size) {
             for (uint i = 0; i < size; i++)
-                _value = Table[(byte)this._value ^ data[offset + i]] ^ (_value >> 8);
+                this._value = Table[(byte)this._value ^ data[offset + i]] ^ (this._value >> 8);
         }
 
-        public uint GetDigest() { return _value ^ 0xFFFFFFFF; }
+        public uint GetDigest() { return this._value ^ 0xFFFFFFFF; }
 
         static uint CalculateDigest(byte[] data, uint offset, uint size) {
             var crc = new CRC();

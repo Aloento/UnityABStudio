@@ -3,7 +3,7 @@
 Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
-namespace Org.Brotli.Dec {
+namespace SoarCraft.QYun.AssetReader.Brotli {
     /// <summary>Contains a collection of huffman trees with the same alphabet size.</summary>
     internal sealed class HuffmanTreeGroup {
         /// <summary>The maximal alphabet size in this group.</summary>
@@ -37,7 +37,7 @@ namespace Org.Brotli.Dec {
             var n = group.trees.Length;
             for (var i = 0; i < n; i++) {
                 group.trees[i] = next;
-                Dec.Decode.ReadHuffmanCode(group.alphabetSize, group.codes, next, br);
+                Brotli.Decode.ReadHuffmanCode(group.alphabetSize, group.codes, next, br);
                 next += Huffman.HuffmanMaxTableSize;
             }
         }

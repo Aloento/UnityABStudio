@@ -1,6 +1,6 @@
 // LzmaBase.cs
 
-namespace SevenZip.Compression.LZMA {
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.LZMA {
     internal abstract class Base {
         public const uint kNumRepDistances = 4;
         public const uint kNumStates = 12;
@@ -12,19 +12,19 @@ namespace SevenZip.Compression.LZMA {
 
         public struct State {
             public uint Index;
-            public void Init() { Index = 0; }
+            public void Init() { this.Index = 0; }
             public void UpdateChar() {
-                if (Index < 4)
-                    Index = 0;
-                else if (Index < 10)
-                    Index -= 3;
+                if (this.Index < 4)
+                    this.Index = 0;
+                else if (this.Index < 10)
+                    this.Index -= 3;
                 else
-                    Index -= 6;
+                    this.Index -= 6;
             }
-            public void UpdateMatch() { Index = (uint)(Index < 7 ? 7 : 10); }
-            public void UpdateRep() { Index = (uint)(Index < 7 ? 8 : 11); }
-            public void UpdateShortRep() { Index = (uint)(Index < 7 ? 9 : 11); }
-            public bool IsCharState() { return Index < 7; }
+            public void UpdateMatch() { this.Index = (uint)(this.Index < 7 ? 7 : 10); }
+            public void UpdateRep() { this.Index = (uint)(this.Index < 7 ? 8 : 11); }
+            public void UpdateShortRep() { this.Index = (uint)(this.Index < 7 ? 9 : 11); }
+            public bool IsCharState() { return this.Index < 7; }
         }
 
         public const int kNumPosSlotBits = 6;

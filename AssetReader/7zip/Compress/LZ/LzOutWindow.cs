@@ -1,6 +1,6 @@
 // LzOutWindow.cs
 
-namespace SevenZip.Compression.LZ {
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.LZ {
     public class OutWindow {
         byte[] _buffer = null;
         uint _pos;
@@ -11,86 +11,86 @@ namespace SevenZip.Compression.LZ {
         public uint TrainSize = 0;
 
         public void Create(uint windowSize) {
-            if (_windowSize != windowSize) {
+            if (this._windowSize != windowSize) {
                 // System.GC.Collect();
-                _buffer = new byte[windowSize];
+                this._buffer = new byte[windowSize];
             }
-            _windowSize = windowSize;
-            _pos = 0;
-            _streamPos = 0;
+            this._windowSize = windowSize;
+            this._pos = 0;
+            this._streamPos = 0;
         }
 
         public void Init(System.IO.Stream stream, bool solid) {
-            ReleaseStream();
-            _stream = stream;
+            this.ReleaseStream();
+            this._stream = stream;
             if (!solid) {
-                _streamPos = 0;
-                _pos = 0;
-                TrainSize = 0;
+                this._streamPos = 0;
+                this._pos = 0;
+                this.TrainSize = 0;
             }
         }
 
         public bool Train(System.IO.Stream stream) {
             var len = stream.Length;
-            var size = len < this._windowSize ? (uint)len : _windowSize;
-            TrainSize = size;
+            var size = len < this._windowSize ? (uint)len : this._windowSize;
+            this.TrainSize = size;
             stream.Position = len - size;
-            _streamPos = _pos = 0;
+            this._streamPos = this._pos = 0;
             while (size > 0) {
-                var curSize = _windowSize - _pos;
+                var curSize = this._windowSize - this._pos;
                 if (size < curSize)
                     curSize = size;
-                var numReadBytes = stream.Read(_buffer, (int)_pos, (int)curSize);
+                var numReadBytes = stream.Read(this._buffer, (int)this._pos, (int)curSize);
                 if (numReadBytes == 0)
                     return false;
                 size -= (uint)numReadBytes;
-                _pos += (uint)numReadBytes;
-                _streamPos += (uint)numReadBytes;
-                if (_pos == _windowSize)
-                    _streamPos = _pos = 0;
+                this._pos += (uint)numReadBytes;
+                this._streamPos += (uint)numReadBytes;
+                if (this._pos == this._windowSize)
+                    this._streamPos = this._pos = 0;
             }
             return true;
         }
 
         public void ReleaseStream() {
-            Flush();
-            _stream = null;
+            this.Flush();
+            this._stream = null;
         }
 
         public void Flush() {
-            var size = _pos - _streamPos;
+            var size = this._pos - this._streamPos;
             if (size == 0)
                 return;
-            _stream.Write(_buffer, (int)_streamPos, (int)size);
-            if (_pos >= _windowSize)
-                _pos = 0;
-            _streamPos = _pos;
+            this._stream.Write(this._buffer, (int)this._streamPos, (int)size);
+            if (this._pos >= this._windowSize)
+                this._pos = 0;
+            this._streamPos = this._pos;
         }
 
         public void CopyBlock(uint distance, uint len) {
-            var pos = _pos - distance - 1;
-            if (pos >= _windowSize)
-                pos += _windowSize;
+            var pos = this._pos - distance - 1;
+            if (pos >= this._windowSize)
+                pos += this._windowSize;
             for (; len > 0; len--) {
-                if (pos >= _windowSize)
+                if (pos >= this._windowSize)
                     pos = 0;
-                _buffer[_pos++] = _buffer[pos++];
-                if (_pos >= _windowSize)
-                    Flush();
+                this._buffer[this._pos++] = this._buffer[pos++];
+                if (this._pos >= this._windowSize)
+                    this.Flush();
             }
         }
 
         public void PutByte(byte b) {
-            _buffer[_pos++] = b;
-            if (_pos >= _windowSize)
-                Flush();
+            this._buffer[this._pos++] = b;
+            if (this._pos >= this._windowSize)
+                this.Flush();
         }
 
         public byte GetByte(uint distance) {
-            var pos = _pos - distance - 1;
-            if (pos >= _windowSize)
-                pos += _windowSize;
-            return _buffer[pos];
+            var pos = this._pos - distance - 1;
+            if (pos >= this._windowSize)
+                pos += this._windowSize;
+            return this._buffer[pos];
         }
     }
 }

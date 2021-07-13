@@ -3,7 +3,7 @@
 Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
-namespace Org.Brotli.Dec {
+namespace SoarCraft.QYun.AssetReader.Brotli {
     /// <summary>
     /// <see cref="System.IO.Stream"/>
     /// decorator that decompresses brotli data.
@@ -94,32 +94,32 @@ namespace Org.Brotli.Dec {
             this.remainingBufferBytes = 0;
             this.bufferOffset = 0;
             try {
-                State.SetInput(state, source);
+                State.SetInput(this.state, source);
             } catch (BrotliRuntimeException ex) {
                 throw new System.IO.IOException("Brotli decoder initialization failed", ex);
             }
             if (customDictionary != null) {
-                Decode.SetCustomDictionary(state, customDictionary);
+                Decode.SetCustomDictionary(this.state, customDictionary);
             }
         }
 
         /// <summary><inheritDoc/></summary>
         /// <exception cref="System.IO.IOException"/>
         public override void Close() {
-            State.Close(state);
+            State.Close(this.state);
         }
 
         /// <summary><inheritDoc/></summary>
         /// <exception cref="System.IO.IOException"/>
         public override int ReadByte() {
-            if (bufferOffset >= remainingBufferBytes) {
-                remainingBufferBytes = Read(buffer, 0, buffer.Length);
-                bufferOffset = 0;
-                if (remainingBufferBytes == -1) {
+            if (this.bufferOffset >= this.remainingBufferBytes) {
+                this.remainingBufferBytes = this.Read(this.buffer, 0, this.buffer.Length);
+                this.bufferOffset = 0;
+                if (this.remainingBufferBytes == -1) {
                     return -1;
                 }
             }
-            return buffer[bufferOffset++] & unchecked(0xFF);
+            return this.buffer[this.bufferOffset++] & unchecked(0xFF);
         }
 
         /// <summary><inheritDoc/></summary>
@@ -139,11 +139,11 @@ namespace Org.Brotli.Dec {
                 return 0;
             }
 
-            var copyLen = System.Math.Max(remainingBufferBytes - bufferOffset, 0);
+            var copyLen = System.Math.Max(this.remainingBufferBytes - this.bufferOffset, 0);
             if (copyLen != 0) {
                 copyLen = System.Math.Min(copyLen, destLen);
-                System.Array.Copy(buffer, bufferOffset, destBuffer, destOffset, copyLen);
-                bufferOffset += copyLen;
+                System.Array.Copy(this.buffer, this.bufferOffset, destBuffer, destOffset, copyLen);
+                this.bufferOffset += copyLen;
                 destOffset += copyLen;
                 destLen -= copyLen;
                 if (destLen == 0) {
@@ -151,15 +151,15 @@ namespace Org.Brotli.Dec {
                 }
             }
             try {
-                state.output = destBuffer;
-                state.outputOffset = destOffset;
-                state.outputLength = destLen;
-                state.outputUsed = 0;
-                Decode.Decompress(state);
-                if (state.outputUsed == 0) {
+                this.state.output = destBuffer;
+                this.state.outputOffset = destOffset;
+                this.state.outputLength = destLen;
+                this.state.outputUsed = 0;
+                Decode.Decompress(this.state);
+                if (this.state.outputUsed == 0) {
                     return -1;
                 }
-                return state.outputUsed + copyLen;
+                return this.state.outputUsed + copyLen;
             } catch (BrotliRuntimeException ex) {
                 throw new System.IO.IOException("Brotli stream decoding failed", ex);
             }

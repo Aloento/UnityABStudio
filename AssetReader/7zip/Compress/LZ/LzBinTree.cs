@@ -1,8 +1,9 @@
 // LzBinTree.cs
 
-using System;
+namespace SoarCraft.QYun.AssetReader._7zip.Compress.LZ {
+    using System;
+    using Common;
 
-namespace SevenZip.Compression.LZ {
     public class BinTree : InWindow, IMatchFinder {
         UInt32 _cyclicBufferPos;
         UInt32 _cyclicBufferSize = 0;
@@ -30,15 +31,15 @@ namespace SevenZip.Compression.LZ {
         UInt32 kFixHashSize = kHash2Size + kHash3Size;
 
         public void SetType(int numHashBytes) {
-            HASH_ARRAY = numHashBytes > 2;
-            if (HASH_ARRAY) {
-                kNumHashDirectBytes = 0;
-                kMinMatchCheck = 4;
-                kFixHashSize = kHash2Size + kHash3Size;
+            this.HASH_ARRAY = numHashBytes > 2;
+            if (this.HASH_ARRAY) {
+                this.kNumHashDirectBytes = 0;
+                this.kMinMatchCheck = 4;
+                this.kFixHashSize = kHash2Size + kHash3Size;
             } else {
-                kNumHashDirectBytes = 2;
-                kMinMatchCheck = 2 + 1;
-                kFixHashSize = 0;
+                this.kNumHashDirectBytes = 2;
+                this.kMinMatchCheck = 2 + 1;
+                this.kFixHashSize = 0;
             }
         }
 
@@ -47,18 +48,18 @@ namespace SevenZip.Compression.LZ {
 
         public new void Init() {
             base.Init();
-            for (UInt32 i = 0; i < _hashSizeSum; i++)
-                _hash[i] = kEmptyHashValue;
-            _cyclicBufferPos = 0;
-            ReduceOffsets(-1);
+            for (UInt32 i = 0; i < this._hashSizeSum; i++)
+                this._hash[i] = kEmptyHashValue;
+            this._cyclicBufferPos = 0;
+            this.ReduceOffsets(-1);
         }
 
         public new void MovePos() {
-            if (++_cyclicBufferPos >= _cyclicBufferSize)
-                _cyclicBufferPos = 0;
+            if (++this._cyclicBufferPos >= this._cyclicBufferSize)
+                this._cyclicBufferPos = 0;
             base.MovePos();
-            if (_pos == kMaxValForNormalize)
-                Normalize();
+            if (this._pos == kMaxValForNormalize)
+                this.Normalize();
         }
 
         public new Byte GetIndexByte(Int32 index) { return base.GetIndexByte(index); }
@@ -71,22 +72,22 @@ namespace SevenZip.Compression.LZ {
                 UInt32 matchMaxLen, UInt32 keepAddBufferAfter) {
             if (historySize > kMaxValForNormalize - 256)
                 throw new Exception();
-            _cutValue = 16 + (matchMaxLen >> 1);
+            this._cutValue = 16 + (matchMaxLen >> 1);
 
             var windowReservSize = (historySize + keepAddBufferBefore +
                     matchMaxLen + keepAddBufferAfter) / 2 + 256;
 
             base.Create(historySize + keepAddBufferBefore, matchMaxLen + keepAddBufferAfter, windowReservSize);
 
-            _matchMaxLen = matchMaxLen;
+            this._matchMaxLen = matchMaxLen;
 
             var cyclicBufferSize = historySize + 1;
-            if (_cyclicBufferSize != cyclicBufferSize)
-                _son = new UInt32[(_cyclicBufferSize = cyclicBufferSize) * 2];
+            if (this._cyclicBufferSize != cyclicBufferSize)
+                this._son = new UInt32[(this._cyclicBufferSize = cyclicBufferSize) * 2];
 
             var hs = kBT2HashSize;
 
-            if (HASH_ARRAY) {
+            if (this.HASH_ARRAY) {
                 hs = historySize - 1;
                 hs |= hs >> 1;
                 hs |= hs >> 2;
@@ -96,58 +97,58 @@ namespace SevenZip.Compression.LZ {
                 hs |= 0xFFFF;
                 if (hs > 1 << 24)
                     hs >>= 1;
-                _hashMask = hs;
+                this._hashMask = hs;
                 hs++;
-                hs += kFixHashSize;
+                hs += this.kFixHashSize;
             }
-            if (hs != _hashSizeSum)
-                _hash = new UInt32[_hashSizeSum = hs];
+            if (hs != this._hashSizeSum)
+                this._hash = new UInt32[this._hashSizeSum = hs];
         }
 
         public UInt32 GetMatches(UInt32[] distances) {
             UInt32 lenLimit;
-            if (_pos + _matchMaxLen <= _streamPos)
-                lenLimit = _matchMaxLen;
+            if (this._pos + this._matchMaxLen <= this._streamPos)
+                lenLimit = this._matchMaxLen;
             else {
-                lenLimit = _streamPos - _pos;
-                if (lenLimit < kMinMatchCheck) {
-                    MovePos();
+                lenLimit = this._streamPos - this._pos;
+                if (lenLimit < this.kMinMatchCheck) {
+                    this.MovePos();
                     return 0;
                 }
             }
 
             UInt32 offset = 0;
             var matchMinPos = this._pos > this._cyclicBufferSize ? this._pos - this._cyclicBufferSize : 0;
-            var cur = _bufferOffset + _pos;
+            var cur = this._bufferOffset + this._pos;
             var maxLen = kStartMaxLen; // to avoid items for len < hashSize;
             UInt32 hashValue, hash2Value = 0, hash3Value = 0;
 
-            if (HASH_ARRAY) {
-                var temp = CRC.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
+            if (this.HASH_ARRAY) {
+                var temp = CRC.Table[this._bufferBase[cur]] ^ this._bufferBase[cur + 1];
                 hash2Value = temp & (kHash2Size - 1);
                 temp ^= (UInt32)this._bufferBase[cur + 2] << 8;
                 hash3Value = temp & (kHash3Size - 1);
-                hashValue = (temp ^ (CRC.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
+                hashValue = (temp ^ (CRC.Table[this._bufferBase[cur + 3]] << 5)) & this._hashMask;
             } else
-                hashValue = _bufferBase[cur] ^ ((UInt32)this._bufferBase[cur + 1] << 8);
+                hashValue = this._bufferBase[cur] ^ ((UInt32)this._bufferBase[cur + 1] << 8);
 
-            var curMatch = _hash[kFixHashSize + hashValue];
-            if (HASH_ARRAY) {
-                var curMatch2 = _hash[hash2Value];
-                var curMatch3 = _hash[kHash3Offset + hash3Value];
-                _hash[hash2Value] = _pos;
-                _hash[kHash3Offset + hash3Value] = _pos;
+            var curMatch = this._hash[this.kFixHashSize + hashValue];
+            if (this.HASH_ARRAY) {
+                var curMatch2 = this._hash[hash2Value];
+                var curMatch3 = this._hash[kHash3Offset + hash3Value];
+                this._hash[hash2Value] = this._pos;
+                this._hash[kHash3Offset + hash3Value] = this._pos;
                 if (curMatch2 > matchMinPos)
-                    if (_bufferBase[_bufferOffset + curMatch2] == _bufferBase[cur]) {
+                    if (this._bufferBase[this._bufferOffset + curMatch2] == this._bufferBase[cur]) {
                         distances[offset++] = maxLen = 2;
-                        distances[offset++] = _pos - curMatch2 - 1;
+                        distances[offset++] = this._pos - curMatch2 - 1;
                     }
                 if (curMatch3 > matchMinPos)
-                    if (_bufferBase[_bufferOffset + curMatch3] == _bufferBase[cur]) {
+                    if (this._bufferBase[this._bufferOffset + curMatch3] == this._bufferBase[cur]) {
                         if (curMatch3 == curMatch2)
                             offset -= 2;
                         distances[offset++] = maxLen = 3;
-                        distances[offset++] = _pos - curMatch3 - 1;
+                        distances[offset++] = this._pos - curMatch3 - 1;
                         curMatch2 = curMatch3;
                     }
                 if (offset != 0 && curMatch2 == curMatch) {
@@ -156,143 +157,143 @@ namespace SevenZip.Compression.LZ {
                 }
             }
 
-            _hash[kFixHashSize + hashValue] = _pos;
+            this._hash[this.kFixHashSize + hashValue] = this._pos;
 
-            var ptr0 = (_cyclicBufferPos << 1) + 1;
+            var ptr0 = (this._cyclicBufferPos << 1) + 1;
             var ptr1 = this._cyclicBufferPos << 1;
 
             UInt32 len0, len1;
-            len0 = len1 = kNumHashDirectBytes;
+            len0 = len1 = this.kNumHashDirectBytes;
 
-            if (kNumHashDirectBytes != 0) {
+            if (this.kNumHashDirectBytes != 0) {
                 if (curMatch > matchMinPos) {
-                    if (_bufferBase[_bufferOffset + curMatch + kNumHashDirectBytes] !=
-                            _bufferBase[cur + kNumHashDirectBytes]) {
-                        distances[offset++] = maxLen = kNumHashDirectBytes;
-                        distances[offset++] = _pos - curMatch - 1;
+                    if (this._bufferBase[this._bufferOffset + curMatch + this.kNumHashDirectBytes] !=
+                            this._bufferBase[cur + this.kNumHashDirectBytes]) {
+                        distances[offset++] = maxLen = this.kNumHashDirectBytes;
+                        distances[offset++] = this._pos - curMatch - 1;
                     }
                 }
             }
 
-            var count = _cutValue;
+            var count = this._cutValue;
 
             while (true) {
                 if (curMatch <= matchMinPos || count-- == 0) {
-                    _son[ptr0] = _son[ptr1] = kEmptyHashValue;
+                    this._son[ptr0] = this._son[ptr1] = kEmptyHashValue;
                     break;
                 }
-                var delta = _pos - curMatch;
+                var delta = this._pos - curMatch;
                 var cyclicPos = (delta <= this._cyclicBufferPos ?
                             this._cyclicBufferPos - delta :
                             this._cyclicBufferPos - delta + this._cyclicBufferSize) << 1;
 
-                var pby1 = _bufferOffset + curMatch;
+                var pby1 = this._bufferOffset + curMatch;
                 var len = Math.Min(len0, len1);
-                if (_bufferBase[pby1 + len] == _bufferBase[cur + len]) {
+                if (this._bufferBase[pby1 + len] == this._bufferBase[cur + len]) {
                     while (++len != lenLimit)
-                        if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
+                        if (this._bufferBase[pby1 + len] != this._bufferBase[cur + len])
                             break;
                     if (maxLen < len) {
                         distances[offset++] = maxLen = len;
                         distances[offset++] = delta - 1;
                         if (len == lenLimit) {
-                            _son[ptr1] = _son[cyclicPos];
-                            _son[ptr0] = _son[cyclicPos + 1];
+                            this._son[ptr1] = this._son[cyclicPos];
+                            this._son[ptr0] = this._son[cyclicPos + 1];
                             break;
                         }
                     }
                 }
-                if (_bufferBase[pby1 + len] < _bufferBase[cur + len]) {
-                    _son[ptr1] = curMatch;
+                if (this._bufferBase[pby1 + len] < this._bufferBase[cur + len]) {
+                    this._son[ptr1] = curMatch;
                     ptr1 = cyclicPos + 1;
-                    curMatch = _son[ptr1];
+                    curMatch = this._son[ptr1];
                     len1 = len;
                 } else {
-                    _son[ptr0] = curMatch;
+                    this._son[ptr0] = curMatch;
                     ptr0 = cyclicPos;
-                    curMatch = _son[ptr0];
+                    curMatch = this._son[ptr0];
                     len0 = len;
                 }
             }
-            MovePos();
+            this.MovePos();
             return offset;
         }
 
         public void Skip(UInt32 num) {
             do {
                 UInt32 lenLimit;
-                if (_pos + _matchMaxLen <= _streamPos)
-                    lenLimit = _matchMaxLen;
+                if (this._pos + this._matchMaxLen <= this._streamPos)
+                    lenLimit = this._matchMaxLen;
                 else {
-                    lenLimit = _streamPos - _pos;
-                    if (lenLimit < kMinMatchCheck) {
-                        MovePos();
+                    lenLimit = this._streamPos - this._pos;
+                    if (lenLimit < this.kMinMatchCheck) {
+                        this.MovePos();
                         continue;
                     }
                 }
 
                 var matchMinPos = this._pos > this._cyclicBufferSize ? this._pos - this._cyclicBufferSize : 0;
-                var cur = _bufferOffset + _pos;
+                var cur = this._bufferOffset + this._pos;
 
                 UInt32 hashValue;
 
-                if (HASH_ARRAY) {
-                    var temp = CRC.Table[_bufferBase[cur]] ^ _bufferBase[cur + 1];
+                if (this.HASH_ARRAY) {
+                    var temp = CRC.Table[this._bufferBase[cur]] ^ this._bufferBase[cur + 1];
                     var hash2Value = temp & (kHash2Size - 1);
-                    _hash[hash2Value] = _pos;
+                    this._hash[hash2Value] = this._pos;
                     temp ^= (UInt32)this._bufferBase[cur + 2] << 8;
                     var hash3Value = temp & (kHash3Size - 1);
-                    _hash[kHash3Offset + hash3Value] = _pos;
-                    hashValue = (temp ^ (CRC.Table[_bufferBase[cur + 3]] << 5)) & _hashMask;
+                    this._hash[kHash3Offset + hash3Value] = this._pos;
+                    hashValue = (temp ^ (CRC.Table[this._bufferBase[cur + 3]] << 5)) & this._hashMask;
                 } else
-                    hashValue = _bufferBase[cur] ^ ((UInt32)this._bufferBase[cur + 1] << 8);
+                    hashValue = this._bufferBase[cur] ^ ((UInt32)this._bufferBase[cur + 1] << 8);
 
-                var curMatch = _hash[kFixHashSize + hashValue];
-                _hash[kFixHashSize + hashValue] = _pos;
+                var curMatch = this._hash[this.kFixHashSize + hashValue];
+                this._hash[this.kFixHashSize + hashValue] = this._pos;
 
-                var ptr0 = (_cyclicBufferPos << 1) + 1;
+                var ptr0 = (this._cyclicBufferPos << 1) + 1;
                 var ptr1 = this._cyclicBufferPos << 1;
 
                 UInt32 len0, len1;
-                len0 = len1 = kNumHashDirectBytes;
+                len0 = len1 = this.kNumHashDirectBytes;
 
-                var count = _cutValue;
+                var count = this._cutValue;
                 while (true) {
                     if (curMatch <= matchMinPos || count-- == 0) {
-                        _son[ptr0] = _son[ptr1] = kEmptyHashValue;
+                        this._son[ptr0] = this._son[ptr1] = kEmptyHashValue;
                         break;
                     }
 
-                    var delta = _pos - curMatch;
+                    var delta = this._pos - curMatch;
                     var cyclicPos = (delta <= this._cyclicBufferPos ?
                                 this._cyclicBufferPos - delta :
                                 this._cyclicBufferPos - delta + this._cyclicBufferSize) << 1;
 
-                    var pby1 = _bufferOffset + curMatch;
+                    var pby1 = this._bufferOffset + curMatch;
                     var len = Math.Min(len0, len1);
-                    if (_bufferBase[pby1 + len] == _bufferBase[cur + len]) {
+                    if (this._bufferBase[pby1 + len] == this._bufferBase[cur + len]) {
                         while (++len != lenLimit)
-                            if (_bufferBase[pby1 + len] != _bufferBase[cur + len])
+                            if (this._bufferBase[pby1 + len] != this._bufferBase[cur + len])
                                 break;
                         if (len == lenLimit) {
-                            _son[ptr1] = _son[cyclicPos];
-                            _son[ptr0] = _son[cyclicPos + 1];
+                            this._son[ptr1] = this._son[cyclicPos];
+                            this._son[ptr0] = this._son[cyclicPos + 1];
                             break;
                         }
                     }
-                    if (_bufferBase[pby1 + len] < _bufferBase[cur + len]) {
-                        _son[ptr1] = curMatch;
+                    if (this._bufferBase[pby1 + len] < this._bufferBase[cur + len]) {
+                        this._son[ptr1] = curMatch;
                         ptr1 = cyclicPos + 1;
-                        curMatch = _son[ptr1];
+                        curMatch = this._son[ptr1];
                         len1 = len;
                     } else {
-                        _son[ptr0] = curMatch;
+                        this._son[ptr0] = curMatch;
                         ptr0 = cyclicPos;
-                        curMatch = _son[ptr0];
+                        curMatch = this._son[ptr0];
                         len0 = len;
                     }
                 }
-                MovePos();
+                this.MovePos();
             }
             while (--num != 0);
         }
@@ -309,12 +310,12 @@ namespace SevenZip.Compression.LZ {
         }
 
         void Normalize() {
-            var subValue = _pos - _cyclicBufferSize;
-            NormalizeLinks(_son, _cyclicBufferSize * 2, subValue);
-            NormalizeLinks(_hash, _hashSizeSum, subValue);
-            ReduceOffsets((Int32)subValue);
+            var subValue = this._pos - this._cyclicBufferSize;
+            this.NormalizeLinks(this._son, this._cyclicBufferSize * 2, subValue);
+            this.NormalizeLinks(this._hash, this._hashSizeSum, subValue);
+            this.ReduceOffsets((Int32)subValue);
         }
 
-        public void SetCutValue(UInt32 cutValue) { _cutValue = cutValue; }
+        public void SetCutValue(UInt32 cutValue) { this._cutValue = cutValue; }
     }
 }
