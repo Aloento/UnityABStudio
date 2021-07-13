@@ -194,6 +194,28 @@ public string m_Name;
 
 ***
 
+##### **`ResourceManager`**
+
+资源管理器，用于获取资源的名称  
+其中，`m_Container` 会向 `AssetItem` 中 `Container` 赋值  
+
+***
+
+### **`PlayerSettings`**
+
+在 `Unity` 中构建的最终游戏定义各种参数的地方  
+在 `UnityABStudio` 中没有实际意义  
+`productName = m_PlayerSettings.productName;` 便可获得游戏的名字
+
+***
+
+### **`BuildSettings`**
+
+这是一个结构，其中包含关于如何构建内容的信息  
+在 `UnityABStudio` 中没有实际意义  
+
+***
+
 ## **`Unity3D` 实体**
 
 ### **`Animator`**
@@ -437,4 +459,3 @@ public PPtr<Sprite>[] m_PackedSprites;
 ```
 
 ***
-
