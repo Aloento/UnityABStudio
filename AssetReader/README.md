@@ -125,14 +125,28 @@ public uint byteSize;
 #### **`EditorExtension`**
 
 抽象类，被 `Component` / `NamedObject` / `GameObject` 直接继承  
-所有有实际意义的游戏对象都是它的子类
+所有有实际意义的实例对象都是它的子类
 
 ***
 
 ##### **`GameObject`**
 
 `Unity3D` 中所有的游戏物件都是这个类型的对象，场景中所有实体的基类  
-在 `UnityABStudio` 中此对象会导出为 `.fbx` 文件，没有类继承它  
+**可以导出**为 `.fbx` 文件，没有类继承它  
+
+***
+
+```csharp
+public PPtr<Component>[] m_Components;
+```
+`m_Components` 成员是 `GameObject` 的组件列表，每个元素是 `Component` 的指针
+
+***
+
+```csharp
+public string m_Name;
+```
+`m_Name` 成员是 `GameObject` 的名称
 
 ***
 
@@ -143,9 +157,17 @@ public uint byteSize;
 
 ***
 
+```csharp
+public PPtr<GameObject> m_GameObject;
+```
+`m_GameObject` 成员是 `Component` 对应的 `GameObject` 指针  
+表示此 `Component` 在这个 `GameObject` 中
+
+***
+
 ###### **`Behaviour`**
 
-Behaviour 是指可启用或禁用的组件  
+抽象类，是指可启用或禁用的组件  
 被 `Animator` / `MonoBehaviour` / `Animation` 直接继承
 
 ***
@@ -168,11 +190,82 @@ Behaviour 是指可启用或禁用的组件
 ```csharp
 public string m_Name;
 ```
-`m_Name` 这个对象的名字
+`m_Name` 是这个对象的名字
 
 ***
 
 ## **`Unity3D` 实体**
 
 ### **`Animator`**
+
+用于控制 Mecanim 动画系统的接口  
+**可以导出**为 `.fbx` 文件，对象名称为对应 `GameObject` 的名称  
+
+***
+
+### **`MonoBehaviour`**
+
+是一个基类，所有 `Unity3D` 脚本都派生自该类  
+**可以导出**为 `.json` 文件  
+对象名称在 `m_Name` 为空，且 `m_Script` 不为空时为 `m_Script.m_ClassName`  
+
+***
+
+```csharp
+public PPtr<MonoScript> m_Script;
+```
+指向 `MonoScript` 的指针，表示这个 `MonoBehaviour` 的脚本
+
+***
+
+### **`Animation`**
+
+动画组件用于播放动画  
+本身不能导出，但是其成员 `AnimationClip` 可以导出为 `.fbx` 文件
+
+```csharp
+public PPtr<AnimationClip>[] m_Animations;
+```
+
+***
+
+### **`MeshFilter`**
+
+用于访问mesh filter的 Mesh 的类  
+这与程序化网格接口一起使用  
+本身不能导出，但是其成员 `Mesh` 可以导出为 `.obj` 文件  
+
+```csharp
+public PPtr<Mesh> m_Mesh;
+```
+
+***
+
+### **`Transform`**
+
+对象的位置、旋转和缩放，不能导出  
+场景中的每个对象都有一个变换  
+它用于存储和操作对象的位置、旋转和缩放  
+每个变换都可以有一个父级  
+
+***
+
+```csharp
+public Quaternion m_LocalRotation;
+public Vector3 m_LocalPosition;
+public Vector3 m_LocalScale;
+public PPtr<Transform>[] m_Children;
+public PPtr<Transform> m_Father;
+```
+`m_LocalRotation` 相对于父级变换旋转的变换旋转  
+`m_LocalPosition` 相对于父变换的变换位置  
+`m_LocalScale` 相对于父对象的变换缩放  
+`m_Children` 此变换的子变换集合  
+`m_Father` 此变换的父级变换  
+
+***
+
+### **`SkinnedMeshRenderer`**
+
+
 
