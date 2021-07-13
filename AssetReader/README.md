@@ -9,6 +9,8 @@
 
 ### **`AssetsManager`**
 
+此类用来管理Asset文件，支持加载文件和文件夹
+
 ***
 
 ```csharp
@@ -21,6 +23,8 @@ public List<SerializedFile> AssetsFileList;
 ***
 
 ### **`SerializedFile`**
+
+此类用于储存Asset的各种信息
 
 ***
 
@@ -51,10 +55,12 @@ public string originalPath;
 public string unityVersion;
 public int[] version;
 public BuildType buildType;
+public BuildTarget m_TargetPlatform;
 ```
 `unityVersion` 成员是 `SerializedFile` 实例的 Unity3D 版本号，如 `2017.4.39f1`  
 `version` 成员是 `unityVersion` 的拆分，包含四个整数，如 `[2017, 4, 39, 1]`  
 `buildType` 成员是 Unity3D 的编译类型，如 `f`  
+`m_TargetPlatform` 成员是 Unity3D 的编译目标平台，如 `StandaloneWindows`
 
 ***
 
@@ -77,10 +83,33 @@ public List<ObjectInfo> m_Objects;
 
 ***
 
-### **Unity3D 类**
+### **`Unity3D` 类**
+
+***
+
+#### **`UObject`**
+
+此类是所有有关于 Unity3D 的类的**基类**，包含了一些基本的属性和方法
 
 ***
 
 ```csharp
-
+public SerializedFile assetsFile;
 ```
+此成员代表 `UObject` 对应的 `SerializedFile` 实例  
+意为：这个对象存在于哪个Aseet文件中
+
+***
+
+```csharp
+public long m_PathID;
+```
+`Unity3D` 中的全局文件索引ID，每一个 `UObject` 都有一个全局唯一的ID
+
+***
+
+```csharp
+public ClassIDType type;
+```
+`type` 成员代表这个 `UObject` 在 `ClassIDType` 中对应的类型  
+表明了这是一个什么类型的对象，如 `GameObject`、`MonoBehaviour`、`Texture2D` 等
