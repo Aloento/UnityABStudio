@@ -22,7 +22,9 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             var objectAssetsList = new List<AssetItem>(objectCount);
 
             foreach (var serializedFile in this.manager.AssetsFileList) {
-
+                foreach (var uObject in serializedFile.Objects) {
+                    objectAssetsList.Add(new AssetItem(uObject));
+                }
             }
 
         }
