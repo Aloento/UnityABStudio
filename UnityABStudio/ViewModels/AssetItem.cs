@@ -117,7 +117,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                 case NamedObject namedObject:
                     this.Name = namedObject.m_Name;
                     break;
-                    
+
             }
         }
     }
