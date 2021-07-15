@@ -29,7 +29,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
         public string Container;
         public string InfoText;
 
-        public AssetItem(UObject obj) {
+        public AssetItem(UObject obj, out ICollection<(PPtr<UObject>, string)> container, out (string, string) names) {
             this.Obj = obj;
             this.Type = obj.type;
             this.PathID = obj.m_PathID;
@@ -38,8 +38,8 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             this.BaseID = obj.m_PathID.ToBase62();
             this.Name = $"{this.Type}_{this.BaseID}";
 
-            string productName;
-            var containers = new List<(PPtr<UObject>, string)>();
+            names = ("", "");
+            container = new List<(PPtr<UObject>, string)>();
 
             switch (obj) {
                 case Font:
@@ -77,7 +77,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                         var preLoadSize = value.preloadSize;
                         var preLoadEnd = preLoadIndex + preLoadSize;
                         for (var k = preLoadIndex; k < preLoadEnd; k++) {
-                            containers.Add((assetBundle.m_PreloadTable[k], key));
+                            container.Add((assetBundle.m_PreloadTable[k], key));
                         }
                     }
 
@@ -103,7 +103,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                     break;
 
                 case PlayerSettings playerSettings:
-                    productName = playerSettings.productName;
+                    names = (playerSettings.companyName, playerSettings.productName);
                     break;
 
                 case Shader shader:
@@ -128,8 +128,6 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                     this.Name = namedObject.m_Name;
                     break;
             }
-
-
         }
     }
 }

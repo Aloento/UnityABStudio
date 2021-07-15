@@ -42,7 +42,7 @@ namespace SoarCraft.QYun.UnityABStudio {
 
             // Other Activation Handlers
 
-            // Services
+            // Service
             _ = services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
             _ = services.AddTransient<INavigationViewService, NavigationViewService>();
 
@@ -50,9 +50,10 @@ namespace SoarCraft.QYun.UnityABStudio {
             _ = services.AddSingleton<IPageService, PageService>();
             _ = services.AddSingleton<INavigationService, NavigationService>();
 
-            // Core Services
+            // Core Service
             _ = services.AddSingleton<ISampleDataService, SampleDataService>();
             _ = services.AddSingleton<IAssetDataService, AssetDataService>();
+            _ = services.AddTransient<SettingsService>();
             _ = services.AddSingleton<AssetsManager>();
             _ = services.AddSingleton<LoggerService>();
 
@@ -69,7 +70,6 @@ namespace SoarCraft.QYun.UnityABStudio {
             _ = services.AddTransient<ContentGridPage>();
             _ = services.AddTransient<ContentGridDetailViewModel>();
             _ = services.AddTransient<ContentGridDetailPage>();
-            _ = services.AddTransient<SettingsViewModel>();
             _ = services.AddTransient<SettingsPage>();
             return services.BuildServiceProvider();
         }

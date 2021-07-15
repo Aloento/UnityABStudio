@@ -42,7 +42,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
 
         private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args) {
             if (args.IsSettingsInvoked) {
-                _ = this._navigationService.NavigateTo(typeof(SettingsViewModel).FullName);
+                _ = this._navigationService.NavigateTo(typeof(SettingsServic).FullName);
             } else {
                 var selectedItem = args.InvokedItemContainer as NavigationViewItem;
                 var pageKey = selectedItem.GetValue(NavHelper.NavigateToProperty) as string;

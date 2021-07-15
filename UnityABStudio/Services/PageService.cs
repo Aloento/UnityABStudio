@@ -17,7 +17,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
             this.Configure<DataGridViewModel, DataGridPage>();
             this.Configure<ContentGridViewModel, ContentGridPage>();
             this.Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
-            this.Configure<SettingsViewModel, SettingsPage>();
+            this.Configure<SettingsServic, SettingsPage>();
         }
 
         public Type GetPageType(string key) {
