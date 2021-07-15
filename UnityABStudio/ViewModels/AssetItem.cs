@@ -1,13 +1,16 @@
 namespace SoarCraft.QYun.UnityABStudio.ViewModels {
+    using System.Collections.Generic;
     using AssetReader.Entities.Enums;
     using AssetReader.Unity3D;
     using AssetReader.Unity3D.Contracts;
     using AssetReader.Unity3D.Objects;
     using AssetReader.Unity3D.Objects.AnimationClips;
+    using AssetReader.Unity3D.Objects.AssetBundles;
     using AssetReader.Unity3D.Objects.Meshes;
     using AssetReader.Unity3D.Objects.Sprites;
     using AssetReader.Unity3D.Objects.Texture2Ds;
-    using AssetReader.Unity3D.Objects.AudioClip;
+    using AssetReader.Unity3D.Objects.Shaders;
+    using AssetReader.Unity3D.Objects.VideoClips;
     using Base62;
 
     public class AssetItem {
@@ -21,15 +24,16 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
         public string Container;
         public string InfoText;
         public bool Exportable;
-        public string ProductName;
 
         public AssetItem(UObject obj) {
             this.Obj = obj;
             this.Type = obj.type;
             this.PathID = obj.m_PathID;
             this.FullSize = obj.byteSize;
-
             this.BaseID = obj.m_PathID.ToBase62();
+
+            string productName;
+            var containers = new List<(PPtr<UObject>, string)>();
 
             switch (obj) {
                 case Mesh:
@@ -64,7 +68,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
 
                 case VideoClip videoClip:
                     if (!string.IsNullOrEmpty(videoClip.m_OriginalPath))
-                        this.FullSize = obj.byteSize + (long)videoClip.m_ExternalResources.m_Size;
+                        this.FullSize = obj.byteSize + videoClip.m_ExternalResources.m_Size;
 
                     this.Name = videoClip.m_Name;
                     this.Exportable = true;
@@ -76,8 +80,8 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                     break;
 
                 case Animator animator:
-                    if (animator.m_GameObject.TryGet(out var gameObject))
-                        this.Name = gameObject.m_Name;
+                    if (animator.m_GameObject.TryGet(out var result))
+                        this.Name = result.m_Name;
 
                     this.Exportable = true;
                     break;
@@ -86,22 +90,22 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                     if (monoBehaviour.m_Name == "" && monoBehaviour.m_Script.TryGet(out var m_Script))
                         this.Name = m_Script.m_ClassName;
                     else
-                        this.Name = monoBehaviour.m_ClassName;
+                        this.Name = monoBehaviour.m_Name;
 
                     this.Exportable = true;
                     break;
 
                 case PlayerSettings playerSettings:
-                    ProductName = playerSettings.productName;
+                    productName = playerSettings.productName;
                     break;
 
                 case AssetBundle assetBundle:
-                    foreach (var m_Container in assetBundle.m_Container){
-                        var preloadIndex = m_Container.Value.preloadIndex;
-                        var preloadSize = m_Container.Value.preloadSize;
-                        var preloadEnd = preloadIndex + preloadSize;
-                        for (int k = preloadIndex; k < preloadEnd; k++){
-                            containers.Add((assetBundle.m_PreloadTable[k], m_Container.Key));
+                    foreach (var (key, value) in assetBundle.m_Container) {
+                        var preLoadIndex = value.preloadIndex;
+                        var preLoadSize = value.preloadSize;
+                        var preLoadEnd = preLoadIndex + preLoadSize;
+                        for (var k = preLoadIndex; k < preLoadEnd; k++) {
+                            containers.Add((assetBundle.m_PreloadTable[k], key));
                         }
                     }
 
@@ -109,8 +113,8 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                     break;
 
                 case ResourceManager resourceManager:
-                    foreach (var m_Container in resourceManager.m_Container){
-                        containers.Add((m_Container.Value, m_Container.Key));
+                    foreach (var (key, value) in resourceManager.m_Container) {
+                        containers.Add((value, key));
                     }
                     break;
 
