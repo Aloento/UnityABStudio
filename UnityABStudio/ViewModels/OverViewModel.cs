@@ -21,13 +21,14 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             await manager.LoadFilesAsync(files.Select(x => x.Path).ToArray());
             this.logger.Information("AB Files loaded... Start to read contents...");
 
-            var objectAssetsList = new List<AssetItem>(this.manager.AssetsFileList.Sum(x => x.Objects.Count));
+            var objectAssetsDic =
+                new Dictionary<UObject, AssetItem>(this.manager.AssetsFileList.Sum(x => x.Objects.Count));
             var containers = new List<(PPtr<UObject>, string)>();
             var companyName = string.Empty;
             var productName = string.Empty;
 
             foreach (var uObject in this.manager.AssetsFileList.SelectMany(serializedFile => serializedFile.Objects)) {
-                objectAssetsList.Add(new AssetItem(uObject, out var container, out var names));
+                objectAssetsDic.Add(uObject, new AssetItem(uObject, out var container, out var names));
                 containers.AddRange(container);
 
                 var (company, project) = names;
@@ -39,32 +40,37 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
 
             foreach (var (pptr, container) in containers) {
                 if (pptr.TryGet(out var obj))
-                    objectAssetsList.Find(x => x.Obj.Equals(obj)).Container = container;
+                    objectAssetsDic[obj].Container = container;
             }
 
-            var gameObjectNodeList = new List<GameObjectNode>();
+            var gameObjectNodeDic = new Dictionary<GameObject, GameObjectNode>();
             foreach (var obj in from serializedFile in this.manager.AssetsFileList let rootNode =
                 new GameObjectNode(serializedFile.fileName) from obj in serializedFile.Objects select obj) {
-
                 if (obj is GameObject gameObject) {
-                    var currentNode = gameObjectNodeList.Find(x => x.GObj.Equals(gameObject));
-                    if (currentNode == null) {
+                    if (!gameObjectNodeDic.TryGetValue(gameObject, out var currentNode)) {
                         currentNode = new GameObjectNode(gameObject);
-                        gameObjectNodeList.Add(currentNode);
+                        gameObjectNodeDic.Add(gameObject, currentNode);
                     }
 
                     foreach (var pptr in gameObject.m_Components) {
                         if (pptr.TryGet(out var component)) {
-                            objectAssetsList.Find(x => x.Obj.Equals(component)).Node = currentNode;
+                            objectAssetsDic[component].Node = currentNode;
 
                             switch (component) {
                                 case MeshFilter meshFilter:
+                                    if (meshFilter.m_Mesh.TryGet(out var fMesh))
+                                        objectAssetsDic[fMesh].Node = currentNode;
+                                    break;
 
+                                case SkinnedMeshRenderer renderer:
+                                    if (renderer.m_Mesh.TryGet(out var sMesh))
+                                        objectAssetsDic[sMesh].Node = currentNode;
                                     break;
                             }
-
                         }
                     }
+
+
 
                 }
             }
