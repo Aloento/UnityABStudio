@@ -9,6 +9,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using AssetReader.Unity3D.Objects;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.DependencyInjection;
+    using Microsoft.UI.Xaml.Controls;
     using Serilog;
     using Services;
 
@@ -16,7 +17,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
         private readonly AssetsManager manager = Ioc.Default.GetRequiredService<AssetsManager>();
         private readonly ILogger logger = Ioc.Default.GetRequiredService<LoggerService>().Logger;
 
-        public async Task LoadAssetsDataAsync(IEnumerable<StorageFile> files) {
+        public async Task<(Dictionary<string, List<string>>, List<TreeViewNode>)> LoadAssetsDataAsync(IEnumerable<StorageFile> files) {
             this.logger.Information("Start to load Asset Files...");
             await manager.LoadFilesAsync(files.Select(x => x.Path).ToArray());
             this.logger.Information("AB Files loaded... Start to read contents...");
@@ -24,18 +25,21 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             var objectAssetsDic =
                 new Dictionary<UObject, AssetItem>(this.manager.AssetsFileList.Sum(x => x.Objects.Count));
             var containers = new List<(PPtr<UObject>, string)>();
-            var companyName = string.Empty;
-            var productName = string.Empty;
+            var namesDic = new Dictionary<string, List<string>> { { "Unclassified", new List<string>() } };
 
             foreach (var uObject in this.manager.AssetsFileList.SelectMany(serializedFile => serializedFile.Objects)) {
-                objectAssetsDic.Add(uObject, new AssetItem(uObject, out var container, out var names));
+                objectAssetsDic.Add(uObject, new AssetItem(uObject, out var container, out var outNames));
                 containers.AddRange(container);
 
-                var (company, project) = names;
-                if (!string.IsNullOrWhiteSpace(company) && !companyName.Contains(company))
-                    companyName = company;
-                if (!string.IsNullOrWhiteSpace(project) && !productName.Contains(project))
-                    productName = project;
+                var (company, project) = outNames;
+                if (!string.IsNullOrWhiteSpace(company) && !namesDic.TryGetValue(company, out var _))
+                    namesDic.Add(company, new List<string>());
+                if (!string.IsNullOrWhiteSpace(project)) {
+                    if (namesDic.TryGetValue(company, out var projectList))
+                        projectList.Add(project);
+                    else
+                        namesDic["Unclassified"].Add(project);
+                }
             }
 
             foreach (var (pptr, container) in containers) {
@@ -43,37 +47,58 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                     objectAssetsDic[obj].Container = container;
             }
 
+            var nodeCollection = new List<TreeViewNode>();
             var gameObjectNodeDic = new Dictionary<GameObject, GameObjectNode>();
-            foreach (var obj in from serializedFile in this.manager.AssetsFileList let rootNode =
-                new GameObjectNode(serializedFile.fileName) from obj in serializedFile.Objects select obj) {
-                if (obj is GameObject gameObject) {
-                    if (!gameObjectNodeDic.TryGetValue(gameObject, out var currentNode)) {
-                        currentNode = new GameObjectNode(gameObject);
-                        gameObjectNodeDic.Add(gameObject, currentNode);
-                    }
+            foreach (var serializedFile in this.manager.AssetsFileList) {
+                var rootNode = new GameObjectNode(serializedFile.fileName);
 
-                    foreach (var pptr in gameObject.m_Components) {
-                        if (pptr.TryGet(out var component)) {
-                            objectAssetsDic[component].Node = currentNode;
+                foreach (var obj in serializedFile.Objects) {
+                    if (obj is GameObject gameObject) {
+                        if (!gameObjectNodeDic.TryGetValue(gameObject, out var currentNode)) {
+                            currentNode = new GameObjectNode(gameObject);
+                            gameObjectNodeDic.Add(gameObject, currentNode);
+                        }
 
-                            switch (component) {
-                                case MeshFilter meshFilter:
-                                    if (meshFilter.m_Mesh.TryGet(out var fMesh))
-                                        objectAssetsDic[fMesh].Node = currentNode;
-                                    break;
+                        foreach (var pptr in gameObject.m_Components) {
+                            if (pptr.TryGet(out var component)) {
+                                objectAssetsDic[component].Node = currentNode;
 
-                                case SkinnedMeshRenderer renderer:
-                                    if (renderer.m_Mesh.TryGet(out var sMesh))
-                                        objectAssetsDic[sMesh].Node = currentNode;
-                                    break;
+                                switch (component) {
+                                    case MeshFilter meshFilter:
+                                        if (meshFilter.m_Mesh.TryGet(out var fMesh))
+                                            objectAssetsDic[fMesh].Node = currentNode;
+                                        break;
+
+                                    case SkinnedMeshRenderer renderer:
+                                        if (renderer.m_Mesh.TryGet(out var sMesh))
+                                            objectAssetsDic[sMesh].Node = currentNode;
+                                        break;
+                                }
                             }
                         }
+
+                        var parentNode = rootNode;
+                        if (gameObject.m_Transform != null) {
+                            if (gameObject.m_Transform.m_Father.TryGet(out var father)) {
+                                if (father.m_GameObject.TryGet(out var parentGameObject)) {
+                                    if (!gameObjectNodeDic.TryGetValue(parentGameObject, out parentNode)) {
+                                        parentNode = new GameObjectNode(parentGameObject);
+                                        gameObjectNodeDic.Add(parentGameObject, parentNode);
+                                    }
+                                }
+                            }
+                        }
+
+                        parentNode.Children.Add(currentNode);
                     }
+                }
 
-
-
+                if (rootNode.Children.Count > 0) {
+                    nodeCollection.Add(rootNode);
                 }
             }
+
+            return (namesDic, nodeCollection);
         }
     }
 }
