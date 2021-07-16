@@ -34,7 +34,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                 if (!string.IsNullOrWhiteSpace(company) && !companyName.Contains(company))
                     companyName = company;
                 if (!string.IsNullOrWhiteSpace(project) && !productName.Contains(project))
-                    companyName = project;
+                    productName = project;
             }
 
             foreach (var (pptr, container) in containers) {
@@ -42,7 +42,32 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                     objectAssetsList.Find(x => x.Obj.Equals(obj)).Container = container;
             }
 
+            var gameObjectNodeList = new List<GameObjectNode>();
+            foreach (var obj in from serializedFile in this.manager.AssetsFileList let rootNode =
+                new GameObjectNode(serializedFile.fileName) from obj in serializedFile.Objects select obj) {
 
+                if (obj is GameObject gameObject) {
+                    var currentNode = gameObjectNodeList.Find(x => x.GObj.Equals(gameObject));
+                    if (currentNode == null) {
+                        currentNode = new GameObjectNode(gameObject);
+                        gameObjectNodeList.Add(currentNode);
+                    }
+
+                    foreach (var pptr in gameObject.m_Components) {
+                        if (pptr.TryGet(out var component)) {
+                            objectAssetsList.Find(x => x.Obj.Equals(component)).Node = currentNode;
+
+                            switch (component) {
+                                case MeshFilter meshFilter:
+
+                                    break;
+                            }
+
+                        }
+                    }
+
+                }
+            }
         }
     }
 }

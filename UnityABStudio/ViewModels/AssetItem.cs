@@ -21,13 +21,15 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     public class AssetItem {
         public UObject Obj;
         public ClassIDType Type;
+        public GameObjectNode Node;
+
         public long PathID;
         public long FullSize;
 
         public string Name;
         public string BaseID;
-        public string Container;
         public string InfoText;
+        public string Container;
 
         public AssetItem(UObject obj, out ICollection<(PPtr<UObject>, string)> container, out (string, string) names) {
             this.Obj = obj;
