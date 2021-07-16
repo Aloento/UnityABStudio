@@ -17,7 +17,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
         private readonly AssetsManager manager = Ioc.Default.GetRequiredService<AssetsManager>();
         private readonly ILogger logger = Ioc.Default.GetRequiredService<LoggerService>().Logger;
 
-        public async Task<(Dictionary<string, List<string>>, List<TreeViewNode>)> LoadAssetsDataAsync(IEnumerable<StorageFile> files) {
+        public Task<(Dictionary<string, List<string>>, List<TreeViewNode>)> LoadAssetsDataAsync(IEnumerable<StorageFile> files) => Task.Run(async () => {
             this.logger.Information("Start to load Asset Files...");
             await this.manager.LoadFilesAsync(files.Select(x => x.Path).ToArray());
             this.logger.Information("AB Files loaded... Start to read contents...");
@@ -99,6 +99,6 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             }
 
             return (namesDic, nodeCollection);
-        }
+        });
     }
 }
