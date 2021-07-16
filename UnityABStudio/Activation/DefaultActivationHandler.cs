@@ -1,8 +1,8 @@
 namespace SoarCraft.QYun.UnityABStudio.Activation {
     using System.Threading.Tasks;
     using Contracts.Services;
-    using Core.Models;
     using Microsoft.UI.Xaml;
+    using ViewModels;
 
     public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventArgs> {
         private readonly INavigationService _navigationService;

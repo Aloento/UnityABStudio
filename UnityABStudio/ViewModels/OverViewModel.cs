@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Core.Models {
+namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -8,9 +8,10 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Models {
     using AssetReader.Unity3D.Objects;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.DependencyInjection;
+    using Core.Models;
+    using Core.Services;
     using Microsoft.UI.Xaml.Controls;
     using Serilog;
-    using Services;
 
     public class OverViewModel : ObservableRecipient {
         private readonly AssetsManager manager = Ioc.Default.GetRequiredService<AssetsManager>();
