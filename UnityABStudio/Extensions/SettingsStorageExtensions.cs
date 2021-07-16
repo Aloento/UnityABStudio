@@ -11,9 +11,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     public static class SettingsStorageExtensions {
         private const string FileExtension = ".json";
 
-        public static bool IsRoamingStorageAvailable(this ApplicationData appData) {
-            return appData.RoamingStorageQuota == 0;
-        }
+        public static bool IsRoamingStorageAvailable(this ApplicationData appData) => appData.RoamingStorageQuota == 0;
 
         public static async Task SaveAsync<T>(this StorageFolder folder, string name, T content) {
             var file = await folder.CreateFileAsync(GetFileName(name), CreationCollisionOption.ReplaceExisting);
@@ -33,25 +31,22 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             return await Json.ToObjectAsync<T>(fileContent);
         }
 
-        public static async Task SaveAsync<T>(this ApplicationDataContainer settings, string key, T value) {
+        public static async Task SaveAsync<T>(this ApplicationDataContainer settings, string key, T value) =>
             settings.SaveString(key, await Json.StringifyAsync(value));
-        }
 
-        public static void SaveString(this ApplicationDataContainer settings, string key, string value) {
+        public static void SaveString(this ApplicationDataContainer settings, string key, string value) =>
             settings.Values[key] = value;
-        }
 
         public static async Task<T> ReadAsync<T>(this ApplicationDataContainer settings, string key) {
-            object obj = null;
-
-            if (settings.Values.TryGetValue(key, out obj)) {
+            if (settings.Values.TryGetValue(key, out var obj)) {
                 return await Json.ToObjectAsync<T>((string)obj);
             }
 
             return default;
         }
 
-        public static async Task<StorageFile> SaveFileAsync(this StorageFolder folder, byte[] content, string fileName, CreationCollisionOption options = CreationCollisionOption.ReplaceExisting) {
+        public static async Task<StorageFile> SaveFileAsync(this StorageFolder folder, byte[] content, string fileName,
+            CreationCollisionOption options = CreationCollisionOption.ReplaceExisting) {
             if (content == null) {
                 throw new ArgumentNullException(nameof(content));
             }
@@ -70,7 +65,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
             if ((item != null) && item.IsOfType(StorageItemTypes.File)) {
                 var storageFile = await folder.GetFileAsync(fileName);
-                byte[] content = await storageFile.ReadBytesAsync();
+                var content = await storageFile.ReadBytesAsync();
                 return content;
             }
 
@@ -79,21 +74,17 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
         public static async Task<byte[]> ReadBytesAsync(this StorageFile file) {
             if (file != null) {
-                using (IRandomAccessStream stream = await file.OpenReadAsync()) {
-                    using (var reader = new DataReader(stream.GetInputStreamAt(0))) {
-                        _ = await reader.LoadAsync((uint)stream.Size);
-                        var bytes = new byte[stream.Size];
-                        reader.ReadBytes(bytes);
-                        return bytes;
-                    }
-                }
+                using IRandomAccessStream stream = await file.OpenReadAsync();
+                using var reader = new DataReader(stream.GetInputStreamAt(0));
+                _ = await reader.LoadAsync((uint)stream.Size);
+                var bytes = new byte[stream.Size];
+                reader.ReadBytes(bytes);
+                return bytes;
             }
 
             return null;
         }
 
-        private static string GetFileName(string name) {
-            return string.Concat(name, FileExtension);
-        }
+        private static string GetFileName(string name) => string.Concat(name, FileExtension);
     }
 }

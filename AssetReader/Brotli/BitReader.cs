@@ -65,7 +65,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             }
             var readOffset = br.intOffset << 2;
             var bytesRead = ByteReadSize - readOffset;
-            System.Array.Copy(br.byteBuffer, readOffset, br.byteBuffer, 0, bytesRead);
+            Array.Copy(br.byteBuffer, readOffset, br.byteBuffer, 0, bytesRead);
             br.intOffset = 0;
             try {
                 while (bytesRead < ByteReadSize) {
@@ -124,7 +124,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// <param name="input">data source</param>
         internal static void Init(BitReader br, System.IO.Stream input) {
             if (br.input != null) {
-                throw new System.InvalidOperationException("Bit reader already has associated input stream");
+                throw new InvalidOperationException("Bit reader already has associated input stream");
             }
             IntReader.Init(br.intReader, br.byteBuffer, br.intBuffer);
             br.input = input;
@@ -192,7 +192,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             var copyInts = Math.Min(IntAvailable(br), length >> 2);
             if (copyInts > 0) {
                 var readOffset = br.intOffset << 2;
-                System.Array.Copy(br.byteBuffer, readOffset, data, offset, copyInts << 2);
+                Array.Copy(br.byteBuffer, readOffset, data, offset, copyInts << 2);
                 offset += copyInts << 2;
                 length -= copyInts << 2;
                 br.intOffset += copyInts;

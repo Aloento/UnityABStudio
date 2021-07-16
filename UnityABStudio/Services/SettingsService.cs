@@ -4,6 +4,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
     using Contracts.Services;
+    using Core.Entities;
     using Extensions;
     using Microsoft.UI.Xaml;
 
@@ -30,6 +31,13 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
         public bool ConvertTexture {
             get => this.convertTexture;
             set => _ = SetProperty(ref this.convertTexture, value);
+        }
+
+        private ImageFormat convertType;
+
+        public ImageFormat ConvertType {
+            get => this.convertType;
+            set => _ = SetProperty(ref this.convertType, value);
         }
 
         private ICommand switchThemeCommand;

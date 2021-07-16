@@ -1,7 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.VideoClips {
     using Contracts;
     using Utils;
-    using Unity3D.Objects.Shaders;
+    using Shaders;
 
     public sealed class VideoClip : NamedObject {
         public ResourceReader m_VideoData;

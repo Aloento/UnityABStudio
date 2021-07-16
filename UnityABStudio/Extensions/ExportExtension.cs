@@ -1,4 +1,5 @@
 namespace SoarCraft.QYun.UnityABStudio.Extensions {
+    using System.IO;
     using AssetReader.Entities.Enums;
     using AssetReader.Unity3D.Objects.Texture2Ds;
     using CommunityToolkit.Mvvm.DependencyInjection;
@@ -37,9 +38,22 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
         public static bool ExportTexture2D(this AssetItem asset, string path) {
             var m_Texture2D = (Texture2D)asset.Obj;
             if (settings.ConvertTexture) {
-
+                var type = settings.ConvertType;
+                if (!TryExportFile(path, asset, "." + type.ToString().ToLower(), out var exportFullPath))
+                    return false;
+                var stream = m_Texture2D.ConvertToStream(type, true);
+                if (stream == null)
+                    return false;
+                using (stream) {
+                    File.WriteAllBytes(exportFullPath, stream.ToArray());
+                    return true;
+                }
+            } else {
+                if (!TryExportFile(path, asset, ".tex", out var exportFullPath))
+                    return false;
+                File.WriteAllBytes(exportFullPath, m_Texture2D.image_data.GetData());
+                return true;
             }
-            return false;
         }
     }
 }
