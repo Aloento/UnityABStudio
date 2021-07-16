@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Helpers {
+namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using System;
     using System.IO;
     using System.Threading.Tasks;

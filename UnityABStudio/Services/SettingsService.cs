@@ -4,7 +4,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
     using Contracts.Services;
-    using Helpers;
+    using Extensions;
     using Microsoft.UI.Xaml;
 
     public class SettingsService : ObservableRecipient {

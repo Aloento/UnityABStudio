@@ -3,7 +3,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
     using System.Threading.Tasks;
     using Windows.Storage;
     using Contracts.Services;
-    using Helpers;
+    using Extensions;
     using Microsoft.UI.Xaml;
 
     public class ThemeSelectorService : IThemeSelectorService {

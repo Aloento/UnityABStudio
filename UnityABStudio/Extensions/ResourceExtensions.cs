@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Helpers {
+namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using Microsoft.ApplicationModel.Resources;
 
     internal static class ResourceExtensions {

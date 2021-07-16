@@ -1,18 +1,18 @@
-namespace SoarCraft.QYun.UnityABStudio.Helpers {
+namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using AssetReader.Entities.Enums;
     using AssetReader.Unity3D.Objects.Texture2Ds;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Core.Models;
     using Services;
 
-    public static class ExportHelper {
+    public static class ExportExtension {
         private static string path;
         private static AssetItem asset;
-        private static SettingsService settings = Ioc.Default.GetRequiredService<SettingsService>();
+        private static readonly SettingsService settings = Ioc.Default.GetRequiredService<SettingsService>();
 
         public static bool ExportConvertFile(this AssetItem asset, string path) {
-            ExportHelper.path = path;
-            ExportHelper.asset = asset;
+            ExportExtension.path = path;
+            ExportExtension.asset = asset;
 
             switch (asset.Type) {
                 case ClassIDType.Texture2D:
