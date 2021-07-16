@@ -1,7 +1,6 @@
-namespace SoarCraft.QYun.UnityABStudio.ViewModels {
-    using System;
-    using System.Linq;
+namespace SoarCraft.QYun.UnityABStudio.Core.Models {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Windows.Storage;
     using AssetReader;
@@ -19,7 +18,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
 
         public async Task<(Dictionary<string, List<string>>, List<TreeViewNode>)> LoadAssetsDataAsync(IEnumerable<StorageFile> files) {
             this.logger.Information("Start to load Asset Files...");
-            await manager.LoadFilesAsync(files.Select(x => x.Path).ToArray());
+            await this.manager.LoadFilesAsync(files.Select(x => x.Path).ToArray());
             this.logger.Information("AB Files loaded... Start to read contents...");
 
             var objectAssetsDic =

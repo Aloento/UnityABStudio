@@ -5,7 +5,6 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
     using Contracts.Services;
     using Helpers;
     using Microsoft.UI.Xaml.Controls;
-    using ViewModels;
 
     public class NavigationViewService : INavigationViewService {
         private readonly INavigationService _navigationService;

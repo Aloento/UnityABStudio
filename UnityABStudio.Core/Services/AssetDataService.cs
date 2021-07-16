@@ -1,9 +1,9 @@
-namespace SoarCraft.QYun.UnityABStudio.Services {
+namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using AssetReader;
     using Contracts.Services;
-    using ViewModels;
+    using Models;
 
     public class AssetDataService : IAssetDataService {
         public static readonly AssetsManager AssetsManager = new();

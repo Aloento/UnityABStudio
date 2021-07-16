@@ -1,15 +1,15 @@
-namespace SoarCraft.QYun.UnityABStudio.Services {
+namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     using Serilog;
 
     public class LoggerService {
         public ILogger Logger { get; }
 
         public LoggerService() {
-            Logger = new LoggerConfiguration()
+            this.Logger = new LoggerConfiguration()
                 .WriteTo.File(@"C:\CaChe\UnityABStudio.log")
                 .CreateLogger();
 
-            Logger.Information("Hello, UnityABStudio!");
+            this.Logger.Information("Hello, UnityABStudio!");
         }
     }
 }

@@ -1,7 +1,7 @@
-namespace SoarCraft.QYun.UnityABStudio.Contracts.Services {
+namespace SoarCraft.QYun.UnityABStudio.Core.Contracts.Services {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using UnityABStudio.ViewModels;
+    using Models;
 
     public interface IAssetDataService {
         Task<IEnumerable<AssetItem>> GetHierarchyDataAsync();

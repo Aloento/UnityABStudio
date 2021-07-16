@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.ViewModels {
+namespace SoarCraft.QYun.UnityABStudio.Core.Models {
     using System.Collections.Generic;
     using AssetReader.Entities.Enums;
     using AssetReader.Unity3D;
@@ -11,10 +11,10 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using AssetReader.Unity3D.Objects.Avatars;
     using AssetReader.Unity3D.Objects.Materials;
     using AssetReader.Unity3D.Objects.Meshes;
-    using AssetReader.Unity3D.Objects.Sprites;
-    using AssetReader.Unity3D.Objects.Texture2Ds;
     using AssetReader.Unity3D.Objects.Shaders;
     using AssetReader.Unity3D.Objects.SpriteAtlases;
+    using AssetReader.Unity3D.Objects.Sprites;
+    using AssetReader.Unity3D.Objects.Texture2Ds;
     using AssetReader.Unity3D.Objects.VideoClips;
     using Base62;
 
