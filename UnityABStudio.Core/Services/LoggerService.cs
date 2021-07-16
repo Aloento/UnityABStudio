@@ -6,10 +6,10 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
 
         public LoggerService() {
             this.Logger = new LoggerConfiguration()
-                .WriteTo.File(@"C:\CaChe\UnityABStudio.log")
+                .WriteTo.Async(a => a.File(@"C:\CaChe\UnityABStudio.log"))
                 .CreateLogger();
 
-            this.Logger.Information("Hello, UnityABStudio!");
+            this.Logger.Information("Hello, SoarCraft.QYun.UnityABStudio!");
         }
     }
 }

@@ -22,8 +22,8 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             await this.manager.LoadFilesAsync(files.Select(x => x.Path).ToArray());
             this.logger.Information("AB Files loaded... Start to read contents...");
 
-            var objectAssetsDic =
-                new Dictionary<UObject, AssetItem>(this.manager.AssetsFileList.Sum(x => x.Objects.Count));
+            var objectAssetsDic = new Dictionary<UObject, AssetItem>(
+                this.manager.AssetsFileList.Sum(x => x.Objects.Count));
             var containers = new List<(PPtr<UObject>, string)>();
             var namesDic = new Dictionary<string, List<string>> { { "Unclassified", new List<string>() } };
 
