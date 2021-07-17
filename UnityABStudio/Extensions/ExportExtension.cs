@@ -20,13 +20,13 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
                 ClassIDType.AnimationClip => false,
                 ClassIDType.Animator => ExportAnimator(),
                 ClassIDType.AudioClip => ExportAudioClip(),
-                ClassIDType.Texture2D => ExportTexture2D(),
                 ClassIDType.Font => ExportFont(),
                 ClassIDType.Mesh => ExportMesh(),
                 ClassIDType.MonoBehaviour => ExportMonoBehaviour(),
                 ClassIDType.MovieTexture => ExportMovieTexture(),
                 ClassIDType.Shader => ExportShader(),
                 ClassIDType.Sprite => ExportSprite(),
+                ClassIDType.Texture2D => ExportTexture2D(),
                 ClassIDType.TextAsset => ExportTextAsset(),
                 ClassIDType.VideoClip => ExportVideoClip(),
                 _ => ExportRawFile(),
@@ -37,27 +37,6 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
         private static bool ExportAudioClip() => throw new NotImplementedException();
 
-        private static bool ExportTexture2D() {
-            var m_Texture2D = (Texture2D)item.Asset;
-            if (settings.ConvertTexture) {
-                var type = settings.ConvertType;
-                if (!TryExportFile(exportPath, item, "." + type.ToString().ToLower(), out var exportFullPath))
-                    return false;
-                var stream = m_Texture2D.ConvertToStream(type, true);
-                if (stream == null)
-                    return false;
-                using (stream) {
-                    File.WriteAllBytes(exportFullPath, stream.ToArray());
-                    return true;
-                }
-            } else {
-                if (!TryExportFile(exportPath, item, ".tex", out var exportFullPath))
-                    return false;
-                File.WriteAllBytes(exportFullPath, m_Texture2D.image_data.GetData());
-                return true;
-            }
-        }
-
         private static bool ExportFont() => throw new NotImplementedException();
         private static bool ExportMesh() => throw new NotImplementedException();
         private static bool ExportMonoBehaviour() => throw new NotImplementedException();
@@ -65,6 +44,28 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
         private static bool ExportShader() => throw new NotImplementedException();
         private static bool ExportSprite() => throw new NotImplementedException();
         private static bool ExportTextAsset() => throw new NotImplementedException();
+
+        private static bool ExportTexture2D() {
+            var m_Texture2D = (Texture2D)item.Obj;
+            if (settings.ConvertTexture) {
+                // var type = settings.ConvertType;
+                // if (!TryExportFile(exportPath, item, "." + type.ToString().ToLower(), out var exportFullPath))
+                //     return false;
+                // var stream = m_Texture2D.ConvertToStream(type, true);
+                // if (stream == null)
+                return false;
+                // using (stream) {
+                //     File.WriteAllBytes(exportFullPath, stream.ToArray());
+                //     return true;
+                // }
+            } else {
+                // if (!TryExportFile(exportPath, item, ".tex", out var exportFullPath))
+                //     return false;
+                // File.WriteAllBytes(exportFullPath, m_Texture2D.image_data.GetData());
+                return true;
+            }
+        }
+
         private static bool ExportVideoClip() => throw new NotImplementedException();
         private static bool ExportRawFile() => throw new NotImplementedException();
     }
