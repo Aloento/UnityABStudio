@@ -1,11 +1,13 @@
 #pragma once
 
-using namespace System;
+namespace SoarCraft::QYun::TextureDecoder {
+    using namespace System;
+    using namespace IO;
+    using namespace AssetReader::Utils;
 
-namespace SoarCraft::QYun::TextureDecoder
-{
-    public ref class TextureDecoder
+    public ref class TextureDecoderService
     {
-        // TODO: 在此处为此类添加方法。
+    public:
+        bool DecodeDXT1(UnityReader^ data, int width, int height, MemoryStream^ image);
     };
 }

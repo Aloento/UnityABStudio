@@ -48,20 +48,20 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
         private static bool ExportTexture2D() {
             var m_Texture2D = (Texture2D)item.Obj;
             if (settings.ConvertTexture) {
-                // var type = settings.ConvertType;
-                // if (!TryExportFile(exportPath, item, "." + type.ToString().ToLower(), out var exportFullPath))
-                //     return false;
-                // var stream = m_Texture2D.ConvertToStream(type, true);
-                // if (stream == null)
-                return false;
-                // using (stream) {
-                //     File.WriteAllBytes(exportFullPath, stream.ToArray());
-                //     return true;
-                // }
+                var type = settings.ConvertType;
+                if (!TryExportFile(exportPath, item, "." + type.ToString().ToLower(), out var exportFullPath))
+                    return false;
+                var stream = m_Texture2D.ConvertToStream(type, true);
+                if (stream == null)
+                    return false;
+                using (stream) {
+                    File.WriteAllBytes(exportFullPath, stream.ToArray());
+                    return true;
+                }
             } else {
-                // if (!TryExportFile(exportPath, item, ".tex", out var exportFullPath))
-                //     return false;
-                // File.WriteAllBytes(exportFullPath, m_Texture2D.image_data.GetData());
+                if (!TryExportFile(exportPath, item, ".tex", out var exportFullPath))
+                    return false;
+                File.WriteAllBytes(exportFullPath, m_Texture2D.image_data.GetData());
                 return true;
             }
         }

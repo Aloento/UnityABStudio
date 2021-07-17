@@ -1,4 +1,4 @@
-﻿#include "pch.h"
+#include "pch.h"
 
 using namespace System;
 using namespace System::Reflection;
@@ -11,10 +11,10 @@ using namespace System::Security::Permissions;
 [assembly:AssemblyConfigurationAttribute(L"")];
 [assembly:AssemblyCompanyAttribute(L"")];
 [assembly:AssemblyProductAttribute(L"TextureDecoder")];
-[assembly:AssemblyCopyrightAttribute(L"版权所有(c)  2021")];
+[assembly:AssemblyCopyrightAttribute(L"Copyright (c)  2021")];
 [assembly:AssemblyTrademarkAttribute(L"")];
 [assembly:AssemblyCultureAttribute(L"")];
 
-[assembly:AssemblyVersionAttribute("1.0.*")];
+[assembly:AssemblyVersionAttribute(L"1.0.*")];
 
 [assembly:ComVisible(false)];

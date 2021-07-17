@@ -11,7 +11,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
         public static Image ConvertToImage(this Texture2D m_Texture2D, bool flip) {
             var converter = new Texture2DConverter(m_Texture2D);
             var bytes = converter.DecodeTexture2D();
-            if (bytes != null && bytes.Length > 0) {
+            if (bytes is { Length: > 0 }) {
                 var image = Image.LoadPixelData<Bgra32>(bytes, m_Texture2D.m_Width, m_Texture2D.m_Height);
                 if (flip) {
                     image.Mutate(x => x.Flip(FlipMode.Vertical));
