@@ -10,7 +10,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
             return (uint)(a | (r << 8) | (g << 16) | (b << 24));
         }
 
-        private void RGB565LE(in ushort d, out byte r, out byte g, out byte b) {
+        private void RGB565LE(ushort d, out byte r, out byte g, out byte b) {
             if (this.IsLittleEndian) {
                 r = (byte)(((d >> 8) & 0xf8) | (d >> 13));
                 g = (byte)(((d >> 3) & 0xfc) | ((d >> 9) & 3));

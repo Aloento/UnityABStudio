@@ -5,13 +5,13 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
     using AssetReader.Utils;
 
     public partial class TextureDecoder {
-        public bool DecodeDXT1(UnityReader data, int width, int height, MemoryStream image) {
+        public async Task<bool> DecodeDXT1Async(UnityReader data, int width, int height, MemoryStream image) {
             var blocks_x = (width + 3) / 4;
             var blocks_y = (height + 3) / 4;
 
             for (var by = 0; by < blocks_x; by++) {
                 for (var bx = 0; bx < blocks_y; bx++) {
-                    DecodeDXT1BlockAsync(data, image);
+                    await DecodeDXT1BlockAsync(data, image);
                 }
             }
 
