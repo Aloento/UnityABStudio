@@ -3,6 +3,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
     using System.IO;
     using System.Threading.Tasks;
     using AssetReader.Utils;
+    using Helpers;
 
     public partial class TextureDecoder {
         public async Task<bool> DecodeDXT5Async(UnityReader data, int width, int height, MemoryStream image) {
@@ -10,23 +11,22 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
             var blocks_y = (height + 3) / 4;
 
             for (var by = 0; by < blocks_x; by++) {
-                for (var bx = 0; bx < blocks_y; bx++) {
-                    data.Position += 8;
+                for (var bx = 0; bx < blocks_y; bx++) { // Once Reader -> 16
+                    await DecodeDXT1BlockAsync(data.Move(8), image.Mark()); // Reader -> 8
 
-                    var pos = image.Position;
-                    await DecodeDXT1BlockAsync(data, image);
-                    image.Position = pos;
-
-                    data.Position -= 16;
-                    DecodeDXT5Alpha(data, image);
+                    DecodeDXT5Alpha(data.Move(-16), image.Back()); // Reader -> 8
+                    _ = data.Move(8);
                 }
             }
 
             return true;
         }
 
+        /// <summary>
+        /// Reader -> 8
+        /// </summary>
         private void DecodeDXT5Alpha(UnityReader data, MemoryStream image, int channel = 3) {
-            var a = new List<byte>(8) { data.ReadByte(), data.ReadByte() };
+            var a = new List<byte>(8) { data.ReadByte(), data.ReadByte() }; // Reader -> 2
             if (a[0] > a[1]) {
                 a[2] = (byte)(((a[0] * 6) + a[1]) / 7);
                 a[3] = (byte)(((a[0] * 5) + (a[1] * 2)) / 7);
@@ -43,11 +43,9 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
                 a[7] = 255;
             }
 
-            data.Position -= 2;
-            var d = data.ReadUInt64();
+            var d = data.Move(-2).ReadUInt64() >> 16; // Reader -> 8
             for (var i = 0; i < 16; i++, d >>= 3) {
-                image.Position += (i * 4) + channel;
-                image.WriteByte(a[(int)(d & 7)]);
+                image.Move((i * 4) + channel).WriteByte(a[(int)(d & 7)]);
             }
         }
     }

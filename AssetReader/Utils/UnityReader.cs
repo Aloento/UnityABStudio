@@ -12,6 +12,8 @@ namespace SoarCraft.QYun.AssetReader.Utils {
         public string FileName;
         public FileType FileType;
 
+        private long markPos;
+
         public UnityReader(string path) : this(path, File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) { }
 
         public UnityReader(string path, Stream stream) : base(stream) {
@@ -27,6 +29,21 @@ namespace SoarCraft.QYun.AssetReader.Utils {
         }
 
         public UnityReader(Stream stream, bool isBigEndian = false) : base(stream, isBigEndian) {
+        }
+
+        public UnityReader Move(long offset) {
+            Position += offset;
+            return this;
+        }
+
+        public UnityReader Mark() {
+            this.markPos = Position;
+            return this;
+        }
+
+        public UnityReader Back() {
+            Position = this.markPos;
+            return this;
         }
 
         public void AlignStream() => AlignStream(4);

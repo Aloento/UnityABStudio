@@ -10,17 +10,20 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
             var blocks_y = (height + 3) / 4;
 
             for (var by = 0; by < blocks_x; by++) {
-                for (var bx = 0; bx < blocks_y; bx++) {
-                    await DecodeDXT1BlockAsync(data, image);
+                for (var bx = 0; bx < blocks_y; bx++) { // Once Reader -> 8
+                    await DecodeDXT1BlockAsync(data, image); // Reader -> 8
                 }
             }
 
             return true;
         }
 
+        /// <summary>
+        /// Reader -> 8
+        /// </summary>
         private async Task DecodeDXT1BlockAsync(UnityReader data, MemoryStream image) {
-            var q0 = data.ReadUInt16();
-            var q1 = data.ReadUInt16();
+            var q0 = data.ReadUInt16(); // Reader -> 2
+            var q1 = data.ReadUInt16(); // Reader -> 2
 
             RGB565LE(q0, out var r0, out var g0, out var b0);
             RGB565LE(q1, out var r1, out var g1, out var b1);
@@ -34,7 +37,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
                 c[3] = Color(0, 0, 0, 255);
             }
 
-            var d = data.ReadUInt32();
+            var d = data.ReadUInt32(); // Reader -> 4
             for (var i = 0; i < 16; i++, d >>= 2) {
                 await image.WriteAsync(BitConverter.GetBytes(c[d & 3]));
             }
