@@ -12,9 +12,9 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
 
             for (var by = 0; by < blocks_x; by++) {
                 for (var bx = 0; bx < blocks_y; bx++) { // Once Reader -> 16
-                    await DecodeDXT1BlockAsync(data.Move(8), image.Mark()); // Reader -> 8
+                    await DecodeDXT1BlockAsync(data.Move(8), image.Mark()); // Reader -> 8, -> 8
 
-                    DecodeDXT5Alpha(data.Move(-16), image.Back()); // Reader -> 8
+                    DecodeDXT5Alpha(data.Move(-16), image.Back()); // Reader <- 16, -> 8
                     _ = data.Move(8);
                 }
             }
@@ -43,7 +43,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.TextureDecoders {
                 a[7] = 255;
             }
 
-            var d = data.Move(-2).ReadUInt64() >> 16; // Reader -> 8
+            var d = data.Move(-2).ReadUInt64() >> 16; // Reader <- 2, -> 8
             for (var i = 0; i < 16; i++, d >>= 3) {
                 image.Move((i * 4) + channel).WriteByte(a[(int)(d & 7)]);
             }
