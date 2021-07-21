@@ -27,6 +27,9 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ETC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextureDecoder.cpp">
@@ -52,6 +55,18 @@
     </ClCompile>
     <ClCompile Include="PVRTC.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeETC1.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeETC2.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeETC2A1.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeETC2A8.cpp">
+      <Filter>Source Files\Decoders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

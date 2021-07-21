@@ -3,15 +3,10 @@
 
 namespace SoarCraft::QYun::TextureDecoder {
     bool TextureDecoderService::DecodeDXT1(array<Byte>^ data, int w, int h, array<UInt32>^ image) {
-        auto blocks_x = (w + 3) / 4;
-        auto blocks_y = (h + 3) / 4;
+        FastInsert;
 
-        Byte* d = Array2Ptr(data);
-        UInt32* i = Array2Ptr(image);
-        UInt32 buffer[16];
-
-        for (long by = 0; by < blocks_y; by++) {
-            for (long bx = 0; bx < blocks_x; bx++, d += 8) {
+        for (long by = 0; by < num_blocks_y; by++) {
+            for (long bx = 0; bx < num_blocks_x; bx++, d += 8) {
                 DecodeDXT1Block(d, buffer);
                 CopyBlockBuffer(bx, by, w, h, 4, 4, buffer, i);
             }
