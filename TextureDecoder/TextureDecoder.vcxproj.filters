@@ -47,6 +47,12 @@
     <ClCompile Include="DecodeDXT5.cpp">
       <Filter>Source Files\Decoders</Filter>
     </ClCompile>
+    <ClCompile Include="DecodePVRTC.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="PVRTC.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
