@@ -29,7 +29,7 @@ namespace SoarCraft::QYun::TextureDecoder {
         return ptr;
     }
 
-    void CopyBlockBuffer(long bx, long by, long w, long h, long bw,
+    void TextureDecoderService::CopyBlockBuffer(long bx, long by, long w, long h, long bw,
                          long bh, UInt32* buffer, UInt32* image) {
         long x = bw * bx;
         long xl = (bw * (bx + 1) > w ? w - bw * bx : bw) * 4;

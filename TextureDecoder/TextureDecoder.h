@@ -3,7 +3,6 @@
 namespace SoarCraft::QYun::TextureDecoder {
     using namespace System;
     using namespace IO;
-    using namespace AssetReader::Utils;
 
     public ref class TextureDecoderService
     {
