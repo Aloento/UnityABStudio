@@ -33,6 +33,9 @@
     <ClInclude Include="FP16.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BitCasts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextureDecoder.cpp">
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="BCN.h">
       <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeBC7.cpp">
+      <Filter>Source Files\Decoders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -41,6 +41,7 @@ namespace SoarCraft::QYun::TextureDecoder {
         bool DecodeBC4(FastArgs);
         bool DecodeBC5(FastArgs);
         bool DecodeBC6(FastArgs);
+        bool DecodeBC7(FastArgs);
 
     private:
         inline Byte* Array2Ptr(array<Byte>^ array);
@@ -75,5 +76,6 @@ namespace SoarCraft::QYun::TextureDecoder {
         inline void DecodeEACSignedBlock(Byte* data, int color, UInt32* outbuf);
 
         inline void DecodeBC6Block(const uint8_t* _src, uint32_t* _dst, bool _signed);
+        inline void DecodeBC7Block(const uint8_t* _src, uint32_t* _dst);
     };
 }

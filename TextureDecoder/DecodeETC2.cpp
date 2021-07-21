@@ -2,7 +2,7 @@
 #include "TextureDecoder.h"
 
 namespace SoarCraft::QYun::TextureDecoder {
-    bool TextureDecoderService::DecodeETC1(FastArgs) {
+    bool TextureDecoderService::DecodeETC2(FastArgs) {
         FastInsert;
 
         for (long by = 0; by < num_blocks_y; by++) {
