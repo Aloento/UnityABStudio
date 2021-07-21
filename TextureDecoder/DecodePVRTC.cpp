@@ -7,10 +7,10 @@ namespace SoarCraft::QYun::TextureDecoder {
     const int PVRTC1_STANDARD_WEIGHT[] = { 0, 3, 5, 8 };
     const int PVRTC1_PUNCHTHROUGH_WEIGHT[] = { 0, 4, 4, 8 };
 
-    bool TextureDecoderService::DecodePVRTC(array<Byte>^ data, int w, int h, array<UInt32>^ image, bool is2bpp) {
+    bool TextureDecoderService::DecodePVRTC(FastArgs, bool is2bpp) {
         long bw = is2bpp ? 8 : 4;
-        long num_blocks_x = is2bpp ? (w + 7) / 8 : (w + 3) / 4;
-        long num_blocks_y = (h + 3) / 4;
+        long num_blocks_x = is2bpp ? (width + 7) / 8 : (width + 3) / 4;
+        long num_blocks_y = (height + 3) / 4;
         long num_blocks = num_blocks_x * num_blocks_y;
         long min_num_blocks = num_blocks_x <= num_blocks_y ? num_blocks_x : num_blocks_y;
 
@@ -55,7 +55,7 @@ namespace SoarCraft::QYun::TextureDecoder {
                 if (is2bpp) ApplicateColor2Bpp(d + MortonIndex(bx, by, min_num_blocks) * 8, local_info, buffer);
                 else ApplicateColor4Bpp(d + MortonIndex(bx, by, min_num_blocks) * 8, local_info, buffer);
 
-                CopyBlockBuffer(bx, by, w, h, bw, 4, buffer, i);
+                CopyBlockBuffer(bx, by, width, height, bw, 4, buffer, i);
             }
         }
 

@@ -2,14 +2,14 @@
 #include "TextureDecoder.h"
 
 namespace SoarCraft::QYun::TextureDecoder {
-    bool TextureDecoderService::DecodeETC2A8(array<Byte>^ data, int w, int h, array<UInt32>^ image) {
+    bool TextureDecoderService::DecodeETC2A8(FastArgs) {
         FastInsert;
 
         for (long by = 0; by < num_blocks_y; by++) {
             for (long bx = 0; bx < num_blocks_x; bx++, d += 16) {
                 DecodeETC2Block(d + 8, buffer);
                 DecodeETC2A8Block(d, buffer);
-                CopyBlockBuffer(bx, by, w, h, 4, 4, buffer, i);
+                CopyBlockBuffer(bx, by, width, height, 4, 4, buffer, i);
             }
         }
         return 1;

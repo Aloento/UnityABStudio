@@ -83,6 +83,9 @@
     <ClCompile Include="DecodeEACRGSigned.cpp">
       <Filter>Source Files\Decoders</Filter>
     </ClCompile>
+    <ClCompile Include="DecodeBC4.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">

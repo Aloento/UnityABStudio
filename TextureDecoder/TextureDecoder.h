@@ -4,11 +4,13 @@
 #include "stdint.h"
 
 #define FastInsert \
-    long num_blocks_x = (w + 3) / 4; \
-    long num_blocks_y = (h + 3) / 4;\
+    long num_blocks_x = (width + 3) / 4; \
+    long num_blocks_y = (height + 3) / 4;\
     Byte* d = Array2Ptr(data);\
     UInt32* i = Array2Ptr(image);\
     UInt32 buffer[16];
+
+#define FastArgs array<Byte>^ data, int width, int height, array<UInt32>^ image
 
 namespace SoarCraft::QYun::TextureDecoder {
     using namespace System;
@@ -21,20 +23,22 @@ namespace SoarCraft::QYun::TextureDecoder {
         static bool IsBigEndian;
         static UInt32 TRANSPARENT_MASK;
 
-        bool DecodeDXT1(array<Byte>^ data, int width, int height, array<UInt32>^ image);
-        bool DecodeDXT5(array<Byte>^ data, int width, int height, array<UInt32>^ image);
+        bool DecodeDXT1(FastArgs);
+        bool DecodeDXT5(FastArgs);
 
-        bool DecodePVRTC(array<Byte>^ data, int width, int height, array<UInt32>^ image, bool is2bpp);
+        bool DecodePVRTC(FastArgs, bool is2bpp);
 
-        bool DecodeETC1(array<Byte>^ data, int width, int height, array<UInt32>^ image);
-        bool DecodeETC2(array<Byte>^ data, int width, int height, array<UInt32>^ image);
-        bool DecodeETC2A1(array<Byte>^ data, int width, int height, array<UInt32>^ image);
-        bool DecodeETC2A8(array<Byte>^ data, int width, int height, array<UInt32>^ image);
+        bool DecodeETC1(FastArgs);
+        bool DecodeETC2(FastArgs);
+        bool DecodeETC2A1(FastArgs);
+        bool DecodeETC2A8(FastArgs);
 
-        bool DecodeEACR(array<Byte>^ data, int width, int height, array<UInt32>^ image);
-        bool DecodeEACRSigned(array<Byte>^ data, int width, int height, array<UInt32>^ image);
-        bool DecodeEACRG(array<Byte>^ data, int width, int height, array<UInt32>^ image);
-        bool DecodeEACRGSigned(array<Byte>^ data, int width, int height, array<UInt32>^ image);
+        bool DecodeEACR(FastArgs);
+        bool DecodeEACRSigned(FastArgs);
+        bool DecodeEACRG(FastArgs);
+        bool DecodeEACRGSigned(FastArgs);
+
+        bool DecodeBC4(FastArgs);
 
     private:
         inline Byte* Array2Ptr(array<Byte>^ array);

@@ -3,7 +3,7 @@
 #include <cstring>
 
 namespace SoarCraft::QYun::TextureDecoder {
-    bool TextureDecoderService::DecodeEACRG(array<Byte>^ data, int w, int h, array<UInt32>^ image) {
+    bool TextureDecoderService::DecodeEACRG(FastArgs) {
         FastInsert;
 
         uint32_t base_buffer[16];
@@ -14,7 +14,7 @@ namespace SoarCraft::QYun::TextureDecoder {
                 memcpy(buffer, base_buffer, sizeof(buffer));
                 DecodeEACBlock(d, 2, buffer);
                 DecodeEACBlock(d + 8, 1, buffer);
-                CopyBlockBuffer(bx, by, w, h, 4, 4, buffer, i);
+                CopyBlockBuffer(bx, by, width, height, 4, 4, buffer, i);
             }
         }
         return 1;

@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Colors.cpp" />
+    <ClCompile Include="DecodeBC4.cpp" />
     <ClCompile Include="DecodeDXT1.cpp" />
     <ClCompile Include="DecodeDXT5.cpp" />
     <ClCompile Include="DecodeEACR.cpp" />
