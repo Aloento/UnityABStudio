@@ -2,40 +2,44 @@
 #include "TextureDecoder.h"
 
 namespace SoarCraft::QYun::TextureDecoder {
-    bool TextureDecoderService::DecodeDXT1(UnityReader^ data, int width, int height, MemoryStream^ image) {
-        auto blocks_x = (width + 3) / 4;
-        auto blocks_y = (height + 3) / 4;
+    bool TextureDecoderService::DecodeDXT1(array<Byte>^ data, int w, int h, array<UInt32>^ image) {
+        auto blocks_x = (w + 3) / 4;
+        auto blocks_y = (h + 3) / 4;
 
-        for (auto y = 0; y < blocks_y; y++) {
-            for (auto x = 0; x < blocks_x; x++) {
-                DecodeDXT1Block(data, image);
+        Byte* d = ArrayToPointer(data);
+        UInt32* i = ArrayToPointer(image);
+        UInt32 buffer[16];
+
+        for (long by = 0; by < blocks_y; by++) {
+            for (long bx = 0; bx < blocks_x; bx++, d += 8) {
+                DecodeDXT1Block(d, buffer);
+                CopyBlockBuffer(bx, by, w, h, 4, 4, buffer, i);
             }
         }
 
         return true;
     }
 
-    inline void TextureDecoderService::DecodeDXT1Block(UnityReader^ data, MemoryStream^ image) {
+    inline void TextureDecoderService::DecodeDXT1Block(Byte* data, UInt32* outbuf) {
         Byte r0, g0, b0, r1, g1, b1;
-        UInt16 q0 = data->ReadUInt16();
-        UInt16 q1 = data->ReadUInt16();
+        int q0 = *(UInt16*)(data);
+        int q1 = *(UInt16*)(data + 2);
 
         RGB565LE(q0, &r0, &g0, &b0);
         RGB565LE(q1, &r1, &g1, &b1);
+        UInt32 c[4] = { Color(r0, g0, b0, 255), Color(r1, g1, b1, 255) };
 
-        unsigned c[4] = 
-    }
-
-    inline void TextureDecoderService::RGB565LE(UInt16 d, Byte* r, Byte* g, Byte* b) {
-        if (NativeEndianness) {
-            *r = (d & 0xf8) | (d >> 5 & 7);
-            *g = (d << 5 & 0xe0) | (d >> 11 & 0x1c) | (d >> 1 & 3);
-            *b = (d >> 5 & 0xf8) | (d >> 10 & 0x7);
+        if (q0 > q1) {
+            c[2] = Color((r0 * 2 + r1) / 3, (g0 * 2 + g1) / 3, (b0 * 2 + b1) / 3, 255);
+            c[3] = Color((r0 + r1 * 2) / 3, (g0 + g1 * 2) / 3, (b0 + b1 * 2) / 3, 255);
         }
         else {
-            *r = (d >> 8 & 0xf8) | (d >> 13);
-            *g = (d >> 3 & 0xfc) | (d >> 9 & 3);
-            *b = (d << 3) | (d >> 2 & 7);
+            c[2] = Color((r0 + r1) / 2, (g0 + g1) / 2, (b0 + b1) / 2, 255);
+            c[3] = Color(0, 0, 0, 255);
         }
+
+        UInt32 d = *(UInt32*)(data + 4);
+        for (int i = 0; i < 16; i++, d >>= 2)
+            outbuf[i] = c[d & 3];
     }
 }

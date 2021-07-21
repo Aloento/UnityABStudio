@@ -41,6 +41,9 @@
     <ClCompile Include="DecodeDXT1.cpp">
       <Filter>Source Files\Decoders</Filter>
     </ClCompile>
+    <ClCompile Include="Colors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">

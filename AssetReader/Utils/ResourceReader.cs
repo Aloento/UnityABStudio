@@ -52,7 +52,7 @@ namespace SoarCraft.QYun.AssetReader.Utils {
 
         public byte[] GetData() {
             var binaryReader = this.GetReader();
-            binaryReader.BaseStream.Position = this.offset;
+            binaryReader.Position = this.offset;
             return binaryReader.ReadBytes((int)this.size);
         }
 
