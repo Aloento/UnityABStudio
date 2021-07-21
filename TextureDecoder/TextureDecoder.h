@@ -58,5 +58,6 @@ namespace SoarCraft::QYun::TextureDecoder {
         inline void DecodeETC1Block(Byte* data, UInt32* outbuf);
         inline void DecodeETC2Block(Byte* data, UInt32* outbuf);
         inline void DecodeETC2A1Block(Byte* data, UInt32* outbuf);
+        inline void DecodeETC2A8Block(Byte* data, UInt32* outbuf);
     };
 }

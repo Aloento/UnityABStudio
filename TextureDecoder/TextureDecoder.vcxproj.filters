@@ -68,6 +68,9 @@
     <ClCompile Include="DecodeETC2A8.cpp">
       <Filter>Source Files\Decoders</Filter>
     </ClCompile>
+    <ClCompile Include="ETC.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">

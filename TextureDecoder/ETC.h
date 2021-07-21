@@ -20,21 +20,4 @@ namespace SoarCraft::QYun::TextureDecoder {
       {-2, -5, -8, -10, 1, 4, 7, 9},  {-2, -4, -8, -10, 1, 3, 7, 9},   {-2, -5, -7, -10, 1, 4, 6, 9},
       {-3, -4, -7, -10, 2, 3, 6, 9},  {-1, -2, -3, -10, 0, 1, 2, 9},   {-4, -6, -8, -9, 3, 5, 7, 8},
       {-3, -5, -7, -9, 2, 4, 6, 8} };
-
-
-    uint_fast8_t TextureDecoderService::Clamp(const int n) {
-        return n < 0 ? 0 : n > 255 ? 255 : n;
-    }
-
-    uint32_t TextureDecoderService::ApplicateColor(uint_fast8_t c[3], int_fast16_t m) {
-        return Color(Clamp(c[0] + m), Clamp(c[1] + m), Clamp(c[2] + m), 255);
-    }
-
-    uint32_t TextureDecoderService::ApplicateColorAlpha(uint_fast8_t c[3], int_fast16_t m, int transparent) {
-        return Color(Clamp(c[0] + m), Clamp(c[1] + m), Clamp(c[2] + m), transparent ? 0 : 255);
-    }
-
-    uint32_t TextureDecoderService::ApplicateColorRaw(uint_fast8_t c[3]) {
-        return Color(c[0], c[1], c[2], 255);
-    }
 }

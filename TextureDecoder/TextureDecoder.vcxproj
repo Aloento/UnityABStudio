@@ -136,6 +136,7 @@
     <ClCompile Include="DecodeETC2A1.cpp" />
     <ClCompile Include="DecodeETC2A8.cpp" />
     <ClCompile Include="DecodePVRTC.cpp" />
+    <ClCompile Include="ETC.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
