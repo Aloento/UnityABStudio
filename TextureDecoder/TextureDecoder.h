@@ -31,6 +31,11 @@ namespace SoarCraft::QYun::TextureDecoder {
         bool DecodeETC2A1(array<Byte>^ data, int width, int height, array<UInt32>^ image);
         bool DecodeETC2A8(array<Byte>^ data, int width, int height, array<UInt32>^ image);
 
+        bool DecodeEACR(array<Byte>^ data, int width, int height, array<UInt32>^ image);
+        bool DecodeEACRSigned(array<Byte>^ data, int width, int height, array<UInt32>^ image);
+        bool DecodeEACRG(array<Byte>^ data, int width, int height, array<UInt32>^ image);
+        bool DecodeEACRGSigned(array<Byte>^ data, int width, int height, array<UInt32>^ image);
+
     private:
         inline Byte* Array2Ptr(array<Byte>^ array);
         inline UInt32* Array2Ptr(array<UInt32>^ array);
@@ -59,5 +64,8 @@ namespace SoarCraft::QYun::TextureDecoder {
         inline void DecodeETC2Block(Byte* data, UInt32* outbuf);
         inline void DecodeETC2A1Block(Byte* data, UInt32* outbuf);
         inline void DecodeETC2A8Block(Byte* data, UInt32* outbuf);
+
+        inline void DecodeEACBlock(Byte* data, int color, UInt32* outbuf);
+        inline void DecodeEACSignedBlock(Byte* data, int color, UInt32* outbuf);
     };
 }

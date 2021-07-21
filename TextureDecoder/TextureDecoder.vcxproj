@@ -131,6 +131,10 @@
     <ClCompile Include="Colors.cpp" />
     <ClCompile Include="DecodeDXT1.cpp" />
     <ClCompile Include="DecodeDXT5.cpp" />
+    <ClCompile Include="DecodeEACR.cpp" />
+    <ClCompile Include="DecodeEACRG.cpp" />
+    <ClCompile Include="DecodeEACRGSigned.cpp" />
+    <ClCompile Include="DecodeEACRSigned.cpp" />
     <ClCompile Include="DecodeETC1.cpp" />
     <ClCompile Include="DecodeETC2.cpp" />
     <ClCompile Include="DecodeETC2A1.cpp" />

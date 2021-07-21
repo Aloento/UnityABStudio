@@ -71,6 +71,18 @@
     <ClCompile Include="ETC.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DecodeEACR.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeEACRSigned.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeEACRG.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeEACRGSigned.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
