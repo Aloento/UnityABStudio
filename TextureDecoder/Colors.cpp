@@ -2,14 +2,14 @@
 #include "TextureDecoder.h"
 
 namespace SoarCraft::QYun::TextureDecoder {
-    inline unsigned TextureDecoderService::Color(Byte r, Byte g, Byte b, Byte a) {
+    unsigned TextureDecoderService::Color(Byte r, Byte g, Byte b, Byte a) {
         if (IsBigEndian)
             return a | r << 8 | g << 16 | b << 24;
         
         return b | g << 8 | r << 16 | a << 24;
     }
 
-    inline void TextureDecoderService::RGB565LE(UInt16 d, Byte* r, Byte* g, Byte* b) {
+    void TextureDecoderService::RGB565LE(UInt16 d, Byte* r, Byte* g, Byte* b) {
         if (IsBigEndian) {
             *r = (d & 0xf8) | (d >> 5 & 7);
             *g = (d << 5 & 0xe0) | (d >> 11 & 0x1c) | (d >> 1 & 3);

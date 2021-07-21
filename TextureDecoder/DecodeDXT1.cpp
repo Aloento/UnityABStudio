@@ -6,8 +6,8 @@ namespace SoarCraft::QYun::TextureDecoder {
         auto blocks_x = (w + 3) / 4;
         auto blocks_y = (h + 3) / 4;
 
-        Byte* d = ArrayToPointer(data);
-        UInt32* i = ArrayToPointer(image);
+        Byte* d = Array2Ptr(data);
+        UInt32* i = Array2Ptr(image);
         UInt32 buffer[16];
 
         for (long by = 0; by < blocks_y; by++) {
@@ -20,7 +20,7 @@ namespace SoarCraft::QYun::TextureDecoder {
         return true;
     }
 
-    inline void TextureDecoderService::DecodeDXT1Block(Byte* data, UInt32* outbuf) {
+    void TextureDecoderService::DecodeDXT1Block(Byte* data, UInt32* outbuf) {
         Byte r0, g0, b0, r1, g1, b1;
         int q0 = *(UInt16*)(data);
         int q1 = *(UInt16*)(data + 2);
