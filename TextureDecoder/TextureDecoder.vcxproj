@@ -122,14 +122,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ETC.h" />
+    <ClInclude Include="FP16.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="TextureDecoder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="BCN.h" />
     <ClCompile Include="Colors.cpp" />
     <ClCompile Include="DecodeBC4.cpp" />
+    <ClCompile Include="DecodeBC5.cpp" />
+    <ClCompile Include="DecodeBC6.cpp" />
     <ClCompile Include="DecodeDXT1.cpp" />
     <ClCompile Include="DecodeDXT5.cpp" />
     <ClCompile Include="DecodeEACR.cpp" />

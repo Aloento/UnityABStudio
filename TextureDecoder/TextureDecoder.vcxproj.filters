@@ -30,6 +30,9 @@
     <ClInclude Include="ETC.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FP16.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextureDecoder.cpp">
@@ -85,6 +88,15 @@
     </ClCompile>
     <ClCompile Include="DecodeBC4.cpp">
       <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeBC5.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeBC6.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="BCN.h">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
