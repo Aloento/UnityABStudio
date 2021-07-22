@@ -36,6 +36,9 @@
     <ClInclude Include="BitCasts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ASTC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextureDecoder.cpp">
@@ -102,6 +105,15 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="DecodeBC7.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeATCRGB4.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeATCRGBA8.cpp">
+      <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="DecodeASTC.cpp">
       <Filter>Source Files\Decoders</Filter>
     </ClCompile>
   </ItemGroup>

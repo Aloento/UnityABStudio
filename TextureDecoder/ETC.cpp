@@ -1,11 +1,8 @@
 #include "pch.h"
 #include "TextureDecoder.h"
+#include "ETC.h"
 
 namespace SoarCraft::QYun::TextureDecoder {
-    uint_fast8_t TextureDecoderService::Clamp(const int n) {
-        return n < 0 ? 0 : n > 255 ? 255 : n;
-    }
-
     uint32_t TextureDecoderService::ApplicateColor(uint_fast8_t c[3], int_fast16_t m) {
         return Color(Clamp(c[0] + m), Clamp(c[1] + m), Clamp(c[2] + m), 255);
     }

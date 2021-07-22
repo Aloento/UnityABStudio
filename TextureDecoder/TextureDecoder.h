@@ -1,14 +1,24 @@
 #pragma once
 #include "PVRTC.h"
-#include "ETC.h"
 #include "stdint.h"
+#include "ASTC.h"
+
+#define A2PInsert \
+    Byte* d = Array2Ptr(data);\
+    UInt32* i = Array2Ptr(image);\
+    UInt32 buffer[16];
 
 #define FastInsert \
     long num_blocks_x = (width + 3) / 4; \
     long num_blocks_y = (height + 3) / 4;\
-    Byte* d = Array2Ptr(data);\
-    UInt32* i = Array2Ptr(image);\
-    UInt32 buffer[16];
+    A2PInsert;
+
+#define BCInsert \
+    uint32_t m_block_width = 4; \
+    uint32_t m_block_height = 4; \
+    uint32_t m_blocks_x = (width + m_block_width - 1) / m_block_width; \
+    uint32_t m_blocks_y = (height + m_block_height - 1) / m_block_height; \
+    A2PInsert;
 
 #define FastArgs array<Byte>^ data, int width, int height, array<UInt32>^ image
 
@@ -43,6 +53,10 @@ namespace SoarCraft::QYun::TextureDecoder {
         bool DecodeBC6(FastArgs);
         bool DecodeBC7(FastArgs);
 
+        bool DecodeATCRGB4(FastArgs);
+        bool DecodeATCRGBA8(FastArgs);
+        bool DecodeASTC(FastArgs, int32_t blockWidth, int32_t blockHeight);
+
     private:
         inline Byte* Array2Ptr(array<Byte>^ array);
         inline UInt32* Array2Ptr(array<UInt32>^ array);
@@ -63,7 +77,6 @@ namespace SoarCraft::QYun::TextureDecoder {
         inline void ApplicateColor2Bpp(Byte* data, PVRTCTexelInfo* info[9], UInt32 buf[32]);
         inline void ApplicateColor4Bpp(Byte* data, PVRTCTexelInfo* info[9], UInt32 buf[32]);
 
-        inline uint_fast8_t Clamp(const int n);
         inline uint32_t ApplicateColor(uint_fast8_t c[3], int_fast16_t m);
         inline uint32_t ApplicateColorAlpha(uint_fast8_t c[3], int_fast16_t m, int transparent);
         inline uint32_t ApplicateColorRaw(uint_fast8_t c[3]);
@@ -77,5 +90,13 @@ namespace SoarCraft::QYun::TextureDecoder {
 
         inline void DecodeBC6Block(const uint8_t* _src, uint32_t* _dst, bool _signed);
         inline void DecodeBC7Block(const uint8_t* _src, uint32_t* _dst);
+
+        inline void DecodeATCBlock(const uint8_t* _src, uint32_t* _dst);
+        inline void DecodeBlock(const uint8_t* buf, const int bw, const int bh, uint32_t* outbuf);
+
+        inline void DecodeBlockParams(const uint8_t* buf, BlockData* block_data);
+        inline void DecodeEndpoints(const uint8_t* buf, BlockData* data);
+        inline void DecodeWeights(const uint8_t* buf, BlockData* data);
+        inline void ApplicateColor(const BlockData* data, uint32_t* outbuf);
     };
 }

@@ -121,6 +121,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ASTC.h" />
     <ClInclude Include="BitCasts.h" />
     <ClInclude Include="ETC.h" />
     <ClInclude Include="FP16.h" />
@@ -132,6 +133,9 @@
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="BCN.h" />
     <ClCompile Include="Colors.cpp" />
+    <ClCompile Include="DecodeASTC.cpp" />
+    <ClCompile Include="DecodeATCRGB4.cpp" />
+    <ClCompile Include="DecodeATCRGBA8.cpp" />
     <ClCompile Include="DecodeBC4.cpp" />
     <ClCompile Include="DecodeBC5.cpp" />
     <ClCompile Include="DecodeBC6.cpp" />
