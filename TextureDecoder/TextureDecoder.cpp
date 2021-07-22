@@ -29,9 +29,9 @@ namespace SoarCraft::QYun::TextureDecoder {
         return ptr;
     }
 
-    UInt32* TextureDecoderService::Array2Ptr(array<UInt32>^ array) {
-        pin_ptr<UInt32> pin = &array[0];
-        UInt32* ptr = pin;
+    UInt32* TextureDecoderService::Array2UIntPtr(array<Byte>^ array) {
+        pin_ptr<Byte> pin = &array[0];
+        UInt32* ptr = (UInt32*)pin;
         return ptr;
     }
 

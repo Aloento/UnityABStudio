@@ -2,9 +2,12 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
     using System;
     using System.Linq;
     using AssetReader.Entities.Enums;
+    using TextureDecoder;
     using Half = AssetReader.Math.Half;
 
     public partial class Texture2DConverter {
+        private readonly TextureDecoderService decoder = new();
+
         private void SwapBytesForXbox() {
             if (platform == BuildTarget.XBOX360) {
                 for (var i = 0; i < image_data_size / 2; i++) {
@@ -102,20 +105,12 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
 
         private byte[] DecodeDXT1() {
             var buff = new byte[width * height * 4];
-            // if (!TextureDecoder.DecodeDXT1(image_data, width, height, buff)) {
-            //     return null;
-            // }
-
-            return buff;
+            return !this.decoder.DecodeDXT1(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeDXT5() {
             var buff = new byte[width * height * 4];
-            // if (!TextureDecoder.DecodeDXT5(image_data, width, height, buff)) {
-            //     return null;
-            // }
-
-            return buff;
+            return !this.decoder.DecodeDXT5(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeRGBA4444() {
@@ -270,98 +265,82 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
 
         private byte[] DecodeBC4() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeBC4(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeBC4(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeBC5() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeBC5(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeBC5(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeBC6H() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeBC6(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeBC6(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeBC7() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeBC7(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeBC7(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodePVRTC(bool is2bpp) {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodePVRTC(this.image_data, this.width, this.height, buff, is2bpp) ? null : buff;
+            return !decoder.DecodePVRTC(this.image_data, this.width, this.height, buff, is2bpp) ? null : buff;
         }
 
         private byte[] DecodeETC1() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeETC1(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeETC1(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeATCRGB4() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeATCRGB4(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeATCRGB4(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeATCRGBA8() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeATCRGBA8(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeATCRGBA8(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeEACR() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeEACR(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeEACR(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeEACRSigned() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeEACRSigned(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeEACRSigned(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeEACRG() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeEACRG(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeEACRG(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeEACRGSigned() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeEACRGSigned(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeEACRGSigned(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeETC2() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeETC2(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeETC2(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeETC2A1() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeETC2A1(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeETC2A1(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeETC2A8() {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeETC2A8(this.image_data, this.width, this.height, buff) ? null : buff;
+            return !decoder.DecodeETC2A8(this.image_data, this.width, this.height, buff) ? null : buff;
         }
 
         private byte[] DecodeASTC(int blocksize) {
             var buff = new byte[width * height * 4];
-            return buff;
-            // return !TextureDecoder.DecodeASTC(this.image_data, this.width, this.height, blocksize, blocksize, buff) ? null : buff;
+            return !decoder.DecodeASTC(this.image_data, this.width, this.height, buff, blocksize, blocksize) ? null : buff;
         }
 
         private byte[] DecodeRG16() {
@@ -387,19 +366,18 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
 
         private bool UnpackCrunch() {
             byte[] result;
-            if (version[0] > 2017 || (version[0] == 2017 && version[1] >= 3) //2017.3 and up
-                                  || textureFormat == TextureFormat.ETC_RGB4Crunched
-                                  || textureFormat == TextureFormat.ETC2_RGBA8Crunched) {
-                // result = TextureDecoder.UnpackUnityCrunch(image_data);
+            if (this.version[0] > 2017 || (this.version[0] == 2017 && this.version[1] >= 3) //2017.3 and up
+                                       || this.textureFormat is TextureFormat.ETC_RGB4Crunched or TextureFormat.ETC2_RGBA8Crunched) {
+                result = decoder.UnpackUnityCrunch(image_data);
             } else {
-                // result = TextureDecoder.UnpackCrunch(image_data);
+                result = decoder.UnpackCrunch(image_data);
             }
 
-            // if (result != null) {
-            //     image_data = result;
-            //     image_data_size = result.Length;
-            //     return true;
-            // }
+            if (result != null) {
+                image_data = result;
+                image_data_size = result.Length;
+                return true;
+            }
 
             return false;
         }

@@ -215,7 +215,7 @@ namespace SoarCraft.QYun.AssetReader._7zip.Common {
         const string kStopSwitchParsing = "--";
 
         static bool IsItSwitchChar(char c) {
-            return c == kSwitchID1 || c == kSwitchID2;
+            return c is kSwitchID1 or kSwitchID2;
         }
     }
 

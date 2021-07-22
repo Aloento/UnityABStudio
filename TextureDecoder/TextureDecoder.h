@@ -5,7 +5,7 @@
 
 #define A2PInsert \
     Byte* d = Array2Ptr(data);\
-    UInt32* i = Array2Ptr(image);\
+    UInt32* i = Array2UIntPtr(image);\
     UInt32 buffer[16];
 
 #define FastInsert \
@@ -20,7 +20,7 @@
     uint32_t m_blocks_y = (height + m_block_height - 1) / m_block_height; \
     A2PInsert;
 
-#define FastArgs array<Byte>^ data, int width, int height, array<UInt32>^ image
+#define FastArgs array<Byte>^ data, int width, int height, array<Byte>^ image
 
 namespace SoarCraft::QYun::TextureDecoder {
     using namespace System;
@@ -61,7 +61,7 @@ namespace SoarCraft::QYun::TextureDecoder {
 
     private:
         inline Byte* Array2Ptr(array<Byte>^ array);
-        inline UInt32* Array2Ptr(array<UInt32>^ array);
+        inline UInt32* Array2UIntPtr(array<Byte>^ array);
 
         void DisposeBuffer(void** ppBuffer);
         inline void CopyBlockBuffer(long bx, long by, long w, long h, long bw,

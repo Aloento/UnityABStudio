@@ -9,7 +9,7 @@ namespace SoarCraft::QYun::TextureDecoder {
         const long num_blocks_y = (height + blockHeight - 1) / blockHeight;
 
         Byte* d = Array2Ptr(data);
-        UInt32* i = Array2Ptr(image);
+        UInt32* i = Array2UIntPtr(image);
         uint32_t buffer[144];
 
         for (long by = 0; by < num_blocks_y; by++) {

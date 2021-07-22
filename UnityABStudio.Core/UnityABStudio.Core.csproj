@@ -29,5 +29,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AssetReader\AssetReader.csproj" />
+    <ProjectReference Include="..\TextureDecoder\TextureDecoder.vcxproj" />
   </ItemGroup>
 </Project>

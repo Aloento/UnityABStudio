@@ -28,7 +28,7 @@ namespace SoarCraft::QYun::TextureDecoder {
         }
 
         Byte* d = Array2Ptr(data);
-        UInt32* i = Array2Ptr(image);
+        UInt32* i = Array2UIntPtr(image);
 
         for (long i = 0; i < num_blocks; i++, d += 8) {
             GetTexelColors(d, &texel_info[i]);

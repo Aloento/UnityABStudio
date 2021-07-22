@@ -85,7 +85,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                 dst[offset++] = word[wordOffset++];
                 i--;
             }
-            if (op == WordTransformType.UppercaseAll || op == WordTransformType.UppercaseFirst) {
+            if (op is WordTransformType.UppercaseAll or WordTransformType.UppercaseFirst) {
                 var uppercaseOffset = offset - len;
                 if (op == WordTransformType.UppercaseFirst) {
                     len = 1;
