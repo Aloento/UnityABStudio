@@ -2,7 +2,7 @@
 #include "TextureDecoder.h"
 #include "BCN.h"
 #include <cstring>
-#include <algorithm>
+#include <utility>
 
 namespace SoarCraft::QYun::TextureDecoder {
     bool TextureDecoderService::DecodeBC6(FastArgs) {
