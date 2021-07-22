@@ -1,8 +1,12 @@
 #include "pch.h"
 #include "TextureDecoder.h"
 #include <cstring>
+#include "crunch.h"
+#include "unitycrunch.h"
 
 namespace SoarCraft::QYun::TextureDecoder {
+    using namespace System::Runtime::InteropServices;
+
     TextureDecoderService::TextureDecoderService() {
         int i = 0x12345678;
         char* pc = (char*)&i;
@@ -38,5 +42,46 @@ namespace SoarCraft::QYun::TextureDecoder {
         const UInt32* buffer_end = buffer + bw * bh;
         for (long y = by * bh; buffer < buffer_end && y < h; buffer += bw, y++)
             memcpy(image + y * w + x, buffer, xl);
+    }
+
+    void TextureDecoderService::DisposeBuffer(void** ppBuffer) {
+        if (ppBuffer == nullptr)
+            return;
+
+        auto ppTypedBuffer = reinterpret_cast<uint8_t**>(ppBuffer);
+
+        delete[](*ppTypedBuffer);
+
+        *ppBuffer = nullptr;
+    }
+
+    array<Byte>^ TextureDecoderService::UnpackCrunch(array<Byte>^ data) {
+        Byte* d = Array2Ptr(data);
+        void* result;
+        uint32_t resultSize;
+
+        if (!crunch_unpack_level(d, data->Length, 0, &result, &resultSize)) 
+            return nullptr;
+        
+        array<Byte>^ resultArray = gcnew array<Byte>(resultSize + 2);
+        Marshal::Copy((IntPtr)result, resultArray, 0, resultSize);
+
+        DisposeBuffer(&result);
+        return resultArray;
+    }
+
+    array<Byte>^ TextureDecoderService::UnpackUnityCrunch(array<Byte>^ data) {
+        Byte* d = Array2Ptr(data);
+        void* result;
+        uint32_t resultSize;
+
+        if (!unity_crunch_unpack_level(d, data->Length, 0, &result, &resultSize))
+            return nullptr;
+
+        array<Byte>^ resultArray = gcnew array<Byte>(resultSize + 2);
+        Marshal::Copy((IntPtr)result, resultArray, 0, resultSize);
+
+        DisposeBuffer(&result);
+        return resultArray;
     }
 }

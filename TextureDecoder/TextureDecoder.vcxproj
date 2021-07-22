@@ -123,16 +123,24 @@
   <ItemGroup>
     <ClInclude Include="ASTC.h" />
     <ClInclude Include="BitCasts.h" />
+    <ClInclude Include="crunch.h" />
+    <ClInclude Include="crunch\crnlib.h" />
+    <ClInclude Include="crunch\crn_decomp.h" />
     <ClInclude Include="ETC.h" />
     <ClInclude Include="FP16.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="TextureDecoder.h" />
+    <ClInclude Include="unitycrunch.h" />
+    <ClInclude Include="unitycrunch\crnlib.h" />
+    <ClInclude Include="unitycrunch\crn_decomp.h" />
+    <ClInclude Include="unitycrunch\crn_defs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="BCN.h" />
     <ClCompile Include="Colors.cpp" />
+    <ClCompile Include="Crunch.cpp" />
     <ClCompile Include="DecodeASTC.cpp" />
     <ClCompile Include="DecodeATCRGB4.cpp" />
     <ClCompile Include="DecodeATCRGBA8.cpp" />
@@ -160,6 +168,7 @@
     </ClCompile>
     <ClCompile Include="PVRTC.h" />
     <ClCompile Include="TextureDecoder.cpp" />
+    <ClCompile Include="UnityCrunch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc" />

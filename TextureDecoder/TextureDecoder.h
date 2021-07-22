@@ -32,6 +32,8 @@ namespace SoarCraft::QYun::TextureDecoder {
         TextureDecoderService();
         static bool IsBigEndian;
         static UInt32 TRANSPARENT_MASK;
+        array<Byte>^ UnpackCrunch(array<Byte>^ data);
+        array<Byte>^ UnpackUnityCrunch(array<Byte>^ data);
 
         bool DecodeDXT1(FastArgs);
         bool DecodeDXT5(FastArgs);
@@ -61,6 +63,7 @@ namespace SoarCraft::QYun::TextureDecoder {
         inline Byte* Array2Ptr(array<Byte>^ array);
         inline UInt32* Array2Ptr(array<UInt32>^ array);
 
+        void DisposeBuffer(void** ppBuffer);
         inline void CopyBlockBuffer(long bx, long by, long w, long h, long bw,
                                     long bh, UInt32* buffer, UInt32* image);
 

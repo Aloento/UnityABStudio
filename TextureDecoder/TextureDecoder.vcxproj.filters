@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Decoders">
       <UniqueIdentifier>{9c46abb8-ec23-4b16-8c5f-ea0d29e0a26a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CRN">
+      <UniqueIdentifier>{9e20df97-f3c6-4503-b81d-2e4e01cbcb84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextureDecoder.h">
@@ -38,6 +41,27 @@
     </ClInclude>
     <ClInclude Include="ASTC.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="crunch\crn_decomp.h">
+      <Filter>Header Files\CRN</Filter>
+    </ClInclude>
+    <ClInclude Include="crunch\crnlib.h">
+      <Filter>Header Files\CRN</Filter>
+    </ClInclude>
+    <ClInclude Include="unitycrunch\crn_decomp.h">
+      <Filter>Header Files\CRN</Filter>
+    </ClInclude>
+    <ClInclude Include="unitycrunch\crn_defs.h">
+      <Filter>Header Files\CRN</Filter>
+    </ClInclude>
+    <ClInclude Include="unitycrunch\crnlib.h">
+      <Filter>Header Files\CRN</Filter>
+    </ClInclude>
+    <ClInclude Include="unitycrunch.h">
+      <Filter>Header Files\CRN</Filter>
+    </ClInclude>
+    <ClInclude Include="crunch.h">
+      <Filter>Header Files\CRN</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +139,12 @@
     </ClCompile>
     <ClCompile Include="DecodeASTC.cpp">
       <Filter>Source Files\Decoders</Filter>
+    </ClCompile>
+    <ClCompile Include="Crunch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UnityCrunch.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
