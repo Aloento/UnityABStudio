@@ -31,4 +31,10 @@
     <ProjectReference Include="..\AssetReader\AssetReader.csproj" />
     <ProjectReference Include="..\TextureDecoder\TextureDecoder.vcxproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Natives\fmod64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

@@ -23,7 +23,7 @@ namespace SoarCraft.QYun.UnityABStudio {
             Ioc.Default.ConfigureServices(this.ConfigureServices());
         }
 
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) => Ioc.Default.GetRequiredService<LoggerService>().Logger.Error(e.Message);
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) => Ioc.Default.GetService<LoggerService>()?.Logger.Error(e.Message);
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args) {
             base.OnLaunched(args);

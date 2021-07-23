@@ -3,9 +3,11 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using System.IO;
     using System.Threading.Tasks;
     using AssetReader.Entities.Enums;
+    using AssetReader.Unity3D.Objects;
     using AssetReader.Unity3D.Objects.Texture2Ds;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Core.Models;
+    using Helpers;
     using Services;
 
     public static partial class ExportExtension {
@@ -29,7 +31,26 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
         private static bool ExportAnimator(AssetItem item, string exportPath) => throw new NotImplementedException();
 
-        private static bool ExportAudioClip(AssetItem item, string exportPath) => throw new NotImplementedException();
+        private static bool ExportAudioClip(AssetItem item, string exportPath) {
+            var m_AudioClip = (AudioClip)item.Obj;
+            var m_AudioData = m_AudioClip.m_AudioData.GetData();
+            if (m_AudioData == null || m_AudioData.Length == 0)
+                return false;
+            var converter = new AudioClipConverter(m_AudioClip);
+            if (settings.ConvertAudio && converter.IsSupport) {
+                if (!TryExportFile(exportPath, item, ".wav", out var exportFullPath))
+                    return false;
+                var buffer = converter.ConvertToWav();
+                if (buffer == null)
+                    return false;
+                File.WriteAllBytes(exportFullPath, buffer);
+            } else {
+                if (!TryExportFile(exportPath, item, converter.GetExtensionName(), out var exportFullPath))
+                    return false;
+                File.WriteAllBytes(exportFullPath, m_AudioData);
+            }
+            return true;
+        }
 
         private static bool ExportFont(AssetItem item, string exportPath) => throw new NotImplementedException();
         private static bool ExportMesh(AssetItem item, string exportPath) => throw new NotImplementedException();

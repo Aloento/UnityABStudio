@@ -33,6 +33,13 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
             set => _ = SetProperty(ref this.convertTexture, value);
         }
 
+        private bool convertAudio;
+
+        public bool ConvertAudio {
+            get => this.convertAudio;
+            set => _ = SetProperty(ref this.convertAudio, value);
+        }
+
         private ImageFormat convertType;
 
         public ImageFormat ConvertType {
