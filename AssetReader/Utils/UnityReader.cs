@@ -28,7 +28,7 @@ namespace SoarCraft.QYun.AssetReader.Utils {
             this.FileType = reader.FileType;
         }
 
-        public UnityReader(Stream stream, bool isBigEndian = false) : base(stream, isBigEndian) {
+        public UnityReader(Stream stream, bool isBigEndian = true) : base(stream, isBigEndian) {
         }
 
         public UnityReader Move(long offset) {

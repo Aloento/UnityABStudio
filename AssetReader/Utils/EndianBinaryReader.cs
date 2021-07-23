@@ -5,7 +5,7 @@ namespace SoarCraft.QYun.AssetReader.Utils {
     public abstract class EndianBinaryReader : BinaryReader {
         public bool IsBigEndian;
 
-        protected EndianBinaryReader(Stream stream, bool isBigEndian = false) : base(stream) => this.IsBigEndian = isBigEndian;
+        protected EndianBinaryReader(Stream stream, bool isBigEndian = true) : base(stream) => this.IsBigEndian = isBigEndian;
 
         public long Position {
             get => this.BaseStream.Position;
