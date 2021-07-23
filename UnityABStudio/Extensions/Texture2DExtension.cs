@@ -16,7 +16,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
                 if (flip) {
                     image.Mutate(x => x.Flip(FlipMode.Vertical));
                 }
-                return null;
+                return image;
             }
             return null;
         }
