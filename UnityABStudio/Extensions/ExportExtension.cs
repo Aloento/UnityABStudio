@@ -4,10 +4,12 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using System.Threading.Tasks;
     using AssetReader.Entities.Enums;
     using AssetReader.Unity3D.Objects;
+    using AssetReader.Unity3D.Objects.Shaders;
     using AssetReader.Unity3D.Objects.Texture2Ds;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Core.Models;
     using Helpers;
+    using Helpers.ShaderConverters;
     using Services;
 
     public static partial class ExportExtension {
@@ -56,7 +58,15 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
         private static bool ExportMesh(AssetItem item, string exportPath) => throw new NotImplementedException();
         private static bool ExportMonoBehaviour(AssetItem item, string exportPath) => throw new NotImplementedException();
         private static bool ExportMovieTexture(AssetItem item, string exportPath) => throw new NotImplementedException();
-        private static bool ExportShader(AssetItem item, string exportPath) => throw new NotImplementedException();
+        private static bool ExportShader(AssetItem item, string exportPath) {
+            if (!TryExportFile(exportPath, item, ".shader", out var exportFullPath))
+                return false;
+            var m_Shader = (Shader)item.Obj;
+            var str = m_Shader.Convert();
+            File.WriteAllText(exportFullPath, str);
+            return true;
+        }
+
         private static bool ExportSprite(AssetItem item, string exportPath) => throw new NotImplementedException();
         private static bool ExportTextAsset(AssetItem item, string exportPath) => throw new NotImplementedException();
 
