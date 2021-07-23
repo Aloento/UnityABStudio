@@ -63,7 +63,7 @@ namespace SoarCraft::QYun::TextureDecoder {
         inline Byte* Array2Ptr(array<Byte>^ array);
         inline UInt32* Array2UIntPtr(array<Byte>^ array);
 
-        void DisposeBuffer(void** ppBuffer);
+        inline void DisposeBuffer(void** ppBuffer);
         inline void CopyBlockBuffer(long bx, long by, long w, long h, long bw,
                                     long bh, UInt32* buffer, UInt32* image);
 

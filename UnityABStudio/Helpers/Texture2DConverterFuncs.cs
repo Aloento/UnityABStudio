@@ -2,11 +2,12 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
     using System;
     using System.Linq;
     using AssetReader.Entities.Enums;
+    using CommunityToolkit.Mvvm.DependencyInjection;
     using TextureDecoder;
     using Half = AssetReader.Math.Half;
 
     public partial class Texture2DConverter {
-        private readonly TextureDecoderService decoder = new();
+        private readonly TextureDecoderService decoder = Ioc.Default.GetRequiredService<TextureDecoderService>();
 
         private void SwapBytesForXbox() {
             if (platform == BuildTarget.XBOX360) {
@@ -105,12 +106,12 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
 
         private byte[] DecodeDXT1() {
             var buff = new byte[width * height * 4];
-            return !this.decoder.DecodeDXT1(this.image_data, this.width, this.height, buff) ? null : buff;
+            return this.decoder.DecodeDXT1(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeDXT5() {
             var buff = new byte[width * height * 4];
-            return !this.decoder.DecodeDXT5(this.image_data, this.width, this.height, buff) ? null : buff;
+            return this.decoder.DecodeDXT5(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeRGBA4444() {
@@ -265,82 +266,82 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
 
         private byte[] DecodeBC4() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeBC4(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeBC4(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeBC5() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeBC5(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeBC5(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeBC6H() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeBC6(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeBC6(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeBC7() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeBC7(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeBC7(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodePVRTC(bool is2bpp) {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodePVRTC(this.image_data, this.width, this.height, buff, is2bpp) ? null : buff;
+            return decoder.DecodePVRTC(this.image_data, this.width, this.height, buff, is2bpp) ? buff : null;
         }
 
         private byte[] DecodeETC1() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeETC1(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeETC1(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeATCRGB4() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeATCRGB4(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeATCRGB4(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeATCRGBA8() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeATCRGBA8(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeATCRGBA8(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeEACR() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeEACR(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeEACR(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeEACRSigned() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeEACRSigned(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeEACRSigned(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeEACRG() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeEACRG(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeEACRG(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeEACRGSigned() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeEACRGSigned(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeEACRGSigned(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeETC2() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeETC2(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeETC2(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeETC2A1() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeETC2A1(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeETC2A1(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeETC2A8() {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeETC2A8(this.image_data, this.width, this.height, buff) ? null : buff;
+            return decoder.DecodeETC2A8(this.image_data, this.width, this.height, buff) ? buff : null;
         }
 
         private byte[] DecodeASTC(int blocksize) {
             var buff = new byte[width * height * 4];
-            return !decoder.DecodeASTC(this.image_data, this.width, this.height, buff, blocksize, blocksize) ? null : buff;
+            return decoder.DecodeASTC(this.image_data, this.width, this.height, buff, blocksize, blocksize) ? buff : null;
         }
 
         private byte[] DecodeRG16() {

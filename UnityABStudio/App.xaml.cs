@@ -10,6 +10,7 @@ namespace SoarCraft.QYun.UnityABStudio {
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
     using Services;
+    using TextureDecoder;
     using ViewModels;
     using Views;
 
@@ -22,10 +23,7 @@ namespace SoarCraft.QYun.UnityABStudio {
             Ioc.Default.ConfigureServices(this.ConfigureServices());
         }
 
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
-            // TODO WTS: Please log and handle the exception as appropriate to your scenario
-            // For more info see https://docs.microsoft.com/windows/winui/api/microsoft.ui.xaml.unhandledexceptioneventargs
-        }
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) => Ioc.Default.GetRequiredService<LoggerService>().Logger.Error(e.Message);
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args) {
             base.OnLaunched(args);
@@ -34,8 +32,8 @@ namespace SoarCraft.QYun.UnityABStudio {
         }
 
         private System.IServiceProvider ConfigureServices() {
-            // TODO WTS: Register your services, viewmodels and pages here
             var services = new ServiceCollection();
+            _ = services.AddSingleton<LoggerService>();
 
             // Default Activation Handler
             _ = services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
@@ -53,9 +51,9 @@ namespace SoarCraft.QYun.UnityABStudio {
             // Core Services
             _ = services.AddSingleton<ISampleDataService, SampleDataService>();
             _ = services.AddSingleton<IAssetDataService, AssetDataService>();
-            _ = services.AddTransient<SettingsService>();
+            _ = services.AddSingleton<SettingsService>();
             _ = services.AddSingleton<AssetsManager>();
-            _ = services.AddSingleton<LoggerService>();
+            _ = services.AddSingleton<TextureDecoderService>();
 
             // Views and ViewModels
             _ = services.AddTransient<ShellPage>();
