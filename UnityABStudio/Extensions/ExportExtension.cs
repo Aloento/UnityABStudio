@@ -7,9 +7,10 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using AssetReader.Unity3D.Objects.Shaders;
     using AssetReader.Unity3D.Objects.Texture2Ds;
     using CommunityToolkit.Mvvm.DependencyInjection;
+    using Converters;
+    using Converters.ShaderConverters;
     using Core.Models;
-    using Helpers;
-    using Helpers.ShaderConverters;
+    using Newtonsoft.Json;
     using Services;
 
     public static partial class ExportExtension {
@@ -56,7 +57,20 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
         private static bool ExportFont(AssetItem item, string exportPath) => throw new NotImplementedException();
         private static bool ExportMesh(AssetItem item, string exportPath) => throw new NotImplementedException();
-        private static bool ExportMonoBehaviour(AssetItem item, string exportPath) => throw new NotImplementedException();
+        private static bool ExportMonoBehaviour(AssetItem item, string exportPath) {
+            if (!TryExportFile(exportPath, item, ".json", out var exportFullPath))
+                return false;
+            var m_MonoBehaviour = (MonoBehaviour)item.Obj;
+            var type = m_MonoBehaviour.ToType();
+            if (type == null) {
+                var m_Type = MonoBehaviourToTypeTree(m_MonoBehaviour);
+                type = m_MonoBehaviour.ToType(m_Type);
+            }
+            var str = JsonConvert.SerializeObject(type, Formatting.Indented);
+            File.WriteAllText(exportFullPath, str);
+            return true;
+        }
+
         private static bool ExportMovieTexture(AssetItem item, string exportPath) => throw new NotImplementedException();
         private static bool ExportShader(AssetItem item, string exportPath) {
             if (!TryExportFile(exportPath, item, ".shader", out var exportFullPath))
@@ -68,7 +82,19 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
         }
 
         private static bool ExportSprite(AssetItem item, string exportPath) => throw new NotImplementedException();
-        private static bool ExportTextAsset(AssetItem item, string exportPath) => throw new NotImplementedException();
+        private static bool ExportTextAsset(AssetItem item, string exportPath) {
+            var m_TextAsset = (TextAsset)item.Obj;
+            var extension = ".txt";
+            if (settings.RestoreExtensionName) {
+                if (!string.IsNullOrEmpty(item.Container)) {
+                    extension = Path.GetExtension(item.Container);
+                }
+            }
+            if (!TryExportFile(exportPath, item, extension, out var exportFullPath))
+                return false;
+            File.WriteAllBytes(exportFullPath, m_TextAsset.m_Script);
+            return true;
+        }
 
         private static bool ExportTexture2D(AssetItem item, string exportPath) {
             var m_Texture2D = (Texture2D)item.Obj;

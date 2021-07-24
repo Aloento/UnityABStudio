@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
+namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters {
     using System;
     using System.IO;
     using System.Text;
@@ -21,25 +21,25 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
             //201708220 - Unity 2017.3, Unity 2017.4 & Unity 2018.1
             //201802150 - Unity 2018.2 & Unity 2018.3
             //201806140 - Unity 2019.1~2020.1
-            m_Version = reader.ReadInt32();
-            m_ProgramType = (ShaderGpuProgramType)reader.ReadInt32();
+            this.m_Version = reader.ReadInt32();
+            this.m_ProgramType = (ShaderGpuProgramType)reader.ReadInt32();
             reader.BaseStream.Position += 12;
-            if (m_Version >= 201608170) {
+            if (this.m_Version >= 201608170) {
                 reader.BaseStream.Position += 4;
             }
             var m_KeywordsSize = reader.ReadInt32();
-            m_Keywords = new string[m_KeywordsSize];
+            this.m_Keywords = new string[m_KeywordsSize];
             for (var i = 0; i < m_KeywordsSize; i++) {
-                m_Keywords[i] = reader.ReadAlignedString();
+                this.m_Keywords[i] = reader.ReadAlignedString();
             }
-            if (m_Version >= 201806140) {
+            if (this.m_Version >= 201806140) {
                 var m_LocalKeywordsSize = reader.ReadInt32();
-                m_LocalKeywords = new string[m_LocalKeywordsSize];
+                this.m_LocalKeywords = new string[m_LocalKeywordsSize];
                 for (var i = 0; i < m_LocalKeywordsSize; i++) {
-                    m_LocalKeywords[i] = reader.ReadAlignedString();
+                    this.m_LocalKeywords[i] = reader.ReadAlignedString();
                 }
             }
-            m_ProgramCode = reader.ReadUInt8Array();
+            this.m_ProgramCode = reader.ReadUInt8Array();
             reader.AlignStream();
 
             //TODO
@@ -47,24 +47,24 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
 
         public string Export() {
             var sb = new StringBuilder();
-            if (m_Keywords.Length > 0) {
+            if (this.m_Keywords.Length > 0) {
                 _ = sb.Append("Keywords { ");
-                foreach (var keyword in m_Keywords) {
+                foreach (var keyword in this.m_Keywords) {
                     _ = sb.Append($"\"{keyword}\" ");
                 }
                 _ = sb.Append("}\n");
             }
-            if (m_LocalKeywords != null && m_LocalKeywords.Length > 0) {
+            if (this.m_LocalKeywords != null && this.m_LocalKeywords.Length > 0) {
                 _ = sb.Append("Local Keywords { ");
-                foreach (var keyword in m_LocalKeywords) {
+                foreach (var keyword in this.m_LocalKeywords) {
                     _ = sb.Append($"\"{keyword}\" ");
                 }
                 _ = sb.Append("}\n");
             }
 
             _ = sb.Append('"');
-            if (m_ProgramCode.Length > 0) {
-                switch (m_ProgramType) {
+            if (this.m_ProgramCode.Length > 0) {
+                switch (this.m_ProgramType) {
                     case ShaderGpuProgramType.kShaderGpuProgramGLLegacy:
                     case ShaderGpuProgramType.kShaderGpuProgramGLES31AEP:
                     case ShaderGpuProgramType.kShaderGpuProgramGLES31:
@@ -73,7 +73,7 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
                     case ShaderGpuProgramType.kShaderGpuProgramGLCore32:
                     case ShaderGpuProgramType.kShaderGpuProgramGLCore41:
                     case ShaderGpuProgramType.kShaderGpuProgramGLCore43:
-                        _ = sb.Append(Encoding.UTF8.GetString(m_ProgramCode));
+                        _ = sb.Append(Encoding.UTF8.GetString(this.m_ProgramCode));
                         break;
                     case ShaderGpuProgramType.kShaderGpuProgramDX9VertexSM20:
                     case ShaderGpuProgramType.kShaderGpuProgramDX9VertexSM30:
@@ -108,7 +108,7 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
                     }
                     case ShaderGpuProgramType.kShaderGpuProgramMetalVS:
                     case ShaderGpuProgramType.kShaderGpuProgramMetalFS:
-                        using (var reader = new UnityReader(new MemoryStream(m_ProgramCode), false)) {
+                        using (var reader = new UnityReader(new MemoryStream(this.m_ProgramCode), false)) {
                             var fourCC = reader.ReadUInt32();
                             if (fourCC == 0xf00dcafe) {
                                 var offset = reader.ReadInt32();
@@ -121,7 +121,7 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
                         break;
                     case ShaderGpuProgramType.kShaderGpuProgramSPIRV:
                         try {
-                            _ = sb.Append(SpirVShaderConverter.Convert(m_ProgramCode));
+                            _ = sb.Append(SpirVShaderConverter.Convert(this.m_ProgramCode));
                         } catch (Exception e) {
                             _ = sb.Append($"// disassembly error {e.Message}\n");
                         }
@@ -131,10 +131,10 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
                     case ShaderGpuProgramType.kShaderGpuProgramConsoleHS:
                     case ShaderGpuProgramType.kShaderGpuProgramConsoleDS:
                     case ShaderGpuProgramType.kShaderGpuProgramConsoleGS:
-                        _ = sb.Append(Encoding.UTF8.GetString(m_ProgramCode));
+                        _ = sb.Append(Encoding.UTF8.GetString(this.m_ProgramCode));
                         break;
                     default:
-                        _ = sb.Append($"//shader disassembly not supported on {m_ProgramType}");
+                        _ = sb.Append($"//shader disassembly not supported on {this.m_ProgramType}");
                         break;
                 }
             }

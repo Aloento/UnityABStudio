@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters.Smolv {
+namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
     public struct OpData {
         public OpData(byte hasResult, byte hasType, sbyte deltaFromResult, byte varrest) {
             this.hasResult = hasResult;

@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Helpers {
+namespace SoarCraft.QYun.UnityABStudio.Converters {
     using System;
     using System.Runtime.InteropServices;
     using System.Text;
@@ -9,10 +9,10 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
     public class AudioClipConverter {
         private readonly AudioClip m_AudioClip;
 
-        public AudioClipConverter(AudioClip audioClip) => m_AudioClip = audioClip;
+        public AudioClipConverter(AudioClip audioClip) => this.m_AudioClip = audioClip;
 
         public byte[] ConvertToWav() {
-            var m_AudioData = m_AudioClip.m_AudioData.GetData();
+            var m_AudioData = this.m_AudioClip.m_AudioData.GetData();
             if (m_AudioData == null || m_AudioData.Length == 0)
                 return null;
             var exinfo = new CREATESOUNDEXINFO();
@@ -23,7 +23,7 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
             if (result != RESULT.OK)
                 return null;
             exinfo.cbsize = Marshal.SizeOf(exinfo);
-            exinfo.length = (uint)m_AudioClip.m_Size;
+            exinfo.length = (uint)this.m_AudioClip.m_Size;
             result = system.createSound(m_AudioData, MODE.OPENMEMORY, ref exinfo, out var sound);
             if (result != RESULT.OK)
                 return null;
@@ -35,10 +35,10 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
                 result = sound.getSubSound(0, out var subsound);
                 if (result != RESULT.OK)
                     return null;
-                buff = SoundToWav(subsound);
+                buff = this.SoundToWav(subsound);
                 subsound.release();
             } else {
-                buff = SoundToWav(sound);
+                buff = this.SoundToWav(sound);
             }
             sound.release();
             system.release();
@@ -79,8 +79,8 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
         }
 
         public string GetExtensionName() {
-            if (m_AudioClip.version[0] < 5) {
-                switch (m_AudioClip.m_Type) {
+            if (this.m_AudioClip.version[0] < 5) {
+                switch (this.m_AudioClip.m_Type) {
                     case AudioType.ACC:
                         return ".m4a";
                     case AudioType.AIFF:
@@ -108,7 +108,7 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
                 }
 
             } else {
-                switch (m_AudioClip.m_CompressionFormat) {
+                switch (this.m_AudioClip.m_CompressionFormat) {
                     case AudioCompressionFormat.PCM:
                         return ".fsb";
                     case AudioCompressionFormat.Vorbis:
@@ -137,8 +137,8 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
 
         public bool IsSupport {
             get {
-                if (m_AudioClip.version[0] < 5) {
-                    switch (m_AudioClip.m_Type) {
+                if (this.m_AudioClip.version[0] < 5) {
+                    switch (this.m_AudioClip.m_Type) {
                         case AudioType.AIFF:
                         case AudioType.IT:
                         case AudioType.MOD:
@@ -151,7 +151,7 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers {
                             return false;
                     }
                 } else {
-                    switch (m_AudioClip.m_CompressionFormat) {
+                    switch (this.m_AudioClip.m_CompressionFormat) {
                         case AudioCompressionFormat.PCM:
                         case AudioCompressionFormat.Vorbis:
                         case AudioCompressionFormat.ADPCM:

@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters.SpirV {
+namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
     using System.Collections.Generic;
 
     internal class Meta {

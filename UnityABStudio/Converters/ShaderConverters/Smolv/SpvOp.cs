@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters.Smolv {
+namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
     public enum SpvOp {
         Nop = 0,
         Undef = 1,

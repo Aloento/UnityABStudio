@@ -26,18 +26,25 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
             set => _ = this.SetProperty(ref this.versionDescription, value);
         }
 
-        private bool convertTexture;
+        private bool convertTexture = true;
 
         public bool ConvertTexture {
             get => this.convertTexture;
             set => _ = SetProperty(ref this.convertTexture, value);
         }
 
-        private bool convertAudio;
+        private bool convertAudio = true;
 
         public bool ConvertAudio {
             get => this.convertAudio;
             set => _ = SetProperty(ref this.convertAudio, value);
+        }
+
+        private bool restoreExtensionName = true;
+
+        public bool RestoreExtensionName {
+            get => this.restoreExtensionName;
+            set => _ = SetProperty(ref this.restoreExtensionName, value);
         }
 
         private ImageFormat convertType;
