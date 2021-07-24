@@ -108,7 +108,7 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
                     }
                     case ShaderGpuProgramType.kShaderGpuProgramMetalVS:
                     case ShaderGpuProgramType.kShaderGpuProgramMetalFS:
-                        using (var reader = new UnityReader(new MemoryStream(m_ProgramCode))) {
+                        using (var reader = new UnityReader(new MemoryStream(m_ProgramCode), false)) {
                             var fourCC = reader.ReadUInt32();
                             if (fourCC == 0xf00dcafe) {
                                 var offset = reader.ReadInt32();

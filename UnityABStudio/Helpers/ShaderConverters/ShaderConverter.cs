@@ -19,7 +19,7 @@ namespace SoarCraft.QYun.UnityABStudio.Helpers.ShaderConverters {
                     _ = decoder.Read(decompressedBytes, 0, (int)shader.decompressedSize);
                 }
 
-                using var blobReader = new UnityReader(new MemoryStream(decompressedBytes));
+                using var blobReader = new UnityReader(new MemoryStream(decompressedBytes), false);
                 var program = new ShaderProgram(blobReader, shader.version);
                 return header + program.Export(Encoding.UTF8.GetString(shader.m_Script));
             }
