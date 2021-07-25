@@ -3,6 +3,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
     using Core.Models;
     using Extensions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using static SoarCraft.QYun.UnityABStudio.UnitTest.Helpers;
 
     [TestClass]
     public class StudioTests {

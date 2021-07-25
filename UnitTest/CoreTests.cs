@@ -21,7 +21,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
             if (obj is not AudioClip)
                 Assert.Fail($"{PathID} 不是 {nameof(AudioClip)}");
 
-            if (!ToFile.ByteArrayToFile(@"C:\CaChe\UnityABStudio_AudioResult.wav",
+            if (!Helpers.ByteArrayToFile(@"C:\CaChe\UnityABStudio_AudioResult.wav",
                 new AudioClipConverter((AudioClip)obj).ConvertToWav())) {
                 Assert.Fail("导出失败");
             }

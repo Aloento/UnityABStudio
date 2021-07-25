@@ -9,7 +9,6 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Converters;
     using Converters.ShaderConverters;
-    using Core.Helpers;
     using Core.Models;
     using Newtonsoft.Json;
     using Services;

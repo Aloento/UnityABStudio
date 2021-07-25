@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31507.150
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetReader", "AssetReader\AssetReader.csproj", "{5E8AF99F-026E-42C5-BDD5-B61C1F067EE4}"
 EndProject
@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityABStudio.Core", "Unity
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TextureDecoder", "TextureDecoder\TextureDecoder.vcxproj", "{F03ECF6F-B06A-4CA3-BBFA-6ECD4DBE3617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{7EBA8040-4973-410E-8889-0462BA17E15B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{7EBA8040-4973-410E-8889-0462BA17E15B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
