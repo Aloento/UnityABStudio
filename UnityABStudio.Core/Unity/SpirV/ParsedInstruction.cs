@@ -1,12 +1,12 @@
-namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
+namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
     using System;
     using System.Collections.Generic;
     using System.Text;
 
     public class ParsedOperand {
         public ParsedOperand(IReadOnlyList<uint> words, int index, int count, object value, Operand operand) {
-            uint[] array = new uint[count];
-            for (int i = 0; i < count; i++) {
+            var array = new uint[count];
+            for (var i = 0; i < count; i++) {
                 array[i] = words[index + i];
             }
 
@@ -17,20 +17,18 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
 
         public T GetSingleEnumValue<T>()
             where T : Enum {
-            IValueEnumOperandValue v = (IValueEnumOperandValue)this.Value;
+            var v = (IValueEnumOperandValue)this.Value;
             if (v.Value.Count == 0) {
                 // If there's no value at all, the enum is probably something like ImageFormat.
                 // In which case we just return the enum value
                 return (T)v.Key;
-            } else {
-                // This means the enum has a value attached to it, so we return the attached value
-                return (T)((IValueEnumOperandValue)this.Value).Value[0];
             }
+
+            // This means the enum has a value attached to it, so we return the attached value
+            return (T)((IValueEnumOperandValue)this.Value).Value[0];
         }
 
-        public uint GetId() {
-            return ((ObjectReference)this.Value).Id;
-        }
+        public uint GetId() => ((ObjectReference)this.Value).Id;
 
         public T GetBitEnumValue<T>()
             where T : Enum {
@@ -50,25 +48,23 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
     }
 
     public class VaryingOperandValue {
-        public VaryingOperandValue(IReadOnlyList<object> values) {
-            this.Values = values;
-        }
+        public VaryingOperandValue(IReadOnlyList<object> values) => this.Values = values;
 
         public override string ToString() {
-            StringBuilder sb = new StringBuilder();
-            this.ToString(sb);
+            var sb = new StringBuilder();
+            _ = this.ToString(sb);
             return sb.ToString();
         }
 
         public StringBuilder ToString(StringBuilder sb) {
-            for (int i = 0; i < this.Values.Count; ++i) {
+            for (var i = 0; i < this.Values.Count; ++i) {
                 if (this.Values[i] is ObjectReference objRef) {
-                    objRef.ToString(sb);
+                    _ = objRef.ToString(sb);
                 } else {
-                    sb.Append(this.Values[i]);
+                    _ = sb.Append(this.Values[i]);
                 }
                 if (i < (this.Values.Count - 1)) {
-                    sb.Append(' ');
+                    _ = sb.Append(' ');
                 }
             }
             return sb;
@@ -104,30 +100,20 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
 
     public class BitEnumOperandValue<T> : IBitEnumOperandValue
         where T : Enum {
-        public BitEnumOperandValue(Dictionary<uint, IReadOnlyList<object>> values) {
-            this.Values = values;
-        }
+        public BitEnumOperandValue(Dictionary<uint, IReadOnlyList<object>> values) => this.Values = values;
 
         public IReadOnlyDictionary<uint, IReadOnlyList<object>> Values { get; }
         public System.Type EnumerationType => typeof(T);
     }
 
     public class ObjectReference {
-        public ObjectReference(uint id) {
-            this.Id = id;
-        }
+        public ObjectReference(uint id) => this.Id = id;
 
-        public void Resolve(IReadOnlyDictionary<uint, ParsedInstruction> objects) {
-            this.Reference = objects[this.Id];
-        }
+        public void Resolve(IReadOnlyDictionary<uint, ParsedInstruction> objects) => this.Reference = objects[this.Id];
 
-        public override string ToString() {
-            return $"%{this.Id}";
-        }
+        public override string ToString() => $"%{this.Id}";
 
-        public StringBuilder ToString(StringBuilder sb) {
-            return sb.Append('%').Append(this.Id);
-        }
+        public StringBuilder ToString(StringBuilder sb) => sb.Append('%').Append(this.Id);
 
         public uint Id { get; }
         public ParsedInstruction Reference { get; private set; }
@@ -146,22 +132,22 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
             }
 
             // Word 0 describes this instruction so we can ignore it
-            int currentWord = 1;
-            int currentOperand = 0;
-            List<object> varyingOperandValues = new List<object>();
-            int varyingWordStart = 0;
+            var currentWord = 1;
+            var currentOperand = 0;
+            var varyingOperandValues = new List<object>();
+            var varyingWordStart = 0;
             Operand varyingOperand = null;
 
             while (currentWord < this.Words.Count) {
-                Operand operand = this.Instruction.Operands[currentOperand];
-                operand.Type.ReadValue(this.Words, currentWord, out object value, out int wordsUsed);
+                var operand = this.Instruction.Operands[currentOperand];
+                _ = operand.Type.ReadValue(this.Words, currentWord, out var value, out var wordsUsed);
                 if (operand.Quantifier == OperandQuantifier.Varying) {
                     varyingOperandValues.Add(value);
                     varyingWordStart = currentWord;
                     varyingOperand = operand;
                 } else {
-                    int wordCount = Math.Min(this.Words.Count - currentWord, wordsUsed);
-                    ParsedOperand parsedOperand = new ParsedOperand(this.Words, currentWord, wordCount, value, operand);
+                    var wordCount = Math.Min(this.Words.Count - currentWord, wordsUsed);
+                    var parsedOperand = new ParsedOperand(this.Words, currentWord, wordCount, value, operand);
                     this.Operands.Add(parsedOperand);
                 }
 
@@ -172,8 +158,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
             }
 
             if (varyingOperand != null) {
-                VaryingOperandValue varOperantValue = new VaryingOperandValue(varyingOperandValues);
-                ParsedOperand parsedOperand = new ParsedOperand(this.Words, currentWord, this.Words.Count - currentWord, varOperantValue, varyingOperand);
+                var varOperantValue = new VaryingOperandValue(varyingOperandValues);
+                var parsedOperand = new ParsedOperand(this.Words, currentWord, this.Words.Count - currentWord, varOperantValue, varyingOperand);
                 this.Operands.Add(parsedOperand);
             }
         }
@@ -195,7 +181,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
         public Type ResultType { get; set; }
         public uint ResultId {
             get {
-                for (int i = 0; i < this.Instruction.Operands.Count; ++i) {
+                for (var i = 0; i < this.Instruction.Operands.Count; ++i) {
                     if (this.Instruction.Operands[i].Type is IdResult) {
                         return this.Operands[i].GetId();
                     }

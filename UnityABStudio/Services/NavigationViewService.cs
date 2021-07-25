@@ -44,9 +44,8 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
                 _ = this._navigationService.NavigateTo(typeof(SettingsService).FullName);
             } else {
                 var selectedItem = args.InvokedItemContainer as NavigationViewItem;
-                var pageKey = selectedItem.GetValue(NavHelper.NavigateToProperty) as string;
 
-                if (pageKey != null) {
+                if (selectedItem.GetValue(NavHelper.NavigateToProperty) is string pageKey) {
                     _ = this._navigationService.NavigateTo(pageKey);
                 }
             }
@@ -68,8 +67,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
         }
 
         private bool IsMenuItemForPageType(NavigationViewItem menuItem, Type sourcePageType) {
-            var pageKey = menuItem.GetValue(NavHelper.NavigateToProperty) as string;
-            if (pageKey != null) {
+            if (menuItem.GetValue(NavHelper.NavigateToProperty) is string pageKey) {
                 return this._pageService.GetPageType(pageKey) == sourcePageType;
             }
 

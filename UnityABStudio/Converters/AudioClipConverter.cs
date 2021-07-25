@@ -138,30 +138,16 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
         public bool IsSupport {
             get {
                 if (this.m_AudioClip.version[0] < 5) {
-                    switch (this.m_AudioClip.m_Type) {
-                        case AudioType.AIFF:
-                        case AudioType.IT:
-                        case AudioType.MOD:
-                        case AudioType.S3M:
-                        case AudioType.XM:
-                        case AudioType.XMA:
-                        case AudioType.AUDIOQUEUE:
-                            return true;
-                        default:
-                            return false;
-                    }
-                } else {
-                    switch (this.m_AudioClip.m_CompressionFormat) {
-                        case AudioCompressionFormat.PCM:
-                        case AudioCompressionFormat.Vorbis:
-                        case AudioCompressionFormat.ADPCM:
-                        case AudioCompressionFormat.MP3:
-                        case AudioCompressionFormat.XMA:
-                            return true;
-                        default:
-                            return false;
-                    }
+                    return this.m_AudioClip.m_Type switch {
+                        AudioType.AIFF or AudioType.IT or AudioType.MOD or AudioType.S3M or AudioType.XM or AudioType.XMA or AudioType.AUDIOQUEUE => true,
+                        _ => false,
+                    };
                 }
+
+                return this.m_AudioClip.m_CompressionFormat switch {
+                    AudioCompressionFormat.PCM or AudioCompressionFormat.Vorbis or AudioCompressionFormat.ADPCM or AudioCompressionFormat.MP3 or AudioCompressionFormat.XMA => true,
+                    _ => false,
+                };
             }
         }
     }

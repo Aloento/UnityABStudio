@@ -42,8 +42,6 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
             return cacheTheme;
         }
 
-        private async Task SaveThemeInSettingsAsync(ElementTheme theme) {
-            await ApplicationData.Current.LocalSettings.SaveAsync(SettingsKey, theme.ToString());
-        }
+        private async Task SaveThemeInSettingsAsync(ElementTheme theme) => await ApplicationData.Current.LocalSettings.SaveAsync(SettingsKey, theme.ToString());
     }
 }

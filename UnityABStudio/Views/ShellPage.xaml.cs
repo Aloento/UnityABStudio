@@ -2,6 +2,7 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
     using Windows.System;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Contracts.Services;
+    using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Microsoft.UI.Xaml.Input;
     using ViewModels;
@@ -20,7 +21,7 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
             this.ViewModel.NavigationViewService.Initialize(this.navigationView);
         }
 
-        private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e) {
+        private void OnLoaded(object sender, RoutedEventArgs e) {
             // Keyboard accelerators are added here to avoid showing 'Alt + left' tooltip on the page.
             // More info on tracking issue https://github.com/Microsoft/microsoft-ui-xaml/issues/8
             this.KeyboardAccelerators.Add(this._altLeftKeyboardAccelerator);
@@ -28,7 +29,7 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
         }
 
         private static KeyboardAccelerator BuildKeyboardAccelerator(VirtualKey key, VirtualKeyModifiers? modifiers = null) {
-            var keyboardAccelerator = new KeyboardAccelerator() { Key = key };
+            var keyboardAccelerator = new KeyboardAccelerator { Key = key };
             if (modifiers.HasValue) {
                 keyboardAccelerator.Modifiers = modifiers.Value;
             }

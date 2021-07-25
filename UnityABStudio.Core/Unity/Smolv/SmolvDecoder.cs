@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
+namespace SoarCraft.QYun.UnityABStudio.Core.Unity.Smolv {
     using System;
     using System.IO;
     using System.Text;
@@ -13,7 +13,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                 return 0;
             }
 
-            int size = BitConverter.ToInt32(data, 5 * sizeof(uint));
+            var size = BitConverter.ToInt32(data, 5 * sizeof(uint));
             return size;
         }
 
@@ -28,9 +28,9 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                 return 0;
             }
 
-            long initPosition = stream.Position;
+            var initPosition = stream.Position;
             stream.Position += HeaderSize - sizeof(uint);
-            int size = stream.ReadByte() | stream.ReadByte() << 8 | stream.ReadByte() << 16 | stream.ReadByte() << 24;
+            var size = stream.ReadByte() | stream.ReadByte() << 8 | stream.ReadByte() << 16 | stream.ReadByte() << 24;
             stream.Position = initPosition;
             return size;
         }
@@ -40,18 +40,14 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                 throw new ArgumentNullException(nameof(data));
             }
 
-            int bufferSize = GetDecodedBufferSize(data);
+            var bufferSize = GetDecodedBufferSize(data);
             if (bufferSize == 0) {
                 // invalid SMOL-V
                 return null;
             }
 
-            byte[] output = new byte[bufferSize];
-            if (Decode(data, output)) {
-                return output;
-            }
-
-            return null;
+            var output = new byte[bufferSize];
+            return Decode(data, output) ? output : null;
         }
 
         public static bool Decode(byte[] data, byte[] output) {
@@ -62,12 +58,12 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                 throw new ArgumentNullException(nameof(output));
             }
 
-            int bufferSize = GetDecodedBufferSize(data);
+            var bufferSize = GetDecodedBufferSize(data);
             if (bufferSize > output.Length) {
                 return false;
             }
 
-            using (MemoryStream outputStream = new MemoryStream(output)) {
+            using (var outputStream = new MemoryStream(output)) {
                 return Decode(data, outputStream);
             }
         }
@@ -76,7 +72,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
             if (data == null) {
                 throw new ArgumentNullException(nameof(data));
             }
-            using (MemoryStream inputStream = new MemoryStream(data)) {
+            using (var inputStream = new MemoryStream(data)) {
                 return Decode(inputStream, data.Length, outputStream);
             }
         }
@@ -92,34 +88,34 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                 return false;
             }
 
-            using (BinaryReader input = new BinaryReader(inputStream, Encoding.UTF8, true)) {
-                using (BinaryWriter output = new BinaryWriter(outputStream, Encoding.UTF8, true)) {
-                    long inputEndPosition = input.BaseStream.Position + inputSize;
-                    long outputStartPosition = output.BaseStream.Position;
+            using (var input = new BinaryReader(inputStream, Encoding.UTF8, true)) {
+                using (var output = new BinaryWriter(outputStream, Encoding.UTF8, true)) {
+                    var inputEndPosition = input.BaseStream.Position + inputSize;
+                    var outputStartPosition = output.BaseStream.Position;
 
                     // Header
                     output.Write(SpirVHeaderMagic);
                     input.BaseStream.Position += sizeof(uint);
-                    uint version = input.ReadUInt32();
+                    var version = input.ReadUInt32();
                     output.Write(version);
-                    uint generator = input.ReadUInt32();
+                    var generator = input.ReadUInt32();
                     output.Write(generator);
-                    int bound = input.ReadInt32();
+                    var bound = input.ReadInt32();
                     output.Write(bound);
-                    uint schema = input.ReadUInt32();
+                    var schema = input.ReadUInt32();
                     output.Write(schema);
-                    int decodedSize = input.ReadInt32();
+                    var decodedSize = input.ReadInt32();
 
                     // Body
-                    int prevResult = 0;
-                    int prevDecorate = 0;
+                    var prevResult = 0;
+                    var prevDecorate = 0;
                     while (input.BaseStream.Position < inputEndPosition) {
                         // read length + opcode
-                        if (!ReadLengthOp(input, out uint instrLen, out SpvOp op)) {
+                        if (!ReadLengthOp(input, out var instrLen, out var op)) {
                             return false;
                         }
 
-                        bool wasSwizzle = op == SpvOp.VectorShuffleCompact;
+                        var wasSwizzle = op == SpvOp.VectorShuffleCompact;
                         if (wasSwizzle) {
                             op = SpvOp.VectorShuffle;
                         }
@@ -128,7 +124,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                         uint ioffs = 1;
                         // read type as varint, if we have it
                         if (op.OpHasType()) {
-                            if (!ReadVarint(input, out uint value)) {
+                            if (!ReadVarint(input, out var value)) {
                                 return false;
                             }
 
@@ -138,41 +134,41 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
 
                         // read result as delta+varint, if we have it
                         if (op.OpHasResult()) {
-                            if (!ReadVarint(input, out uint value)) {
+                            if (!ReadVarint(input, out var value)) {
                                 return false;
                             }
 
-                            int zds = prevResult + ZigDecode(value);
+                            var zds = prevResult + ZigDecode(value);
                             output.Write(zds);
                             prevResult = zds;
                             ioffs++;
                         }
 
                         // Decorate: IDs relative to previous decorate
-                        if (op == SpvOp.Decorate || op == SpvOp.MemberDecorate) {
-                            if (!ReadVarint(input, out uint value)) {
+                        if (op is SpvOp.Decorate or SpvOp.MemberDecorate) {
+                            if (!ReadVarint(input, out var value)) {
                                 return false;
                             }
 
-                            int zds = prevDecorate + unchecked((int)value);
+                            var zds = prevDecorate + unchecked((int)value);
                             output.Write(zds);
                             prevDecorate = zds;
                             ioffs++;
                         }
 
                         // Read this many IDs, that are relative to result ID
-                        int relativeCount = op.OpDeltaFromResult();
-                        bool inverted = false;
+                        var relativeCount = op.OpDeltaFromResult();
+                        var inverted = false;
                         if (relativeCount < 0) {
                             inverted = true;
                             relativeCount = -relativeCount;
                         }
-                        for (int i = 0; i < relativeCount && ioffs < instrLen; ++i, ++ioffs) {
-                            if (!ReadVarint(input, out uint value)) {
+                        for (var i = 0; i < relativeCount && ioffs < instrLen; ++i, ++ioffs) {
+                            if (!ReadVarint(input, out var value)) {
                                 return false;
                             }
 
-                            int zd = inverted ? ZigDecode(value) : unchecked((int)value);
+                            var zd = inverted ? ZigDecode(value) : unchecked((int)value);
                             output.Write(prevResult - zd);
                         }
 
@@ -189,7 +185,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                         } else if (op.OpVarRest()) {
                             // read rest of words with variable encoding
                             for (; ioffs < instrLen; ++ioffs) {
-                                if (!ReadVarint(input, out uint value)) {
+                                if (!ReadVarint(input, out var value)) {
                                     return false;
                                 }
                                 output.Write(value);
@@ -200,29 +196,18 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                                 if (input.BaseStream.Position + 4 > input.BaseStream.Length) {
                                     return false;
                                 }
-                                uint val = input.ReadUInt32();
+                                var val = input.ReadUInt32();
                                 output.Write(val);
                             }
                         }
                     }
 
-                    if (output.BaseStream.Position != outputStartPosition + decodedSize) {
-                        // something went wrong during decoding? we should have decoded to exact output size
-                        return false;
-                    }
-
-                    return true;
+                    return output.BaseStream.Position == outputStartPosition + decodedSize;
                 }
             }
         }
 
-        private static bool CheckSmolHeader(byte[] data) {
-            if (!CheckGenericHeader(data, SmolHeaderMagic)) {
-                return false;
-            }
-
-            return true;
-        }
+        private static bool CheckSmolHeader(byte[] data) => CheckGenericHeader(data, SmolHeaderMagic);
 
         private static bool CheckGenericHeader(byte[] data, uint expectedMagic) {
             if (data == null) {
@@ -232,25 +217,20 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
                 return false;
             }
 
-            uint headerMagic = BitConverter.ToUInt32(data, 0 * sizeof(uint));
+            var headerMagic = BitConverter.ToUInt32(data, 0 * sizeof(uint));
             if (headerMagic != expectedMagic) {
                 return false;
             }
 
-            uint headerVersion = BitConverter.ToUInt32(data, 1 * sizeof(uint));
-            if (headerVersion < 0x00010000 || headerVersion > 0x00010300) {
-                // only support 1.0 through 1.3
-                return false;
-            }
-
-            return true;
+            var headerVersion = BitConverter.ToUInt32(data, 1 * sizeof(uint));
+            return headerVersion is >= 0x00010000 and <= 0x00010300;
         }
 
         private static bool ReadVarint(BinaryReader input, out uint value) {
             uint v = 0;
-            int shift = 0;
+            var shift = 0;
             while (input.BaseStream.Position < input.BaseStream.Length) {
-                byte b = input.ReadByte();
+                var b = input.ReadByte();
                 v |= unchecked((uint)(b & 127) << shift);
                 shift += 7;
                 if ((b & 128) == 0) {
@@ -266,7 +246,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
         private static bool ReadLengthOp(BinaryReader input, out uint len, out SpvOp op) {
             len = default;
             op = default;
-            if (!ReadVarint(input, out uint value)) {
+            if (!ReadVarint(input, out var value)) {
                 return false;
             }
             len = ((value >> 20) << 4) | ((value >> 4) & 0xF);
@@ -282,86 +262,49 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
         /// more compact varint encoding. This basically swaps rarely used op values that are &lt; 16 with the
         /// ones that are common.
         /// </summary>
-        private static SpvOp RemapOp(SpvOp op) {
-            switch (op) {
-                // 0: 24%
-                case SpvOp.Decorate:
-                    return SpvOp.Nop;
-                case SpvOp.Nop:
-                    return SpvOp.Decorate;
-
-                // 1: 17%
-                case SpvOp.Load:
-                    return SpvOp.Undef;
-                case SpvOp.Undef:
-                    return SpvOp.Load;
-
-                // 2: 9%
-                case SpvOp.Store:
-                    return SpvOp.SourceContinued;
-                case SpvOp.SourceContinued:
-                    return SpvOp.Store;
-
-                // 3: 7.2%
-                case SpvOp.AccessChain:
-                    return SpvOp.Source;
-                case SpvOp.Source:
-                    return SpvOp.AccessChain;
-
-                // 4: 5.0%
-                // Name - already small enum value - 5: 4.4%
-                // MemberName - already small enum value - 6: 2.9% 
-                case SpvOp.VectorShuffle:
-                    return SpvOp.SourceExtension;
-                case SpvOp.SourceExtension:
-                    return SpvOp.VectorShuffle;
-
-                // 7: 4.0%
-                case SpvOp.MemberDecorate:
-                    return SpvOp.String;
-                case SpvOp.String:
-                    return SpvOp.MemberDecorate;
-
-                // 8: 0.9%
-                case SpvOp.Label:
-                    return SpvOp.Line;
-                case SpvOp.Line:
-                    return SpvOp.Label;
-
-                // 9: 3.9%
-                case SpvOp.Variable:
-                    return (SpvOp)9;
-                case (SpvOp)9:
-                    return SpvOp.Variable;
-
-                // 10: 3.9%
-                case SpvOp.FMul:
-                    return SpvOp.Extension;
-                case SpvOp.Extension:
-                    return SpvOp.FMul;
-
-                // 11: 2.5%
-                // ExtInst - already small enum value - 12: 1.2%
-                // VectorShuffleCompact - already small enum value - used for compact shuffle encoding
-                case SpvOp.FAdd:
-                    return SpvOp.ExtInstImport;
-                case SpvOp.ExtInstImport:
-                    return SpvOp.FAdd;
-
-                // 14: 2.2%
-                case SpvOp.TypePointer:
-                    return SpvOp.MemoryModel;
-                case SpvOp.MemoryModel:
-                    return SpvOp.TypePointer;
-
-                // 15: 1.1%
-                case SpvOp.FNegate:
-                    return SpvOp.EntryPoint;
-                case SpvOp.EntryPoint:
-                    return SpvOp.FNegate;
-            }
-            return op;
-        }
+        private static SpvOp RemapOp(SpvOp op) => op switch {
+            // 0: 24%
+            SpvOp.Decorate => SpvOp.Nop,
+            SpvOp.Nop => SpvOp.Decorate,
+            // 1: 17%
+            SpvOp.Load => SpvOp.Undef,
+            SpvOp.Undef => SpvOp.Load,
+            // 2: 9%
+            SpvOp.Store => SpvOp.SourceContinued,
+            SpvOp.SourceContinued => SpvOp.Store,
+            // 3: 7.2%
+            SpvOp.AccessChain => SpvOp.Source,
+            SpvOp.Source => SpvOp.AccessChain,
+            // 4: 5.0%
+            // Name - already small enum value - 5: 4.4%
+            // MemberName - already small enum value - 6: 2.9% 
+            SpvOp.VectorShuffle => SpvOp.SourceExtension,
+            SpvOp.SourceExtension => SpvOp.VectorShuffle,
+            // 7: 4.0%
+            SpvOp.MemberDecorate => SpvOp.String,
+            SpvOp.String => SpvOp.MemberDecorate,
+            // 8: 0.9%
+            SpvOp.Label => SpvOp.Line,
+            SpvOp.Line => SpvOp.Label,
+            // 9: 3.9%
+            SpvOp.Variable => (SpvOp)9,
+            (SpvOp)9 => SpvOp.Variable,
+            // 10: 3.9%
+            SpvOp.FMul => SpvOp.Extension,
+            SpvOp.Extension => SpvOp.FMul,
+            // 11: 2.5%
+            // ExtInst - already small enum value - 12: 1.2%
+            // VectorShuffleCompact - already small enum value - used for compact shuffle encoding
+            SpvOp.FAdd => SpvOp.ExtInstImport,
+            SpvOp.ExtInstImport => SpvOp.FAdd,
+            // 14: 2.2%
+            SpvOp.TypePointer => SpvOp.MemoryModel,
+            SpvOp.MemoryModel => SpvOp.TypePointer,
+            // 15: 1.1%
+            SpvOp.FNegate => SpvOp.EntryPoint,
+            SpvOp.EntryPoint => SpvOp.FNegate,
+            _ => op,
+        };
 
         private static uint DecodeLen(SpvOp op, uint len) {
             len++;
@@ -387,11 +330,11 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
 
         private static int DecorationExtraOps(int dec) {
             // RelaxedPrecision, Block..ColMajor
-            if (dec == 0 || (dec >= 2 && dec <= 5)) {
+            if (dec is 0 or >= 2 and <= 5) {
                 return 0;
             }
             // Stream..XfbStride
-            if (dec >= 29 && dec <= 37) {
+            if (dec is >= 29 and <= 37) {
                 return 1;
             }
 
@@ -399,9 +342,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
             return -1;
         }
 
-        private static int ZigDecode(uint u) {
-            return (u & 1) != 0 ? unchecked((int)(~(u >> 1))) : unchecked((int)(u >> 1));
-        }
+        private static int ZigDecode(uint u) => (u & 1) != 0 ? unchecked((int)(~(u >> 1))) : unchecked((int)(u >> 1));
 
         public const uint SpirVHeaderMagic = 0x07230203;
         /// <summary>

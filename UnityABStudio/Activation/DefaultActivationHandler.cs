@@ -16,9 +16,8 @@ namespace SoarCraft.QYun.UnityABStudio.Activation {
             await Task.CompletedTask;
         }
 
-        protected override bool CanHandleInternal(LaunchActivatedEventArgs args) {
+        protected override bool CanHandleInternal(LaunchActivatedEventArgs args) =>
             // None of the ActivationHandlers has handled the app activation
-            return this._navigationService.Frame.Content == null;
-        }
+            this._navigationService.Frame.Content == null;
     }
 }

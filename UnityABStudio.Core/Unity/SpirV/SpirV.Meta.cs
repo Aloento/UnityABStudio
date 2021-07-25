@@ -1,11 +1,9 @@
-namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
+namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
     using System.Collections.Generic;
 
     internal class Meta {
         public class ToolInfo {
-            public ToolInfo(string vendor) {
-                this.Vendor = vendor;
-            }
+            public ToolInfo(string vendor) => this.Vendor = vendor;
 
             public ToolInfo(string vendor, string name) {
                 this.Vendor = vendor;
@@ -24,8 +22,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
 
         public static IReadOnlyDictionary<int, ToolInfo> Tools => toolInfos_;
 
-        private readonly static Dictionary<int, ToolInfo> toolInfos_ = new Dictionary<int, ToolInfo>
-        {
+        private readonly static Dictionary<int, ToolInfo> toolInfos_ = new() {
             { 0, new ToolInfo("Khronos") },
             { 1, new ToolInfo("LunarG") },
             { 2, new ToolInfo("Valve") },

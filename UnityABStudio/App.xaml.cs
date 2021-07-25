@@ -1,5 +1,6 @@
 // To learn more about WinUI3, see: https://docs.microsoft.com/windows/apps/winui/winui3/.
 namespace SoarCraft.QYun.UnityABStudio {
+    using System;
     using Activation;
     using AssetReader;
     using CommunityToolkit.Mvvm.DependencyInjection;
@@ -13,6 +14,7 @@ namespace SoarCraft.QYun.UnityABStudio {
     using TextureDecoder;
     using ViewModels;
     using Views;
+    using UnhandledExceptionEventArgs = Microsoft.UI.Xaml.UnhandledExceptionEventArgs;
 
     public partial class App : Application {
         public static Window MainWindow { get; set; } = new() { Title = "AppDisplayName".GetLocalized() };
@@ -31,7 +33,7 @@ namespace SoarCraft.QYun.UnityABStudio {
             await activationService.ActivateAsync(args);
         }
 
-        private System.IServiceProvider ConfigureServices() {
+        private IServiceProvider ConfigureServices() {
             var services = new ServiceCollection();
             _ = services.AddSingleton<LoggerService>();
 

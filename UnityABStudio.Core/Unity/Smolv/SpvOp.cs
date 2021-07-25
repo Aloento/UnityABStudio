@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
+namespace SoarCraft.QYun.UnityABStudio.Core.Unity.Smolv {
     public enum SpvOp {
         Nop = 0,
         Undef = 1,
@@ -314,44 +314,41 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.Smolv {
 
     public static class SpvOpExtensions {
         public static bool OpHasResult(this SpvOp _this) {
-            if (_this < 0 || _this >= SpvOp.KnownOpsCount) {
+            if (_this is < 0 or >= SpvOp.KnownOpsCount) {
                 return false;
             }
             return OpData.SpirvOpData[(int)_this].hasResult != 0;
         }
 
         public static bool OpHasType(this SpvOp _this) {
-            if (_this < 0 || _this >= SpvOp.KnownOpsCount) {
+            if (_this is < 0 or >= SpvOp.KnownOpsCount) {
                 return false;
             }
             return OpData.SpirvOpData[(int)_this].hasType != 0;
         }
 
         public static int OpDeltaFromResult(this SpvOp _this) {
-            if (_this < 0 || _this >= SpvOp.KnownOpsCount) {
+            if (_this is < 0 or >= SpvOp.KnownOpsCount) {
                 return 0;
             }
             return OpData.SpirvOpData[(int)_this].deltaFromResult;
         }
 
         public static bool OpVarRest(this SpvOp _this) {
-            if (_this < 0 || _this >= SpvOp.KnownOpsCount) {
+            if (_this is < 0 or >= SpvOp.KnownOpsCount) {
                 return false;
             }
             return OpData.SpirvOpData[(int)_this].varrest != 0;
         }
 
-        public static bool OpDebugInfo(this SpvOp _this) {
-            return
-                _this == SpvOp.SourceContinued ||
-                _this == SpvOp.Source ||
-                _this == SpvOp.SourceExtension ||
-                _this == SpvOp.Name ||
-                _this == SpvOp.MemberName ||
-                _this == SpvOp.String ||
-                _this == SpvOp.Line ||
-                _this == SpvOp.NoLine ||
-                _this == SpvOp.ModuleProcessed;
-        }
+        public static bool OpDebugInfo(this SpvOp _this) => _this is SpvOp.SourceContinued or
+                SpvOp.Source or
+                SpvOp.SourceExtension or
+                SpvOp.Name or
+                SpvOp.MemberName or
+                SpvOp.String or
+                SpvOp.Line or
+                SpvOp.NoLine or
+                SpvOp.ModuleProcessed;
     }
 }

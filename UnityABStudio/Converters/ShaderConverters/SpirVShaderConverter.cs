@@ -2,8 +2,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters {
     using System;
     using System.IO;
     using System.Text;
-    using Smolv;
-    using SpirV;
+    using Core.Unity.Smolv;
+    using Core.Unity.SpirV;
 
     public static class SpirVShaderConverter {
         public static string Convert(byte[] m_ProgramCode) {

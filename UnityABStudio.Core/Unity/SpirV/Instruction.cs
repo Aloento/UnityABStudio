@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
+namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
     using System.Collections.Generic;
 
     public enum OperandQuantifier {

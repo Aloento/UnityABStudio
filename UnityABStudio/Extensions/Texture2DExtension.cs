@@ -1,11 +1,11 @@
 namespace SoarCraft.QYun.UnityABStudio.Extensions {
+    using System.IO;
     using AssetReader.Unity3D.Objects.Texture2Ds;
+    using Converters;
+    using Core.Entities;
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
     using SixLabors.ImageSharp.Processing;
-    using System.IO;
-    using Converters;
-    using Core.Entities;
 
     public static class Texture2DExtension {
         public static Image ConvertToImage(this Texture2D m_Texture2D, bool flip) {

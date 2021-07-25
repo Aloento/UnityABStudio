@@ -9,6 +9,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Converters;
     using Converters.ShaderConverters;
+    using Core.Helpers;
     using Core.Models;
     using Newtonsoft.Json;
     using Services;
@@ -63,7 +64,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             var m_MonoBehaviour = (MonoBehaviour)item.Obj;
             var type = m_MonoBehaviour.ToType();
             if (type == null) {
-                var m_Type = MonoBehaviourToTypeTree(m_MonoBehaviour);
+                var m_Type = m_MonoBehaviour.ConvertToTypeTree(new AssemblyLoader());
                 type = m_MonoBehaviour.ToType(m_Type);
             }
             var str = JsonConvert.SerializeObject(type, Formatting.Indented);

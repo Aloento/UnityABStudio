@@ -57,7 +57,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
         private ICommand switchThemeCommand;
 
         public ICommand SwitchThemeCommand => this.switchThemeCommand ??= new RelayCommand<ElementTheme>(
-            async (param) => {
+            async param => {
                 if (this.ElementTheme != param) {
                     this.ElementTheme = param;
                     await this.themeSelectorService.SetThemeAsync(param);

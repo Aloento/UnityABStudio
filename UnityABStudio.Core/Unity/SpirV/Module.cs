@@ -1,4 +1,4 @@
-namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
+namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -29,18 +29,16 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
             Read(this.Instructions, this.objects_);
         }
 
-        public static bool IsDebugInstruction(ParsedInstruction instruction) {
-            return debugInstructions_.Contains(instruction.Instruction.Name);
-        }
+        public static bool IsDebugInstruction(ParsedInstruction instruction) => debugInstructions_.Contains(instruction.Instruction.Name);
 
         private static void Read(IReadOnlyList<ParsedInstruction> instructions, Dictionary<uint, ParsedInstruction> objects) {
             // Debug instructions can be only processed after everything
             // else has been parsed, as they may reference types which haven't
             // been seen in the file yet
-            List<ParsedInstruction> debugInstructions = new List<ParsedInstruction>();
+            var debugInstructions = new List<ParsedInstruction>();
             // Entry points contain forward references
             // Those need to be resolved afterwards
-            List<ParsedInstruction> entryPoints = new List<ParsedInstruction>();
+            var entryPoints = new List<ParsedInstruction>();
 
             foreach (var instruction in instructions) {
                 if (IsDebugInstruction(instruction)) {
@@ -65,11 +63,11 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                     // Constants require that the result type has been resolved
                     case OpSpecConstant sc:
                     case OpConstant oc: {
-                        Type t = instruction.ResultType;
+                        var t = instruction.ResultType;
                         Debug.Assert(t != null);
                         Debug.Assert(t is ScalarType);
 
-                        object constant = ConvertConstant(instruction.ResultType as ScalarType, instruction.Words, 3);
+                        var constant = ConvertConstant(instruction.ResultType as ScalarType, instruction.Words, 3);
                         instruction.Operands[2].Value = constant;
                         instruction.Value = constant;
                     }
@@ -77,44 +75,44 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                 }
             }
 
-            foreach (ParsedInstruction instruction in debugInstructions) {
+            foreach (var instruction in debugInstructions) {
                 switch (instruction.Instruction) {
                     case OpMemberName mn: {
-                        StructType t = (StructType)objects[instruction.Words[1]].ResultType;
+                        var t = (StructType)objects[instruction.Words[1]].ResultType;
                         t.SetMemberName((uint)instruction.Operands[1].Value, (string)instruction.Operands[2].Value);
                     }
                     break;
 
                     case OpName n: {
                         // We skip naming objects we don't know about
-                        ParsedInstruction t = objects[instruction.Words[1]];
+                        var t = objects[instruction.Words[1]];
                         t.Name = (string)instruction.Operands[1].Value;
                     }
                     break;
                 }
             }
 
-            foreach (ParsedInstruction instruction in instructions) {
+            foreach (var instruction in instructions) {
                 instruction.ResolveReferences(objects);
             }
         }
 
         public static Module ReadFrom(Stream stream) {
-            BinaryReader br = new BinaryReader(stream);
-            Reader reader = new Reader(br);
+            var br = new BinaryReader(stream);
+            var reader = new Reader(br);
 
-            uint versionNumber = reader.ReadDWord();
-            int majorVersion = (int)(versionNumber >> 16);
-            int minorVersion = (int)((versionNumber >> 8) & 0xFF);
-            Version version = new Version(majorVersion, minorVersion);
+            var versionNumber = reader.ReadDWord();
+            var majorVersion = (int)(versionNumber >> 16);
+            var minorVersion = (int)((versionNumber >> 8) & 0xFF);
+            var version = new Version(majorVersion, minorVersion);
 
-            uint generatorMagicNumber = reader.ReadDWord();
-            int generatorToolId = (int)(generatorMagicNumber >> 16);
-            string generatorVendor = "unknown";
+            var generatorMagicNumber = reader.ReadDWord();
+            var generatorToolId = (int)(generatorMagicNumber >> 16);
+            var generatorVendor = "unknown";
             string generatorName = null;
 
             if (Meta.Tools.ContainsKey(generatorToolId)) {
-                Meta.ToolInfo toolInfo = Meta.Tools[generatorToolId];
+                var toolInfo = Meta.Tools[generatorToolId];
                 generatorVendor = toolInfo.Vendor;
                 if (toolInfo.Name != null) {
                     generatorName = toolInfo.Name;
@@ -122,7 +120,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
             }
 
             // Read header
-            ModuleHeader header = new ModuleHeader();
+            var header = new ModuleHeader();
             header.Version = version;
             header.GeneratorName = generatorName;
             header.GeneratorVendor = generatorVendor;
@@ -130,19 +128,19 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
             header.Bound = reader.ReadDWord();
             header.Reserved = reader.ReadDWord();
 
-            List<ParsedInstruction> instructions = new List<ParsedInstruction>();
+            var instructions = new List<ParsedInstruction>();
             while (!reader.EndOfStream) {
-                uint instructionStart = reader.ReadDWord();
-                ushort wordCount = (ushort)(instructionStart >> 16);
-                int opCode = (int)(instructionStart & 0xFFFF);
+                var instructionStart = reader.ReadDWord();
+                var wordCount = (ushort)(instructionStart >> 16);
+                var opCode = (int)(instructionStart & 0xFFFF);
 
-                uint[] words = new uint[wordCount];
+                var words = new uint[wordCount];
                 words[0] = instructionStart;
                 for (ushort i = 1; i < wordCount; ++i) {
                     words[i] = reader.ReadDWord();
                 }
 
-                ParsedInstruction instruction = new ParsedInstruction(opCode, words);
+                var instruction = new ParsedInstruction(opCode, words);
                 instructions.Add(instruction);
             }
 
@@ -175,8 +173,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                 break;
 
                 case OpTypeArray t: {
-                    object constant = objects[i.Words[3]].Value;
-                    int size = 0;
+                    var constant = objects[i.Words[3]].Value;
+                    var size = 0;
 
                     switch (constant) {
                         case ushort u16:
@@ -229,13 +227,13 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                 break;
 
                 case OpTypeImage t: {
-                    Type sampledType = objects[i.Operands[1].GetId()].ResultType;
-                    Dim dim = i.Operands[2].GetSingleEnumValue<Dim>();
-                    uint depth = (uint)i.Operands[3].Value;
-                    bool isArray = (uint)i.Operands[4].Value != 0;
-                    bool isMultiSampled = (uint)i.Operands[5].Value != 0;
-                    uint sampled = (uint)i.Operands[6].Value;
-                    ImageFormat imageFormat = i.Operands[7].GetSingleEnumValue<ImageFormat>();
+                    var sampledType = objects[i.Operands[1].GetId()].ResultType;
+                    var dim = i.Operands[2].GetSingleEnumValue<Dim>();
+                    var depth = (uint)i.Operands[3].Value;
+                    var isArray = (uint)i.Operands[4].Value != 0;
+                    var isMultiSampled = (uint)i.Operands[5].Value != 0;
+                    var sampled = (uint)i.Operands[6].Value;
+                    var imageFormat = i.Operands[7].GetSingleEnumValue<ImageFormat>();
 
                     i.ResultType = new ImageType(sampledType,
                         dim,
@@ -256,8 +254,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                 break;
 
                 case OpTypeFunction t: {
-                    List<Type> parameterTypes = new List<Type>();
-                    for (int j = 3; j < i.Words.Count; ++j) {
+                    var parameterTypes = new List<Type>();
+                    for (var j = 3; j < i.Words.Count; ++j) {
                         parameterTypes.Add(objects[i.Words[j]].ResultType);
                     }
                     i.ResultType = new FunctionType(objects[i.Words[2]].ResultType, parameterTypes);
@@ -276,7 +274,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                         // If there is something present, it must have been
                         // a forward reference. The storage type must
                         // match
-                        PointerType pt = (PointerType)i.ResultType;
+                        var pt = (PointerType)i.ResultType;
                         Debug.Assert(pt != null);
                         Debug.Assert(pt.StorageClass == (StorageClass)i.Words[2]);
                         pt.ResolveForwardReference(objects[i.Words[3]].ResultType);
@@ -287,8 +285,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                 break;
 
                 case OpTypeStruct t: {
-                    List<Type> memberTypes = new List<Type>();
-                    for (int j = 2; j < i.Words.Count; ++j) {
+                    var memberTypes = new List<Type>();
+                    for (var j = 2; j < i.Words.Count; ++j) {
                         memberTypes.Add(objects[i.Words[j]].ResultType);
                     }
                     i.ResultType = new StructType(memberTypes);
@@ -303,17 +301,23 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                     if (i.Signed) {
                         if (i.Width == 16) {
                             return unchecked((short)(words[index]));
-                        } else if (i.Width == 32) {
+                        }
+
+                        if (i.Width == 32) {
                             return unchecked((int)(words[index]));
-                        } else if (i.Width == 64) {
+                        }
+                        if (i.Width == 64) {
                             return unchecked((long)(words[index] | (ulong)(words[index + 1]) << 32));
                         }
                     } else {
                         if (i.Width == 16) {
                             return unchecked((ushort)(words[index]));
-                        } else if (i.Width == 32) {
+                        }
+
+                        if (i.Width == 32) {
                             return words[index];
-                        } else if (i.Width == 64) {
+                        }
+                        if (i.Width == 64) {
                             return words[index] | (ulong)(words[index + 1]) << 32;
                         }
                     }
@@ -324,11 +328,12 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
                 case FloatingPointType f: {
                     if (f.Width == 32) {
                         return new FloatUIntUnion { Int = words[0] }.Float;
-                    } else if (f.Width == 64) {
-                        return new DoubleULongUnion { Long = (words[index] | (ulong)(words[index + 1]) << 32) }.Double;
-                    } else {
-                        throw new Exception("Cannot construct floating point literal.");
                     }
+
+                    if (f.Width == 64) {
+                        return new DoubleULongUnion { Long = (words[index] | (ulong)(words[index + 1]) << 32) }.Double;
+                    }
+                    throw new Exception("Cannot construct floating point literal.");
                 }
             }
 
@@ -338,8 +343,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
         public ModuleHeader Header { get; }
         public IReadOnlyList<ParsedInstruction> Instructions { get; }
 
-        private static HashSet<string> debugInstructions_ = new HashSet<string>
-        {
+        private static HashSet<string> debugInstructions_ = new() {
             "OpSourceContinued",
             "OpSource",
             "OpSourceExtension",
@@ -351,6 +355,6 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters.SpirV {
             "OpModuleProcessed"
         };
 
-        private readonly Dictionary<uint, ParsedInstruction> objects_ = new Dictionary<uint, ParsedInstruction>();
+        private readonly Dictionary<uint, ParsedInstruction> objects_ = new();
     }
 }

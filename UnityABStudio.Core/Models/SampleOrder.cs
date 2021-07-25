@@ -36,9 +36,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Models {
 
         public ICollection<SampleOrderDetail> Details { get; set; }
 
-        public override string ToString() {
-            return $"{this.Company} {this.Status}";
-        }
+        public override string ToString() => $"{this.Company} {this.Status}";
 
         public string ShortDescription => $"Order ID: {this.OrderID}";
     }

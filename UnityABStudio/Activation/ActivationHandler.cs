@@ -10,19 +10,14 @@ namespace SoarCraft.QYun.UnityABStudio.Activation {
         // Override this method to add the activation logic in your activation handler
         protected abstract Task HandleInternalAsync(T args);
 
-        public async Task HandleAsync(object args) {
-            await this.HandleInternalAsync(args as T);
-        }
+        public async Task HandleAsync(object args) => await this.HandleInternalAsync(args as T);
 
-        public bool CanHandle(object args) {
+        public bool CanHandle(object args) =>
             // CanHandle checks the args is of type you have configured
-            return args is T && this.CanHandleInternal(args as T);
-        }
+            args is T && this.CanHandleInternal(args as T);
 
         // You can override this method to add extra validation on activation args
         // to determine if your ActivationHandler should handle this activation args
-        protected virtual bool CanHandleInternal(T args) {
-            return true;
-        }
+        protected virtual bool CanHandleInternal(T args) => true;
     }
 }

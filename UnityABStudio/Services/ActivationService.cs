@@ -14,7 +14,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
         private readonly IEnumerable<IActivationHandler> _activationHandlers;
         private readonly INavigationService _navigationService;
         private readonly IThemeSelectorService _themeSelectorService;
-        private UIElement _shell = null;
+        private UIElement _shell;
 
         public ActivationService(ActivationHandler<LaunchActivatedEventArgs> defaultHandler, IEnumerable<IActivationHandler> activationHandlers, INavigationService navigationService, IThemeSelectorService themeSelectorService) {
             this._defaultHandler = defaultHandler;
