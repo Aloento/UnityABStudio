@@ -1,4 +1,5 @@
 namespace SoarCraft.QYun.UnityABStudio.Core.Services {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using AssetReader;
@@ -8,10 +9,10 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     public class AssetDataService : IAssetDataService {
         public static readonly AssetsManager AssetsManager = new();
 
-        public Task<IEnumerable<AssetItem>> GetHierarchyDataAsync() => throw new System.NotImplementedException();
+        public Task<IEnumerable<AssetItem>> GetHierarchyDataAsync() => throw new NotImplementedException();
 
-        public Task<IEnumerable<AssetItem>> GetAssetListDataAsync() => throw new System.NotImplementedException();
+        public Task<IEnumerable<AssetItem>> GetAssetListDataAsync() => throw new NotImplementedException();
 
-        public Task<IEnumerable<AssetItem>> GetClassListDataAsync() => throw new System.NotImplementedException();
+        public Task<IEnumerable<AssetItem>> GetClassListDataAsync() => throw new NotImplementedException();
     }
 }

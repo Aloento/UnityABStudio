@@ -26,337 +26,337 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.Smolv {
 
         public static readonly OpData[] SpirvOpData =
         {
-            new OpData(0, 0, 0, 0), // Nop
-			new OpData(1, 1, 0, 0), // Undef
-			new OpData(0, 0, 0, 0), // SourceContinued
-			new OpData(0, 0, 0, 1), // Source
-			new OpData(0, 0, 0, 0), // SourceExtension
-			new OpData(0, 0, 0, 0), // Name
-			new OpData(0, 0, 0, 0), // MemberName
-			new OpData(0, 0, 0, 0), // String
-			new OpData(0, 0, 0, 1), // Line
-			new OpData(1, 1, 0, 0), // #9
-			new OpData(0, 0, 0, 0), // Extension
-			new OpData(1, 0, 0, 0), // ExtInstImport
-			new OpData(1, 1, 0, 1), // ExtInst
-			new OpData(1, 1, 2, 1), // VectorShuffleCompact - new in SMOLV
-			new OpData(0, 0, 0, 1), // MemoryModel
-			new OpData(0, 0, 0, 1), // EntryPoint
-			new OpData(0, 0, 0, 1), // ExecutionMode
-			new OpData(0, 0, 0, 1), // Capability
-			new OpData(1, 1, 0, 0), // #18
-			new OpData(1, 0, 0, 1), // TypeVoid
-			new OpData(1, 0, 0, 1), // TypeBool
-			new OpData(1, 0, 0, 1), // TypeInt
-			new OpData(1, 0, 0, 1), // TypeFloat
-			new OpData(1, 0, 0, 1), // TypeVector
-			new OpData(1, 0, 0, 1), // TypeMatrix
-			new OpData(1, 0, 0, 1), // TypeImage
-			new OpData(1, 0, 0, 1), // TypeSampler
-			new OpData(1, 0, 0, 1), // TypeSampledImage
-			new OpData(1, 0, 0, 1), // TypeArray
-			new OpData(1, 0, 0, 1), // TypeRuntimeArray
-			new OpData(1, 0, 0, 1), // TypeStruct
-			new OpData(1, 0, 0, 1), // TypeOpaque
-			new OpData(1, 0, 0, 1), // TypePointer
-			new OpData(1, 0, 0, 1), // TypeFunction
-			new OpData(1, 0, 0, 1), // TypeEvent
-			new OpData(1, 0, 0, 1), // TypeDeviceEvent
-			new OpData(1, 0, 0, 1), // TypeReserveId
-			new OpData(1, 0, 0, 1), // TypeQueue
-			new OpData(1, 0, 0, 1), // TypePipe
-			new OpData(0, 0, 0, 1), // TypeForwardPointer
-			new OpData(1, 1, 0, 0), // #40
-			new OpData(1, 1, 0, 0), // ConstantTrue
-			new OpData(1, 1, 0, 0), // ConstantFalse
-			new OpData(1, 1, 0, 0), // Constant
-			new OpData(1, 1, 9, 0), // ConstantComposite
-			new OpData(1, 1, 0, 1), // ConstantSampler
-			new OpData(1, 1, 0, 0), // ConstantNull
-			new OpData(1, 1, 0, 0), // #47
-			new OpData(1, 1, 0, 0), // SpecConstantTrue
-			new OpData(1, 1, 0, 0), // SpecConstantFalse
-			new OpData(1, 1, 0, 0), // SpecConstant
-			new OpData(1, 1, 9, 0), // SpecConstantComposite
-			new OpData(1, 1, 0, 0), // SpecConstantOp
-			new OpData(1, 1, 0, 0), // #53
-			new OpData(1, 1, 0, 1), // Function
-			new OpData(1, 1, 0, 0), // FunctionParameter
-			new OpData(0, 0, 0, 0), // FunctionEnd
-			new OpData(1, 1, 9, 0), // FunctionCall
-			new OpData(1, 1, 0, 0), // #58
-			new OpData(1, 1, 0, 1), // Variable
-			new OpData(1, 1, 0, 0), // ImageTexelPointer
-			new OpData(1, 1, 1, 1), // Load
-			new OpData(0, 0, 2, 1), // Store
-			new OpData(0, 0, 0, 0), // CopyMemory
-			new OpData(0, 0, 0, 0), // CopyMemorySized
-			new OpData(1, 1, 0, 1), // AccessChain
-			new OpData(1, 1, 0, 0), // InBoundsAccessChain
-			new OpData(1, 1, 0, 0), // PtrAccessChain
-			new OpData(1, 1, 0, 0), // ArrayLength
-			new OpData(1, 1, 0, 0), // GenericPtrMemSemantics
-			new OpData(1, 1, 0, 0), // InBoundsPtrAccessChain
-			new OpData(0, 0, 0, 1), // Decorate
-			new OpData(0, 0, 0, 1), // MemberDecorate
-			new OpData(1, 0, 0, 0), // DecorationGroup
-			new OpData(0, 0, 0, 0), // GroupDecorate
-			new OpData(0, 0, 0, 0), // GroupMemberDecorate
-			new OpData(1, 1, 0, 0), // #76
-			new OpData(1, 1, 1, 1), // VectorExtractDynamic
-			new OpData(1, 1, 2, 1), // VectorInsertDynamic
-			new OpData(1, 1, 2, 1), // VectorShuffle
-			new OpData(1, 1, 9, 0), // CompositeConstruct
-			new OpData(1, 1, 1, 1), // CompositeExtract
-			new OpData(1, 1, 2, 1), // CompositeInsert
-			new OpData(1, 1, 1, 0), // CopyObject
-			new OpData(1, 1, 0, 0), // Transpose
-			new OpData(1, 1, 0, 0), // #85
-			new OpData(1, 1, 0, 0), // SampledImage
-			new OpData(1, 1, 2, 1), // ImageSampleImplicitLod
-			new OpData(1, 1, 2, 1), // ImageSampleExplicitLod
-			new OpData(1, 1, 3, 1), // ImageSampleDrefImplicitLod
-			new OpData(1, 1, 3, 1), // ImageSampleDrefExplicitLod
-			new OpData(1, 1, 2, 1), // ImageSampleProjImplicitLod
-			new OpData(1, 1, 2, 1), // ImageSampleProjExplicitLod
-			new OpData(1, 1, 3, 1), // ImageSampleProjDrefImplicitLod
-			new OpData(1, 1, 3, 1), // ImageSampleProjDrefExplicitLod
-			new OpData(1, 1, 2, 1), // ImageFetch
-			new OpData(1, 1, 3, 1), // ImageGather
-			new OpData(1, 1, 3, 1), // ImageDrefGather
-			new OpData(1, 1, 2, 1), // ImageRead
-			new OpData(0, 0, 3, 1), // ImageWrite
-			new OpData(1, 1, 1, 0), // Image
-			new OpData(1, 1, 1, 0), // ImageQueryFormat
-			new OpData(1, 1, 1, 0), // ImageQueryOrder
-			new OpData(1, 1, 2, 0), // ImageQuerySizeLod
-			new OpData(1, 1, 1, 0), // ImageQuerySize
-			new OpData(1, 1, 2, 0), // ImageQueryLod
-			new OpData(1, 1, 1, 0), // ImageQueryLevels
-			new OpData(1, 1, 1, 0), // ImageQuerySamples
-			new OpData(1, 1, 0, 0), // #108
-			new OpData(1, 1, 1, 0), // ConvertFToU
-			new OpData(1, 1, 1, 0), // ConvertFToS
-			new OpData(1, 1, 1, 0), // ConvertSToF
-			new OpData(1, 1, 1, 0), // ConvertUToF
-			new OpData(1, 1, 1, 0), // UConvert
-			new OpData(1, 1, 1, 0), // SConvert
-			new OpData(1, 1, 1, 0), // FConvert
-			new OpData(1, 1, 1, 0), // QuantizeToF16
-			new OpData(1, 1, 1, 0), // ConvertPtrToU
-			new OpData(1, 1, 1, 0), // SatConvertSToU
-			new OpData(1, 1, 1, 0), // SatConvertUToS
-			new OpData(1, 1, 1, 0), // ConvertUToPtr
-			new OpData(1, 1, 1, 0), // PtrCastToGeneric
-			new OpData(1, 1, 1, 0), // GenericCastToPtr
-			new OpData(1, 1, 1, 1), // GenericCastToPtrExplicit
-			new OpData(1, 1, 1, 0), // Bitcast
-			new OpData(1, 1, 0, 0), // #125
-			new OpData(1, 1, 1, 0), // SNegate
-			new OpData(1, 1, 1, 0), // FNegate
-			new OpData(1, 1, 2, 0), // IAdd
-			new OpData(1, 1, 2, 0), // FAdd
-			new OpData(1, 1, 2, 0), // ISub
-			new OpData(1, 1, 2, 0), // FSub
-			new OpData(1, 1, 2, 0), // IMul
-			new OpData(1, 1, 2, 0), // FMul
-			new OpData(1, 1, 2, 0), // UDiv
-			new OpData(1, 1, 2, 0), // SDiv
-			new OpData(1, 1, 2, 0), // FDiv
-			new OpData(1, 1, 2, 0), // UMod
-			new OpData(1, 1, 2, 0), // SRem
-			new OpData(1, 1, 2, 0), // SMod
-			new OpData(1, 1, 2, 0), // FRem
-			new OpData(1, 1, 2, 0), // FMod
-			new OpData(1, 1, 2, 0), // VectorTimesScalar
-			new OpData(1, 1, 2, 0), // MatrixTimesScalar
-			new OpData(1, 1, 2, 0), // VectorTimesMatrix
-			new OpData(1, 1, 2, 0), // MatrixTimesVector
-			new OpData(1, 1, 2, 0), // MatrixTimesMatrix
-			new OpData(1, 1, 2, 0), // OuterProduct
-			new OpData(1, 1, 2, 0), // Dot
-			new OpData(1, 1, 2, 0), // IAddCarry
-			new OpData(1, 1, 2, 0), // ISubBorrow
-			new OpData(1, 1, 2, 0), // UMulExtended
-			new OpData(1, 1, 2, 0), // SMulExtended
-			new OpData(1, 1, 0, 0), // #153
-			new OpData(1, 1, 1, 0), // Any
-			new OpData(1, 1, 1, 0), // All
-			new OpData(1, 1, 1, 0), // IsNan
-			new OpData(1, 1, 1, 0), // IsInf
-			new OpData(1, 1, 1, 0), // IsFinite
-			new OpData(1, 1, 1, 0), // IsNormal
-			new OpData(1, 1, 1, 0), // SignBitSet
-			new OpData(1, 1, 2, 0), // LessOrGreater
-			new OpData(1, 1, 2, 0), // Ordered
-			new OpData(1, 1, 2, 0), // Unordered
-			new OpData(1, 1, 2, 0), // LogicalEqual
-			new OpData(1, 1, 2, 0), // LogicalNotEqual
-			new OpData(1, 1, 2, 0), // LogicalOr
-			new OpData(1, 1, 2, 0), // LogicalAnd
-			new OpData(1, 1, 1, 0), // LogicalNot
-			new OpData(1, 1, 3, 0), // Select
-			new OpData(1, 1, 2, 0), // IEqual
-			new OpData(1, 1, 2, 0), // INotEqual
-			new OpData(1, 1, 2, 0), // UGreaterThan
-			new OpData(1, 1, 2, 0), // SGreaterThan
-			new OpData(1, 1, 2, 0), // UGreaterThanEqual
-			new OpData(1, 1, 2, 0), // SGreaterThanEqual
-			new OpData(1, 1, 2, 0), // ULessThan
-			new OpData(1, 1, 2, 0), // SLessThan
-			new OpData(1, 1, 2, 0), // ULessThanEqual
-			new OpData(1, 1, 2, 0), // SLessThanEqual
-			new OpData(1, 1, 2, 0), // FOrdEqual
-			new OpData(1, 1, 2, 0), // FUnordEqual
-			new OpData(1, 1, 2, 0), // FOrdNotEqual
-			new OpData(1, 1, 2, 0), // FUnordNotEqual
-			new OpData(1, 1, 2, 0), // FOrdLessThan
-			new OpData(1, 1, 2, 0), // FUnordLessThan
-			new OpData(1, 1, 2, 0), // FOrdGreaterThan
-			new OpData(1, 1, 2, 0), // FUnordGreaterThan
-			new OpData(1, 1, 2, 0), // FOrdLessThanEqual
-			new OpData(1, 1, 2, 0), // FUnordLessThanEqual
-			new OpData(1, 1, 2, 0), // FOrdGreaterThanEqual
-			new OpData(1, 1, 2, 0), // FUnordGreaterThanEqual
-			new OpData(1, 1, 0, 0), // #192
-			new OpData(1, 1, 0, 0), // #193
-			new OpData(1, 1, 2, 0), // ShiftRightLogical
-			new OpData(1, 1, 2, 0), // ShiftRightArithmetic
-			new OpData(1, 1, 2, 0), // ShiftLeftLogical
-			new OpData(1, 1, 2, 0), // BitwiseOr
-			new OpData(1, 1, 2, 0), // BitwiseXor
-			new OpData(1, 1, 2, 0), // BitwiseAnd
-			new OpData(1, 1, 1, 0), // Not
-			new OpData(1, 1, 4, 0), // BitFieldInsert
-			new OpData(1, 1, 3, 0), // BitFieldSExtract
-			new OpData(1, 1, 3, 0), // BitFieldUExtract
-			new OpData(1, 1, 1, 0), // BitReverse
-			new OpData(1, 1, 1, 0), // BitCount
-			new OpData(1, 1, 0, 0), // #206
-			new OpData(1, 1, 0, 0), // DPdx
-			new OpData(1, 1, 0, 0), // DPdy
-			new OpData(1, 1, 0, 0), // Fwidth
-			new OpData(1, 1, 0, 0), // DPdxFine
-			new OpData(1, 1, 0, 0), // DPdyFine
-			new OpData(1, 1, 0, 0), // FwidthFine
-			new OpData(1, 1, 0, 0), // DPdxCoarse
-			new OpData(1, 1, 0, 0), // DPdyCoarse
-			new OpData(1, 1, 0, 0), // FwidthCoarse
-			new OpData(1, 1, 0, 0), // #216
-			new OpData(1, 1, 0, 0), // #217
-			new OpData(0, 0, 0, 0), // EmitVertex
-			new OpData(0, 0, 0, 0), // EndPrimitive
-			new OpData(0, 0, 0, 0), // EmitStreamVertex
-			new OpData(0, 0, 0, 0), // EndStreamPrimitive
-			new OpData(1, 1, 0, 0), // #222
-			new OpData(1, 1, 0, 0), // #223
-			new OpData(0, 0, -3, 0), // ControlBarrier
-			new OpData(0, 0, -2, 0), // MemoryBarrier
-			new OpData(1, 1, 0, 0), // #226
-			new OpData(1, 1, 0, 0), // AtomicLoad
-			new OpData(0, 0, 0, 0), // AtomicStore
-			new OpData(1, 1, 0, 0), // AtomicExchange
-			new OpData(1, 1, 0, 0), // AtomicCompareExchange
-			new OpData(1, 1, 0, 0), // AtomicCompareExchangeWeak
-			new OpData(1, 1, 0, 0), // AtomicIIncrement
-			new OpData(1, 1, 0, 0), // AtomicIDecrement
-			new OpData(1, 1, 0, 0), // AtomicIAdd
-			new OpData(1, 1, 0, 0), // AtomicISub
-			new OpData(1, 1, 0, 0), // AtomicSMin
-			new OpData(1, 1, 0, 0), // AtomicUMin
-			new OpData(1, 1, 0, 0), // AtomicSMax
-			new OpData(1, 1, 0, 0), // AtomicUMax
-			new OpData(1, 1, 0, 0), // AtomicAnd
-			new OpData(1, 1, 0, 0), // AtomicOr
-			new OpData(1, 1, 0, 0), // AtomicXor
-			new OpData(1, 1, 0, 0), // #243
-			new OpData(1, 1, 0, 0), // #244
-			new OpData(1, 1, 0, 0), // Phi
-			new OpData(0, 0, -2, 1), // LoopMerge
-			new OpData(0, 0, -1, 1), // SelectionMerge
-			new OpData(1, 0, 0, 0), // Label
-			new OpData(0, 0, -1, 0), // Branch
-			new OpData(0, 0, -3, 1), // BranchConditional
-			new OpData(0, 0, 0, 0), // Switch
-			new OpData(0, 0, 0, 0), // Kill
-			new OpData(0, 0, 0, 0), // Return
-			new OpData(0, 0, 0, 0), // ReturnValue
-			new OpData(0, 0, 0, 0), // Unreachable
-			new OpData(0, 0, 0, 0), // LifetimeStart
-			new OpData(0, 0, 0, 0), // LifetimeStop
-			new OpData(1, 1, 0, 0), // #258
-			new OpData(1, 1, 0, 0), // GroupAsyncCopy
-			new OpData(0, 0, 0, 0), // GroupWaitEvents
-			new OpData(1, 1, 0, 0), // GroupAll
-			new OpData(1, 1, 0, 0), // GroupAny
-			new OpData(1, 1, 0, 0), // GroupBroadcast
-			new OpData(1, 1, 0, 0), // GroupIAdd
-			new OpData(1, 1, 0, 0), // GroupFAdd
-			new OpData(1, 1, 0, 0), // GroupFMin
-			new OpData(1, 1, 0, 0), // GroupUMin
-			new OpData(1, 1, 0, 0), // GroupSMin
-			new OpData(1, 1, 0, 0), // GroupFMax
-			new OpData(1, 1, 0, 0), // GroupUMax
-			new OpData(1, 1, 0, 0), // GroupSMax
-			new OpData(1, 1, 0, 0), // #272
-			new OpData(1, 1, 0, 0), // #273
-			new OpData(1, 1, 0, 0), // ReadPipe
-			new OpData(1, 1, 0, 0), // WritePipe
-			new OpData(1, 1, 0, 0), // ReservedReadPipe
-			new OpData(1, 1, 0, 0), // ReservedWritePipe
-			new OpData(1, 1, 0, 0), // ReserveReadPipePackets
-			new OpData(1, 1, 0, 0), // ReserveWritePipePackets
-			new OpData(0, 0, 0, 0), // CommitReadPipe
-			new OpData(0, 0, 0, 0), // CommitWritePipe
-			new OpData(1, 1, 0, 0), // IsValidReserveId
-			new OpData(1, 1, 0, 0), // GetNumPipePackets
-			new OpData(1, 1, 0, 0), // GetMaxPipePackets
-			new OpData(1, 1, 0, 0), // GroupReserveReadPipePackets
-			new OpData(1, 1, 0, 0), // GroupReserveWritePipePackets
-			new OpData(0, 0, 0, 0), // GroupCommitReadPipe
-			new OpData(0, 0, 0, 0), // GroupCommitWritePipe
-			new OpData(1, 1, 0, 0), // #289
-			new OpData(1, 1, 0, 0), // #290
-			new OpData(1, 1, 0, 0), // EnqueueMarker
-			new OpData(1, 1, 0, 0), // EnqueueKernel
-			new OpData(1, 1, 0, 0), // GetKernelNDrangeSubGroupCount
-			new OpData(1, 1, 0, 0), // GetKernelNDrangeMaxSubGroupSize
-			new OpData(1, 1, 0, 0), // GetKernelWorkGroupSize
-			new OpData(1, 1, 0, 0), // GetKernelPreferredWorkGroupSizeMultiple
-			new OpData(0, 0, 0, 0), // RetainEvent
-			new OpData(0, 0, 0, 0), // ReleaseEvent
-			new OpData(1, 1, 0, 0), // CreateUserEvent
-			new OpData(1, 1, 0, 0), // IsValidEvent
-			new OpData(0, 0, 0, 0), // SetUserEventStatus
-			new OpData(0, 0, 0, 0), // CaptureEventProfilingInfo
-			new OpData(1, 1, 0, 0), // GetDefaultQueue
-			new OpData(1, 1, 0, 0), // BuildNDRange
-			new OpData(1, 1, 2, 1), // ImageSparseSampleImplicitLod
-			new OpData(1, 1, 2, 1), // ImageSparseSampleExplicitLod
-			new OpData(1, 1, 3, 1), // ImageSparseSampleDrefImplicitLod
-			new OpData(1, 1, 3, 1), // ImageSparseSampleDrefExplicitLod
-			new OpData(1, 1, 2, 1), // ImageSparseSampleProjImplicitLod
-			new OpData(1, 1, 2, 1), // ImageSparseSampleProjExplicitLod
-			new OpData(1, 1, 3, 1), // ImageSparseSampleProjDrefImplicitLod
-			new OpData(1, 1, 3, 1), // ImageSparseSampleProjDrefExplicitLod
-			new OpData(1, 1, 2, 1), // ImageSparseFetch
-			new OpData(1, 1, 3, 1), // ImageSparseGather
-			new OpData(1, 1, 3, 1), // ImageSparseDrefGather
-			new OpData(1, 1, 1, 0), // ImageSparseTexelsResident
-			new OpData(0, 0, 0, 0), // NoLine
-			new OpData(1, 1, 0, 0), // AtomicFlagTestAndSet
-			new OpData(0, 0, 0, 0), // AtomicFlagClear
-			new OpData(1, 1, 0, 0), // ImageSparseRead
-			new OpData(1, 1, 0, 0), // SizeOf
-			new OpData(1, 1, 0, 0), // TypePipeStorage
-			new OpData(1, 1, 0, 0), // ConstantPipeStorage
-			new OpData(1, 1, 0, 0), // CreatePipeFromPipeStorage
-			new OpData(1, 1, 0, 0), // GetKernelLocalSizeForSubgroupCount
-			new OpData(1, 1, 0, 0), // GetKernelMaxNumSubgroups
-			new OpData(1, 1, 0, 0), // TypeNamedBarrier
-			new OpData(1, 1, 0, 1), // NamedBarrierInitialize
-			new OpData(0, 0, -2, 1), // MemoryNamedBarrier
-			new OpData(1, 1, 0, 0), // ModuleProcessed
+            new(0, 0, 0, 0), // Nop
+			new(1, 1, 0, 0), // Undef
+			new(0, 0, 0, 0), // SourceContinued
+			new(0, 0, 0, 1), // Source
+			new(0, 0, 0, 0), // SourceExtension
+			new(0, 0, 0, 0), // Name
+			new(0, 0, 0, 0), // MemberName
+			new(0, 0, 0, 0), // String
+			new(0, 0, 0, 1), // Line
+			new(1, 1, 0, 0), // #9
+			new(0, 0, 0, 0), // Extension
+			new(1, 0, 0, 0), // ExtInstImport
+			new(1, 1, 0, 1), // ExtInst
+			new(1, 1, 2, 1), // VectorShuffleCompact - new in SMOLV
+			new(0, 0, 0, 1), // MemoryModel
+			new(0, 0, 0, 1), // EntryPoint
+			new(0, 0, 0, 1), // ExecutionMode
+			new(0, 0, 0, 1), // Capability
+			new(1, 1, 0, 0), // #18
+			new(1, 0, 0, 1), // TypeVoid
+			new(1, 0, 0, 1), // TypeBool
+			new(1, 0, 0, 1), // TypeInt
+			new(1, 0, 0, 1), // TypeFloat
+			new(1, 0, 0, 1), // TypeVector
+			new(1, 0, 0, 1), // TypeMatrix
+			new(1, 0, 0, 1), // TypeImage
+			new(1, 0, 0, 1), // TypeSampler
+			new(1, 0, 0, 1), // TypeSampledImage
+			new(1, 0, 0, 1), // TypeArray
+			new(1, 0, 0, 1), // TypeRuntimeArray
+			new(1, 0, 0, 1), // TypeStruct
+			new(1, 0, 0, 1), // TypeOpaque
+			new(1, 0, 0, 1), // TypePointer
+			new(1, 0, 0, 1), // TypeFunction
+			new(1, 0, 0, 1), // TypeEvent
+			new(1, 0, 0, 1), // TypeDeviceEvent
+			new(1, 0, 0, 1), // TypeReserveId
+			new(1, 0, 0, 1), // TypeQueue
+			new(1, 0, 0, 1), // TypePipe
+			new(0, 0, 0, 1), // TypeForwardPointer
+			new(1, 1, 0, 0), // #40
+			new(1, 1, 0, 0), // ConstantTrue
+			new(1, 1, 0, 0), // ConstantFalse
+			new(1, 1, 0, 0), // Constant
+			new(1, 1, 9, 0), // ConstantComposite
+			new(1, 1, 0, 1), // ConstantSampler
+			new(1, 1, 0, 0), // ConstantNull
+			new(1, 1, 0, 0), // #47
+			new(1, 1, 0, 0), // SpecConstantTrue
+			new(1, 1, 0, 0), // SpecConstantFalse
+			new(1, 1, 0, 0), // SpecConstant
+			new(1, 1, 9, 0), // SpecConstantComposite
+			new(1, 1, 0, 0), // SpecConstantOp
+			new(1, 1, 0, 0), // #53
+			new(1, 1, 0, 1), // Function
+			new(1, 1, 0, 0), // FunctionParameter
+			new(0, 0, 0, 0), // FunctionEnd
+			new(1, 1, 9, 0), // FunctionCall
+			new(1, 1, 0, 0), // #58
+			new(1, 1, 0, 1), // Variable
+			new(1, 1, 0, 0), // ImageTexelPointer
+			new(1, 1, 1, 1), // Load
+			new(0, 0, 2, 1), // Store
+			new(0, 0, 0, 0), // CopyMemory
+			new(0, 0, 0, 0), // CopyMemorySized
+			new(1, 1, 0, 1), // AccessChain
+			new(1, 1, 0, 0), // InBoundsAccessChain
+			new(1, 1, 0, 0), // PtrAccessChain
+			new(1, 1, 0, 0), // ArrayLength
+			new(1, 1, 0, 0), // GenericPtrMemSemantics
+			new(1, 1, 0, 0), // InBoundsPtrAccessChain
+			new(0, 0, 0, 1), // Decorate
+			new(0, 0, 0, 1), // MemberDecorate
+			new(1, 0, 0, 0), // DecorationGroup
+			new(0, 0, 0, 0), // GroupDecorate
+			new(0, 0, 0, 0), // GroupMemberDecorate
+			new(1, 1, 0, 0), // #76
+			new(1, 1, 1, 1), // VectorExtractDynamic
+			new(1, 1, 2, 1), // VectorInsertDynamic
+			new(1, 1, 2, 1), // VectorShuffle
+			new(1, 1, 9, 0), // CompositeConstruct
+			new(1, 1, 1, 1), // CompositeExtract
+			new(1, 1, 2, 1), // CompositeInsert
+			new(1, 1, 1, 0), // CopyObject
+			new(1, 1, 0, 0), // Transpose
+			new(1, 1, 0, 0), // #85
+			new(1, 1, 0, 0), // SampledImage
+			new(1, 1, 2, 1), // ImageSampleImplicitLod
+			new(1, 1, 2, 1), // ImageSampleExplicitLod
+			new(1, 1, 3, 1), // ImageSampleDrefImplicitLod
+			new(1, 1, 3, 1), // ImageSampleDrefExplicitLod
+			new(1, 1, 2, 1), // ImageSampleProjImplicitLod
+			new(1, 1, 2, 1), // ImageSampleProjExplicitLod
+			new(1, 1, 3, 1), // ImageSampleProjDrefImplicitLod
+			new(1, 1, 3, 1), // ImageSampleProjDrefExplicitLod
+			new(1, 1, 2, 1), // ImageFetch
+			new(1, 1, 3, 1), // ImageGather
+			new(1, 1, 3, 1), // ImageDrefGather
+			new(1, 1, 2, 1), // ImageRead
+			new(0, 0, 3, 1), // ImageWrite
+			new(1, 1, 1, 0), // Image
+			new(1, 1, 1, 0), // ImageQueryFormat
+			new(1, 1, 1, 0), // ImageQueryOrder
+			new(1, 1, 2, 0), // ImageQuerySizeLod
+			new(1, 1, 1, 0), // ImageQuerySize
+			new(1, 1, 2, 0), // ImageQueryLod
+			new(1, 1, 1, 0), // ImageQueryLevels
+			new(1, 1, 1, 0), // ImageQuerySamples
+			new(1, 1, 0, 0), // #108
+			new(1, 1, 1, 0), // ConvertFToU
+			new(1, 1, 1, 0), // ConvertFToS
+			new(1, 1, 1, 0), // ConvertSToF
+			new(1, 1, 1, 0), // ConvertUToF
+			new(1, 1, 1, 0), // UConvert
+			new(1, 1, 1, 0), // SConvert
+			new(1, 1, 1, 0), // FConvert
+			new(1, 1, 1, 0), // QuantizeToF16
+			new(1, 1, 1, 0), // ConvertPtrToU
+			new(1, 1, 1, 0), // SatConvertSToU
+			new(1, 1, 1, 0), // SatConvertUToS
+			new(1, 1, 1, 0), // ConvertUToPtr
+			new(1, 1, 1, 0), // PtrCastToGeneric
+			new(1, 1, 1, 0), // GenericCastToPtr
+			new(1, 1, 1, 1), // GenericCastToPtrExplicit
+			new(1, 1, 1, 0), // Bitcast
+			new(1, 1, 0, 0), // #125
+			new(1, 1, 1, 0), // SNegate
+			new(1, 1, 1, 0), // FNegate
+			new(1, 1, 2, 0), // IAdd
+			new(1, 1, 2, 0), // FAdd
+			new(1, 1, 2, 0), // ISub
+			new(1, 1, 2, 0), // FSub
+			new(1, 1, 2, 0), // IMul
+			new(1, 1, 2, 0), // FMul
+			new(1, 1, 2, 0), // UDiv
+			new(1, 1, 2, 0), // SDiv
+			new(1, 1, 2, 0), // FDiv
+			new(1, 1, 2, 0), // UMod
+			new(1, 1, 2, 0), // SRem
+			new(1, 1, 2, 0), // SMod
+			new(1, 1, 2, 0), // FRem
+			new(1, 1, 2, 0), // FMod
+			new(1, 1, 2, 0), // VectorTimesScalar
+			new(1, 1, 2, 0), // MatrixTimesScalar
+			new(1, 1, 2, 0), // VectorTimesMatrix
+			new(1, 1, 2, 0), // MatrixTimesVector
+			new(1, 1, 2, 0), // MatrixTimesMatrix
+			new(1, 1, 2, 0), // OuterProduct
+			new(1, 1, 2, 0), // Dot
+			new(1, 1, 2, 0), // IAddCarry
+			new(1, 1, 2, 0), // ISubBorrow
+			new(1, 1, 2, 0), // UMulExtended
+			new(1, 1, 2, 0), // SMulExtended
+			new(1, 1, 0, 0), // #153
+			new(1, 1, 1, 0), // Any
+			new(1, 1, 1, 0), // All
+			new(1, 1, 1, 0), // IsNan
+			new(1, 1, 1, 0), // IsInf
+			new(1, 1, 1, 0), // IsFinite
+			new(1, 1, 1, 0), // IsNormal
+			new(1, 1, 1, 0), // SignBitSet
+			new(1, 1, 2, 0), // LessOrGreater
+			new(1, 1, 2, 0), // Ordered
+			new(1, 1, 2, 0), // Unordered
+			new(1, 1, 2, 0), // LogicalEqual
+			new(1, 1, 2, 0), // LogicalNotEqual
+			new(1, 1, 2, 0), // LogicalOr
+			new(1, 1, 2, 0), // LogicalAnd
+			new(1, 1, 1, 0), // LogicalNot
+			new(1, 1, 3, 0), // Select
+			new(1, 1, 2, 0), // IEqual
+			new(1, 1, 2, 0), // INotEqual
+			new(1, 1, 2, 0), // UGreaterThan
+			new(1, 1, 2, 0), // SGreaterThan
+			new(1, 1, 2, 0), // UGreaterThanEqual
+			new(1, 1, 2, 0), // SGreaterThanEqual
+			new(1, 1, 2, 0), // ULessThan
+			new(1, 1, 2, 0), // SLessThan
+			new(1, 1, 2, 0), // ULessThanEqual
+			new(1, 1, 2, 0), // SLessThanEqual
+			new(1, 1, 2, 0), // FOrdEqual
+			new(1, 1, 2, 0), // FUnordEqual
+			new(1, 1, 2, 0), // FOrdNotEqual
+			new(1, 1, 2, 0), // FUnordNotEqual
+			new(1, 1, 2, 0), // FOrdLessThan
+			new(1, 1, 2, 0), // FUnordLessThan
+			new(1, 1, 2, 0), // FOrdGreaterThan
+			new(1, 1, 2, 0), // FUnordGreaterThan
+			new(1, 1, 2, 0), // FOrdLessThanEqual
+			new(1, 1, 2, 0), // FUnordLessThanEqual
+			new(1, 1, 2, 0), // FOrdGreaterThanEqual
+			new(1, 1, 2, 0), // FUnordGreaterThanEqual
+			new(1, 1, 0, 0), // #192
+			new(1, 1, 0, 0), // #193
+			new(1, 1, 2, 0), // ShiftRightLogical
+			new(1, 1, 2, 0), // ShiftRightArithmetic
+			new(1, 1, 2, 0), // ShiftLeftLogical
+			new(1, 1, 2, 0), // BitwiseOr
+			new(1, 1, 2, 0), // BitwiseXor
+			new(1, 1, 2, 0), // BitwiseAnd
+			new(1, 1, 1, 0), // Not
+			new(1, 1, 4, 0), // BitFieldInsert
+			new(1, 1, 3, 0), // BitFieldSExtract
+			new(1, 1, 3, 0), // BitFieldUExtract
+			new(1, 1, 1, 0), // BitReverse
+			new(1, 1, 1, 0), // BitCount
+			new(1, 1, 0, 0), // #206
+			new(1, 1, 0, 0), // DPdx
+			new(1, 1, 0, 0), // DPdy
+			new(1, 1, 0, 0), // Fwidth
+			new(1, 1, 0, 0), // DPdxFine
+			new(1, 1, 0, 0), // DPdyFine
+			new(1, 1, 0, 0), // FwidthFine
+			new(1, 1, 0, 0), // DPdxCoarse
+			new(1, 1, 0, 0), // DPdyCoarse
+			new(1, 1, 0, 0), // FwidthCoarse
+			new(1, 1, 0, 0), // #216
+			new(1, 1, 0, 0), // #217
+			new(0, 0, 0, 0), // EmitVertex
+			new(0, 0, 0, 0), // EndPrimitive
+			new(0, 0, 0, 0), // EmitStreamVertex
+			new(0, 0, 0, 0), // EndStreamPrimitive
+			new(1, 1, 0, 0), // #222
+			new(1, 1, 0, 0), // #223
+			new(0, 0, -3, 0), // ControlBarrier
+			new(0, 0, -2, 0), // MemoryBarrier
+			new(1, 1, 0, 0), // #226
+			new(1, 1, 0, 0), // AtomicLoad
+			new(0, 0, 0, 0), // AtomicStore
+			new(1, 1, 0, 0), // AtomicExchange
+			new(1, 1, 0, 0), // AtomicCompareExchange
+			new(1, 1, 0, 0), // AtomicCompareExchangeWeak
+			new(1, 1, 0, 0), // AtomicIIncrement
+			new(1, 1, 0, 0), // AtomicIDecrement
+			new(1, 1, 0, 0), // AtomicIAdd
+			new(1, 1, 0, 0), // AtomicISub
+			new(1, 1, 0, 0), // AtomicSMin
+			new(1, 1, 0, 0), // AtomicUMin
+			new(1, 1, 0, 0), // AtomicSMax
+			new(1, 1, 0, 0), // AtomicUMax
+			new(1, 1, 0, 0), // AtomicAnd
+			new(1, 1, 0, 0), // AtomicOr
+			new(1, 1, 0, 0), // AtomicXor
+			new(1, 1, 0, 0), // #243
+			new(1, 1, 0, 0), // #244
+			new(1, 1, 0, 0), // Phi
+			new(0, 0, -2, 1), // LoopMerge
+			new(0, 0, -1, 1), // SelectionMerge
+			new(1, 0, 0, 0), // Label
+			new(0, 0, -1, 0), // Branch
+			new(0, 0, -3, 1), // BranchConditional
+			new(0, 0, 0, 0), // Switch
+			new(0, 0, 0, 0), // Kill
+			new(0, 0, 0, 0), // Return
+			new(0, 0, 0, 0), // ReturnValue
+			new(0, 0, 0, 0), // Unreachable
+			new(0, 0, 0, 0), // LifetimeStart
+			new(0, 0, 0, 0), // LifetimeStop
+			new(1, 1, 0, 0), // #258
+			new(1, 1, 0, 0), // GroupAsyncCopy
+			new(0, 0, 0, 0), // GroupWaitEvents
+			new(1, 1, 0, 0), // GroupAll
+			new(1, 1, 0, 0), // GroupAny
+			new(1, 1, 0, 0), // GroupBroadcast
+			new(1, 1, 0, 0), // GroupIAdd
+			new(1, 1, 0, 0), // GroupFAdd
+			new(1, 1, 0, 0), // GroupFMin
+			new(1, 1, 0, 0), // GroupUMin
+			new(1, 1, 0, 0), // GroupSMin
+			new(1, 1, 0, 0), // GroupFMax
+			new(1, 1, 0, 0), // GroupUMax
+			new(1, 1, 0, 0), // GroupSMax
+			new(1, 1, 0, 0), // #272
+			new(1, 1, 0, 0), // #273
+			new(1, 1, 0, 0), // ReadPipe
+			new(1, 1, 0, 0), // WritePipe
+			new(1, 1, 0, 0), // ReservedReadPipe
+			new(1, 1, 0, 0), // ReservedWritePipe
+			new(1, 1, 0, 0), // ReserveReadPipePackets
+			new(1, 1, 0, 0), // ReserveWritePipePackets
+			new(0, 0, 0, 0), // CommitReadPipe
+			new(0, 0, 0, 0), // CommitWritePipe
+			new(1, 1, 0, 0), // IsValidReserveId
+			new(1, 1, 0, 0), // GetNumPipePackets
+			new(1, 1, 0, 0), // GetMaxPipePackets
+			new(1, 1, 0, 0), // GroupReserveReadPipePackets
+			new(1, 1, 0, 0), // GroupReserveWritePipePackets
+			new(0, 0, 0, 0), // GroupCommitReadPipe
+			new(0, 0, 0, 0), // GroupCommitWritePipe
+			new(1, 1, 0, 0), // #289
+			new(1, 1, 0, 0), // #290
+			new(1, 1, 0, 0), // EnqueueMarker
+			new(1, 1, 0, 0), // EnqueueKernel
+			new(1, 1, 0, 0), // GetKernelNDrangeSubGroupCount
+			new(1, 1, 0, 0), // GetKernelNDrangeMaxSubGroupSize
+			new(1, 1, 0, 0), // GetKernelWorkGroupSize
+			new(1, 1, 0, 0), // GetKernelPreferredWorkGroupSizeMultiple
+			new(0, 0, 0, 0), // RetainEvent
+			new(0, 0, 0, 0), // ReleaseEvent
+			new(1, 1, 0, 0), // CreateUserEvent
+			new(1, 1, 0, 0), // IsValidEvent
+			new(0, 0, 0, 0), // SetUserEventStatus
+			new(0, 0, 0, 0), // CaptureEventProfilingInfo
+			new(1, 1, 0, 0), // GetDefaultQueue
+			new(1, 1, 0, 0), // BuildNDRange
+			new(1, 1, 2, 1), // ImageSparseSampleImplicitLod
+			new(1, 1, 2, 1), // ImageSparseSampleExplicitLod
+			new(1, 1, 3, 1), // ImageSparseSampleDrefImplicitLod
+			new(1, 1, 3, 1), // ImageSparseSampleDrefExplicitLod
+			new(1, 1, 2, 1), // ImageSparseSampleProjImplicitLod
+			new(1, 1, 2, 1), // ImageSparseSampleProjExplicitLod
+			new(1, 1, 3, 1), // ImageSparseSampleProjDrefImplicitLod
+			new(1, 1, 3, 1), // ImageSparseSampleProjDrefExplicitLod
+			new(1, 1, 2, 1), // ImageSparseFetch
+			new(1, 1, 3, 1), // ImageSparseGather
+			new(1, 1, 3, 1), // ImageSparseDrefGather
+			new(1, 1, 1, 0), // ImageSparseTexelsResident
+			new(0, 0, 0, 0), // NoLine
+			new(1, 1, 0, 0), // AtomicFlagTestAndSet
+			new(0, 0, 0, 0), // AtomicFlagClear
+			new(1, 1, 0, 0), // ImageSparseRead
+			new(1, 1, 0, 0), // SizeOf
+			new(1, 1, 0, 0), // TypePipeStorage
+			new(1, 1, 0, 0), // ConstantPipeStorage
+			new(1, 1, 0, 0), // CreatePipeFromPipeStorage
+			new(1, 1, 0, 0), // GetKernelLocalSizeForSubgroupCount
+			new(1, 1, 0, 0), // GetKernelMaxNumSubgroups
+			new(1, 1, 0, 0), // TypeNamedBarrier
+			new(1, 1, 0, 1), // NamedBarrierInitialize
+			new(0, 0, -2, 1), // MemoryNamedBarrier
+			new(1, 1, 0, 0), // ModuleProcessed
 		};
-    };
+    }
 }

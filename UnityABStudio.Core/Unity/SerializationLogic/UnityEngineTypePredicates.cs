@@ -37,16 +37,14 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SerializationLogic {
         private const string SerializeFieldAttribute = "UnityEngine.SerializeField";
         private const string SerializeReferenceAttribute = "UnityEngine.SerializeReference";
 
-        private static string[] serializableClasses = new[]
-        {
+        private static string[] serializableClasses = {
             "UnityEngine.AnimationCurve",
             "UnityEngine.Gradient",
             "UnityEngine.GUIStyle",
             "UnityEngine.RectOffset"
         };
 
-        private static string[] serializableStructs = new[]
-        {
+        private static string[] serializableStructs = {
             // NOTE: assumes all types here are NOT interfaces
             "UnityEngine.Color32",
             "UnityEngine.Matrix4x4",

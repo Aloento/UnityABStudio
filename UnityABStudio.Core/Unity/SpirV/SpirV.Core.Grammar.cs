@@ -21,7 +21,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class LodParameter : Parameter {
@@ -30,7 +30,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class GradParameter : Parameter {
@@ -39,7 +39,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), new IdRef(), };
+        { new IdRef(), new IdRef(), };
         }
 
         public class ConstOffsetParameter : Parameter {
@@ -48,7 +48,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class OffsetParameter : Parameter {
@@ -57,7 +57,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class ConstOffsetsParameter : Parameter {
@@ -66,7 +66,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class SampleParameter : Parameter {
@@ -75,7 +75,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class MinLodParameter : Parameter {
@@ -84,7 +84,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public override Parameter CreateParameter(object value) => (ImageOperands)value switch {
@@ -133,7 +133,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public override Parameter CreateParameter(object value) => (LoopControl)value switch {
@@ -182,7 +182,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public override Parameter CreateParameter(object value) => (MemoryAccess)value switch {
@@ -281,7 +281,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class LocalSizeParameter : Parameter {
@@ -290,7 +290,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), new LiteralInteger(), new LiteralInteger(), };
+        { new LiteralInteger(), new LiteralInteger(), new LiteralInteger(), };
         }
 
         public class LocalSizeHintParameter : Parameter {
@@ -299,7 +299,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), new LiteralInteger(), new LiteralInteger(), };
+        { new LiteralInteger(), new LiteralInteger(), new LiteralInteger(), };
         }
 
         public class OutputVerticesParameter : Parameter {
@@ -308,7 +308,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class VecTypeHintParameter : Parameter {
@@ -317,7 +317,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class SubgroupSizeParameter : Parameter {
@@ -326,7 +326,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class SubgroupsPerWorkgroupParameter : Parameter {
@@ -335,7 +335,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class SubgroupsPerWorkgroupIdParameter : Parameter {
@@ -344,7 +344,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class LocalSizeIdParameter : Parameter {
@@ -353,7 +353,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), new IdRef(), new IdRef(), };
+        { new IdRef(), new IdRef(), new IdRef(), };
         }
 
         public class LocalSizeHintIdParameter : Parameter {
@@ -362,7 +362,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public override Parameter CreateParameter(object value) => (ExecutionMode)value switch {
@@ -604,7 +604,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class ArrayStrideParameter : Parameter {
@@ -613,7 +613,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class MatrixStrideParameter : Parameter {
@@ -622,7 +622,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class BuiltInParameter : Parameter {
@@ -631,7 +631,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new EnumType<BuiltIn>(), };
+        { new EnumType<BuiltIn>(), };
         }
 
         public class StreamParameter : Parameter {
@@ -640,7 +640,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class LocationParameter : Parameter {
@@ -649,7 +649,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class ComponentParameter : Parameter {
@@ -658,7 +658,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class IndexParameter : Parameter {
@@ -667,7 +667,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class BindingParameter : Parameter {
@@ -676,7 +676,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class DescriptorSetParameter : Parameter {
@@ -685,7 +685,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class OffsetParameter : Parameter {
@@ -694,7 +694,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class XfbBufferParameter : Parameter {
@@ -703,7 +703,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class XfbStrideParameter : Parameter {
@@ -712,7 +712,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class FuncParamAttrParameter : Parameter {
@@ -721,7 +721,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new EnumType<FunctionParameterAttribute>(), };
+        { new EnumType<FunctionParameterAttribute>(), };
         }
 
         public class FPRoundingModeParameter : Parameter {
@@ -730,7 +730,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new EnumType<FPRoundingMode>(), };
+        { new EnumType<FPRoundingMode>(), };
         }
 
         public class FPFastMathModeParameter : Parameter {
@@ -739,7 +739,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new EnumType<FPFastMathMode>(), };
+        { new EnumType<FPFastMathMode>(), };
         }
 
         public class LinkageAttributesParameter : Parameter {
@@ -748,7 +748,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralString(), new EnumType<LinkageType>(), };
+        { new LiteralString(), new EnumType<LinkageType>(), };
         }
 
         public class InputAttachmentIndexParameter : Parameter {
@@ -757,7 +757,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class AlignmentParameter : Parameter {
@@ -766,7 +766,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class MaxByteOffsetParameter : Parameter {
@@ -775,7 +775,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public class AlignmentIdParameter : Parameter {
@@ -784,7 +784,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class MaxByteOffsetIdParameter : Parameter {
@@ -793,7 +793,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new IdRef(), };
+        { new IdRef(), };
         }
 
         public class SecondaryViewportRelativeNVParameter : Parameter {
@@ -802,7 +802,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             private static readonly List<OperandType> operandTypes_ = new()
-        {new LiteralInteger(), };
+        { new LiteralInteger(), };
         }
 
         public override Parameter CreateParameter(object value) => (Decoration)value switch {
@@ -1020,248 +1020,199 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
         }
     }
     public class OpUndef : Instruction {
-        public OpUndef() : base("OpUndef", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpUndef() : base("OpUndef", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpSourceContinued : Instruction {
-        public OpSourceContinued() : base("OpSourceContinued", new List<Operand>()
-    {new Operand(new LiteralString(), "Continued Source", OperandQuantifier.Default), }) {
+        public OpSourceContinued() : base("OpSourceContinued", new List<Operand> {new(new LiteralString(), "Continued Source", OperandQuantifier.Default), }) {
         }
     }
     public class OpSource : Instruction {
-        public OpSource() : base("OpSource", new List<Operand>()
-    {new Operand(new EnumType<SourceLanguage, SourceLanguageParameterFactory>(), null, OperandQuantifier.Default), new Operand(new LiteralInteger(), "Version", OperandQuantifier.Default), new Operand(new IdRef(), "File", OperandQuantifier.Optional), new Operand(new LiteralString(), "Source", OperandQuantifier.Optional), }) {
+        public OpSource() : base("OpSource", new List<Operand> {new(new EnumType<SourceLanguage, SourceLanguageParameterFactory>(), null, OperandQuantifier.Default), new(new LiteralInteger(), "Version", OperandQuantifier.Default), new(new IdRef(), "File", OperandQuantifier.Optional), new(new LiteralString(), "Source", OperandQuantifier.Optional), }) {
         }
     }
     public class OpSourceExtension : Instruction {
-        public OpSourceExtension() : base("OpSourceExtension", new List<Operand>()
-    {new Operand(new LiteralString(), "Extension", OperandQuantifier.Default), }) {
+        public OpSourceExtension() : base("OpSourceExtension", new List<Operand> {new(new LiteralString(), "Extension", OperandQuantifier.Default), }) {
         }
     }
     public class OpName : Instruction {
-        public OpName() : base("OpName", new List<Operand>()
-    {new Operand(new IdRef(), "Target", OperandQuantifier.Default), new Operand(new LiteralString(), "Name", OperandQuantifier.Default), }) {
+        public OpName() : base("OpName", new List<Operand> {new(new IdRef(), "Target", OperandQuantifier.Default), new(new LiteralString(), "Name", OperandQuantifier.Default), }) {
         }
     }
     public class OpMemberName : Instruction {
-        public OpMemberName() : base("OpMemberName", new List<Operand>()
-    {new Operand(new IdRef(), "Type", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Member", OperandQuantifier.Default), new Operand(new LiteralString(), "Name", OperandQuantifier.Default), }) {
+        public OpMemberName() : base("OpMemberName", new List<Operand> {new(new IdRef(), "Type", OperandQuantifier.Default), new(new LiteralInteger(), "Member", OperandQuantifier.Default), new(new LiteralString(), "Name", OperandQuantifier.Default), }) {
         }
     }
     public class OpString : Instruction {
-        public OpString() : base("OpString", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralString(), "String", OperandQuantifier.Default), }) {
+        public OpString() : base("OpString", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralString(), "String", OperandQuantifier.Default), }) {
         }
     }
     public class OpLine : Instruction {
-        public OpLine() : base("OpLine", new List<Operand>()
-    {new Operand(new IdRef(), "File", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Line", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Column", OperandQuantifier.Default), }) {
+        public OpLine() : base("OpLine", new List<Operand> {new(new IdRef(), "File", OperandQuantifier.Default), new(new LiteralInteger(), "Line", OperandQuantifier.Default), new(new LiteralInteger(), "Column", OperandQuantifier.Default), }) {
         }
     }
     public class OpExtension : Instruction {
-        public OpExtension() : base("OpExtension", new List<Operand>()
-    {new Operand(new LiteralString(), "Name", OperandQuantifier.Default), }) {
+        public OpExtension() : base("OpExtension", new List<Operand> {new(new LiteralString(), "Name", OperandQuantifier.Default), }) {
         }
     }
     public class OpExtInstImport : Instruction {
-        public OpExtInstImport() : base("OpExtInstImport", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralString(), "Name", OperandQuantifier.Default), }) {
+        public OpExtInstImport() : base("OpExtInstImport", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralString(), "Name", OperandQuantifier.Default), }) {
         }
     }
     public class OpExtInst : Instruction {
-        public OpExtInst() : base("OpExtInst", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Set", OperandQuantifier.Default), new Operand(new LiteralExtInstInteger(), "Instruction", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1, +Operand 2, +...", OperandQuantifier.Varying), }) {
+        public OpExtInst() : base("OpExtInst", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Set", OperandQuantifier.Default), new(new LiteralExtInstInteger(), "Instruction", OperandQuantifier.Default), new(new IdRef(), "Operand 1, +Operand 2, +...", OperandQuantifier.Varying), }) {
         }
     }
     public class OpMemoryModel : Instruction {
-        public OpMemoryModel() : base("OpMemoryModel", new List<Operand>()
-    {new Operand(new EnumType<AddressingModel, AddressingModelParameterFactory>(), null, OperandQuantifier.Default), new Operand(new EnumType<MemoryModel, MemoryModelParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpMemoryModel() : base("OpMemoryModel", new List<Operand> {new(new EnumType<AddressingModel, AddressingModelParameterFactory>(), null, OperandQuantifier.Default), new(new EnumType<MemoryModel, MemoryModelParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpEntryPoint : Instruction {
-        public OpEntryPoint() : base("OpEntryPoint", new List<Operand>()
-    {new Operand(new EnumType<ExecutionModel, ExecutionModelParameterFactory>(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Entry Point", OperandQuantifier.Default), new Operand(new LiteralString(), "Name", OperandQuantifier.Default), new Operand(new IdRef(), "Interface", OperandQuantifier.Varying), }) {
+        public OpEntryPoint() : base("OpEntryPoint", new List<Operand> {new(new EnumType<ExecutionModel, ExecutionModelParameterFactory>(), null, OperandQuantifier.Default), new(new IdRef(), "Entry Point", OperandQuantifier.Default), new(new LiteralString(), "Name", OperandQuantifier.Default), new(new IdRef(), "Interface", OperandQuantifier.Varying), }) {
         }
     }
     public class OpExecutionMode : Instruction {
-        public OpExecutionMode() : base("OpExecutionMode", new List<Operand>()
-    {new Operand(new IdRef(), "Entry Point", OperandQuantifier.Default), new Operand(new EnumType<ExecutionMode, ExecutionModeParameterFactory>(), "Mode", OperandQuantifier.Default), }) {
+        public OpExecutionMode() : base("OpExecutionMode", new List<Operand> {new(new IdRef(), "Entry Point", OperandQuantifier.Default), new(new EnumType<ExecutionMode, ExecutionModeParameterFactory>(), "Mode", OperandQuantifier.Default), }) {
         }
     }
     public class OpCapability : Instruction {
-        public OpCapability() : base("OpCapability", new List<Operand>()
-    {new Operand(new EnumType<Capability, CapabilityParameterFactory>(), "Capability", OperandQuantifier.Default), }) {
+        public OpCapability() : base("OpCapability", new List<Operand> {new(new EnumType<Capability, CapabilityParameterFactory>(), "Capability", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeVoid : Instruction {
-        public OpTypeVoid() : base("OpTypeVoid", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypeVoid() : base("OpTypeVoid", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeBool : Instruction {
-        public OpTypeBool() : base("OpTypeBool", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypeBool() : base("OpTypeBool", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeInt : Instruction {
-        public OpTypeInt() : base("OpTypeInt", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralInteger(), "Width", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Signedness", OperandQuantifier.Default), }) {
+        public OpTypeInt() : base("OpTypeInt", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralInteger(), "Width", OperandQuantifier.Default), new(new LiteralInteger(), "Signedness", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeFloat : Instruction {
-        public OpTypeFloat() : base("OpTypeFloat", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralInteger(), "Width", OperandQuantifier.Default), }) {
+        public OpTypeFloat() : base("OpTypeFloat", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralInteger(), "Width", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeVector : Instruction {
-        public OpTypeVector() : base("OpTypeVector", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Component Type", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Component Count", OperandQuantifier.Default), }) {
+        public OpTypeVector() : base("OpTypeVector", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Component Type", OperandQuantifier.Default), new(new LiteralInteger(), "Component Count", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeMatrix : Instruction {
-        public OpTypeMatrix() : base("OpTypeMatrix", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Column Type", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Column Count", OperandQuantifier.Default), }) {
+        public OpTypeMatrix() : base("OpTypeMatrix", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Column Type", OperandQuantifier.Default), new(new LiteralInteger(), "Column Count", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeImage : Instruction {
-        public OpTypeImage() : base("OpTypeImage", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Type", OperandQuantifier.Default), new Operand(new EnumType<Dim, DimParameterFactory>(), null, OperandQuantifier.Default), new Operand(new LiteralInteger(), "Depth", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Arrayed", OperandQuantifier.Default), new Operand(new LiteralInteger(), "MS", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Sampled", OperandQuantifier.Default), new Operand(new EnumType<ImageFormat, ImageFormatParameterFactory>(), null, OperandQuantifier.Default), new Operand(new EnumType<AccessQualifier, AccessQualifierParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpTypeImage() : base("OpTypeImage", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Type", OperandQuantifier.Default), new(new EnumType<Dim, DimParameterFactory>(), null, OperandQuantifier.Default), new(new LiteralInteger(), "Depth", OperandQuantifier.Default), new(new LiteralInteger(), "Arrayed", OperandQuantifier.Default), new(new LiteralInteger(), "MS", OperandQuantifier.Default), new(new LiteralInteger(), "Sampled", OperandQuantifier.Default), new(new EnumType<ImageFormat, ImageFormatParameterFactory>(), null, OperandQuantifier.Default), new(new EnumType<AccessQualifier, AccessQualifierParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpTypeSampler : Instruction {
-        public OpTypeSampler() : base("OpTypeSampler", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypeSampler() : base("OpTypeSampler", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeSampledImage : Instruction {
-        public OpTypeSampledImage() : base("OpTypeSampledImage", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image Type", OperandQuantifier.Default), }) {
+        public OpTypeSampledImage() : base("OpTypeSampledImage", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image Type", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeArray : Instruction {
-        public OpTypeArray() : base("OpTypeArray", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Element Type", OperandQuantifier.Default), new Operand(new IdRef(), "Length", OperandQuantifier.Default), }) {
+        public OpTypeArray() : base("OpTypeArray", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Element Type", OperandQuantifier.Default), new(new IdRef(), "Length", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeRuntimeArray : Instruction {
-        public OpTypeRuntimeArray() : base("OpTypeRuntimeArray", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Element Type", OperandQuantifier.Default), }) {
+        public OpTypeRuntimeArray() : base("OpTypeRuntimeArray", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Element Type", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeStruct : Instruction {
-        public OpTypeStruct() : base("OpTypeStruct", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Member 0 type, +member 1 type, +...", OperandQuantifier.Varying), }) {
+        public OpTypeStruct() : base("OpTypeStruct", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Member 0 type, +member 1 type, +...", OperandQuantifier.Varying), }) {
         }
     }
     public class OpTypeOpaque : Instruction {
-        public OpTypeOpaque() : base("OpTypeOpaque", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralString(), "The name of the opaque type.", OperandQuantifier.Default), }) {
+        public OpTypeOpaque() : base("OpTypeOpaque", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralString(), "The name of the opaque type.", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypePointer : Instruction {
-        public OpTypePointer() : base("OpTypePointer", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new EnumType<StorageClass, StorageClassParameterFactory>(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Type", OperandQuantifier.Default), }) {
+        public OpTypePointer() : base("OpTypePointer", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new EnumType<StorageClass, StorageClassParameterFactory>(), null, OperandQuantifier.Default), new(new IdRef(), "Type", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeFunction : Instruction {
-        public OpTypeFunction() : base("OpTypeFunction", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Return Type", OperandQuantifier.Default), new Operand(new IdRef(), "Parameter 0 Type, +Parameter 1 Type, +...", OperandQuantifier.Varying), }) {
+        public OpTypeFunction() : base("OpTypeFunction", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Return Type", OperandQuantifier.Default), new(new IdRef(), "Parameter 0 Type, +Parameter 1 Type, +...", OperandQuantifier.Varying), }) {
         }
     }
     public class OpTypeEvent : Instruction {
-        public OpTypeEvent() : base("OpTypeEvent", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypeEvent() : base("OpTypeEvent", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeDeviceEvent : Instruction {
-        public OpTypeDeviceEvent() : base("OpTypeDeviceEvent", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypeDeviceEvent() : base("OpTypeDeviceEvent", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeReserveId : Instruction {
-        public OpTypeReserveId() : base("OpTypeReserveId", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypeReserveId() : base("OpTypeReserveId", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeQueue : Instruction {
-        public OpTypeQueue() : base("OpTypeQueue", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypeQueue() : base("OpTypeQueue", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpTypePipe : Instruction {
-        public OpTypePipe() : base("OpTypePipe", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new EnumType<AccessQualifier, AccessQualifierParameterFactory>(), "Qualifier", OperandQuantifier.Default), }) {
+        public OpTypePipe() : base("OpTypePipe", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), new(new EnumType<AccessQualifier, AccessQualifierParameterFactory>(), "Qualifier", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeForwardPointer : Instruction {
-        public OpTypeForwardPointer() : base("OpTypeForwardPointer", new List<Operand>()
-    {new Operand(new IdRef(), "Pointer Type", OperandQuantifier.Default), new Operand(new EnumType<StorageClass, StorageClassParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpTypeForwardPointer() : base("OpTypeForwardPointer", new List<Operand> {new(new IdRef(), "Pointer Type", OperandQuantifier.Default), new(new EnumType<StorageClass, StorageClassParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpConstantTrue : Instruction {
-        public OpConstantTrue() : base("OpConstantTrue", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpConstantTrue() : base("OpConstantTrue", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpConstantFalse : Instruction {
-        public OpConstantFalse() : base("OpConstantFalse", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpConstantFalse() : base("OpConstantFalse", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpConstant : Instruction {
-        public OpConstant() : base("OpConstant", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralContextDependentNumber(), "Value", OperandQuantifier.Default), }) {
+        public OpConstant() : base("OpConstant", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralContextDependentNumber(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpConstantComposite : Instruction {
-        public OpConstantComposite() : base("OpConstantComposite", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Constituents", OperandQuantifier.Varying), }) {
+        public OpConstantComposite() : base("OpConstantComposite", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Constituents", OperandQuantifier.Varying), }) {
         }
     }
     public class OpConstantSampler : Instruction {
-        public OpConstantSampler() : base("OpConstantSampler", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new EnumType<SamplerAddressingMode, SamplerAddressingModeParameterFactory>(), null, OperandQuantifier.Default), new Operand(new LiteralInteger(), "Param", OperandQuantifier.Default), new Operand(new EnumType<SamplerFilterMode, SamplerFilterModeParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpConstantSampler() : base("OpConstantSampler", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new EnumType<SamplerAddressingMode, SamplerAddressingModeParameterFactory>(), null, OperandQuantifier.Default), new(new LiteralInteger(), "Param", OperandQuantifier.Default), new(new EnumType<SamplerFilterMode, SamplerFilterModeParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpConstantNull : Instruction {
-        public OpConstantNull() : base("OpConstantNull", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpConstantNull() : base("OpConstantNull", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpSpecConstantTrue : Instruction {
-        public OpSpecConstantTrue() : base("OpSpecConstantTrue", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpSpecConstantTrue() : base("OpSpecConstantTrue", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpSpecConstantFalse : Instruction {
-        public OpSpecConstantFalse() : base("OpSpecConstantFalse", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpSpecConstantFalse() : base("OpSpecConstantFalse", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpSpecConstant : Instruction {
-        public OpSpecConstant() : base("OpSpecConstant", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralContextDependentNumber(), "Value", OperandQuantifier.Default), }) {
+        public OpSpecConstant() : base("OpSpecConstant", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralContextDependentNumber(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpSpecConstantComposite : Instruction {
-        public OpSpecConstantComposite() : base("OpSpecConstantComposite", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Constituents", OperandQuantifier.Varying), }) {
+        public OpSpecConstantComposite() : base("OpSpecConstantComposite", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Constituents", OperandQuantifier.Varying), }) {
         }
     }
     public class OpSpecConstantOp : Instruction {
-        public OpSpecConstantOp() : base("OpSpecConstantOp", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralSpecConstantOpInteger(), "Opcode", OperandQuantifier.Default), }) {
+        public OpSpecConstantOp() : base("OpSpecConstantOp", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralSpecConstantOpInteger(), "Opcode", OperandQuantifier.Default), }) {
         }
     }
     public class OpFunction : Instruction {
-        public OpFunction() : base("OpFunction", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new EnumType<FunctionControl, FunctionControlParameterFactory>(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Function Type", OperandQuantifier.Default), }) {
+        public OpFunction() : base("OpFunction", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new EnumType<FunctionControl, FunctionControlParameterFactory>(), null, OperandQuantifier.Default), new(new IdRef(), "Function Type", OperandQuantifier.Default), }) {
         }
     }
     public class OpFunctionParameter : Instruction {
-        public OpFunctionParameter() : base("OpFunctionParameter", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpFunctionParameter() : base("OpFunctionParameter", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpFunctionEnd : Instruction {
@@ -1269,753 +1220,603 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
         }
     }
     public class OpFunctionCall : Instruction {
-        public OpFunctionCall() : base("OpFunctionCall", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Function", OperandQuantifier.Default), new Operand(new IdRef(), "Argument 0, +Argument 1, +...", OperandQuantifier.Varying), }) {
+        public OpFunctionCall() : base("OpFunctionCall", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Function", OperandQuantifier.Default), new(new IdRef(), "Argument 0, +Argument 1, +...", OperandQuantifier.Varying), }) {
         }
     }
     public class OpVariable : Instruction {
-        public OpVariable() : base("OpVariable", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new EnumType<StorageClass, StorageClassParameterFactory>(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Initializer", OperandQuantifier.Optional), }) {
+        public OpVariable() : base("OpVariable", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new EnumType<StorageClass, StorageClassParameterFactory>(), null, OperandQuantifier.Default), new(new IdRef(), "Initializer", OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageTexelPointer : Instruction {
-        public OpImageTexelPointer() : base("OpImageTexelPointer", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "Sample", OperandQuantifier.Default), }) {
+        public OpImageTexelPointer() : base("OpImageTexelPointer", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "Sample", OperandQuantifier.Default), }) {
         }
     }
     public class OpLoad : Instruction {
-        public OpLoad() : base("OpLoad", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new EnumType<MemoryAccess, MemoryAccessParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpLoad() : base("OpLoad", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new EnumType<MemoryAccess, MemoryAccessParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpStore : Instruction {
-        public OpStore() : base("OpStore", new List<Operand>()
-    {new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdRef(), "Object", OperandQuantifier.Default), new Operand(new EnumType<MemoryAccess, MemoryAccessParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpStore() : base("OpStore", new List<Operand> {new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdRef(), "Object", OperandQuantifier.Default), new(new EnumType<MemoryAccess, MemoryAccessParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpCopyMemory : Instruction {
-        public OpCopyMemory() : base("OpCopyMemory", new List<Operand>()
-    {new Operand(new IdRef(), "Target", OperandQuantifier.Default), new Operand(new IdRef(), "Source", OperandQuantifier.Default), new Operand(new EnumType<MemoryAccess, MemoryAccessParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpCopyMemory() : base("OpCopyMemory", new List<Operand> {new(new IdRef(), "Target", OperandQuantifier.Default), new(new IdRef(), "Source", OperandQuantifier.Default), new(new EnumType<MemoryAccess, MemoryAccessParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpCopyMemorySized : Instruction {
-        public OpCopyMemorySized() : base("OpCopyMemorySized", new List<Operand>()
-    {new Operand(new IdRef(), "Target", OperandQuantifier.Default), new Operand(new IdRef(), "Source", OperandQuantifier.Default), new Operand(new IdRef(), "Size", OperandQuantifier.Default), new Operand(new EnumType<MemoryAccess, MemoryAccessParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpCopyMemorySized() : base("OpCopyMemorySized", new List<Operand> {new(new IdRef(), "Target", OperandQuantifier.Default), new(new IdRef(), "Source", OperandQuantifier.Default), new(new IdRef(), "Size", OperandQuantifier.Default), new(new EnumType<MemoryAccess, MemoryAccessParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpAccessChain : Instruction {
-        public OpAccessChain() : base("OpAccessChain", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Indexes", OperandQuantifier.Varying), }) {
+        public OpAccessChain() : base("OpAccessChain", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Indexes", OperandQuantifier.Varying), }) {
         }
     }
     public class OpInBoundsAccessChain : Instruction {
-        public OpInBoundsAccessChain() : base("OpInBoundsAccessChain", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Indexes", OperandQuantifier.Varying), }) {
+        public OpInBoundsAccessChain() : base("OpInBoundsAccessChain", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Indexes", OperandQuantifier.Varying), }) {
         }
     }
     public class OpPtrAccessChain : Instruction {
-        public OpPtrAccessChain() : base("OpPtrAccessChain", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Element", OperandQuantifier.Default), new Operand(new IdRef(), "Indexes", OperandQuantifier.Varying), }) {
+        public OpPtrAccessChain() : base("OpPtrAccessChain", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Element", OperandQuantifier.Default), new(new IdRef(), "Indexes", OperandQuantifier.Varying), }) {
         }
     }
     public class OpArrayLength : Instruction {
-        public OpArrayLength() : base("OpArrayLength", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Structure", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Array member", OperandQuantifier.Default), }) {
+        public OpArrayLength() : base("OpArrayLength", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Structure", OperandQuantifier.Default), new(new LiteralInteger(), "Array member", OperandQuantifier.Default), }) {
         }
     }
     public class OpGenericPtrMemSemantics : Instruction {
-        public OpGenericPtrMemSemantics() : base("OpGenericPtrMemSemantics", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
+        public OpGenericPtrMemSemantics() : base("OpGenericPtrMemSemantics", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
         }
     }
     public class OpInBoundsPtrAccessChain : Instruction {
-        public OpInBoundsPtrAccessChain() : base("OpInBoundsPtrAccessChain", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Element", OperandQuantifier.Default), new Operand(new IdRef(), "Indexes", OperandQuantifier.Varying), }) {
+        public OpInBoundsPtrAccessChain() : base("OpInBoundsPtrAccessChain", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Element", OperandQuantifier.Default), new(new IdRef(), "Indexes", OperandQuantifier.Varying), }) {
         }
     }
     public class OpDecorate : Instruction {
-        public OpDecorate() : base("OpDecorate", new List<Operand>()
-    {new Operand(new IdRef(), "Target", OperandQuantifier.Default), new Operand(new EnumType<Decoration, DecorationParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpDecorate() : base("OpDecorate", new List<Operand> {new(new IdRef(), "Target", OperandQuantifier.Default), new(new EnumType<Decoration, DecorationParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpMemberDecorate : Instruction {
-        public OpMemberDecorate() : base("OpMemberDecorate", new List<Operand>()
-    {new Operand(new IdRef(), "Structure Type", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Member", OperandQuantifier.Default), new Operand(new EnumType<Decoration, DecorationParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpMemberDecorate() : base("OpMemberDecorate", new List<Operand> {new(new IdRef(), "Structure Type", OperandQuantifier.Default), new(new LiteralInteger(), "Member", OperandQuantifier.Default), new(new EnumType<Decoration, DecorationParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpDecorationGroup : Instruction {
-        public OpDecorationGroup() : base("OpDecorationGroup", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpDecorationGroup() : base("OpDecorationGroup", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupDecorate : Instruction {
-        public OpGroupDecorate() : base("OpGroupDecorate", new List<Operand>()
-    {new Operand(new IdRef(), "Decoration Group", OperandQuantifier.Default), new Operand(new IdRef(), "Targets", OperandQuantifier.Varying), }) {
+        public OpGroupDecorate() : base("OpGroupDecorate", new List<Operand> {new(new IdRef(), "Decoration Group", OperandQuantifier.Default), new(new IdRef(), "Targets", OperandQuantifier.Varying), }) {
         }
     }
     public class OpGroupMemberDecorate : Instruction {
-        public OpGroupMemberDecorate() : base("OpGroupMemberDecorate", new List<Operand>()
-    {new Operand(new IdRef(), "Decoration Group", OperandQuantifier.Default), new Operand(new PairIdRefLiteralInteger(), "Targets", OperandQuantifier.Varying), }) {
+        public OpGroupMemberDecorate() : base("OpGroupMemberDecorate", new List<Operand> {new(new IdRef(), "Decoration Group", OperandQuantifier.Default), new(new PairIdRefLiteralInteger(), "Targets", OperandQuantifier.Varying), }) {
         }
     }
     public class OpVectorExtractDynamic : Instruction {
-        public OpVectorExtractDynamic() : base("OpVectorExtractDynamic", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector", OperandQuantifier.Default), new Operand(new IdRef(), "Index", OperandQuantifier.Default), }) {
+        public OpVectorExtractDynamic() : base("OpVectorExtractDynamic", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector", OperandQuantifier.Default), new(new IdRef(), "Index", OperandQuantifier.Default), }) {
         }
     }
     public class OpVectorInsertDynamic : Instruction {
-        public OpVectorInsertDynamic() : base("OpVectorInsertDynamic", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector", OperandQuantifier.Default), new Operand(new IdRef(), "Component", OperandQuantifier.Default), new Operand(new IdRef(), "Index", OperandQuantifier.Default), }) {
+        public OpVectorInsertDynamic() : base("OpVectorInsertDynamic", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector", OperandQuantifier.Default), new(new IdRef(), "Component", OperandQuantifier.Default), new(new IdRef(), "Index", OperandQuantifier.Default), }) {
         }
     }
     public class OpVectorShuffle : Instruction {
-        public OpVectorShuffle() : base("OpVectorShuffle", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector 1", OperandQuantifier.Default), new Operand(new IdRef(), "Vector 2", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Components", OperandQuantifier.Varying), }) {
+        public OpVectorShuffle() : base("OpVectorShuffle", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector 1", OperandQuantifier.Default), new(new IdRef(), "Vector 2", OperandQuantifier.Default), new(new LiteralInteger(), "Components", OperandQuantifier.Varying), }) {
         }
     }
     public class OpCompositeConstruct : Instruction {
-        public OpCompositeConstruct() : base("OpCompositeConstruct", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Constituents", OperandQuantifier.Varying), }) {
+        public OpCompositeConstruct() : base("OpCompositeConstruct", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Constituents", OperandQuantifier.Varying), }) {
         }
     }
     public class OpCompositeExtract : Instruction {
-        public OpCompositeExtract() : base("OpCompositeExtract", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Composite", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Indexes", OperandQuantifier.Varying), }) {
+        public OpCompositeExtract() : base("OpCompositeExtract", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Composite", OperandQuantifier.Default), new(new LiteralInteger(), "Indexes", OperandQuantifier.Varying), }) {
         }
     }
     public class OpCompositeInsert : Instruction {
-        public OpCompositeInsert() : base("OpCompositeInsert", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Object", OperandQuantifier.Default), new Operand(new IdRef(), "Composite", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Indexes", OperandQuantifier.Varying), }) {
+        public OpCompositeInsert() : base("OpCompositeInsert", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Object", OperandQuantifier.Default), new(new IdRef(), "Composite", OperandQuantifier.Default), new(new LiteralInteger(), "Indexes", OperandQuantifier.Varying), }) {
         }
     }
     public class OpCopyObject : Instruction {
-        public OpCopyObject() : base("OpCopyObject", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand", OperandQuantifier.Default), }) {
+        public OpCopyObject() : base("OpCopyObject", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand", OperandQuantifier.Default), }) {
         }
     }
     public class OpTranspose : Instruction {
-        public OpTranspose() : base("OpTranspose", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Matrix", OperandQuantifier.Default), }) {
+        public OpTranspose() : base("OpTranspose", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Matrix", OperandQuantifier.Default), }) {
         }
     }
     public class OpSampledImage : Instruction {
-        public OpSampledImage() : base("OpSampledImage", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Sampler", OperandQuantifier.Default), }) {
+        public OpSampledImage() : base("OpSampledImage", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Sampler", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSampleImplicitLod : Instruction {
-        public OpImageSampleImplicitLod() : base("OpImageSampleImplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSampleImplicitLod() : base("OpImageSampleImplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSampleExplicitLod : Instruction {
-        public OpImageSampleExplicitLod() : base("OpImageSampleExplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpImageSampleExplicitLod() : base("OpImageSampleExplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSampleDrefImplicitLod : Instruction {
-        public OpImageSampleDrefImplicitLod() : base("OpImageSampleDrefImplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSampleDrefImplicitLod() : base("OpImageSampleDrefImplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSampleDrefExplicitLod : Instruction {
-        public OpImageSampleDrefExplicitLod() : base("OpImageSampleDrefExplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpImageSampleDrefExplicitLod() : base("OpImageSampleDrefExplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSampleProjImplicitLod : Instruction {
-        public OpImageSampleProjImplicitLod() : base("OpImageSampleProjImplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSampleProjImplicitLod() : base("OpImageSampleProjImplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSampleProjExplicitLod : Instruction {
-        public OpImageSampleProjExplicitLod() : base("OpImageSampleProjExplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpImageSampleProjExplicitLod() : base("OpImageSampleProjExplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSampleProjDrefImplicitLod : Instruction {
-        public OpImageSampleProjDrefImplicitLod() : base("OpImageSampleProjDrefImplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSampleProjDrefImplicitLod() : base("OpImageSampleProjDrefImplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSampleProjDrefExplicitLod : Instruction {
-        public OpImageSampleProjDrefExplicitLod() : base("OpImageSampleProjDrefExplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpImageSampleProjDrefExplicitLod() : base("OpImageSampleProjDrefExplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpImageFetch : Instruction {
-        public OpImageFetch() : base("OpImageFetch", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageFetch() : base("OpImageFetch", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageGather : Instruction {
-        public OpImageGather() : base("OpImageGather", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "Component", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageGather() : base("OpImageGather", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "Component", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageDrefGather : Instruction {
-        public OpImageDrefGather() : base("OpImageDrefGather", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageDrefGather() : base("OpImageDrefGather", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageRead : Instruction {
-        public OpImageRead() : base("OpImageRead", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageRead() : base("OpImageRead", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageWrite : Instruction {
-        public OpImageWrite() : base("OpImageWrite", new List<Operand>()
-    {new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "Texel", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageWrite() : base("OpImageWrite", new List<Operand> {new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "Texel", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImage : Instruction {
-        public OpImage() : base("OpImage", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), }) {
+        public OpImage() : base("OpImage", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageQueryFormat : Instruction {
-        public OpImageQueryFormat() : base("OpImageQueryFormat", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), }) {
+        public OpImageQueryFormat() : base("OpImageQueryFormat", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageQueryOrder : Instruction {
-        public OpImageQueryOrder() : base("OpImageQueryOrder", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), }) {
+        public OpImageQueryOrder() : base("OpImageQueryOrder", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageQuerySizeLod : Instruction {
-        public OpImageQuerySizeLod() : base("OpImageQuerySizeLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Level of Detail", OperandQuantifier.Default), }) {
+        public OpImageQuerySizeLod() : base("OpImageQuerySizeLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Level of Detail", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageQuerySize : Instruction {
-        public OpImageQuerySize() : base("OpImageQuerySize", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), }) {
+        public OpImageQuerySize() : base("OpImageQuerySize", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageQueryLod : Instruction {
-        public OpImageQueryLod() : base("OpImageQueryLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), }) {
+        public OpImageQueryLod() : base("OpImageQueryLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageQueryLevels : Instruction {
-        public OpImageQueryLevels() : base("OpImageQueryLevels", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), }) {
+        public OpImageQueryLevels() : base("OpImageQueryLevels", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageQuerySamples : Instruction {
-        public OpImageQuerySamples() : base("OpImageQuerySamples", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), }) {
+        public OpImageQuerySamples() : base("OpImageQuerySamples", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), }) {
         }
     }
     public class OpConvertFToU : Instruction {
-        public OpConvertFToU() : base("OpConvertFToU", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Float Value", OperandQuantifier.Default), }) {
+        public OpConvertFToU() : base("OpConvertFToU", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Float Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpConvertFToS : Instruction {
-        public OpConvertFToS() : base("OpConvertFToS", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Float Value", OperandQuantifier.Default), }) {
+        public OpConvertFToS() : base("OpConvertFToS", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Float Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpConvertSToF : Instruction {
-        public OpConvertSToF() : base("OpConvertSToF", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Signed Value", OperandQuantifier.Default), }) {
+        public OpConvertSToF() : base("OpConvertSToF", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Signed Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpConvertUToF : Instruction {
-        public OpConvertUToF() : base("OpConvertUToF", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Unsigned Value", OperandQuantifier.Default), }) {
+        public OpConvertUToF() : base("OpConvertUToF", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Unsigned Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpUConvert : Instruction {
-        public OpUConvert() : base("OpUConvert", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Unsigned Value", OperandQuantifier.Default), }) {
+        public OpUConvert() : base("OpUConvert", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Unsigned Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpSConvert : Instruction {
-        public OpSConvert() : base("OpSConvert", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Signed Value", OperandQuantifier.Default), }) {
+        public OpSConvert() : base("OpSConvert", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Signed Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpFConvert : Instruction {
-        public OpFConvert() : base("OpFConvert", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Float Value", OperandQuantifier.Default), }) {
+        public OpFConvert() : base("OpFConvert", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Float Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpQuantizeToF16 : Instruction {
-        public OpQuantizeToF16() : base("OpQuantizeToF16", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpQuantizeToF16() : base("OpQuantizeToF16", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpConvertPtrToU : Instruction {
-        public OpConvertPtrToU() : base("OpConvertPtrToU", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
+        public OpConvertPtrToU() : base("OpConvertPtrToU", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
         }
     }
     public class OpSatConvertSToU : Instruction {
-        public OpSatConvertSToU() : base("OpSatConvertSToU", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Signed Value", OperandQuantifier.Default), }) {
+        public OpSatConvertSToU() : base("OpSatConvertSToU", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Signed Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpSatConvertUToS : Instruction {
-        public OpSatConvertUToS() : base("OpSatConvertUToS", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Unsigned Value", OperandQuantifier.Default), }) {
+        public OpSatConvertUToS() : base("OpSatConvertUToS", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Unsigned Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpConvertUToPtr : Instruction {
-        public OpConvertUToPtr() : base("OpConvertUToPtr", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Integer Value", OperandQuantifier.Default), }) {
+        public OpConvertUToPtr() : base("OpConvertUToPtr", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Integer Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpPtrCastToGeneric : Instruction {
-        public OpPtrCastToGeneric() : base("OpPtrCastToGeneric", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
+        public OpPtrCastToGeneric() : base("OpPtrCastToGeneric", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
         }
     }
     public class OpGenericCastToPtr : Instruction {
-        public OpGenericCastToPtr() : base("OpGenericCastToPtr", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
+        public OpGenericCastToPtr() : base("OpGenericCastToPtr", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
         }
     }
     public class OpGenericCastToPtrExplicit : Instruction {
-        public OpGenericCastToPtrExplicit() : base("OpGenericCastToPtrExplicit", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new EnumType<StorageClass, StorageClassParameterFactory>(), "Storage", OperandQuantifier.Default), }) {
+        public OpGenericCastToPtrExplicit() : base("OpGenericCastToPtrExplicit", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new EnumType<StorageClass, StorageClassParameterFactory>(), "Storage", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitcast : Instruction {
-        public OpBitcast() : base("OpBitcast", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand", OperandQuantifier.Default), }) {
+        public OpBitcast() : base("OpBitcast", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand", OperandQuantifier.Default), }) {
         }
     }
     public class OpSNegate : Instruction {
-        public OpSNegate() : base("OpSNegate", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand", OperandQuantifier.Default), }) {
+        public OpSNegate() : base("OpSNegate", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand", OperandQuantifier.Default), }) {
         }
     }
     public class OpFNegate : Instruction {
-        public OpFNegate() : base("OpFNegate", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand", OperandQuantifier.Default), }) {
+        public OpFNegate() : base("OpFNegate", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand", OperandQuantifier.Default), }) {
         }
     }
     public class OpIAdd : Instruction {
-        public OpIAdd() : base("OpIAdd", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpIAdd() : base("OpIAdd", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFAdd : Instruction {
-        public OpFAdd() : base("OpFAdd", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFAdd() : base("OpFAdd", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpISub : Instruction {
-        public OpISub() : base("OpISub", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpISub() : base("OpISub", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFSub : Instruction {
-        public OpFSub() : base("OpFSub", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFSub() : base("OpFSub", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpIMul : Instruction {
-        public OpIMul() : base("OpIMul", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpIMul() : base("OpIMul", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFMul : Instruction {
-        public OpFMul() : base("OpFMul", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFMul() : base("OpFMul", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpUDiv : Instruction {
-        public OpUDiv() : base("OpUDiv", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpUDiv() : base("OpUDiv", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpSDiv : Instruction {
-        public OpSDiv() : base("OpSDiv", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpSDiv() : base("OpSDiv", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFDiv : Instruction {
-        public OpFDiv() : base("OpFDiv", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFDiv() : base("OpFDiv", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpUMod : Instruction {
-        public OpUMod() : base("OpUMod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpUMod() : base("OpUMod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpSRem : Instruction {
-        public OpSRem() : base("OpSRem", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpSRem() : base("OpSRem", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpSMod : Instruction {
-        public OpSMod() : base("OpSMod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpSMod() : base("OpSMod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFRem : Instruction {
-        public OpFRem() : base("OpFRem", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFRem() : base("OpFRem", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFMod : Instruction {
-        public OpFMod() : base("OpFMod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFMod() : base("OpFMod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpVectorTimesScalar : Instruction {
-        public OpVectorTimesScalar() : base("OpVectorTimesScalar", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector", OperandQuantifier.Default), new Operand(new IdRef(), "Scalar", OperandQuantifier.Default), }) {
+        public OpVectorTimesScalar() : base("OpVectorTimesScalar", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector", OperandQuantifier.Default), new(new IdRef(), "Scalar", OperandQuantifier.Default), }) {
         }
     }
     public class OpMatrixTimesScalar : Instruction {
-        public OpMatrixTimesScalar() : base("OpMatrixTimesScalar", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Matrix", OperandQuantifier.Default), new Operand(new IdRef(), "Scalar", OperandQuantifier.Default), }) {
+        public OpMatrixTimesScalar() : base("OpMatrixTimesScalar", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Matrix", OperandQuantifier.Default), new(new IdRef(), "Scalar", OperandQuantifier.Default), }) {
         }
     }
     public class OpVectorTimesMatrix : Instruction {
-        public OpVectorTimesMatrix() : base("OpVectorTimesMatrix", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector", OperandQuantifier.Default), new Operand(new IdRef(), "Matrix", OperandQuantifier.Default), }) {
+        public OpVectorTimesMatrix() : base("OpVectorTimesMatrix", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector", OperandQuantifier.Default), new(new IdRef(), "Matrix", OperandQuantifier.Default), }) {
         }
     }
     public class OpMatrixTimesVector : Instruction {
-        public OpMatrixTimesVector() : base("OpMatrixTimesVector", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Matrix", OperandQuantifier.Default), new Operand(new IdRef(), "Vector", OperandQuantifier.Default), }) {
+        public OpMatrixTimesVector() : base("OpMatrixTimesVector", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Matrix", OperandQuantifier.Default), new(new IdRef(), "Vector", OperandQuantifier.Default), }) {
         }
     }
     public class OpMatrixTimesMatrix : Instruction {
-        public OpMatrixTimesMatrix() : base("OpMatrixTimesMatrix", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "LeftMatrix", OperandQuantifier.Default), new Operand(new IdRef(), "RightMatrix", OperandQuantifier.Default), }) {
+        public OpMatrixTimesMatrix() : base("OpMatrixTimesMatrix", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "LeftMatrix", OperandQuantifier.Default), new(new IdRef(), "RightMatrix", OperandQuantifier.Default), }) {
         }
     }
     public class OpOuterProduct : Instruction {
-        public OpOuterProduct() : base("OpOuterProduct", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector 1", OperandQuantifier.Default), new Operand(new IdRef(), "Vector 2", OperandQuantifier.Default), }) {
+        public OpOuterProduct() : base("OpOuterProduct", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector 1", OperandQuantifier.Default), new(new IdRef(), "Vector 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpDot : Instruction {
-        public OpDot() : base("OpDot", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector 1", OperandQuantifier.Default), new Operand(new IdRef(), "Vector 2", OperandQuantifier.Default), }) {
+        public OpDot() : base("OpDot", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector 1", OperandQuantifier.Default), new(new IdRef(), "Vector 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpIAddCarry : Instruction {
-        public OpIAddCarry() : base("OpIAddCarry", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpIAddCarry() : base("OpIAddCarry", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpISubBorrow : Instruction {
-        public OpISubBorrow() : base("OpISubBorrow", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpISubBorrow() : base("OpISubBorrow", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpUMulExtended : Instruction {
-        public OpUMulExtended() : base("OpUMulExtended", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpUMulExtended() : base("OpUMulExtended", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpSMulExtended : Instruction {
-        public OpSMulExtended() : base("OpSMulExtended", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpSMulExtended() : base("OpSMulExtended", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpAny : Instruction {
-        public OpAny() : base("OpAny", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector", OperandQuantifier.Default), }) {
+        public OpAny() : base("OpAny", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector", OperandQuantifier.Default), }) {
         }
     }
     public class OpAll : Instruction {
-        public OpAll() : base("OpAll", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Vector", OperandQuantifier.Default), }) {
+        public OpAll() : base("OpAll", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Vector", OperandQuantifier.Default), }) {
         }
     }
     public class OpIsNan : Instruction {
-        public OpIsNan() : base("OpIsNan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "x", OperandQuantifier.Default), }) {
+        public OpIsNan() : base("OpIsNan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "x", OperandQuantifier.Default), }) {
         }
     }
     public class OpIsInf : Instruction {
-        public OpIsInf() : base("OpIsInf", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "x", OperandQuantifier.Default), }) {
+        public OpIsInf() : base("OpIsInf", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "x", OperandQuantifier.Default), }) {
         }
     }
     public class OpIsFinite : Instruction {
-        public OpIsFinite() : base("OpIsFinite", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "x", OperandQuantifier.Default), }) {
+        public OpIsFinite() : base("OpIsFinite", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "x", OperandQuantifier.Default), }) {
         }
     }
     public class OpIsNormal : Instruction {
-        public OpIsNormal() : base("OpIsNormal", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "x", OperandQuantifier.Default), }) {
+        public OpIsNormal() : base("OpIsNormal", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "x", OperandQuantifier.Default), }) {
         }
     }
     public class OpSignBitSet : Instruction {
-        public OpSignBitSet() : base("OpSignBitSet", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "x", OperandQuantifier.Default), }) {
+        public OpSignBitSet() : base("OpSignBitSet", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "x", OperandQuantifier.Default), }) {
         }
     }
     public class OpLessOrGreater : Instruction {
-        public OpLessOrGreater() : base("OpLessOrGreater", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "x", OperandQuantifier.Default), new Operand(new IdRef(), "y", OperandQuantifier.Default), }) {
+        public OpLessOrGreater() : base("OpLessOrGreater", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "x", OperandQuantifier.Default), new(new IdRef(), "y", OperandQuantifier.Default), }) {
         }
     }
     public class OpOrdered : Instruction {
-        public OpOrdered() : base("OpOrdered", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "x", OperandQuantifier.Default), new Operand(new IdRef(), "y", OperandQuantifier.Default), }) {
+        public OpOrdered() : base("OpOrdered", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "x", OperandQuantifier.Default), new(new IdRef(), "y", OperandQuantifier.Default), }) {
         }
     }
     public class OpUnordered : Instruction {
-        public OpUnordered() : base("OpUnordered", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "x", OperandQuantifier.Default), new Operand(new IdRef(), "y", OperandQuantifier.Default), }) {
+        public OpUnordered() : base("OpUnordered", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "x", OperandQuantifier.Default), new(new IdRef(), "y", OperandQuantifier.Default), }) {
         }
     }
     public class OpLogicalEqual : Instruction {
-        public OpLogicalEqual() : base("OpLogicalEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpLogicalEqual() : base("OpLogicalEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpLogicalNotEqual : Instruction {
-        public OpLogicalNotEqual() : base("OpLogicalNotEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpLogicalNotEqual() : base("OpLogicalNotEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpLogicalOr : Instruction {
-        public OpLogicalOr() : base("OpLogicalOr", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpLogicalOr() : base("OpLogicalOr", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpLogicalAnd : Instruction {
-        public OpLogicalAnd() : base("OpLogicalAnd", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpLogicalAnd() : base("OpLogicalAnd", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpLogicalNot : Instruction {
-        public OpLogicalNot() : base("OpLogicalNot", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand", OperandQuantifier.Default), }) {
+        public OpLogicalNot() : base("OpLogicalNot", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand", OperandQuantifier.Default), }) {
         }
     }
     public class OpSelect : Instruction {
-        public OpSelect() : base("OpSelect", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Condition", OperandQuantifier.Default), new Operand(new IdRef(), "Object 1", OperandQuantifier.Default), new Operand(new IdRef(), "Object 2", OperandQuantifier.Default), }) {
+        public OpSelect() : base("OpSelect", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Condition", OperandQuantifier.Default), new(new IdRef(), "Object 1", OperandQuantifier.Default), new(new IdRef(), "Object 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpIEqual : Instruction {
-        public OpIEqual() : base("OpIEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpIEqual() : base("OpIEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpINotEqual : Instruction {
-        public OpINotEqual() : base("OpINotEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpINotEqual() : base("OpINotEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpUGreaterThan : Instruction {
-        public OpUGreaterThan() : base("OpUGreaterThan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpUGreaterThan() : base("OpUGreaterThan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpSGreaterThan : Instruction {
-        public OpSGreaterThan() : base("OpSGreaterThan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpSGreaterThan() : base("OpSGreaterThan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpUGreaterThanEqual : Instruction {
-        public OpUGreaterThanEqual() : base("OpUGreaterThanEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpUGreaterThanEqual() : base("OpUGreaterThanEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpSGreaterThanEqual : Instruction {
-        public OpSGreaterThanEqual() : base("OpSGreaterThanEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpSGreaterThanEqual() : base("OpSGreaterThanEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpULessThan : Instruction {
-        public OpULessThan() : base("OpULessThan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpULessThan() : base("OpULessThan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpSLessThan : Instruction {
-        public OpSLessThan() : base("OpSLessThan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpSLessThan() : base("OpSLessThan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpULessThanEqual : Instruction {
-        public OpULessThanEqual() : base("OpULessThanEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpULessThanEqual() : base("OpULessThanEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpSLessThanEqual : Instruction {
-        public OpSLessThanEqual() : base("OpSLessThanEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpSLessThanEqual() : base("OpSLessThanEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFOrdEqual : Instruction {
-        public OpFOrdEqual() : base("OpFOrdEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFOrdEqual() : base("OpFOrdEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFUnordEqual : Instruction {
-        public OpFUnordEqual() : base("OpFUnordEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFUnordEqual() : base("OpFUnordEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFOrdNotEqual : Instruction {
-        public OpFOrdNotEqual() : base("OpFOrdNotEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFOrdNotEqual() : base("OpFOrdNotEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFUnordNotEqual : Instruction {
-        public OpFUnordNotEqual() : base("OpFUnordNotEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFUnordNotEqual() : base("OpFUnordNotEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFOrdLessThan : Instruction {
-        public OpFOrdLessThan() : base("OpFOrdLessThan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFOrdLessThan() : base("OpFOrdLessThan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFUnordLessThan : Instruction {
-        public OpFUnordLessThan() : base("OpFUnordLessThan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFUnordLessThan() : base("OpFUnordLessThan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFOrdGreaterThan : Instruction {
-        public OpFOrdGreaterThan() : base("OpFOrdGreaterThan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFOrdGreaterThan() : base("OpFOrdGreaterThan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFUnordGreaterThan : Instruction {
-        public OpFUnordGreaterThan() : base("OpFUnordGreaterThan", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFUnordGreaterThan() : base("OpFUnordGreaterThan", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFOrdLessThanEqual : Instruction {
-        public OpFOrdLessThanEqual() : base("OpFOrdLessThanEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFOrdLessThanEqual() : base("OpFOrdLessThanEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFUnordLessThanEqual : Instruction {
-        public OpFUnordLessThanEqual() : base("OpFUnordLessThanEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFUnordLessThanEqual() : base("OpFUnordLessThanEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFOrdGreaterThanEqual : Instruction {
-        public OpFOrdGreaterThanEqual() : base("OpFOrdGreaterThanEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFOrdGreaterThanEqual() : base("OpFOrdGreaterThanEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpFUnordGreaterThanEqual : Instruction {
-        public OpFUnordGreaterThanEqual() : base("OpFUnordGreaterThanEqual", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpFUnordGreaterThanEqual() : base("OpFUnordGreaterThanEqual", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpShiftRightLogical : Instruction {
-        public OpShiftRightLogical() : base("OpShiftRightLogical", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Shift", OperandQuantifier.Default), }) {
+        public OpShiftRightLogical() : base("OpShiftRightLogical", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Shift", OperandQuantifier.Default), }) {
         }
     }
     public class OpShiftRightArithmetic : Instruction {
-        public OpShiftRightArithmetic() : base("OpShiftRightArithmetic", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Shift", OperandQuantifier.Default), }) {
+        public OpShiftRightArithmetic() : base("OpShiftRightArithmetic", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Shift", OperandQuantifier.Default), }) {
         }
     }
     public class OpShiftLeftLogical : Instruction {
-        public OpShiftLeftLogical() : base("OpShiftLeftLogical", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Shift", OperandQuantifier.Default), }) {
+        public OpShiftLeftLogical() : base("OpShiftLeftLogical", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Shift", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitwiseOr : Instruction {
-        public OpBitwiseOr() : base("OpBitwiseOr", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpBitwiseOr() : base("OpBitwiseOr", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitwiseXor : Instruction {
-        public OpBitwiseXor() : base("OpBitwiseXor", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpBitwiseXor() : base("OpBitwiseXor", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitwiseAnd : Instruction {
-        public OpBitwiseAnd() : base("OpBitwiseAnd", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand 1", OperandQuantifier.Default), new Operand(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
+        public OpBitwiseAnd() : base("OpBitwiseAnd", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand 1", OperandQuantifier.Default), new(new IdRef(), "Operand 2", OperandQuantifier.Default), }) {
         }
     }
     public class OpNot : Instruction {
-        public OpNot() : base("OpNot", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Operand", OperandQuantifier.Default), }) {
+        public OpNot() : base("OpNot", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Operand", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitFieldInsert : Instruction {
-        public OpBitFieldInsert() : base("OpBitFieldInsert", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Insert", OperandQuantifier.Default), new Operand(new IdRef(), "Offset", OperandQuantifier.Default), new Operand(new IdRef(), "Count", OperandQuantifier.Default), }) {
+        public OpBitFieldInsert() : base("OpBitFieldInsert", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Insert", OperandQuantifier.Default), new(new IdRef(), "Offset", OperandQuantifier.Default), new(new IdRef(), "Count", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitFieldSExtract : Instruction {
-        public OpBitFieldSExtract() : base("OpBitFieldSExtract", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Offset", OperandQuantifier.Default), new Operand(new IdRef(), "Count", OperandQuantifier.Default), }) {
+        public OpBitFieldSExtract() : base("OpBitFieldSExtract", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Offset", OperandQuantifier.Default), new(new IdRef(), "Count", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitFieldUExtract : Instruction {
-        public OpBitFieldUExtract() : base("OpBitFieldUExtract", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), new Operand(new IdRef(), "Offset", OperandQuantifier.Default), new Operand(new IdRef(), "Count", OperandQuantifier.Default), }) {
+        public OpBitFieldUExtract() : base("OpBitFieldUExtract", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), new(new IdRef(), "Offset", OperandQuantifier.Default), new(new IdRef(), "Count", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitReverse : Instruction {
-        public OpBitReverse() : base("OpBitReverse", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), }) {
+        public OpBitReverse() : base("OpBitReverse", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), }) {
         }
     }
     public class OpBitCount : Instruction {
-        public OpBitCount() : base("OpBitCount", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Base", OperandQuantifier.Default), }) {
+        public OpBitCount() : base("OpBitCount", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Base", OperandQuantifier.Default), }) {
         }
     }
     public class OpDPdx : Instruction {
-        public OpDPdx() : base("OpDPdx", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpDPdx() : base("OpDPdx", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpDPdy : Instruction {
-        public OpDPdy() : base("OpDPdy", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpDPdy() : base("OpDPdy", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpFwidth : Instruction {
-        public OpFwidth() : base("OpFwidth", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpFwidth() : base("OpFwidth", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpDPdxFine : Instruction {
-        public OpDPdxFine() : base("OpDPdxFine", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpDPdxFine() : base("OpDPdxFine", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpDPdyFine : Instruction {
-        public OpDPdyFine() : base("OpDPdyFine", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpDPdyFine() : base("OpDPdyFine", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpFwidthFine : Instruction {
-        public OpFwidthFine() : base("OpFwidthFine", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpFwidthFine() : base("OpFwidthFine", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpDPdxCoarse : Instruction {
-        public OpDPdxCoarse() : base("OpDPdxCoarse", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpDPdxCoarse() : base("OpDPdxCoarse", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpDPdyCoarse : Instruction {
-        public OpDPdyCoarse() : base("OpDPdyCoarse", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpDPdyCoarse() : base("OpDPdyCoarse", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpFwidthCoarse : Instruction {
-        public OpFwidthCoarse() : base("OpFwidthCoarse", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "P", OperandQuantifier.Default), }) {
+        public OpFwidthCoarse() : base("OpFwidthCoarse", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "P", OperandQuantifier.Default), }) {
         }
     }
     public class OpEmitVertex : Instruction {
@@ -2027,138 +1828,111 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
         }
     }
     public class OpEmitStreamVertex : Instruction {
-        public OpEmitStreamVertex() : base("OpEmitStreamVertex", new List<Operand>()
-    {new Operand(new IdRef(), "Stream", OperandQuantifier.Default), }) {
+        public OpEmitStreamVertex() : base("OpEmitStreamVertex", new List<Operand> {new(new IdRef(), "Stream", OperandQuantifier.Default), }) {
         }
     }
     public class OpEndStreamPrimitive : Instruction {
-        public OpEndStreamPrimitive() : base("OpEndStreamPrimitive", new List<Operand>()
-    {new Operand(new IdRef(), "Stream", OperandQuantifier.Default), }) {
+        public OpEndStreamPrimitive() : base("OpEndStreamPrimitive", new List<Operand> {new(new IdRef(), "Stream", OperandQuantifier.Default), }) {
         }
     }
     public class OpControlBarrier : Instruction {
-        public OpControlBarrier() : base("OpControlBarrier", new List<Operand>()
-    {new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdScope(), "Memory", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
+        public OpControlBarrier() : base("OpControlBarrier", new List<Operand> {new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdScope(), "Memory", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
         }
     }
     public class OpMemoryBarrier : Instruction {
-        public OpMemoryBarrier() : base("OpMemoryBarrier", new List<Operand>()
-    {new Operand(new IdScope(), "Memory", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
+        public OpMemoryBarrier() : base("OpMemoryBarrier", new List<Operand> {new(new IdScope(), "Memory", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicLoad : Instruction {
-        public OpAtomicLoad() : base("OpAtomicLoad", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
+        public OpAtomicLoad() : base("OpAtomicLoad", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicStore : Instruction {
-        public OpAtomicStore() : base("OpAtomicStore", new List<Operand>()
-    {new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicStore() : base("OpAtomicStore", new List<Operand> {new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicExchange : Instruction {
-        public OpAtomicExchange() : base("OpAtomicExchange", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicExchange() : base("OpAtomicExchange", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicCompareExchange : Instruction {
-        public OpAtomicCompareExchange() : base("OpAtomicCompareExchange", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Equal", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Unequal", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), new Operand(new IdRef(), "Comparator", OperandQuantifier.Default), }) {
+        public OpAtomicCompareExchange() : base("OpAtomicCompareExchange", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Equal", OperandQuantifier.Default), new(new IdMemorySemantics(), "Unequal", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), new(new IdRef(), "Comparator", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicCompareExchangeWeak : Instruction {
-        public OpAtomicCompareExchangeWeak() : base("OpAtomicCompareExchangeWeak", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Equal", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Unequal", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), new Operand(new IdRef(), "Comparator", OperandQuantifier.Default), }) {
+        public OpAtomicCompareExchangeWeak() : base("OpAtomicCompareExchangeWeak", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Equal", OperandQuantifier.Default), new(new IdMemorySemantics(), "Unequal", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), new(new IdRef(), "Comparator", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicIIncrement : Instruction {
-        public OpAtomicIIncrement() : base("OpAtomicIIncrement", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
+        public OpAtomicIIncrement() : base("OpAtomicIIncrement", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicIDecrement : Instruction {
-        public OpAtomicIDecrement() : base("OpAtomicIDecrement", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
+        public OpAtomicIDecrement() : base("OpAtomicIDecrement", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicIAdd : Instruction {
-        public OpAtomicIAdd() : base("OpAtomicIAdd", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicIAdd() : base("OpAtomicIAdd", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicISub : Instruction {
-        public OpAtomicISub() : base("OpAtomicISub", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicISub() : base("OpAtomicISub", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicSMin : Instruction {
-        public OpAtomicSMin() : base("OpAtomicSMin", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicSMin() : base("OpAtomicSMin", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicUMin : Instruction {
-        public OpAtomicUMin() : base("OpAtomicUMin", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicUMin() : base("OpAtomicUMin", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicSMax : Instruction {
-        public OpAtomicSMax() : base("OpAtomicSMax", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicSMax() : base("OpAtomicSMax", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicUMax : Instruction {
-        public OpAtomicUMax() : base("OpAtomicUMax", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicUMax() : base("OpAtomicUMax", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicAnd : Instruction {
-        public OpAtomicAnd() : base("OpAtomicAnd", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicAnd() : base("OpAtomicAnd", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicOr : Instruction {
-        public OpAtomicOr() : base("OpAtomicOr", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicOr() : base("OpAtomicOr", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicXor : Instruction {
-        public OpAtomicXor() : base("OpAtomicXor", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpAtomicXor() : base("OpAtomicXor", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpPhi : Instruction {
-        public OpPhi() : base("OpPhi", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new PairIdRefIdRef(), "Variable, Parent, ...", OperandQuantifier.Varying), }) {
+        public OpPhi() : base("OpPhi", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new PairIdRefIdRef(), "Variable, Parent, ...", OperandQuantifier.Varying), }) {
         }
     }
     public class OpLoopMerge : Instruction {
-        public OpLoopMerge() : base("OpLoopMerge", new List<Operand>()
-    {new Operand(new IdRef(), "Merge Block", OperandQuantifier.Default), new Operand(new IdRef(), "Continue Target", OperandQuantifier.Default), new Operand(new EnumType<LoopControl, LoopControlParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpLoopMerge() : base("OpLoopMerge", new List<Operand> {new(new IdRef(), "Merge Block", OperandQuantifier.Default), new(new IdRef(), "Continue Target", OperandQuantifier.Default), new(new EnumType<LoopControl, LoopControlParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpSelectionMerge : Instruction {
-        public OpSelectionMerge() : base("OpSelectionMerge", new List<Operand>()
-    {new Operand(new IdRef(), "Merge Block", OperandQuantifier.Default), new Operand(new EnumType<SelectionControl, SelectionControlParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpSelectionMerge() : base("OpSelectionMerge", new List<Operand> {new(new IdRef(), "Merge Block", OperandQuantifier.Default), new(new EnumType<SelectionControl, SelectionControlParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpLabel : Instruction {
-        public OpLabel() : base("OpLabel", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpLabel() : base("OpLabel", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpBranch : Instruction {
-        public OpBranch() : base("OpBranch", new List<Operand>()
-    {new Operand(new IdRef(), "Target Label", OperandQuantifier.Default), }) {
+        public OpBranch() : base("OpBranch", new List<Operand> {new(new IdRef(), "Target Label", OperandQuantifier.Default), }) {
         }
     }
     public class OpBranchConditional : Instruction {
-        public OpBranchConditional() : base("OpBranchConditional", new List<Operand>()
-    {new Operand(new IdRef(), "Condition", OperandQuantifier.Default), new Operand(new IdRef(), "True Label", OperandQuantifier.Default), new Operand(new IdRef(), "False Label", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Branch weights", OperandQuantifier.Varying), }) {
+        public OpBranchConditional() : base("OpBranchConditional", new List<Operand> {new(new IdRef(), "Condition", OperandQuantifier.Default), new(new IdRef(), "True Label", OperandQuantifier.Default), new(new IdRef(), "False Label", OperandQuantifier.Default), new(new LiteralInteger(), "Branch weights", OperandQuantifier.Varying), }) {
         }
     }
     public class OpSwitch : Instruction {
-        public OpSwitch() : base("OpSwitch", new List<Operand>()
-    {new Operand(new IdRef(), "Selector", OperandQuantifier.Default), new Operand(new IdRef(), "Default", OperandQuantifier.Default), new Operand(new PairLiteralIntegerIdRef(), "Target", OperandQuantifier.Varying), }) {
+        public OpSwitch() : base("OpSwitch", new List<Operand> {new(new IdRef(), "Selector", OperandQuantifier.Default), new(new IdRef(), "Default", OperandQuantifier.Default), new(new PairLiteralIntegerIdRef(), "Target", OperandQuantifier.Varying), }) {
         }
     }
     public class OpKill : Instruction {
@@ -2170,8 +1944,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
         }
     }
     public class OpReturnValue : Instruction {
-        public OpReturnValue() : base("OpReturnValue", new List<Operand>()
-    {new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpReturnValue() : base("OpReturnValue", new List<Operand> {new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpUnreachable : Instruction {
@@ -2179,283 +1952,227 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
         }
     }
     public class OpLifetimeStart : Instruction {
-        public OpLifetimeStart() : base("OpLifetimeStart", new List<Operand>()
-    {new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Size", OperandQuantifier.Default), }) {
+        public OpLifetimeStart() : base("OpLifetimeStart", new List<Operand> {new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new LiteralInteger(), "Size", OperandQuantifier.Default), }) {
         }
     }
     public class OpLifetimeStop : Instruction {
-        public OpLifetimeStop() : base("OpLifetimeStop", new List<Operand>()
-    {new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Size", OperandQuantifier.Default), }) {
+        public OpLifetimeStop() : base("OpLifetimeStop", new List<Operand> {new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new LiteralInteger(), "Size", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupAsyncCopy : Instruction {
-        public OpGroupAsyncCopy() : base("OpGroupAsyncCopy", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Destination", OperandQuantifier.Default), new Operand(new IdRef(), "Source", OperandQuantifier.Default), new Operand(new IdRef(), "Num Elements", OperandQuantifier.Default), new Operand(new IdRef(), "Stride", OperandQuantifier.Default), new Operand(new IdRef(), "Event", OperandQuantifier.Default), }) {
+        public OpGroupAsyncCopy() : base("OpGroupAsyncCopy", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Destination", OperandQuantifier.Default), new(new IdRef(), "Source", OperandQuantifier.Default), new(new IdRef(), "Num Elements", OperandQuantifier.Default), new(new IdRef(), "Stride", OperandQuantifier.Default), new(new IdRef(), "Event", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupWaitEvents : Instruction {
-        public OpGroupWaitEvents() : base("OpGroupWaitEvents", new List<Operand>()
-    {new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Num Events", OperandQuantifier.Default), new Operand(new IdRef(), "Events List", OperandQuantifier.Default), }) {
+        public OpGroupWaitEvents() : base("OpGroupWaitEvents", new List<Operand> {new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Num Events", OperandQuantifier.Default), new(new IdRef(), "Events List", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupAll : Instruction {
-        public OpGroupAll() : base("OpGroupAll", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
+        public OpGroupAll() : base("OpGroupAll", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupAny : Instruction {
-        public OpGroupAny() : base("OpGroupAny", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
+        public OpGroupAny() : base("OpGroupAny", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupBroadcast : Instruction {
-        public OpGroupBroadcast() : base("OpGroupBroadcast", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), new Operand(new IdRef(), "LocalId", OperandQuantifier.Default), }) {
+        public OpGroupBroadcast() : base("OpGroupBroadcast", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), new(new IdRef(), "LocalId", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupIAdd : Instruction {
-        public OpGroupIAdd() : base("OpGroupIAdd", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupIAdd() : base("OpGroupIAdd", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupFAdd : Instruction {
-        public OpGroupFAdd() : base("OpGroupFAdd", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupFAdd() : base("OpGroupFAdd", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupFMin : Instruction {
-        public OpGroupFMin() : base("OpGroupFMin", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupFMin() : base("OpGroupFMin", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupUMin : Instruction {
-        public OpGroupUMin() : base("OpGroupUMin", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupUMin() : base("OpGroupUMin", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupSMin : Instruction {
-        public OpGroupSMin() : base("OpGroupSMin", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupSMin() : base("OpGroupSMin", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupFMax : Instruction {
-        public OpGroupFMax() : base("OpGroupFMax", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupFMax() : base("OpGroupFMax", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupUMax : Instruction {
-        public OpGroupUMax() : base("OpGroupUMax", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupUMax() : base("OpGroupUMax", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupSMax : Instruction {
-        public OpGroupSMax() : base("OpGroupSMax", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupSMax() : base("OpGroupSMax", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpReadPipe : Instruction {
-        public OpReadPipe() : base("OpReadPipe", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpReadPipe() : base("OpReadPipe", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpWritePipe : Instruction {
-        public OpWritePipe() : base("OpWritePipe", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpWritePipe() : base("OpWritePipe", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpReservedReadPipe : Instruction {
-        public OpReservedReadPipe() : base("OpReservedReadPipe", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Reserve Id", OperandQuantifier.Default), new Operand(new IdRef(), "Index", OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpReservedReadPipe() : base("OpReservedReadPipe", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Reserve Id", OperandQuantifier.Default), new(new IdRef(), "Index", OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpReservedWritePipe : Instruction {
-        public OpReservedWritePipe() : base("OpReservedWritePipe", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Reserve Id", OperandQuantifier.Default), new Operand(new IdRef(), "Index", OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpReservedWritePipe() : base("OpReservedWritePipe", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Reserve Id", OperandQuantifier.Default), new(new IdRef(), "Index", OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpReserveReadPipePackets : Instruction {
-        public OpReserveReadPipePackets() : base("OpReserveReadPipePackets", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Num Packets", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpReserveReadPipePackets() : base("OpReserveReadPipePackets", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Num Packets", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpReserveWritePipePackets : Instruction {
-        public OpReserveWritePipePackets() : base("OpReserveWritePipePackets", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Num Packets", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpReserveWritePipePackets() : base("OpReserveWritePipePackets", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Num Packets", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpCommitReadPipe : Instruction {
-        public OpCommitReadPipe() : base("OpCommitReadPipe", new List<Operand>()
-    {new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Reserve Id", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpCommitReadPipe() : base("OpCommitReadPipe", new List<Operand> {new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Reserve Id", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpCommitWritePipe : Instruction {
-        public OpCommitWritePipe() : base("OpCommitWritePipe", new List<Operand>()
-    {new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Reserve Id", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpCommitWritePipe() : base("OpCommitWritePipe", new List<Operand> {new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Reserve Id", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpIsValidReserveId : Instruction {
-        public OpIsValidReserveId() : base("OpIsValidReserveId", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Reserve Id", OperandQuantifier.Default), }) {
+        public OpIsValidReserveId() : base("OpIsValidReserveId", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Reserve Id", OperandQuantifier.Default), }) {
         }
     }
     public class OpGetNumPipePackets : Instruction {
-        public OpGetNumPipePackets() : base("OpGetNumPipePackets", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpGetNumPipePackets() : base("OpGetNumPipePackets", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpGetMaxPipePackets : Instruction {
-        public OpGetMaxPipePackets() : base("OpGetMaxPipePackets", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpGetMaxPipePackets() : base("OpGetMaxPipePackets", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupReserveReadPipePackets : Instruction {
-        public OpGroupReserveReadPipePackets() : base("OpGroupReserveReadPipePackets", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Num Packets", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpGroupReserveReadPipePackets() : base("OpGroupReserveReadPipePackets", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Num Packets", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupReserveWritePipePackets : Instruction {
-        public OpGroupReserveWritePipePackets() : base("OpGroupReserveWritePipePackets", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Num Packets", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpGroupReserveWritePipePackets() : base("OpGroupReserveWritePipePackets", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Num Packets", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupCommitReadPipe : Instruction {
-        public OpGroupCommitReadPipe() : base("OpGroupCommitReadPipe", new List<Operand>()
-    {new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Reserve Id", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpGroupCommitReadPipe() : base("OpGroupCommitReadPipe", new List<Operand> {new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Reserve Id", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupCommitWritePipe : Instruction {
-        public OpGroupCommitWritePipe() : base("OpGroupCommitWritePipe", new List<Operand>()
-    {new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new IdRef(), "Pipe", OperandQuantifier.Default), new Operand(new IdRef(), "Reserve Id", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Size", OperandQuantifier.Default), new Operand(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
+        public OpGroupCommitWritePipe() : base("OpGroupCommitWritePipe", new List<Operand> {new(new IdScope(), "Execution", OperandQuantifier.Default), new(new IdRef(), "Pipe", OperandQuantifier.Default), new(new IdRef(), "Reserve Id", OperandQuantifier.Default), new(new IdRef(), "Packet Size", OperandQuantifier.Default), new(new IdRef(), "Packet Alignment", OperandQuantifier.Default), }) {
         }
     }
     public class OpEnqueueMarker : Instruction {
-        public OpEnqueueMarker() : base("OpEnqueueMarker", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Queue", OperandQuantifier.Default), new Operand(new IdRef(), "Num Events", OperandQuantifier.Default), new Operand(new IdRef(), "Wait Events", OperandQuantifier.Default), new Operand(new IdRef(), "Ret Event", OperandQuantifier.Default), }) {
+        public OpEnqueueMarker() : base("OpEnqueueMarker", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Queue", OperandQuantifier.Default), new(new IdRef(), "Num Events", OperandQuantifier.Default), new(new IdRef(), "Wait Events", OperandQuantifier.Default), new(new IdRef(), "Ret Event", OperandQuantifier.Default), }) {
         }
     }
     public class OpEnqueueKernel : Instruction {
-        public OpEnqueueKernel() : base("OpEnqueueKernel", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Queue", OperandQuantifier.Default), new Operand(new IdRef(), "Flags", OperandQuantifier.Default), new Operand(new IdRef(), "ND Range", OperandQuantifier.Default), new Operand(new IdRef(), "Num Events", OperandQuantifier.Default), new Operand(new IdRef(), "Wait Events", OperandQuantifier.Default), new Operand(new IdRef(), "Ret Event", OperandQuantifier.Default), new Operand(new IdRef(), "Invoke", OperandQuantifier.Default), new Operand(new IdRef(), "Param", OperandQuantifier.Default), new Operand(new IdRef(), "Param Size", OperandQuantifier.Default), new Operand(new IdRef(), "Param Align", OperandQuantifier.Default), new Operand(new IdRef(), "Local Size", OperandQuantifier.Varying), }) {
+        public OpEnqueueKernel() : base("OpEnqueueKernel", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Queue", OperandQuantifier.Default), new(new IdRef(), "Flags", OperandQuantifier.Default), new(new IdRef(), "ND Range", OperandQuantifier.Default), new(new IdRef(), "Num Events", OperandQuantifier.Default), new(new IdRef(), "Wait Events", OperandQuantifier.Default), new(new IdRef(), "Ret Event", OperandQuantifier.Default), new(new IdRef(), "Invoke", OperandQuantifier.Default), new(new IdRef(), "Param", OperandQuantifier.Default), new(new IdRef(), "Param Size", OperandQuantifier.Default), new(new IdRef(), "Param Align", OperandQuantifier.Default), new(new IdRef(), "Local Size", OperandQuantifier.Varying), }) {
         }
     }
     public class OpGetKernelNDrangeSubGroupCount : Instruction {
-        public OpGetKernelNDrangeSubGroupCount() : base("OpGetKernelNDrangeSubGroupCount", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "ND Range", OperandQuantifier.Default), new Operand(new IdRef(), "Invoke", OperandQuantifier.Default), new Operand(new IdRef(), "Param", OperandQuantifier.Default), new Operand(new IdRef(), "Param Size", OperandQuantifier.Default), new Operand(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
+        public OpGetKernelNDrangeSubGroupCount() : base("OpGetKernelNDrangeSubGroupCount", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "ND Range", OperandQuantifier.Default), new(new IdRef(), "Invoke", OperandQuantifier.Default), new(new IdRef(), "Param", OperandQuantifier.Default), new(new IdRef(), "Param Size", OperandQuantifier.Default), new(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
         }
     }
     public class OpGetKernelNDrangeMaxSubGroupSize : Instruction {
-        public OpGetKernelNDrangeMaxSubGroupSize() : base("OpGetKernelNDrangeMaxSubGroupSize", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "ND Range", OperandQuantifier.Default), new Operand(new IdRef(), "Invoke", OperandQuantifier.Default), new Operand(new IdRef(), "Param", OperandQuantifier.Default), new Operand(new IdRef(), "Param Size", OperandQuantifier.Default), new Operand(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
+        public OpGetKernelNDrangeMaxSubGroupSize() : base("OpGetKernelNDrangeMaxSubGroupSize", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "ND Range", OperandQuantifier.Default), new(new IdRef(), "Invoke", OperandQuantifier.Default), new(new IdRef(), "Param", OperandQuantifier.Default), new(new IdRef(), "Param Size", OperandQuantifier.Default), new(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
         }
     }
     public class OpGetKernelWorkGroupSize : Instruction {
-        public OpGetKernelWorkGroupSize() : base("OpGetKernelWorkGroupSize", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Invoke", OperandQuantifier.Default), new Operand(new IdRef(), "Param", OperandQuantifier.Default), new Operand(new IdRef(), "Param Size", OperandQuantifier.Default), new Operand(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
+        public OpGetKernelWorkGroupSize() : base("OpGetKernelWorkGroupSize", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Invoke", OperandQuantifier.Default), new(new IdRef(), "Param", OperandQuantifier.Default), new(new IdRef(), "Param Size", OperandQuantifier.Default), new(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
         }
     }
     public class OpGetKernelPreferredWorkGroupSizeMultiple : Instruction {
-        public OpGetKernelPreferredWorkGroupSizeMultiple() : base("OpGetKernelPreferredWorkGroupSizeMultiple", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Invoke", OperandQuantifier.Default), new Operand(new IdRef(), "Param", OperandQuantifier.Default), new Operand(new IdRef(), "Param Size", OperandQuantifier.Default), new Operand(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
+        public OpGetKernelPreferredWorkGroupSizeMultiple() : base("OpGetKernelPreferredWorkGroupSizeMultiple", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Invoke", OperandQuantifier.Default), new(new IdRef(), "Param", OperandQuantifier.Default), new(new IdRef(), "Param Size", OperandQuantifier.Default), new(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
         }
     }
     public class OpRetainEvent : Instruction {
-        public OpRetainEvent() : base("OpRetainEvent", new List<Operand>()
-    {new Operand(new IdRef(), "Event", OperandQuantifier.Default), }) {
+        public OpRetainEvent() : base("OpRetainEvent", new List<Operand> {new(new IdRef(), "Event", OperandQuantifier.Default), }) {
         }
     }
     public class OpReleaseEvent : Instruction {
-        public OpReleaseEvent() : base("OpReleaseEvent", new List<Operand>()
-    {new Operand(new IdRef(), "Event", OperandQuantifier.Default), }) {
+        public OpReleaseEvent() : base("OpReleaseEvent", new List<Operand> {new(new IdRef(), "Event", OperandQuantifier.Default), }) {
         }
     }
     public class OpCreateUserEvent : Instruction {
-        public OpCreateUserEvent() : base("OpCreateUserEvent", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpCreateUserEvent() : base("OpCreateUserEvent", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpIsValidEvent : Instruction {
-        public OpIsValidEvent() : base("OpIsValidEvent", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Event", OperandQuantifier.Default), }) {
+        public OpIsValidEvent() : base("OpIsValidEvent", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Event", OperandQuantifier.Default), }) {
         }
     }
     public class OpSetUserEventStatus : Instruction {
-        public OpSetUserEventStatus() : base("OpSetUserEventStatus", new List<Operand>()
-    {new Operand(new IdRef(), "Event", OperandQuantifier.Default), new Operand(new IdRef(), "Status", OperandQuantifier.Default), }) {
+        public OpSetUserEventStatus() : base("OpSetUserEventStatus", new List<Operand> {new(new IdRef(), "Event", OperandQuantifier.Default), new(new IdRef(), "Status", OperandQuantifier.Default), }) {
         }
     }
     public class OpCaptureEventProfilingInfo : Instruction {
-        public OpCaptureEventProfilingInfo() : base("OpCaptureEventProfilingInfo", new List<Operand>()
-    {new Operand(new IdRef(), "Event", OperandQuantifier.Default), new Operand(new IdRef(), "Profiling Info", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpCaptureEventProfilingInfo() : base("OpCaptureEventProfilingInfo", new List<Operand> {new(new IdRef(), "Event", OperandQuantifier.Default), new(new IdRef(), "Profiling Info", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpGetDefaultQueue : Instruction {
-        public OpGetDefaultQueue() : base("OpGetDefaultQueue", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpGetDefaultQueue() : base("OpGetDefaultQueue", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpBuildNDRange : Instruction {
-        public OpBuildNDRange() : base("OpBuildNDRange", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "GlobalWorkSize", OperandQuantifier.Default), new Operand(new IdRef(), "LocalWorkSize", OperandQuantifier.Default), new Operand(new IdRef(), "GlobalWorkOffset", OperandQuantifier.Default), }) {
+        public OpBuildNDRange() : base("OpBuildNDRange", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "GlobalWorkSize", OperandQuantifier.Default), new(new IdRef(), "LocalWorkSize", OperandQuantifier.Default), new(new IdRef(), "GlobalWorkOffset", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSparseSampleImplicitLod : Instruction {
-        public OpImageSparseSampleImplicitLod() : base("OpImageSparseSampleImplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSparseSampleImplicitLod() : base("OpImageSparseSampleImplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSparseSampleExplicitLod : Instruction {
-        public OpImageSparseSampleExplicitLod() : base("OpImageSparseSampleExplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpImageSparseSampleExplicitLod() : base("OpImageSparseSampleExplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSparseSampleDrefImplicitLod : Instruction {
-        public OpImageSparseSampleDrefImplicitLod() : base("OpImageSparseSampleDrefImplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSparseSampleDrefImplicitLod() : base("OpImageSparseSampleDrefImplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSparseSampleDrefExplicitLod : Instruction {
-        public OpImageSparseSampleDrefExplicitLod() : base("OpImageSparseSampleDrefExplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpImageSparseSampleDrefExplicitLod() : base("OpImageSparseSampleDrefExplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSparseSampleProjImplicitLod : Instruction {
-        public OpImageSparseSampleProjImplicitLod() : base("OpImageSparseSampleProjImplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSparseSampleProjImplicitLod() : base("OpImageSparseSampleProjImplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSparseSampleProjExplicitLod : Instruction {
-        public OpImageSparseSampleProjExplicitLod() : base("OpImageSparseSampleProjExplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpImageSparseSampleProjExplicitLod() : base("OpImageSparseSampleProjExplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSparseSampleProjDrefImplicitLod : Instruction {
-        public OpImageSparseSampleProjDrefImplicitLod() : base("OpImageSparseSampleProjDrefImplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSparseSampleProjDrefImplicitLod() : base("OpImageSparseSampleProjDrefImplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSparseSampleProjDrefExplicitLod : Instruction {
-        public OpImageSparseSampleProjDrefExplicitLod() : base("OpImageSparseSampleProjDrefExplicitLod", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpImageSparseSampleProjDrefExplicitLod() : base("OpImageSparseSampleProjDrefExplicitLod", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSparseFetch : Instruction {
-        public OpImageSparseFetch() : base("OpImageSparseFetch", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSparseFetch() : base("OpImageSparseFetch", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSparseGather : Instruction {
-        public OpImageSparseGather() : base("OpImageSparseGather", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "Component", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSparseGather() : base("OpImageSparseGather", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "Component", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSparseDrefGather : Instruction {
-        public OpImageSparseDrefGather() : base("OpImageSparseDrefGather", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Sampled Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "D~ref~", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSparseDrefGather() : base("OpImageSparseDrefGather", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Sampled Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "D~ref~", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpImageSparseTexelsResident : Instruction {
-        public OpImageSparseTexelsResident() : base("OpImageSparseTexelsResident", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Resident Code", OperandQuantifier.Default), }) {
+        public OpImageSparseTexelsResident() : base("OpImageSparseTexelsResident", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Resident Code", OperandQuantifier.Default), }) {
         }
     }
     public class OpNoLine : Instruction {
@@ -2463,198 +2180,159 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
         }
     }
     public class OpAtomicFlagTestAndSet : Instruction {
-        public OpAtomicFlagTestAndSet() : base("OpAtomicFlagTestAndSet", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
+        public OpAtomicFlagTestAndSet() : base("OpAtomicFlagTestAndSet", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
         }
     }
     public class OpAtomicFlagClear : Instruction {
-        public OpAtomicFlagClear() : base("OpAtomicFlagClear", new List<Operand>()
-    {new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), new Operand(new IdScope(), "Scope", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
+        public OpAtomicFlagClear() : base("OpAtomicFlagClear", new List<Operand> {new(new IdRef(), "Pointer", OperandQuantifier.Default), new(new IdScope(), "Scope", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
         }
     }
     public class OpImageSparseRead : Instruction {
-        public OpImageSparseRead() : base("OpImageSparseRead", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
+        public OpImageSparseRead() : base("OpImageSparseRead", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new EnumType<ImageOperands, ImageOperandsParameterFactory>(), null, OperandQuantifier.Optional), }) {
         }
     }
     public class OpSizeOf : Instruction {
-        public OpSizeOf() : base("OpSizeOf", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
+        public OpSizeOf() : base("OpSizeOf", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pointer", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypePipeStorage : Instruction {
-        public OpTypePipeStorage() : base("OpTypePipeStorage", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypePipeStorage() : base("OpTypePipeStorage", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpConstantPipeStorage : Instruction {
-        public OpConstantPipeStorage() : base("OpConstantPipeStorage", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new LiteralInteger(), "Packet Size", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Packet Alignment", OperandQuantifier.Default), new Operand(new LiteralInteger(), "Capacity", OperandQuantifier.Default), }) {
+        public OpConstantPipeStorage() : base("OpConstantPipeStorage", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new LiteralInteger(), "Packet Size", OperandQuantifier.Default), new(new LiteralInteger(), "Packet Alignment", OperandQuantifier.Default), new(new LiteralInteger(), "Capacity", OperandQuantifier.Default), }) {
         }
     }
     public class OpCreatePipeFromPipeStorage : Instruction {
-        public OpCreatePipeFromPipeStorage() : base("OpCreatePipeFromPipeStorage", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Pipe Storage", OperandQuantifier.Default), }) {
+        public OpCreatePipeFromPipeStorage() : base("OpCreatePipeFromPipeStorage", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Pipe Storage", OperandQuantifier.Default), }) {
         }
     }
     public class OpGetKernelLocalSizeForSubgroupCount : Instruction {
-        public OpGetKernelLocalSizeForSubgroupCount() : base("OpGetKernelLocalSizeForSubgroupCount", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Subgroup Count", OperandQuantifier.Default), new Operand(new IdRef(), "Invoke", OperandQuantifier.Default), new Operand(new IdRef(), "Param", OperandQuantifier.Default), new Operand(new IdRef(), "Param Size", OperandQuantifier.Default), new Operand(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
+        public OpGetKernelLocalSizeForSubgroupCount() : base("OpGetKernelLocalSizeForSubgroupCount", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Subgroup Count", OperandQuantifier.Default), new(new IdRef(), "Invoke", OperandQuantifier.Default), new(new IdRef(), "Param", OperandQuantifier.Default), new(new IdRef(), "Param Size", OperandQuantifier.Default), new(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
         }
     }
     public class OpGetKernelMaxNumSubgroups : Instruction {
-        public OpGetKernelMaxNumSubgroups() : base("OpGetKernelMaxNumSubgroups", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Invoke", OperandQuantifier.Default), new Operand(new IdRef(), "Param", OperandQuantifier.Default), new Operand(new IdRef(), "Param Size", OperandQuantifier.Default), new Operand(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
+        public OpGetKernelMaxNumSubgroups() : base("OpGetKernelMaxNumSubgroups", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Invoke", OperandQuantifier.Default), new(new IdRef(), "Param", OperandQuantifier.Default), new(new IdRef(), "Param Size", OperandQuantifier.Default), new(new IdRef(), "Param Align", OperandQuantifier.Default), }) {
         }
     }
     public class OpTypeNamedBarrier : Instruction {
-        public OpTypeNamedBarrier() : base("OpTypeNamedBarrier", new List<Operand>()
-    {new Operand(new IdResult(), null, OperandQuantifier.Default), }) {
+        public OpTypeNamedBarrier() : base("OpTypeNamedBarrier", new List<Operand> {new(new IdResult(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpNamedBarrierInitialize : Instruction {
-        public OpNamedBarrierInitialize() : base("OpNamedBarrierInitialize", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Subgroup Count", OperandQuantifier.Default), }) {
+        public OpNamedBarrierInitialize() : base("OpNamedBarrierInitialize", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Subgroup Count", OperandQuantifier.Default), }) {
         }
     }
     public class OpMemoryNamedBarrier : Instruction {
-        public OpMemoryNamedBarrier() : base("OpMemoryNamedBarrier", new List<Operand>()
-    {new Operand(new IdRef(), "Named Barrier", OperandQuantifier.Default), new Operand(new IdScope(), "Memory", OperandQuantifier.Default), new Operand(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
+        public OpMemoryNamedBarrier() : base("OpMemoryNamedBarrier", new List<Operand> {new(new IdRef(), "Named Barrier", OperandQuantifier.Default), new(new IdScope(), "Memory", OperandQuantifier.Default), new(new IdMemorySemantics(), "Semantics", OperandQuantifier.Default), }) {
         }
     }
     public class OpModuleProcessed : Instruction {
-        public OpModuleProcessed() : base("OpModuleProcessed", new List<Operand>()
-    {new Operand(new LiteralString(), "Process", OperandQuantifier.Default), }) {
+        public OpModuleProcessed() : base("OpModuleProcessed", new List<Operand> {new(new LiteralString(), "Process", OperandQuantifier.Default), }) {
         }
     }
     public class OpExecutionModeId : Instruction {
-        public OpExecutionModeId() : base("OpExecutionModeId", new List<Operand>()
-    {new Operand(new IdRef(), "Entry Point", OperandQuantifier.Default), new Operand(new EnumType<ExecutionMode, ExecutionModeParameterFactory>(), "Mode", OperandQuantifier.Default), }) {
+        public OpExecutionModeId() : base("OpExecutionModeId", new List<Operand> {new(new IdRef(), "Entry Point", OperandQuantifier.Default), new(new EnumType<ExecutionMode, ExecutionModeParameterFactory>(), "Mode", OperandQuantifier.Default), }) {
         }
     }
     public class OpDecorateId : Instruction {
-        public OpDecorateId() : base("OpDecorateId", new List<Operand>()
-    {new Operand(new IdRef(), "Target", OperandQuantifier.Default), new Operand(new EnumType<Decoration, DecorationParameterFactory>(), null, OperandQuantifier.Default), }) {
+        public OpDecorateId() : base("OpDecorateId", new List<Operand> {new(new IdRef(), "Target", OperandQuantifier.Default), new(new EnumType<Decoration, DecorationParameterFactory>(), null, OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupBallotKHR : Instruction {
-        public OpSubgroupBallotKHR() : base("OpSubgroupBallotKHR", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
+        public OpSubgroupBallotKHR() : base("OpSubgroupBallotKHR", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupFirstInvocationKHR : Instruction {
-        public OpSubgroupFirstInvocationKHR() : base("OpSubgroupFirstInvocationKHR", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpSubgroupFirstInvocationKHR() : base("OpSubgroupFirstInvocationKHR", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupAllKHR : Instruction {
-        public OpSubgroupAllKHR() : base("OpSubgroupAllKHR", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
+        public OpSubgroupAllKHR() : base("OpSubgroupAllKHR", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupAnyKHR : Instruction {
-        public OpSubgroupAnyKHR() : base("OpSubgroupAnyKHR", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
+        public OpSubgroupAnyKHR() : base("OpSubgroupAnyKHR", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupAllEqualKHR : Instruction {
-        public OpSubgroupAllEqualKHR() : base("OpSubgroupAllEqualKHR", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
+        public OpSubgroupAllEqualKHR() : base("OpSubgroupAllEqualKHR", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Predicate", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupReadInvocationKHR : Instruction {
-        public OpSubgroupReadInvocationKHR() : base("OpSubgroupReadInvocationKHR", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), new Operand(new IdRef(), "Index", OperandQuantifier.Default), }) {
+        public OpSubgroupReadInvocationKHR() : base("OpSubgroupReadInvocationKHR", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), new(new IdRef(), "Index", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupIAddNonUniformAMD : Instruction {
-        public OpGroupIAddNonUniformAMD() : base("OpGroupIAddNonUniformAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupIAddNonUniformAMD() : base("OpGroupIAddNonUniformAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupFAddNonUniformAMD : Instruction {
-        public OpGroupFAddNonUniformAMD() : base("OpGroupFAddNonUniformAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupFAddNonUniformAMD() : base("OpGroupFAddNonUniformAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupFMinNonUniformAMD : Instruction {
-        public OpGroupFMinNonUniformAMD() : base("OpGroupFMinNonUniformAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupFMinNonUniformAMD() : base("OpGroupFMinNonUniformAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupUMinNonUniformAMD : Instruction {
-        public OpGroupUMinNonUniformAMD() : base("OpGroupUMinNonUniformAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupUMinNonUniformAMD() : base("OpGroupUMinNonUniformAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupSMinNonUniformAMD : Instruction {
-        public OpGroupSMinNonUniformAMD() : base("OpGroupSMinNonUniformAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupSMinNonUniformAMD() : base("OpGroupSMinNonUniformAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupFMaxNonUniformAMD : Instruction {
-        public OpGroupFMaxNonUniformAMD() : base("OpGroupFMaxNonUniformAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupFMaxNonUniformAMD() : base("OpGroupFMaxNonUniformAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupUMaxNonUniformAMD : Instruction {
-        public OpGroupUMaxNonUniformAMD() : base("OpGroupUMaxNonUniformAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupUMaxNonUniformAMD() : base("OpGroupUMaxNonUniformAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpGroupSMaxNonUniformAMD : Instruction {
-        public OpGroupSMaxNonUniformAMD() : base("OpGroupSMaxNonUniformAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdScope(), "Execution", OperandQuantifier.Default), new Operand(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new Operand(new IdRef(), "X", OperandQuantifier.Default), }) {
+        public OpGroupSMaxNonUniformAMD() : base("OpGroupSMaxNonUniformAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdScope(), "Execution", OperandQuantifier.Default), new(new EnumType<GroupOperation, GroupOperationParameterFactory>(), "Operation", OperandQuantifier.Default), new(new IdRef(), "X", OperandQuantifier.Default), }) {
         }
     }
     public class OpFragmentMaskFetchAMD : Instruction {
-        public OpFragmentMaskFetchAMD() : base("OpFragmentMaskFetchAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), }) {
+        public OpFragmentMaskFetchAMD() : base("OpFragmentMaskFetchAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), }) {
         }
     }
     public class OpFragmentFetchAMD : Instruction {
-        public OpFragmentFetchAMD() : base("OpFragmentFetchAMD", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "Fragment Index", OperandQuantifier.Default), }) {
+        public OpFragmentFetchAMD() : base("OpFragmentFetchAMD", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "Fragment Index", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupShuffleINTEL : Instruction {
-        public OpSubgroupShuffleINTEL() : base("OpSubgroupShuffleINTEL", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Data", OperandQuantifier.Default), new Operand(new IdRef(), "InvocationId", OperandQuantifier.Default), }) {
+        public OpSubgroupShuffleINTEL() : base("OpSubgroupShuffleINTEL", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Data", OperandQuantifier.Default), new(new IdRef(), "InvocationId", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupShuffleDownINTEL : Instruction {
-        public OpSubgroupShuffleDownINTEL() : base("OpSubgroupShuffleDownINTEL", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Current", OperandQuantifier.Default), new Operand(new IdRef(), "Next", OperandQuantifier.Default), new Operand(new IdRef(), "Delta", OperandQuantifier.Default), }) {
+        public OpSubgroupShuffleDownINTEL() : base("OpSubgroupShuffleDownINTEL", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Current", OperandQuantifier.Default), new(new IdRef(), "Next", OperandQuantifier.Default), new(new IdRef(), "Delta", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupShuffleUpINTEL : Instruction {
-        public OpSubgroupShuffleUpINTEL() : base("OpSubgroupShuffleUpINTEL", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Previous", OperandQuantifier.Default), new Operand(new IdRef(), "Current", OperandQuantifier.Default), new Operand(new IdRef(), "Delta", OperandQuantifier.Default), }) {
+        public OpSubgroupShuffleUpINTEL() : base("OpSubgroupShuffleUpINTEL", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Previous", OperandQuantifier.Default), new(new IdRef(), "Current", OperandQuantifier.Default), new(new IdRef(), "Delta", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupShuffleXorINTEL : Instruction {
-        public OpSubgroupShuffleXorINTEL() : base("OpSubgroupShuffleXorINTEL", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Data", OperandQuantifier.Default), new Operand(new IdRef(), "Value", OperandQuantifier.Default), }) {
+        public OpSubgroupShuffleXorINTEL() : base("OpSubgroupShuffleXorINTEL", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Data", OperandQuantifier.Default), new(new IdRef(), "Value", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupBlockReadINTEL : Instruction {
-        public OpSubgroupBlockReadINTEL() : base("OpSubgroupBlockReadINTEL", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Ptr", OperandQuantifier.Default), }) {
+        public OpSubgroupBlockReadINTEL() : base("OpSubgroupBlockReadINTEL", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Ptr", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupBlockWriteINTEL : Instruction {
-        public OpSubgroupBlockWriteINTEL() : base("OpSubgroupBlockWriteINTEL", new List<Operand>()
-    {new Operand(new IdRef(), "Ptr", OperandQuantifier.Default), new Operand(new IdRef(), "Data", OperandQuantifier.Default), }) {
+        public OpSubgroupBlockWriteINTEL() : base("OpSubgroupBlockWriteINTEL", new List<Operand> {new(new IdRef(), "Ptr", OperandQuantifier.Default), new(new IdRef(), "Data", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupImageBlockReadINTEL : Instruction {
-        public OpSubgroupImageBlockReadINTEL() : base("OpSubgroupImageBlockReadINTEL", new List<Operand>()
-    {new Operand(new IdResultType(), null, OperandQuantifier.Default), new Operand(new IdResult(), null, OperandQuantifier.Default), new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), }) {
+        public OpSubgroupImageBlockReadINTEL() : base("OpSubgroupImageBlockReadINTEL", new List<Operand> {new(new IdResultType(), null, OperandQuantifier.Default), new(new IdResult(), null, OperandQuantifier.Default), new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), }) {
         }
     }
     public class OpSubgroupImageBlockWriteINTEL : Instruction {
-        public OpSubgroupImageBlockWriteINTEL() : base("OpSubgroupImageBlockWriteINTEL", new List<Operand>()
-    {new Operand(new IdRef(), "Image", OperandQuantifier.Default), new Operand(new IdRef(), "Coordinate", OperandQuantifier.Default), new Operand(new IdRef(), "Data", OperandQuantifier.Default), }) {
+        public OpSubgroupImageBlockWriteINTEL() : base("OpSubgroupImageBlockWriteINTEL", new List<Operand> {new(new IdRef(), "Image", OperandQuantifier.Default), new(new IdRef(), "Coordinate", OperandQuantifier.Default), new(new IdRef(), "Data", OperandQuantifier.Default), }) {
         }
     }
     public static class Instructions {

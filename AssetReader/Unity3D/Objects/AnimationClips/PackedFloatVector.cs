@@ -1,7 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
+    using System;
     using System.Collections.Generic;
     using Utils;
-    using System;
 
     public class PackedFloatVector {
         public uint m_NumItems;

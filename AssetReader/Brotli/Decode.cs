@@ -4,6 +4,8 @@ Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
 namespace SoarCraft.QYun.AssetReader.Brotli {
+    using System;
+
     /// <summary>API for Brotli decompression.</summary>
     internal sealed class Decode {
         private const int DefaultCodeLength = 8;
@@ -22,22 +24,20 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
 
         private const int HuffmanTableBits = 8;
 
-        private const int HuffmanTableMask = unchecked(0xFF);
+        private const int HuffmanTableMask = 0xFF;
 
         private const int CodeLengthCodes = 18;
 
-        private static readonly int[] CodeLengthCodeOrder = new int[] { 1, 2, 3, 4, 0, 5, 17, 6, 16, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+        private static readonly int[] CodeLengthCodeOrder = { 1, 2, 3, 4, 0, 5, 17, 6, 16, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 
         private const int NumDistanceShortCodes = 16;
 
-        private static readonly int[] DistanceShortCodeIndexOffset = new int[] { 3, 2, 1, 0, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
+        private static readonly int[] DistanceShortCodeIndexOffset = { 3, 2, 1, 0, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2 };
 
-        private static readonly int[] DistanceShortCodeValueOffset = new int[] { 0, 0, 0, 0, -1, 1, -2, 2, -3, 3, -1, 1, -2, 2, -3, 3 };
+        private static readonly int[] DistanceShortCodeValueOffset = { 0, 0, 0, 0, -1, 1, -2, 2, -3, 3, -1, 1, -2, 2, -3, 3 };
 
         /// <summary>Static Huffman code for the code length code lengths.</summary>
-        private static readonly int[] FixedTable = new int[] { unchecked(0x020000), unchecked(0x020004), unchecked(0x020003), unchecked(0x030002), unchecked(0x020000), unchecked(0x020004), unchecked(0x020003
-            ), unchecked(0x040001), unchecked(0x020000), unchecked(0x020004), unchecked(0x020003), unchecked(0x030002), unchecked(0x020000), unchecked(0x020004), unchecked(0x020003), unchecked(
-            0x040005) };
+        private static readonly int[] FixedTable = { 0x020000, 0x020004, 0x020003, 0x030002, 0x020000, 0x020004, 0x020003, 0x040001, 0x020000, 0x020004, 0x020003, 0x030002, 0x020000, 0x020004, 0x020003, 0x040005 };
 
         /// <summary>Decodes a number in the range [0..255], by reading 1 - 11 bits.</summary>
         private static int DecodeVarLenUnsignedByte(BitReader br) {
@@ -97,7 +97,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             var val = (int)(long)((ulong)br.accumulator >> br.bitOffset);
             offset += val & HuffmanTableMask;
             var bits = table[offset] >> 16;
-            var sym = table[offset] & unchecked(0xFFFF);
+            var sym = table[offset] & 0xFFFF;
             if (bits <= HuffmanTableBits) {
                 br.bitOffset += bits;
                 return sym;
@@ -106,7 +106,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             var mask = (1 << bits) - 1;
             offset += (int)((uint)(val & mask) >> HuffmanTableBits);
             br.bitOffset += (table[offset] >> 16) + HuffmanTableBits;
-            return table[offset] & unchecked(0xFFFF);
+            return table[offset] & 0xFFFF;
         }
 
         private static int ReadBlockLength(int[] table, int offset, BitReader br) {
@@ -139,7 +139,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                 mtf[i] = i;
             }
             for (var i = 0; i < vLen; i++) {
-                var index = v[i] & unchecked(0xFF);
+                var index = v[i] & 0xFF;
                 v[i] = unchecked((byte)mtf[index]);
                 if (index != 0) {
                     MoveToFront(mtf, index);
@@ -160,7 +160,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                 BitReader.FillBitWindow(br);
                 var p = (int)(long)((ulong)br.accumulator >> br.bitOffset) & 31;
                 br.bitOffset += table[p] >> 16;
-                var codeLen = table[p] & unchecked(0xFFFF);
+                var codeLen = table[p] & 0xFFFF;
                 if (codeLen < CodeLengthRepeatCode) {
                     repeat = 0;
                     codeLengths[symbol++] = codeLen;
@@ -269,7 +269,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                     var p = (int)(long)((ulong)br.accumulator >> br.bitOffset) & 15;
                     // TODO: Demultiplex FIXED_TABLE.
                     br.bitOffset += FixedTable[p] >> 16;
-                    var v = FixedTable[p] & unchecked(0xFFFF);
+                    var v = FixedTable[p] & 0xFFFF;
                     codeLengthCodeLengths[codeLenIdx] = v;
                     if (v != 0) {
                         space -= 32 >> v;
@@ -354,7 +354,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             DecodeBlockTypeAndLength(state, 0);
             var literalBlockType = state.blockTypeRb[1];
             state.contextMapSlice = literalBlockType << LiteralContextBits;
-            state.literalTreeIndex = state.contextMap[state.contextMapSlice] & unchecked(0xFF);
+            state.literalTreeIndex = state.contextMap[state.contextMapSlice] & 0xFF;
             state.literalTree = state.hGroup0.trees[state.literalTreeIndex];
             int contextMode = state.contextModes[literalBlockType];
             state.contextLookupOffset1 = Context.LookupOffsets[contextMode];
@@ -389,7 +389,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             var ringBufferSizeWithSlack = newSize + Dictionary.MaxTransformedWordLength;
             var newBuffer = new byte[ringBufferSizeWithSlack];
             if (state.ringBuffer != null) {
-                System.Array.Copy(state.ringBuffer, 0, newBuffer, 0, state.ringBufferSize);
+                Array.Copy(state.ringBuffer, 0, newBuffer, 0, state.ringBufferSize);
             } else if (state.customDictionary.Length != 0) {
                 /* Prepend custom dictionary, if any. */
                 var length = state.customDictionary.Length;
@@ -398,7 +398,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                     offset = length - state.maxBackwardDistance;
                     length = state.maxBackwardDistance;
                 }
-                System.Array.Copy(state.customDictionary, offset, newBuffer, 0, length);
+                Array.Copy(state.customDictionary, offset, newBuffer, 0, length);
                 state.pos = length;
                 state.bytesToIgnore = length;
             }
@@ -464,7 +464,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             state.contextModes = new byte[state.numBlockTypes[0]];
             for (var i = 0; i < state.numBlockTypes[0];) {
                 /* Ensure that less than 256 bits read between readMoreInput. */
-                var limit = System.Math.Min(i + 96, state.numBlockTypes[0]);
+                var limit = Math.Min(i + 96, state.numBlockTypes[0]);
                 for (; i < limit; ++i) {
                     state.contextModes[i] = unchecked((byte)(BitReader.ReadBits(br, 2) << 1));
                 }
@@ -510,7 +510,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                 state.runningState = RunningState.BlockStart;
                 return;
             }
-            var chunkLength = System.Math.Min(state.ringBufferSize - state.pos, state.metaBlockLength);
+            var chunkLength = Math.Min(state.ringBufferSize - state.pos, state.metaBlockLength);
             BitReader.CopyBytes(br, ringBuffer, state.pos, chunkLength);
             state.metaBlockLength -= chunkLength;
             state.pos += chunkLength;
@@ -531,9 +531,9 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                 state.bytesWritten += state.bytesToIgnore;
                 state.bytesToIgnore = 0;
             }
-            var toWrite = System.Math.Min(state.outputLength - state.outputUsed, state.bytesToWrite - state.bytesWritten);
+            var toWrite = Math.Min(state.outputLength - state.outputUsed, state.bytesToWrite - state.bytesWritten);
             if (toWrite != 0) {
-                System.Array.Copy(state.ringBuffer, state.bytesWritten, state.output, state.outputOffset + state.outputUsed, toWrite);
+                Array.Copy(state.ringBuffer, state.bytesWritten, state.output, state.outputOffset + state.outputUsed, toWrite);
                 state.outputUsed += toWrite;
                 state.bytesWritten += toWrite;
             }
@@ -547,10 +547,10 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// <summary>Actual decompress implementation.</summary>
         internal static void Decompress(State state) {
             if (state.runningState == RunningState.Uninitialized) {
-                throw new System.InvalidOperationException("Can't decompress until initialized");
+                throw new InvalidOperationException("Can't decompress until initialized");
             }
             if (state.runningState == RunningState.Closed) {
-                throw new System.InvalidOperationException("Can't decompress after close");
+                throw new InvalidOperationException("Can't decompress after close");
             }
             var br = state.br;
             var ringBufferMask = state.ringBufferSize - 1;
@@ -624,14 +624,14 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                                 }
                             }
                         } else {
-                            var prevByte1 = ringBuffer[(state.pos - 1) & ringBufferMask] & unchecked(0xFF);
-                            var prevByte2 = ringBuffer[(state.pos - 2) & ringBufferMask] & unchecked(0xFF);
+                            var prevByte1 = ringBuffer[(state.pos - 1) & ringBufferMask] & 0xFF;
+                            var prevByte2 = ringBuffer[(state.pos - 2) & ringBufferMask] & 0xFF;
                             while (state.j < state.insertLength) {
                                 BitReader.ReadMoreInput(br);
                                 if (state.blockLength[0] == 0) {
                                     DecodeLiteralBlockSwitch(state);
                                 }
-                                var literalTreeIndex = state.contextMap[state.contextMapSlice + (Context.Lookup[state.contextLookupOffset1 + prevByte1] | Context.Lookup[state.contextLookupOffset2 + prevByte2])] & unchecked(0xFF);
+                                var literalTreeIndex = state.contextMap[state.contextMapSlice + (Context.Lookup[state.contextLookupOffset1 + prevByte1] | Context.Lookup[state.contextLookupOffset2 + prevByte2])] & 0xFF;
                                 state.blockLength[0]--;
                                 prevByte2 = prevByte1;
                                 BitReader.FillBitWindow(br);
@@ -662,7 +662,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                             }
                             state.blockLength[2]--;
                             BitReader.FillBitWindow(br);
-                            state.distanceCode = ReadSymbol(state.hGroup2.codes, state.hGroup2.trees[state.distContextMap[state.distContextMapSlice + (state.copyLength > 4 ? 3 : state.copyLength - 2)] & unchecked(0xFF)], br);
+                            state.distanceCode = ReadSymbol(state.hGroup2.codes, state.hGroup2.trees[state.distContextMap[state.distContextMapSlice + (state.copyLength > 4 ? 3 : state.copyLength - 2)] & 0xFF], br);
                             if (state.distanceCode >= state.numDirectDistanceCodes) {
                                 state.distanceCode -= state.numDirectDistanceCodes;
                                 var postfix = state.distanceCode & state.distancePostfixMask;
@@ -768,7 +768,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                     }
 
                     case RunningState.CopyWrapBuffer: {
-                        System.Array.Copy(ringBuffer, state.ringBufferSize, ringBuffer, 0, state.copyDst - state.ringBufferSize);
+                        Array.Copy(ringBuffer, state.ringBufferSize, ringBuffer, 0, state.copyDst - state.ringBufferSize);
                         state.runningState = RunningState.MainLoop;
                         continue;
                     }

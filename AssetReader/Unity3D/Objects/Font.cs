@@ -1,7 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
     using Contracts;
-    using Utils;
     using Materials;
+    using Utils;
 
     public sealed class Font : NamedObject {
         public byte[] m_FontData;

@@ -5,6 +5,7 @@ See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
 namespace SoarCraft.QYun.AssetReader.Brotli {
     using System;
+    using System.IO;
 
     /// <summary>Bit reading helpers.</summary>
     internal sealed class BitReader {
@@ -28,7 +29,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
 
         private readonly IntReader intReader = new();
 
-        private System.IO.Stream input;
+        private Stream input;
 
         /// <summary>Input stream is finished.</summary>
         private bool endOfStreamReached;
@@ -42,7 +43,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// <summary>Offset of next item in intBuffer.</summary>
         private int intOffset;
 
-        private int tailBytes = 0;
+        private int tailBytes;
 
         /* Number of bytes in unfinished "int" item. */
         /// <summary>Fills up the input buffer.</summary>
@@ -79,7 +80,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                     }
                     bytesRead += len;
                 }
-            } catch (System.IO.IOException e) {
+            } catch (IOException e) {
                 throw new BrotliRuntimeException("Failed to read input", e);
             }
             IntReader.Convert(br.intReader, bytesRead >> 2);
@@ -122,7 +123,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// </remarks>
         /// <param name="br">BitReader POJO</param>
         /// <param name="input">data source</param>
-        internal static void Init(BitReader br, System.IO.Stream input) {
+        internal static void Init(BitReader br, Stream input) {
             if (br.input != null) {
                 throw new InvalidOperationException("Bit reader already has associated input stream");
             }
@@ -222,7 +223,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                     offset += len;
                     length -= len;
                 }
-            } catch (System.IO.IOException e) {
+            } catch (IOException e) {
                 throw new BrotliRuntimeException("Failed to read input", e);
             }
         }

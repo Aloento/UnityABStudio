@@ -1,6 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Helpers {
     using System.IO;
-    using _7zip.Compress.LZMA;
+    using SevenZip.Compress.LZMA;
 
     public static class SevenZipHelper {
         public static MemoryStream StreamDecompress(MemoryStream inStream) {

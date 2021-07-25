@@ -5,6 +5,7 @@ namespace SoarCraft.QYun.AssetReader {
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
     using Entities.Enums;
     using Unity3D;
     using Unity3D.Objects;
@@ -16,13 +17,12 @@ namespace SoarCraft.QYun.AssetReader {
     using Unity3D.Objects.Materials;
     using Unity3D.Objects.Meshes;
     using Unity3D.Objects.Shaders;
-    using Unity3D.Objects.Sprites;
     using Unity3D.Objects.SpriteAtlases;
+    using Unity3D.Objects.Sprites;
     using Unity3D.Objects.Texture2Ds;
     using Unity3D.Objects.VideoClips;
     using Utils;
     using static Helpers.ImportHelper;
-    using System.Threading.Tasks;
 
     public class AssetsManager {
         public string SpecifyUnityVersion;

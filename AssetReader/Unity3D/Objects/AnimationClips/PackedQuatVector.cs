@@ -1,7 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
+    using System;
     using Math;
     using Utils;
-    using System;
 
     public class PackedQuatVector {
         public uint m_NumItems;

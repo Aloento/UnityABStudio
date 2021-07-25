@@ -56,7 +56,7 @@ namespace SoarCraft.QYun.AssetReader {
             var levelCount = reader.ReadInt32();
             m_BlocksInfo = new StorageBlock[1];
             for (var i = 0; i < levelCount; i++) {
-                var storageBlock = new StorageBlock() {
+                var storageBlock = new StorageBlock {
                     compressedSize = reader.ReadUInt32(),
                     uncompressedSize = reader.ReadUInt32(),
                     flags = (ushort)(isCompressed ? 1 : 0)

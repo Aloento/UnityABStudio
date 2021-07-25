@@ -1,7 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
     using Contracts;
-    using Utils;
     using Math;
+    using Utils;
 
     public class Transform : Component {
         public Quaternion m_LocalRotation;

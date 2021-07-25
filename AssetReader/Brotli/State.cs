@@ -4,6 +4,9 @@ Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
 namespace SoarCraft.QYun.AssetReader.Brotli {
+    using System;
+    using System.IO;
+
     internal sealed class State {
         internal int runningState = RunningState.Uninitialized;
 
@@ -37,7 +40,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
 
         internal readonly int[] blockTypeRb = new int[6];
 
-        internal readonly int[] distRb = new int[] { 16, 15, 11, 4 };
+        internal readonly int[] distRb = { 16, 15, 11, 4 };
 
         internal int pos = 0;
 
@@ -129,9 +132,9 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// <summary>Associate input with decoder state.</summary>
         /// <param name="state">uninitialized state without associated input</param>
         /// <param name="input">compressed data source</param>
-        internal static void SetInput(State state, System.IO.Stream input) {
+        internal static void SetInput(State state, Stream input) {
             if (state.runningState != RunningState.Uninitialized) {
-                throw new System.InvalidOperationException("State MUST be uninitialized");
+                throw new InvalidOperationException("State MUST be uninitialized");
             }
             BitReader.Init(state.br, input);
             var windowBits = DecodeWindowBits(state.br);
@@ -147,7 +150,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// <exception cref="System.IO.IOException"/>
         internal static void Close(State state) {
             if (state.runningState == RunningState.Uninitialized) {
-                throw new System.InvalidOperationException("State MUST be initialized");
+                throw new InvalidOperationException("State MUST be initialized");
             }
             if (state.runningState == RunningState.Closed) {
                 return;

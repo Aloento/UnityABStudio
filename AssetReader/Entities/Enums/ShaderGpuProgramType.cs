@@ -32,5 +32,5 @@ namespace SoarCraft.QYun.AssetReader.Entities.Enums {
         kShaderGpuProgramConsoleDS = 29,
         kShaderGpuProgramConsoleGS = 30,
         kShaderGpuProgramRayTracing = 31,
-    };
+    }
 }

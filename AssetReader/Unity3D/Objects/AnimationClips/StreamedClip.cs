@@ -1,9 +1,9 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
-    using Utils;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using Utils;
 
     public class StreamedClip {
         public uint[] data;

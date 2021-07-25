@@ -120,13 +120,14 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
             }
 
             // Read header
-            var header = new ModuleHeader();
-            header.Version = version;
-            header.GeneratorName = generatorName;
-            header.GeneratorVendor = generatorVendor;
-            header.GeneratorVersion = (int)(generatorMagicNumber & 0xFFFF);
-            header.Bound = reader.ReadDWord();
-            header.Reserved = reader.ReadDWord();
+            var header = new ModuleHeader {
+                Version = version,
+                GeneratorName = generatorName,
+                GeneratorVendor = generatorVendor,
+                GeneratorVersion = (int)(generatorMagicNumber & 0xFFFF),
+                Bound = reader.ReadDWord(),
+                Reserved = reader.ReadDWord()
+            };
 
             var instructions = new List<ParsedInstruction>();
             while (!reader.EndOfStream) {
@@ -207,7 +208,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
                 break;
 
                 case OpTypeRuntimeArray t: {
-                    i.ResultType = new RuntimeArrayType((Type)objects[i.Words[2]].ResultType);
+                    i.ResultType = new RuntimeArrayType(objects[i.Words[2]].ResultType);
                 }
                 break;
 

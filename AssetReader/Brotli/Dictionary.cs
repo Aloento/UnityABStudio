@@ -4,6 +4,8 @@ Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
 namespace SoarCraft.QYun.AssetReader.Brotli {
+    using System;
+
     /// <summary>Collection of static dictionary words.</summary>
     /// <remarks>
     /// Collection of static dictionary words.
@@ -48,13 +50,13 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
 
             static DataHolder() {
                 Data = new byte[122784];
-                var chunks = new string[] { DataHolder0.GetData(), DataHolder1.GetData(), DataHolder2.GetData() };
+                var chunks = new[] { DataHolder0.GetData(), DataHolder1.GetData(), DataHolder2.GetData() };
                 var sum = 0;
                 foreach (var chunk in chunks) {
                     sum += chunk.Length;
                 }
                 if (sum != Data.Length) {
-                    throw new System.Exception("Corrupted brotli dictionary");
+                    throw new Exception("Corrupted brotli dictionary");
                 }
                 sum = 0;
                 foreach (var chunk in chunks) {
@@ -69,9 +71,9 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             return DataHolder.Data;
         }
 
-        internal static readonly int[] OffsetsByLength = new int[] { 0, 0, 0, 0, 0, 4096, 9216, 21504, 35840, 44032, 53248, 63488, 74752, 87040, 93696, 100864, 104704, 106752, 108928, 113536, 115968, 118528, 119872, 121280, 122016 };
+        internal static readonly int[] OffsetsByLength = { 0, 0, 0, 0, 0, 4096, 9216, 21504, 35840, 44032, 53248, 63488, 74752, 87040, 93696, 100864, 104704, 106752, 108928, 113536, 115968, 118528, 119872, 121280, 122016 };
 
-        internal static readonly int[] SizeBitsByLength = new int[] { 0, 0, 0, 0, 10, 10, 11, 11, 10, 10, 10, 10, 10, 9, 9, 8, 7, 7, 8, 7, 7, 6, 6, 5, 5 };
+        internal static readonly int[] SizeBitsByLength = { 0, 0, 0, 0, 10, 10, 11, 11, 10, 10, 10, 10, 10, 9, 9, 8, 7, 7, 8, 7, 7, 6, 6, 5, 5 };
 
         internal const int MinWordLength = 4;
 

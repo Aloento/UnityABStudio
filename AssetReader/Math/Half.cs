@@ -171,7 +171,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
         /// <param name="half1">A System.Half.</param>
         /// <param name="half2">A System.Half.</param>
         /// <returns>The System.Half result of adding half1 and half2.</returns>
-        public static Half operator +(Half half1, Half half2) => (Half)((float)half1 + (float)half2);
+        public static Half operator +(Half half1, Half half2) => (Half)(half1 + (float)half2);
 
         /// <summary>
         /// Subtracts two specified System.Half values.
@@ -179,7 +179,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
         /// <param name="half1">A System.Half.</param>
         /// <param name="half2">A System.Half.</param>
         /// <returns>The System.Half result of subtracting half1 and half2.</returns>        
-        public static Half operator -(Half half1, Half half2) => (Half)((float)half1 - (float)half2);
+        public static Half operator -(Half half1, Half half2) => (Half)(half1 - (float)half2);
 
         /// <summary>
         /// Multiplies two specified System.Half values.
@@ -187,7 +187,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
         /// <param name="half1">A System.Half.</param>
         /// <param name="half2">A System.Half.</param>
         /// <returns>The System.Half result of multiplying half1 by half2.</returns>
-        public static Half operator *(Half half1, Half half2) => (Half)((float)half1 * (float)half2);
+        public static Half operator *(Half half1, Half half2) => (Half)(half1 * (float)half2);
 
         /// <summary>
         /// Divides two specified System.Half values.
@@ -195,7 +195,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
         /// <param name="half1">A System.Half (the dividend).</param>
         /// <param name="half2">A System.Half (the divisor).</param>
         /// <returns>The System.Half result of half1 by half2.</returns>
-        public static Half operator /(Half half1, Half half2) => (Half)((float)half1 / (float)half2);
+        public static Half operator /(Half half1, Half half2) => (Half)(half1 / (float)half2);
 
         /// <summary>
         /// Returns a value indicating whether two instances of System.Half are equal.
@@ -219,7 +219,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
         /// <param name="half1">A System.Half.</param>
         /// <param name="half2">A System.Half.</param>
         /// <returns>true if half1 is less than half1; otherwise, false.</returns>
-        public static bool operator <(Half half1, Half half2) => (float)half1 < (float)half2;
+        public static bool operator <(Half half1, Half half2) => half1 < (float)half2;
 
         /// <summary>
         /// Returns a value indicating whether a specified System.Half is greater than another specified System.Half.
@@ -227,7 +227,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
         /// <param name="half1">A System.Half.</param>
         /// <param name="half2">A System.Half.</param>
         /// <returns>true if half1 is greater than half2; otherwise, false.</returns>
-        public static bool operator >(Half half1, Half half2) => (float)half1 > (float)half2;
+        public static bool operator >(Half half1, Half half2) => half1 > (float)half2;
 
         /// <summary>
         /// Returns a value indicating whether a specified System.Half is less than or equal to another specified System.Half.
@@ -288,7 +288,7 @@ namespace SoarCraft.QYun.AssetReader.Math {
         /// </summary>
         /// <param name="value">A single-precision floating-point number.</param>
         /// <returns>A System.Half that represents the converted single-precision floating point number.</returns>
-        public static explicit operator Half(float value) => new((float)value);
+        public static explicit operator Half(float value) => new(value);
 
         /// <summary>
         /// Converts a double-precision floating-point number to a System.Half.
@@ -344,14 +344,14 @@ namespace SoarCraft.QYun.AssetReader.Math {
         /// </summary>
         /// <param name="value">A System.Half to convert.</param>
         /// <returns>A single-precision floating-point number that represents the converted System.Half.</returns>
-        public static implicit operator float(Half value) => (float)HalfHelper.HalfToSingle(value);
+        public static implicit operator float(Half value) => HalfHelper.HalfToSingle(value);
 
         /// <summary>
         /// Converts a System.Half to a double-precision floating-point number.
         /// </summary>
         /// <param name="value">A System.Half to convert.</param>
         /// <returns>A double-precision floating-point number that represents the converted System.Half.</returns>
-        public static implicit operator double(Half value) => (double)(float)value;
+        public static implicit operator double(Half value) => (float)value;
 
         /// <summary>
         /// Converts a System.Half to a decimal number.
@@ -553,12 +553,14 @@ namespace SoarCraft.QYun.AssetReader.Math {
         public static int Sign(Half value) {
             if (value < 0) {
                 return -1;
-            } else if (value > 0) {
+            }
+
+            if (value > 0) {
                 return 1;
-            } else {
-                if (value != 0) {
-                    throw new ArithmeticException("Function does not accept floating point Not-a-Number values.");
-                }
+            }
+
+            if (value != 0) {
+                throw new ArithmeticException("Function does not accept floating point Not-a-Number values.");
             }
 
             return 0;
@@ -777,39 +779,39 @@ namespace SoarCraft.QYun.AssetReader.Math {
         #endregion
 
         #region IConvertible Members
-        float IConvertible.ToSingle(IFormatProvider provider) => (float)this;
+        float IConvertible.ToSingle(IFormatProvider provider) => this;
 
         TypeCode IConvertible.GetTypeCode() => this.GetTypeCode();
 
-        bool IConvertible.ToBoolean(IFormatProvider provider) => Convert.ToBoolean((float)this);
+        bool IConvertible.ToBoolean(IFormatProvider provider) => Convert.ToBoolean(this);
 
-        byte IConvertible.ToByte(IFormatProvider provider) => Convert.ToByte((float)this);
+        byte IConvertible.ToByte(IFormatProvider provider) => Convert.ToByte(this);
 
         char IConvertible.ToChar(IFormatProvider provider) => throw new InvalidCastException(string.Format(CultureInfo.CurrentCulture, "Invalid cast from '{0}' to '{1}'.", "Half", "Char"));
 
         DateTime IConvertible.ToDateTime(IFormatProvider provider) => throw new InvalidCastException(string.Format(CultureInfo.CurrentCulture, "Invalid cast from '{0}' to '{1}'.", "Half", "DateTime"));
 
-        decimal IConvertible.ToDecimal(IFormatProvider provider) => Convert.ToDecimal((float)this);
+        decimal IConvertible.ToDecimal(IFormatProvider provider) => Convert.ToDecimal(this);
 
-        double IConvertible.ToDouble(IFormatProvider provider) => Convert.ToDouble((float)this);
+        double IConvertible.ToDouble(IFormatProvider provider) => Convert.ToDouble(this);
 
-        short IConvertible.ToInt16(IFormatProvider provider) => Convert.ToInt16((float)this);
+        short IConvertible.ToInt16(IFormatProvider provider) => Convert.ToInt16(this);
 
-        int IConvertible.ToInt32(IFormatProvider provider) => Convert.ToInt32((float)this);
+        int IConvertible.ToInt32(IFormatProvider provider) => Convert.ToInt32(this);
 
-        long IConvertible.ToInt64(IFormatProvider provider) => Convert.ToInt64((float)this);
+        long IConvertible.ToInt64(IFormatProvider provider) => Convert.ToInt64(this);
 
-        sbyte IConvertible.ToSByte(IFormatProvider provider) => Convert.ToSByte((float)this);
+        sbyte IConvertible.ToSByte(IFormatProvider provider) => Convert.ToSByte(this);
 
-        string IConvertible.ToString(IFormatProvider provider) => Convert.ToString((float)this, CultureInfo.InvariantCulture);
+        string IConvertible.ToString(IFormatProvider provider) => Convert.ToString(this, CultureInfo.InvariantCulture);
 
         object IConvertible.ToType(Type conversionType, IFormatProvider provider) => ((float)this as IConvertible).ToType(conversionType, provider);
 
-        ushort IConvertible.ToUInt16(IFormatProvider provider) => Convert.ToUInt16((float)this);
+        ushort IConvertible.ToUInt16(IFormatProvider provider) => Convert.ToUInt16(this);
 
-        uint IConvertible.ToUInt32(IFormatProvider provider) => Convert.ToUInt32((float)this);
+        uint IConvertible.ToUInt32(IFormatProvider provider) => Convert.ToUInt32(this);
 
-        ulong IConvertible.ToUInt64(IFormatProvider provider) => Convert.ToUInt64((float)this);
+        ulong IConvertible.ToUInt64(IFormatProvider provider) => Convert.ToUInt64(this);
 
         #endregion
     }

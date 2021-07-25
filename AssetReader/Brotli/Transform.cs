@@ -26,7 +26,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             return result;
         }
 
-        internal static readonly Transform[] Transforms = new Transform[] { new(string.Empty, WordTransformType.Identity, string.Empty), new(string.Empty,
+        internal static readonly Transform[] Transforms = { new(string.Empty, WordTransformType.Identity, string.Empty), new(string.Empty,
             WordTransformType.Identity, " "), new(" ", WordTransformType.Identity, " "), new(string.Empty, WordTransformType.OmitFirst1, string.Empty), new(string.Empty, WordTransformType.UppercaseFirst, " "), new(string.Empty, WordTransformType.Identity, " the "), new(" ", WordTransformType.Identity
             , string.Empty), new("s ", WordTransformType.Identity, " "), new(string.Empty, WordTransformType.Identity, " of "), new(string.Empty, WordTransformType
             .UppercaseFirst, string.Empty), new(string.Empty, WordTransformType.Identity, " and "), new(string.Empty, WordTransformType.OmitFirst2, string.Empty), new(string.Empty, WordTransformType.OmitLast1, string.Empty), new(", ", WordTransformType.Identity, " "), new(string.Empty, WordTransformType.Identity
@@ -91,19 +91,19 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                     len = 1;
                 }
                 while (len > 0) {
-                    tmp = dst[uppercaseOffset] & unchecked(0xFF);
-                    if (tmp < unchecked(0xc0)) {
+                    tmp = dst[uppercaseOffset] & 0xFF;
+                    if (tmp < 0xc0) {
                         if (tmp >= 'a' && tmp <= 'z') {
-                            dst[uppercaseOffset] ^= unchecked(32);
+                            dst[uppercaseOffset] ^= 32;
                         }
                         uppercaseOffset += 1;
                         len -= 1;
-                    } else if (tmp < unchecked(0xe0)) {
-                        dst[uppercaseOffset + 1] ^= unchecked(32);
+                    } else if (tmp < 0xe0) {
+                        dst[uppercaseOffset + 1] ^= 32;
                         uppercaseOffset += 2;
                         len -= 2;
                     } else {
-                        dst[uppercaseOffset + 2] ^= unchecked(5);
+                        dst[uppercaseOffset + 2] ^= 5;
                         uppercaseOffset += 3;
                         len -= 3;
                     }

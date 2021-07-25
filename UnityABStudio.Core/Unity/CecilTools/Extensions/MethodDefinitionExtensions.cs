@@ -10,7 +10,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.CecilTools.Extensions {
             // FIXME: should be able to compare MethodDefinition references directly
             self.FullName == other.FullName;
 
-        public static string PropertyName(this MethodDefinition self) => self.Name.Substring(4);
+        public static string PropertyName(this MethodDefinition self) => self.Name[4..];
 
         public static bool IsConversionOperator(this MethodDefinition method) {
             if (!method.IsSpecialName)

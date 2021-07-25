@@ -108,7 +108,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Unity.SpirV {
 
     public class EnumType<T> : EnumType<T, ParameterFactory>
         where T : Enum {
-    };
+    }
 
     public class EnumType<T, U> : OperandType
         where T : Enum

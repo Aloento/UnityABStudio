@@ -42,5 +42,22 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             }
             return m_Type;
         }
+
+        private static void ExportFbx(IImported convert, string exportPath) {
+            var eulerFilter = settings.EulerFilter;
+            var filterPrecision = (float)settings.FilterPrecision;
+            var exportAllNodes = settings.ExportAllNodes;
+            var exportSkins = settings.ExportSkins;
+            var exportAnimations = settings.ExportAnimations;
+            var exportBlendShape = settings.ExportBlendShape;
+            var castToBone = settings.CastToBone;
+            var boneSize = (int)settings.BoneSize;
+            var exportAllUvsAsDiffuseMaps = settings.ExportAllUvsAsDiffuseMaps;
+            var scaleFactor = (float)settings.ScaleFactor;
+            var fbxVersion = settings.FbxVersion;
+            var fbxFormat = settings.FbxFormat;
+            ModelExporter.ExportFbx(exportPath, convert, eulerFilter, filterPrecision,
+                exportAllNodes, exportSkins, exportAnimations, exportBlendShape, castToBone, boneSize, exportAllUvsAsDiffuseMaps, scaleFactor, fbxVersion, fbxFormat == 1);
+        }
     }
 }

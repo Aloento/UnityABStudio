@@ -1,8 +1,8 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
-    using Utils;
+    using System;
     using Entities.Enums;
     using Entities.Structs;
-    using System;
+    using Utils;
 
     public sealed class PPtr<T> where T : UObject {
         public int m_FileID;

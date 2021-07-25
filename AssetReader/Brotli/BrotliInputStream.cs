@@ -4,12 +4,15 @@ Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
 namespace SoarCraft.QYun.AssetReader.Brotli {
+    using System;
+    using System.IO;
+
     /// <summary>
     /// <see cref="System.IO.Stream"/>
     /// decorator that decompresses brotli data.
     /// <p> Not thread-safe.
     /// </summary>
-    public class BrotliInputStream : System.IO.Stream {
+    public class BrotliInputStream : Stream {
         public const int DefaultInternalBufferSize = 16384;
 
         /// <summary>Internal buffer used for efficient byte-by-byte reading.</summary>
@@ -37,7 +40,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// </summary>
         /// <param name="source">underlying data source</param>
         /// <exception cref="System.IO.IOException">in case of corrupted data or source stream problems</exception>
-        public BrotliInputStream(System.IO.Stream source)
+        public BrotliInputStream(Stream source)
             : this(source, DefaultInternalBufferSize, null) {
         }
 
@@ -57,7 +60,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// byte-by-byte reading
         /// </param>
         /// <exception cref="System.IO.IOException">in case of corrupted data or source stream problems</exception>
-        public BrotliInputStream(System.IO.Stream source, int byteReadBufferSize)
+        public BrotliInputStream(Stream source, int byteReadBufferSize)
             : this(source, byteReadBufferSize, null) {
         }
 
@@ -82,13 +85,13 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         /// if not used
         /// </param>
         /// <exception cref="System.IO.IOException">in case of corrupted data or source stream problems</exception>
-        public BrotliInputStream(System.IO.Stream source, int byteReadBufferSize, byte[] customDictionary) {
+        public BrotliInputStream(Stream source, int byteReadBufferSize, byte[] customDictionary) {
             if (byteReadBufferSize <= 0) {
-                throw new System.ArgumentException("Bad buffer size:" + byteReadBufferSize);
+                throw new ArgumentException("Bad buffer size:" + byteReadBufferSize);
             }
 
             if (source == null) {
-                throw new System.ArgumentException("source is null");
+                throw new ArgumentException("source is null");
             }
             this.buffer = new byte[byteReadBufferSize];
             this.remainingBufferBytes = 0;
@@ -96,7 +99,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             try {
                 State.SetInput(this.state, source);
             } catch (BrotliRuntimeException ex) {
-                throw new System.IO.IOException("Brotli decoder initialization failed", ex);
+                throw new IOException("Brotli decoder initialization failed", ex);
             }
             if (customDictionary != null) {
                 Decode.SetCustomDictionary(this.state, customDictionary);
@@ -119,30 +122,30 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                     return -1;
                 }
             }
-            return this.buffer[this.bufferOffset++] & unchecked(0xFF);
+            return this.buffer[this.bufferOffset++] & 0xFF;
         }
 
         /// <summary><inheritDoc/></summary>
         /// <exception cref="System.IO.IOException"/>
         public override int Read(byte[] destBuffer, int destOffset, int destLen) {
             if (destOffset < 0) {
-                throw new System.ArgumentException("Bad offset: " + destOffset);
+                throw new ArgumentException("Bad offset: " + destOffset);
             }
 
             if (destLen < 0) {
-                throw new System.ArgumentException("Bad length: " + destLen);
+                throw new ArgumentException("Bad length: " + destLen);
             }
             if (destOffset + destLen > destBuffer.Length) {
-                throw new System.ArgumentException("Buffer overflow: " + (destOffset + destLen) + " > " + destBuffer.Length);
+                throw new ArgumentException("Buffer overflow: " + (destOffset + destLen) + " > " + destBuffer.Length);
             }
             if (destLen == 0) {
                 return 0;
             }
 
-            var copyLen = System.Math.Max(this.remainingBufferBytes - this.bufferOffset, 0);
+            var copyLen = Math.Max(this.remainingBufferBytes - this.bufferOffset, 0);
             if (copyLen != 0) {
-                copyLen = System.Math.Min(copyLen, destLen);
-                System.Array.Copy(this.buffer, this.bufferOffset, destBuffer, destOffset, copyLen);
+                copyLen = Math.Min(copyLen, destLen);
+                Array.Copy(this.buffer, this.bufferOffset, destBuffer, destOffset, copyLen);
                 this.bufferOffset += copyLen;
                 destOffset += copyLen;
                 destLen -= copyLen;
@@ -161,7 +164,7 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
                 }
                 return this.state.outputUsed + copyLen;
             } catch (BrotliRuntimeException ex) {
-                throw new System.IO.IOException("Brotli stream decoding failed", ex);
+                throw new IOException("Brotli stream decoding failed", ex);
             }
         }
         // <{[INJECTED CODE]}>
@@ -173,26 +176,26 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
             get { return false; }
         }
         public override long Length {
-            get { throw new System.NotSupportedException(); }
+            get { throw new NotSupportedException(); }
         }
         public override long Position {
-            get { throw new System.NotSupportedException(); }
-            set { throw new System.NotSupportedException(); }
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
         }
-        public override long Seek(long offset, System.IO.SeekOrigin origin) {
-            throw new System.NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) {
+            throw new NotSupportedException();
         }
         public override void SetLength(long value) {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         public override bool CanWrite { get { return false; } }
-        public override System.IAsyncResult BeginWrite(byte[] buffer, int offset,
-                int count, System.AsyncCallback callback, object state) {
-            throw new System.NotSupportedException();
+        public override IAsyncResult BeginWrite(byte[] buffer, int offset,
+                int count, AsyncCallback callback, object state) {
+            throw new NotSupportedException();
         }
         public override void Write(byte[] buffer, int offset, int count) {
-            throw new System.NotSupportedException();
+            throw new NotSupportedException();
         }
 
         public override void Flush() { }

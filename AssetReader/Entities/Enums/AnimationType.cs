@@ -3,5 +3,5 @@ namespace SoarCraft.QYun.AssetReader.Entities.Enums {
         kLegacy = 1,
         kGeneric = 2,
         kHumanoid = 3
-    };
+    }
 }

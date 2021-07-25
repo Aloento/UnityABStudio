@@ -144,7 +144,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         System::createDSPByType
     ]
     */
-    public enum DSP_TYPE : int {
+    public enum DSP_TYPE {
         UNKNOWN,            /* This unit was created via a non FMOD plugin so has an unknown purpose. */
         MIXER,              /* This unit does nothing but take inputs and mix them together then feed the result to the soundcard unit. */
         OSCILLATOR,         /* This unit generates sine/square/saw/triangle or noise tones. */

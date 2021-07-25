@@ -1,6 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
-    using Utils;
     using Entities.Enums;
+    using Utils;
 
     public class FloatCurve {
         public AnimationCurve<float> curve;

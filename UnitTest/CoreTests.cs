@@ -7,8 +7,8 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
     using Converters;
     using Converters.ShaderConverters;
     using Extensions;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SixLabors.ImageSharp;
     using TextureDecoder;
 
@@ -45,7 +45,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
         }
 
         [DataTestMethod]
-        [DataRow("Assets/ShaderRes.ab", 952725256833404699)]
+        [DataRow("Assets/s_background_chernobog_b.ab", 952725256833404699)]
         public void ShaderConvertTest(string filePath, long PathID) {
             new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
 

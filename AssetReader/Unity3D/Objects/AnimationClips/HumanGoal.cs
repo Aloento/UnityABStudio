@@ -1,6 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
     using Math;
     using Utils;
+
     public class HumanGoal {
         public xform m_X;
         public float m_WeightT;

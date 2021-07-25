@@ -4,14 +4,16 @@ Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
 namespace SoarCraft.QYun.AssetReader.Brotli {
+    using System;
+
     /// <summary>Unchecked exception used internally.</summary>
-    [System.Serializable]
-    internal class BrotliRuntimeException : System.Exception {
+    [Serializable]
+    internal class BrotliRuntimeException : Exception {
         internal BrotliRuntimeException(string message)
             : base(message) {
         }
 
-        internal BrotliRuntimeException(string message, System.Exception cause)
+        internal BrotliRuntimeException(string message, Exception cause)
             : base(message, cause) {
         }
     }

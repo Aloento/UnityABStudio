@@ -1,7 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects {
     using Contracts;
-    using Utils;
     using Meshes;
+    using Utils;
 
     public sealed class SkinnedMeshRenderer : Renderer {
         public PPtr<Mesh> m_Mesh;

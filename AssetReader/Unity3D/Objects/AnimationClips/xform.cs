@@ -1,6 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
-    using Utils;
     using Math;
+    using Utils;
+
     public class xform {
         public Vector3 t;
         public Quaternion q;

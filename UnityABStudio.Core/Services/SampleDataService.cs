@@ -16,16 +16,13 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     public class SampleDataService : ISampleDataService {
         private List<SampleOrder> _allOrders;
 
-        public SampleDataService() {
-        }
-
         private static IEnumerable<SampleOrder> AllOrders() {
             // The following is order summary data
             var companies = AllCompanies();
             return companies.SelectMany(c => c.Orders);
         }
 
-        private static IEnumerable<SampleCompany> AllCompanies() => new List<SampleCompany>() {
+        private static IEnumerable<SampleCompany> AllCompanies() => new List<SampleCompany> {
                 new() {
                     CompanyID = "ALFKI",
                     CompanyName = "Company A",
@@ -37,8 +34,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                     Country = "Germany",
                     Phone = "030-0074321",
                     Fax = "030-0076545",
-                    Orders = new List<SampleOrder>()
-                    {
+                    Orders = new List<SampleOrder> {
                         new()
                         {
                             OrderID = 10643, // Symbol Globe
@@ -54,8 +50,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                             Status = "Shipped",
                             SymbolCode = 57643,
                             SymbolName = "Globe",
-                            Details = new List<SampleOrderDetail>()
-                            {
+                            Details = new List<SampleOrderDetail> {
                                 new()
                                 {
                                     ProductID = 28,
@@ -109,8 +104,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                             Status = "Closed",
                             SymbolCode = 57737,
                             SymbolName = "Audio",
-                            Details = new List<SampleOrderDetail>()
-                            {
+                            Details = new List<SampleOrderDetail> {
                                 new()
                                 {
                                     ProductID = 59,
@@ -152,8 +146,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                             Status = "Closed",
                             SymbolCode = 57699,
                             SymbolName = "Calendar",
-                            Details = new List<SampleOrderDetail>()
-                            {
+                            Details = new List<SampleOrderDetail> {
                                 new()
                                 {
                                     ProductID = 6,
@@ -194,8 +187,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                     Country = "Mexico",
                     Phone = "(5) 555-4729",
                     Fax = "(5) 555-3745",
-                    Orders = new List<SampleOrder>()
-                    {
+                    Orders = new List<SampleOrder> {
                         new()
                         {
                             OrderID = 10625, // Symbol Camera
@@ -211,8 +203,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                             Status = "Shipped",
                             SymbolCode = 57620,
                             SymbolName = "Camera",
-                            Details = new List<SampleOrderDetail>()
-                            {
+                            Details = new List<SampleOrderDetail> {
                                 new()
                                 {
                                     ProductID = 14,
@@ -266,8 +257,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                             Status = "Shipped",
                             SymbolCode = 57633,
                             SymbolName = "Clock",
-                            Details = new List<SampleOrderDetail>()
-                            {
+                            Details = new List<SampleOrderDetail> {
                                 new()
                                 {
                                     ProductID = 11,
@@ -332,8 +322,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                     Country = "Mexico",
                     Phone = "(5) 555-3932",
                     Fax = string.Empty,
-                    Orders = new List<SampleOrder>()
-                    {
+                    Orders = new List<SampleOrder> {
                         new()
                         {
                             OrderID = 10507, // Symbol Contact
@@ -349,8 +338,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                             Status = "Closed",
                             SymbolCode = 57661,
                             SymbolName = "Contact",
-                            Details = new List<SampleOrderDetail>()
-                            {
+                            Details = new List<SampleOrderDetail> {
                                 new()
                                 {
                                     ProductID = 43,
@@ -392,8 +380,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                             Status = "Closed",
                             SymbolCode = 57619,
                             SymbolName = "Favorite",
-                            Details = new List<SampleOrderDetail>()
-                            {
+                            Details = new List<SampleOrderDetail> {
                                 new()
                                 {
                                     ProductID = 17,
@@ -447,8 +434,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                             Status = "Closed",
                             SymbolCode = 57615,
                             SymbolName = "Home",
-                            Details = new List<SampleOrderDetail>()
-                            {
+                            Details = new List<SampleOrderDetail> {
                                 new()
                                 {
                                     ProductID = 33,

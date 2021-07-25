@@ -1,7 +1,7 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.SpriteAtlases {
-    using Texture2Ds;
     using Math;
     using Sprites;
+    using Texture2Ds;
     using Utils;
 
     public class SpriteAtlasData {

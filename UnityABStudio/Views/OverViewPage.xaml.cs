@@ -38,7 +38,7 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
 
             logger.Information($"AB File chosen: {abFile.Path}");
             this.ImageText.Text = abFile.Path;
-            await ViewModel.LoadAssetsDataAsync(new List<StorageFile> { abFile });
+            _ = await ViewModel.LoadAssetsDataAsync(new List<StorageFile> { abFile });
         }
     }
 }

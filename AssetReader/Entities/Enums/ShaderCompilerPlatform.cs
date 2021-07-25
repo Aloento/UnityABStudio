@@ -26,5 +26,5 @@ namespace SoarCraft.QYun.AssetReader.Entities.Enums {
         kShaderCompPlatformGameCoreScarlett = 22,
         kShaderCompPlatformPS5 = 23,
         kShaderCompPlatformPS5NGGC = 24,
-    };
+    }
 }

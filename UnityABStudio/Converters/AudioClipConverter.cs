@@ -36,12 +36,12 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
                 if (result != RESULT.OK)
                     return null;
                 buff = this.SoundToWav(subsound);
-                subsound.release();
+                _ = subsound.release();
             } else {
                 buff = this.SoundToWav(sound);
             }
-            sound.release();
-            system.release();
+            _ = sound.release();
+            _ = system.release();
             return buff;
         }
 

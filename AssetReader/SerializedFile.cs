@@ -26,7 +26,7 @@ namespace SoarCraft.QYun.AssetReader {
         public BuildTarget m_TargetPlatform = BuildTarget.UnknownPlatform;
         private bool m_EnableTypeTree = true;
         public List<SerializedType> m_Types;
-        public int bigIDEnabled = 0;
+        public int bigIDEnabled;
         public List<ObjectInfo> m_Objects;
         private List<LocalSerializedObjectIdentifier> m_ScriptTypes;
         public List<FileIdentifier> m_Externals;

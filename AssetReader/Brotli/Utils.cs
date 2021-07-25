@@ -4,6 +4,8 @@ Distributed under MIT license.
 See file LICENSE for detail or copy at https://opensource.org/licenses/MIT
 */
 namespace SoarCraft.QYun.AssetReader.Brotli {
+    using System;
+
     /// <summary>A set of utility methods.</summary>
     internal sealed class Utils {
         private static readonly byte[] ByteZeroes = new byte[1024];
@@ -24,8 +26,8 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         internal static void FillWithZeroes(byte[] dest, int offset, int length) {
             var cursor = 0;
             while (cursor < length) {
-                var step = System.Math.Min(cursor + 1024, length) - cursor;
-                System.Array.Copy(ByteZeroes, 0, dest, offset + cursor, step);
+                var step = Math.Min(cursor + 1024, length) - cursor;
+                Array.Copy(ByteZeroes, 0, dest, offset + cursor, step);
                 cursor += step;
             }
         }
@@ -44,8 +46,8 @@ namespace SoarCraft.QYun.AssetReader.Brotli {
         internal static void FillWithZeroes(int[] dest, int offset, int length) {
             var cursor = 0;
             while (cursor < length) {
-                var step = System.Math.Min(cursor + 1024, length) - cursor;
-                System.Array.Copy(IntZeroes, 0, dest, offset + cursor, step);
+                var step = Math.Min(cursor + 1024, length) - cursor;
+                Array.Copy(IntZeroes, 0, dest, offset + cursor, step);
                 cursor += step;
             }
         }

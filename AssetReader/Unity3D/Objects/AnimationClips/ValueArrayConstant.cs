@@ -1,5 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
     using Utils;
+
     public class ValueArrayConstant {
         public ValueConstant[] m_ValueArray;
 

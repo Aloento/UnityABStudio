@@ -89,7 +89,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
 
         private void OnNavigated(object sender, NavigationEventArgs e) {
             if (sender is Frame frame) {
-                bool clearNavigation = (bool)frame.Tag;
+                var clearNavigation = (bool)frame.Tag;
                 if (clearNavigation) {
                     frame.BackStack.Clear();
                 }

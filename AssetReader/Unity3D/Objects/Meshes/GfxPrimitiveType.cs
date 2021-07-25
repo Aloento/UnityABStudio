@@ -6,5 +6,5 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
         kPrimitiveLines = 3,
         kPrimitiveLineStrip = 4,
         kPrimitivePoints = 5,
-    };
+    }
 }

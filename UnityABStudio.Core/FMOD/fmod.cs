@@ -38,7 +38,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         [SEE_ALSO]
     ]
     */
-    public enum RESULT : int {
+    public enum RESULT {
         OK,                        /* No errors. */
         ERR_BADCOMMAND,            /* Tried to call a function on a data type that does not allow this type of functionality (ie calling Sound::lock on a streaming sound). */
         ERR_CHANNEL_ALLOC,         /* Error trying to allocate a channel. */
@@ -139,7 +139,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         ChannelGroup::setCallback
     ]
     */
-    public enum CHANNELCONTROL_TYPE : int {
+    public enum CHANNELCONTROL_TYPE {
         CHANNEL,
         CHANNELGROUP
     }
@@ -271,7 +271,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
             FMOD_INITFLAGS
     ]
     */
-    public enum OUTPUTTYPE : int {
+    public enum OUTPUTTYPE {
         AUTODETECT,      /* Picks the best output mode for the platform. This is the default. */
 
         UNKNOWN,         /* All - 3rd party plugin, unknown. This is for use with System::getOutput only. */
@@ -311,7 +311,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         FMOD_Debug_Initialize
     ]
     */
-    public enum DEBUG_MODE : int {
+    public enum DEBUG_MODE {
         TTY,        /* Default log location per platform, i.e. Visual Studio output window, stderr, LogCat, etc */
         FILE,       /* Write log to specified file path */
         CALLBACK,   /* Call specified callback with log information */
@@ -470,7 +470,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         DSP::setChannelFormat
     ]
     */
-    public enum SPEAKERMODE : int {
+    public enum SPEAKERMODE {
         DEFAULT,          /* Default speaker mode based on operating system/output mode.  Windows = control panel setting, Xbox = 5.1, PS3 = 7.1 etc. */
         RAW,              /* There is no specific speakermode.  Sound channels are mapped in order of input to output.  Use System::setSoftwareFormat to specify speaker count. See remarks for more information. */
         MONO,             /* The speakers are monaural. */
@@ -496,7 +496,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         System::getSpeakerPosition
     ]
     */
-    public enum SPEAKER : int {
+    public enum SPEAKER {
         FRONT_LEFT,
         FRONT_RIGHT,
         FRONT_CENTER,
@@ -566,7 +566,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         FMOD_CREATESOUNDEXINFO
     ]
     */
-    public enum CHANNELORDER : int {
+    public enum CHANNELORDER {
         DEFAULT,              /* Left, Right, Center, LFE, Surround Left, Surround Right, Back Left, Back Right (see FMOD_SPEAKER enumeration)   */
         WAVEFORMAT,           /* Left, Right, Center, LFE, Back Left, Back Right, Surround Left, Surround Right (as per Microsoft .wav WAVEFORMAT structure master order) */
         PROTOOLS,             /* Left, Center, Right, Surround Left, Surround Right, LFE */
@@ -592,7 +592,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         System::unloadPlugin
     ]
     */
-    public enum PLUGINTYPE : int {
+    public enum PLUGINTYPE {
         OUTPUT,          /* The plugin type is an output module.  FMOD mixed audio will play through one of these devices */
         CODEC,           /* The plugin type is a file format codec.  FMOD will use these codecs to load file formats for playback. */
         DSP,             /* The plugin type is a DSP unit.  FMOD will use these plugins as part of its DSP network to apply effects to output or generate sound in realtime. */
@@ -693,7 +693,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         Sound::getFormat
     ]
     */
-    public enum SOUND_FORMAT : int {
+    public enum SOUND_FORMAT {
         NONE,       /* Unitialized / unknown */
         PCM8,       /* 8bit integer PCM data */
         PCM16,      /* 16bit integer PCM data  */
@@ -795,7 +795,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         FMOD_MODE
     ]
     */
-    public enum OPENSTATE : int {
+    public enum OPENSTATE {
         READY = 0,       /* Opened and ready to play */
         LOADING,         /* Initial load in progress */
         ERROR,           /* Failed to open - file not found, out of memory etc.  See return value of Sound::getOpenState for what happened. */
@@ -828,7 +828,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         SoundGroup::getMuteFadeSpeed
     ]
     */
-    public enum SOUNDGROUP_BEHAVIOR : int {
+    public enum SOUNDGROUP_BEHAVIOR {
         BEHAVIOR_FAIL,              /* Any sound played that puts the sound count over the SoundGroup::setMaxAudible setting, will simply fail during System::playSound. */
         BEHAVIOR_MUTE,              /* Any sound played that puts the sound count over the SoundGroup::setMaxAudible setting, will be silent, then if another sound in the group stops the sound that was silent before becomes audible again. */
         BEHAVIOR_STEALLOWEST,       /* Any sound played that puts the sound count over the SoundGroup::setMaxAudible setting, will steal the quietest / least important sound playing in the group. */
@@ -855,7 +855,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         System::update
     ]
     */
-    public enum CHANNELCONTROL_CALLBACK_TYPE : int {
+    public enum CHANNELCONTROL_CALLBACK_TYPE {
         END,                  /* Called when a sound ends. */
         VIRTUALVOICE,         /* Called when a voice is swapped out or swapped in. */
         SYNCPOINT,            /* Called when a syncpoint is encountered.  Can be from wav file markers. */
@@ -1053,7 +1053,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         System::getSoftwareFormat
     ]
     */
-    public enum DSP_RESAMPLER : int {
+    public enum DSP_RESAMPLER {
         DEFAULT,         /* Default interpolation method.  Currently equal to FMOD_DSP_RESAMPLER_LINEAR. */
         NOINTERP,        /* No interpolation.  High frequency aliasing hiss will be audible depending on the sample rate of the sound. */
         LINEAR,          /* Linear interpolation (default method).  Fast and good quality, causes very slight lowpass effect on low frequency sounds. */
@@ -1100,7 +1100,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         DSPConnection::getType
     ]
     */
-    public enum DSPCONNECTION_TYPE : int {
+    public enum DSPCONNECTION_TYPE {
         STANDARD,          /* Default connection type.         Audio is mixed from the input to the output DSP's audible buffer.  */
         SIDECHAIN,         /* Sidechain connection type.       Audio is mixed from the input to the output DSP's sidechain buffer.  */
         SEND,              /* Send connection type.            Audio is mixed from the input to the output DSP's audible buffer, but the input is NOT executed, only copied from.  A standard connection or sidechain needs to make an input execute to generate data. */
@@ -1121,7 +1121,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         Sound::getTag
     ]
     */
-    public enum TAGTYPE : int {
+    public enum TAGTYPE {
         UNKNOWN = 0,
         ID3V1,
         ID3V2,
@@ -1150,7 +1150,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         Sound::getTag
     ]
     */
-    public enum TAGDATATYPE : int {
+    public enum TAGDATATYPE {
         BINARY = 0,
         INT,
         FLOAT,
@@ -1607,7 +1607,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.FMOD {
         public override int GetHashCode() => this.rawPtr.ToInt32();
         public static bool operator ==(HandleBase a, HandleBase b) {
             // If both are null, or both are same instance, return true.
-            if (Object.ReferenceEquals(a, b)) {
+            if (ReferenceEquals(a, b)) {
                 return true;
             }
             // If one is null, but not both, return false.

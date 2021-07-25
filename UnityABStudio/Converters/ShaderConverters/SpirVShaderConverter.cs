@@ -29,7 +29,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters.ShaderConverters {
                         minOffset = offset;
                     }
                     var pos = ms.Position;
-                    sb.Append(ExportSnippet(ms, offset, size));
+                    _ = sb.Append(ExportSnippet(ms, offset, size));
                     ms.Position = pos;
                 }
             }

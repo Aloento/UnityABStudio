@@ -175,7 +175,6 @@ namespace SoarCraft.QYun.AssetReader.Utils {
                 goto readExLiteralLength;
 
             phase = DecodePhase.CopyLiteral;
-            goto copyLiteral;
 
             copyLiteral:
             var nReadLit = litLen < nToRead ? litLen : nToRead;
@@ -215,7 +214,6 @@ namespace SoarCraft.QYun.AssetReader.Utils {
                 goto finish;
 
             phase = DecodePhase.ReadOffset;
-            goto readOffset;
 
             readOffset:
             if (inBufPos + 1 < inBufEnd) {
@@ -268,7 +266,6 @@ namespace SoarCraft.QYun.AssetReader.Utils {
                 goto readExMatchLength;
 
             phase = DecodePhase.CopyMatch;
-            goto copyMatch;
 
             copyMatch:
             var nCpyMat = matLen < nToRead ? matLen : nToRead;

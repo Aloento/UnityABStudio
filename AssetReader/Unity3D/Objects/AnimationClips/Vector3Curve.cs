@@ -1,6 +1,6 @@
 namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
-    using Utils;
     using Math;
+    using Utils;
 
     public class Vector3Curve {
         public AnimationCurve<Vector3> curve;

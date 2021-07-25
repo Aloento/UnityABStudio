@@ -4,9 +4,9 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.Meshes {
     using System.Collections.Generic;
     using System.Linq;
     using Contracts;
-    using Utils;
     using Math;
     using Texture2Ds;
+    using Utils;
 
     public sealed class Mesh : NamedObject {
         private bool m_Use16BitIndices = true;
