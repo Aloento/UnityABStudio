@@ -64,7 +64,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             var m_MonoBehaviour = (MonoBehaviour)item.Obj;
             var type = m_MonoBehaviour.ToType();
             if (type == null) {
-                var m_Type = m_MonoBehaviour.ConvertToTypeTree(new AssemblyLoader());
+                var m_Type = m_MonoBehaviour.ConvertToTypeTree(null);
                 type = m_MonoBehaviour.ToType(m_Type);
             }
             var str = JsonConvert.SerializeObject(type, Formatting.Indented);
