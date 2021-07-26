@@ -65,6 +65,9 @@
     <ClCompile Include="Math.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="AutoDeskFBX_P1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">

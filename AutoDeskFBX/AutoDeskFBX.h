@@ -28,7 +28,8 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxSetJointsNode_Generic(AsFbxContext* pContext, FbxNode* pNode);
         void AsFbxPrepareMaterials(AsFbxContext* pContext, int32_t materialCount, int32_t textureCount);
         FbxFileTexture* AsFbxCreateTexture(AsFbxContext* pContext, const char* pMatTexName);
-        void AsFbxLinkTexture(int32_t dest, FbxFileTexture* pTexture, FbxSurfacePhong* pMaterial, float offsetX, float offsetY, float scaleX, float scaleY);
+        void AsFbxLinkTexture(int32_t dest, FbxFileTexture* pTexture, FbxSurfacePhong* pMaterial,
+                              float offsetX, float offsetY, float scaleX, float scaleY);
         FbxArray<FbxCluster*>* AsFbxMeshCreateClusterArray(int32_t boneCount);
         void AsFbxMeshDisposeClusterArray(FbxArray<FbxCluster*>** ppArray);
         FbxCluster* AsFbxMeshCreateCluster(AsFbxContext* pContext, FbxNode* pBoneNode);
