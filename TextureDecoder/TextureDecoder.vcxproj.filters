@@ -57,10 +57,10 @@
     <ClInclude Include="unitycrunch\crnlib.h">
       <Filter>Header Files\CRN</Filter>
     </ClInclude>
-    <ClInclude Include="unitycrunch.h">
+    <ClInclude Include="UnityCrunch.h">
       <Filter>Header Files\CRN</Filter>
     </ClInclude>
-    <ClInclude Include="crunch.h">
+    <ClInclude Include="Crunch.h">
       <Filter>Header Files\CRN</Filter>
     </ClInclude>
   </ItemGroup>
