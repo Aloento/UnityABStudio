@@ -2,8 +2,8 @@
 #include "AutoDeskFBX.h"
 #include "Math.h"
 
-namespace SoarCraft::QYun::AutoDeskFBX::FBXService {
-    void AsUtilQuaternionToEuler(float qx, float qy, float qz, float qw, float* vx, float* vy, float* vz) {
+namespace SoarCraft::QYun::AutoDeskFBX {
+    void FBXService::AsUtilQuaternionToEuler(float qx, float qy, float qz, float qw, float* vx, float* vy, float* vz) {
         Quaternion q(qx, qy, qz, qw);
         auto v = QuaternionToEuler(q);
 
@@ -17,7 +17,7 @@ namespace SoarCraft::QYun::AutoDeskFBX::FBXService {
             *vz = v.Z;
     }
 
-    void AsUtilEulerToQuaternion(float vx, float vy, float vz, float* qx, float* qy, float* qz, float* qw) {
+    void FBXService::AsUtilEulerToQuaternion(float vx, float vy, float vz, float* qx, float* qy, float* qz, float* qw) {
         Vector3 v(vx, vy, vz);
         auto q = EulerToQuaternion(v);
 
@@ -45,11 +45,11 @@ namespace SoarCraft::QYun::AutoDeskFBX::FBXService {
         FBX_2016_00_COMPATIBLE
     };
 
-    AsFbxContext* AsFbxCreateContext() {
+    AsFbxContext* FBXService::AsFbxCreateContext() {
         return new AsFbxContext();
     }
 
-    bool AsFbxInitializeContext(AsFbxContext* pContext, const char* pFileName, float scaleFactor, int32_t versionIndex, bool isAscii, bool is60Fps, const char** pErrMsg) {
+    bool FBXService::AsFbxInitializeContext(AsFbxContext* pContext, const char* pFileName, float scaleFactor, int32_t versionIndex, bool isAscii, bool is60Fps, const char** pErrMsg) {
         if (pContext == nullptr) {
             if (pErrMsg != nullptr) {
                 *pErrMsg = "null pointer for pContext";
@@ -116,7 +116,7 @@ namespace SoarCraft::QYun::AutoDeskFBX::FBXService {
         return true;
     }
 
-    void AsFbxDisposeContext(AsFbxContext** ppContext) {
+    void FBXService::AsFbxDisposeContext(AsFbxContext** ppContext) {
         if (ppContext == nullptr)
             return;
 
@@ -124,7 +124,7 @@ namespace SoarCraft::QYun::AutoDeskFBX::FBXService {
         *ppContext = nullptr;
     }
 
-    void AsFbxSetFramePaths(AsFbxContext* pContext, const char* ppPaths[], int32_t count) {
+    void FBXService::AsFbxSetFramePaths(AsFbxContext* pContext, const char* ppPaths[], int32_t count) {
         if (pContext == nullptr)
             return;
 
@@ -136,7 +136,7 @@ namespace SoarCraft::QYun::AutoDeskFBX::FBXService {
         }
     }
 
-    void AsFbxExportScene(AsFbxContext* pContext) {
+    void FBXService::AsFbxExportScene(AsFbxContext* pContext) {
         if (pContext == nullptr)
             return;
 
@@ -147,7 +147,7 @@ namespace SoarCraft::QYun::AutoDeskFBX::FBXService {
             pExporter->Export(pScene);
     }
 
-    FbxNode* AsFbxGetSceneRootNode(AsFbxContext* pContext) {
+    FbxNode* FBXService::AsFbxGetSceneRootNode(AsFbxContext* pContext) {
         if (pContext == nullptr)
             return nullptr;
 
@@ -157,7 +157,7 @@ namespace SoarCraft::QYun::AutoDeskFBX::FBXService {
         return pContext->pScene->GetRootNode();
     }
 
-    FbxNode* AsFbxExportSingleFrame(AsFbxContext* pContext, FbxNode* pParentNode,
+    FbxNode* FBXService::AsFbxExportSingleFrame(AsFbxContext* pContext, FbxNode* pParentNode,
                                                 const char* pFramePath, const char* pFrameName,
                                                 float localPositionX, float localPositionY, float localPositionZ,
                                                 float localRotationX, float localRotationY, float localRotationZ,
