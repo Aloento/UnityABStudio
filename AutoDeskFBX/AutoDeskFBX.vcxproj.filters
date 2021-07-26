@@ -24,6 +24,18 @@
     <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AsFbxContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AsFbxAnimContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AsFbxSkinContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AsFbxMorphContext.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AutoDeskFBX.cpp">
@@ -33,6 +45,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AsFbxContext.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AsFbxAnimContext.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AsFbxSkinContext.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AsFbxMorphContext.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

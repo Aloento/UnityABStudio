@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AssetReader\AssetReader.csproj" />
+    <ProjectReference Include="..\AutoDeskFBX\AutoDeskFBX.vcxproj" />
     <ProjectReference Include="..\TextureDecoder\TextureDecoder.vcxproj" />
   </ItemGroup>
 
