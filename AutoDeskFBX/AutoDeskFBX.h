@@ -18,7 +18,11 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxSetFramePaths(AsFbxContext* pContext, const char* ppPaths[], int32_t count);
         void AsFbxExportScene(AsFbxContext* pContext);
         FbxNode* AsFbxGetSceneRootNode(AsFbxContext* pContext);
-        FbxNode* AsFbxExportSingleFrame(AsFbxContext* pContext, FbxNode* pParentNode, const char* pFramePath, const char* pFrameName, float localPositionX, float localPositionY, float localPositionZ, float localRotationX, float localRotationY, float localRotationZ, float localScaleX, float localScaleY, float localScaleZ);
+        FbxNode* AsFbxExportSingleFrame(AsFbxContext* pContext, FbxNode* pParentNode,
+                                        const char* pFramePath, const char* pFrameName,
+                                        float localPositionX, float localPositionY, float localPositionZ,
+                                        float localRotationX, float localRotationY, float localRotationZ,
+                                        float localScaleX, float localScaleY, float localScaleZ);
         void AsFbxSetJointsNode_CastToBone(AsFbxContext* pContext, FbxNode* pNode, float boneSize);
         void AsFbxSetJointsNode_BoneInPath(AsFbxContext* pContext, FbxNode* pNode, float boneSize);
         void AsFbxSetJointsNode_Generic(AsFbxContext* pContext, FbxNode* pNode);
@@ -38,12 +42,12 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxMeshCreateElementVertexColor(FbxMesh* pMesh);
         void AsFbxMeshCreateElementMaterial(FbxMesh* pMesh);
         FbxSurfacePhong* AsFbxCreateMaterial(AsFbxContext* pContext, const char* pMatName,
-            float diffuseR, float diffuseG, float diffuseB,
-            float ambientR, float ambientG, float ambientB,
-            float emissiveR, float emissiveG, float emissiveB,
-            float specularR, float specularG, float specularB,
-            float reflectR, float reflectG, float reflectB,
-            float shininess, float transparency);
+                                             float diffuseR, float diffuseG, float diffuseB,
+                                             float ambientR, float ambientG, float ambientB,
+                                             float emissiveR, float emissiveG, float emissiveB,
+                                             float specularR, float specularG, float specularB,
+                                             float reflectR, float reflectG, float reflectB,
+                                             float shininess, float transparency);
         int AsFbxAddMaterialToFrame(FbxNode* pFrameNode, FbxSurfacePhong* pMaterial);
         void AsFbxSetFrameShadingModeToTextureShading(FbxNode* pFrameNode);
         void AsFbxMeshSetControlPoint(FbxMesh* pMesh, int32_t index, float x, float y, float z);
