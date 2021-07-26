@@ -94,6 +94,105 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pMesh->EndPolygon();
     }
 
+    void FBXService::AsFbxMeshElementNormalAdd(FbxMesh* pMesh, int32_t elementIndex, float x, float y, float z) {
+        if (pMesh == nullptr)
+            return;
 
+        auto pElem = pMesh->GetElementNormal(elementIndex);
+        auto& array = pElem->GetDirectArray();
 
+        array.Add(FbxVector4(x, y, z, 0));
+    }
+
+    void FBXService::AsFbxMeshElementUVAdd(FbxMesh* pMesh, int32_t elementIndex, float u, float v) {
+        if (pMesh == nullptr)
+            return;
+
+        auto pElem = pMesh->GetElementUV(FbxString("UV") + FbxString(elementIndex));
+        auto& array = pElem->GetDirectArray();
+
+        array.Add(FbxVector2(u, v));
+    }
+
+    void FBXService::AsFbxMeshElementTangentAdd(FbxMesh* pMesh, int32_t elementIndex, float x, float y, float z, float w) {
+        if (pMesh == nullptr)
+            return;
+
+        auto pElem = pMesh->GetElementTangent(elementIndex);
+        auto& array = pElem->GetDirectArray();
+
+        array.Add(FbxVector4(x, y, z, w));
+    }
+
+    void FBXService::AsFbxMeshElementVertexColorAdd(FbxMesh* pMesh, int32_t elementIndex, float r, float g, float b, float a) {
+        if (pMesh == nullptr)
+            return;
+
+        auto pElem = pMesh->GetElementVertexColor(elementIndex);
+        auto& array = pElem->GetDirectArray();
+
+        array.Add(FbxVector4(r, g, b, a));
+    }
+
+    void FBXService::AsFbxMeshSetBoneWeight(FbxArray<FbxCluster*>* pClusterArray, int32_t boneIndex, int32_t vertexIndex, float weight) {
+        if (pClusterArray == nullptr)
+            return;
+
+        auto pCluster = pClusterArray->GetAt(boneIndex);
+
+        if (pCluster != nullptr)
+            pCluster->AddControlPointIndex(vertexIndex, weight);
+    }
+
+    AsFbxSkinContext* FBXService::AsFbxMeshCreateSkinContext(AsFbxContext* pContext, FbxNode* pFrameNode) {
+        return new AsFbxSkinContext(pContext, pFrameNode);
+    }
+
+    void FBXService::AsFbxMeshDisposeSkinContext(AsFbxSkinContext** ppSkinContext) {
+        if (ppSkinContext == nullptr)
+            return;
+
+        delete (*ppSkinContext);
+        *ppSkinContext = nullptr;
+    }
+
+    bool FBXService::FbxClusterArray_HasItemAt(FbxArray<FbxCluster*>* pClusterArray, int32_t index) {
+        if (pClusterArray == nullptr)
+            return false;
+
+        auto pCluster = pClusterArray->GetAt(index);
+
+        return pCluster != nullptr;
+    }
+
+    void FBXService::AsFbxMeshSkinAddCluster(AsFbxSkinContext* pSkinContext, FbxArray<FbxCluster*>* pClusterArray, int32_t index, float pBoneMatrix[16]) {
+        if (pSkinContext == nullptr)
+            return;
+
+        if (pClusterArray == nullptr)
+            return;
+
+        if (pBoneMatrix == nullptr)
+            return;
+
+        auto pCluster = pClusterArray->GetAt(index);
+
+        if (pCluster == nullptr)
+            return;
+
+        FbxAMatrix boneMatrix;
+
+        for (int m = 0; m < 4; m += 1) {
+            for (int n = 0; n < 4; n += 1) {
+                auto index = m * 4 + n;
+                boneMatrix.mData[m][n] = pBoneMatrix[index];
+            }
+        }
+
+        pCluster->SetTransformMatrix(pSkinContext->lMeshMatrix);
+        pCluster->SetTransformLinkMatrix(pSkinContext->lMeshMatrix * boneMatrix.Inverse());
+
+        if (pSkinContext->pSkin)
+            pSkinContext->pSkin->AddCluster(pCluster);
+    }
 }
