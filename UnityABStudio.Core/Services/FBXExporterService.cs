@@ -35,6 +35,10 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                 SetFramePaths(SearchHierarchy());
         }
 
+        public void ExportAll(bool blendShape, bool animation, bool eulerFilter, float filterPrecision) {
+
+        }
+
         private HashSet<string> SearchHierarchy() {
             if (this.imported.MeshList == null || this.imported.MeshList.Count == 0)
                 return null;

@@ -4,13 +4,19 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using System.Linq;
     using AssetReader.Entities.Structs;
     using AssetReader.Unity3D.Objects;
+    using CommunityToolkit.Mvvm.DependencyInjection;
     using Converters;
     using Core.Helpers;
     using Core.Models;
+    using Core.Services;
     using Helpers;
 
     public static partial class ExportExtension {
-        public static string FixFileName(string str) => str.Length >= 260 ? Path.GetRandomFileName() : Path.GetInvalidFileNameChars().Aggregate(str, (current, c) => current.Replace(c, '_'));
+        public static string FixFileName(string str) => str.Length >= 260
+            ? Path.GetRandomFileName()
+            : Path.GetInvalidFileNameChars().Aggregate(str, (current, c) => current.Replace(c, '_'));
+
+        private static readonly FBXHelpService fbx = Ioc.Default.GetRequiredService<FBXHelpService>();
 
         private static bool TryExportFile(string dir, AssetItem item, string extension, out string fullPath) {
             var fileName = FixFileName(item.Name);
@@ -19,11 +25,13 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
                 _ = Directory.CreateDirectory(dir);
                 return true;
             }
+
             fullPath = Path.Combine(dir, $"{fileName}#{item.BaseID}{extension}");
             if (!File.Exists(fullPath)) {
                 _ = Directory.CreateDirectory(dir);
                 return true;
             }
+
             return false;
         }
 
@@ -34,12 +42,16 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             var helper = new SerializedTypeHelper(m_MonoBehaviour.version);
             helper.AddMonoBehaviour(m_Type.m_Nodes, 0);
             if (m_MonoBehaviour.m_Script.TryGet(out var m_Script)) {
-                var typeDef = assemblyLoader.GetTypeDefinition(m_Script.m_AssemblyName, string.IsNullOrEmpty(m_Script.m_Namespace) ? m_Script.m_ClassName : $"{m_Script.m_Namespace}.{m_Script.m_ClassName}");
+                var typeDef = assemblyLoader.GetTypeDefinition(m_Script.m_AssemblyName,
+                    string.IsNullOrEmpty(m_Script.m_Namespace)
+                        ? m_Script.m_ClassName
+                        : $"{m_Script.m_Namespace}.{m_Script.m_ClassName}");
                 if (typeDef != null) {
                     var typeDefinitionConverter = new TypeDefinitionConverter(typeDef, helper, 1);
                     m_Type.m_Nodes.AddRange(typeDefinitionConverter.ConvertToTypeTreeNodes());
                 }
             }
+
             return m_Type;
         }
 
@@ -64,10 +76,11 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             var currentDir = Directory.GetCurrentDirectory();
             Directory.SetCurrentDirectory(dir?.FullName ?? currentDir);
 
+            fbx.Init(Path.GetFileName(exportPath), convert, exportAllNodes, exportSkins, castToBone, boneSize,
+                exportAllUvsAsDiffuseMaps, scaleFactor, fbxVersion, fbxFormat == 1);
+            fbx.ExportAll(exportBlendShape, exportAnimations, eulerFilter, filterPrecision);
 
-
-            ModelExporter.ExportFbx(exportPath, convert, eulerFilter, filterPrecision,
-                exportAllNodes, exportSkins, exportAnimations, exportBlendShape, castToBone, boneSize, exportAllUvsAsDiffuseMaps, scaleFactor, fbxVersion, fbxFormat == 1);
+            Directory.SetCurrentDirectory(currentDir);
         }
     }
 }
