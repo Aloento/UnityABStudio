@@ -40,15 +40,16 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         FBX_2020_00_COMPATIBLE
     };
 
-    AsFbxContext* FBXService::AsFbxCreateContext() {
-        return new AsFbxContext();
+    IntPtr FBXService::AsFbxCreateContext() {
+        return IntPtr(new AsFbxContext());;
     }
 
-    bool FBXService::AsFbxInitializeContext(AsFbxContext* pContext, const char* pFileName, float scaleFactor, int32_t versionIndex, bool isAscii, bool is60Fps, const char** pErrMsg) {
+    bool FBXService::AsFbxInitializeContext(IntPtr ptrContext, String^ fileName, float scaleFactor,
+                                            int32_t versionIndex, bool isAscii, bool is60Fps, [Out] String^% errorMessage) {
+        auto pContext = (AsFbxContext*) ptrContext.ToPointer();
+
         if (pContext == nullptr) {
-            if (pErrMsg != nullptr) {
-                *pErrMsg = "null pointer for pContext";
-            }
+            errorMessage = "null pointer for pContext";
             return false;
         }
 
@@ -95,11 +96,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             }
         }
 
+        const char* pFileName = (const char*)(Marshal::StringToHGlobalAnsi(fileName).ToPointer());
         if (!pExporter->Initialize(pFileName, pFileFormat, pSdkManager->GetIOSettings())) {
-            if (pErrMsg != nullptr) {
-                auto errStr = pExporter->GetStatus().GetErrorString();
-                *pErrMsg = errStr;
-            }
+            errorMessage = gcnew String(pExporter->GetStatus().GetErrorString());
             return false;
         }
 
@@ -107,7 +106,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pContext->pBindPose = pBindPose;
 
         pScene->AddPose(pBindPose);
-
+        Marshal::FreeHGlobal(IntPtr((void*)pFileName));
         return true;
     }
 

@@ -6,6 +6,7 @@
 
 namespace SoarCraft::QYun::AutoDeskFBX {
     using namespace System;
+    using namespace System::Runtime::InteropServices;
     using namespace AssetReader::Math;
 
     public ref class FBXService
@@ -13,8 +14,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
     public:
         Vector3 AsUtilQuaternionToEuler(Quaternion q);
         void AsUtilEulerToQuaternion(float vx, float vy, float vz, float* qx, float* qy, float* qz, float* qw);
-        AsFbxContext* AsFbxCreateContext();
-        bool AsFbxInitializeContext(AsFbxContext* pContext, const char* pFileName, float scaleFactor, int32_t versionIndex, bool isAscii, bool is60Fps, const char** pErrMsg);
+        IntPtr AsFbxCreateContext();
+        bool AsFbxInitializeContext(IntPtr ptrContext, String^ fileName, float scaleFactor,
+                                    int32_t versionIndex, bool isAscii, bool is60Fps, [Out] String^% errorMessage);
         void AsFbxDisposeContext(AsFbxContext** ppContext);
         void AsFbxSetFramePaths(AsFbxContext* pContext, const char* ppPaths[], int32_t count);
         void AsFbxExportScene(AsFbxContext* pContext);
