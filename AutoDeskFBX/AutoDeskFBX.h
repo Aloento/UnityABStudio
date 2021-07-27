@@ -18,7 +18,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         bool AsFbxInitializeContext(IntPtr ptrContext, String^ fileName, float scaleFactor,
                                     int32_t versionIndex, bool isAscii, bool is60Fps, [Out] String^% errorMessage);
         void AsFbxDisposeContext(AsFbxContext** ppContext);
-        void AsFbxSetFramePaths(AsFbxContext* pContext, const char* ppPaths[], int32_t count);
+        void AsFbxSetFramePaths(IntPtr ptrContext, array<String^>^ ppPaths);
         void AsFbxExportScene(AsFbxContext* pContext);
         FbxNode* AsFbxGetSceneRootNode(AsFbxContext* pContext);
         FbxNode* AsFbxExportSingleFrame(AsFbxContext* pContext, FbxNode* pParentNode,

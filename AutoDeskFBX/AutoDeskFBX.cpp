@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "AutoDeskFBX.h"
+#include <msclr\marshal_cppstd.h>
 
 namespace SoarCraft::QYun::AutoDeskFBX {
     Vector3 FBXService::AsUtilQuaternionToEuler(Quaternion q) {
@@ -96,7 +97,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             }
         }
 
-        const char* pFileName = (const char*)(Marshal::StringToHGlobalAnsi(fileName).ToPointer());
+        const char* pFileName = (const char*)(Marshal::StringToHGlobalAuto(fileName).ToPointer());
         if (!pExporter->Initialize(pFileName, pFileFormat, pSdkManager->GetIOSettings())) {
             errorMessage = gcnew String(pExporter->GetStatus().GetErrorString());
             return false;
@@ -118,15 +119,13 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         *ppContext = nullptr;
     }
 
-    void FBXService::AsFbxSetFramePaths(AsFbxContext* pContext, const char* ppPaths[], int32_t count) {
-        if (pContext == nullptr)
-            return;
-
+    void FBXService::AsFbxSetFramePaths(IntPtr ptrContext, array<String^>^ ppPaths) {
+        auto pContext = (AsFbxContext*) ptrContext.ToPointer();
         auto& framePaths = pContext->framePaths;
 
-        for (auto i = 0; i < count; i += 1) {
-            const char* path = ppPaths[i];
-            framePaths.insert(std::string(path));
+        for (auto i = 0; i < ppPaths->Length; i += 1) {
+            auto str = ppPaths[i];
+            framePaths.insert(msclr::interop::marshal_as<std::string>(str));
         }
     }
 

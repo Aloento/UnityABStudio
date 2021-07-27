@@ -1,4 +1,5 @@
 namespace SoarCraft.QYun.UnityABStudio.Core.Services {
+    using System.Collections.Generic;
     using AutoDeskFBX;
     using Helpers;
 
@@ -15,8 +16,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
         private bool isAscii;
 
         public void Init(string fileName, IImported imported, bool allNodes, bool exportSkins, bool castToBone,
-            float boneSize, bool exportAllUvsAsDiffuseMaps, float scaleFactor, int versionIndex, bool isAscii) {
-
+                         float boneSize, bool exportAllUvsAsDiffuseMaps, float scaleFactor, int versionIndex, bool isAscii) {
             this.fileName = fileName;
             this.imported = imported;
             this.allNodes = allNodes;
@@ -29,10 +29,57 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             this.isAscii = isAscii;
 
             var is60Fps = imported.AnimationList.Count > 0 && imported.AnimationList[0].SampleRate.Equals(60.0f);
+            InitContext(is60Fps);
 
-
+            if (!this.allNodes)
+                SetFramePaths(SearchHierarchy());
         }
 
+        private HashSet<string> SearchHierarchy() {
+            if (this.imported.MeshList == null || this.imported.MeshList.Count == 0)
+                return null;
+
+            this.SearchHierarchy(this.imported.RootFrame, this.imported.MeshList, out var exportFrames);
+            return exportFrames;
+        }
+
+        private void SearchHierarchy(ImportedFrame rootFrame, List<ImportedMesh> meshList,
+                                     out HashSet<string> exportFrames) {
+            exportFrames = new HashSet<string>();
+            var frameStack = new Stack<ImportedFrame>();
+            frameStack.Push(rootFrame);
+
+            while (frameStack.Count > 0) {
+                var frame = frameStack.Pop();
+                var meshListSome = ImportedHelpers.FindMesh(frame.Path, meshList);
+
+                if (meshListSome != null) {
+                    var parent = frame;
+                    while (parent != null) {
+                        _ = exportFrames.Add(parent.Path);
+                        parent = parent.Parent;
+                    }
+
+                    var boneList = meshListSome.BoneList;
+                    if (boneList != null) {
+                        foreach (var bone in boneList) {
+                            if (!exportFrames.Contains(bone.Path)) {
+                                var boneParent = rootFrame.FindFrameByPath(bone.Path);
+
+                                while (boneParent != null) {
+                                    _ = exportFrames.Add(boneParent.Path);
+                                    boneParent = boneParent.Parent;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (var i = frame.Count - 1; i >= 0; i -= 1) {
+                    frameStack.Push(frame[i]);
+                }
+            }
+        }
 
     }
 }

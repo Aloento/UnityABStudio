@@ -17,5 +17,15 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             }
         }
 
+        private void SetFramePaths(HashSet<string> framePaths) {
+            if (framePaths == null || framePaths.Count == 0)
+                return;
+
+            var framePathList = new List<string>(framePaths);
+            var framePathArray = framePathList.ToArray();
+
+            AsFbxSetFramePaths(pContext, framePathArray);
+        }
+
     }
 }
