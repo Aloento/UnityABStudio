@@ -22,7 +22,7 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <ProjectGuid>{9CC97E1C-2D80-4452-BEBF-2CC3880629C3}</ProjectGuid>
     <Keyword>NetCoreCProj</Keyword>
-    <RootNamespace>AutoDeskFBX</RootNamespace>
+    <RootNamespace>SoarCraft::QYun::AutoDeskFBX</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
@@ -129,7 +129,6 @@
     <ClInclude Include="AsFbxMorphContext.h" />
     <ClInclude Include="AsFbxSkinContext.h" />
     <ClInclude Include="AutoDeskFBX.h" />
-    <ClInclude Include="Math.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
@@ -157,6 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AssetReader\AssetReader.csproj">
+      <Project>{5e8af99f-026e-42c5-bdd5-b61c1f067ee4}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

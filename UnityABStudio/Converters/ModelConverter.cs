@@ -15,6 +15,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
     using AssetReader.Unity3D.Objects.Materials;
     using AssetReader.Unity3D.Objects.Meshes;
     using AssetReader.Unity3D.Objects.Texture2Ds;
+    using AutoDeskFBX;
+    using CommunityToolkit.Mvvm.DependencyInjection;
     using Core.Entities;
     using Core.Helpers;
     using Extensions;
@@ -27,14 +29,15 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
         public List<ImportedKeyframedAnimation> AnimationList { get; protected set; } = new();
         public List<ImportedMorph> MorphList { get; protected set; } = new();
 
-        private ImageFormat imageFormat;
         private Avatar avatar;
-        private HashSet<AnimationClip> animationClipHashSet = new();
-        private Dictionary<AnimationClip, string> boundAnimationPathDic = new();
-        private Dictionary<uint, string> bonePathHash = new();
-        private Dictionary<Texture2D, string> textureNameDictionary = new();
-        private Dictionary<Transform, ImportedFrame> transformDictionary = new();
-        Dictionary<uint, string> morphChannelNames = new();
+        private readonly ImageFormat imageFormat;
+        private readonly HashSet<AnimationClip> animationClipHashSet = new();
+        private readonly Dictionary<AnimationClip, string> boundAnimationPathDic = new();
+        private readonly Dictionary<uint, string> bonePathHash = new();
+        private readonly Dictionary<Texture2D, string> textureNameDictionary = new();
+        private readonly Dictionary<Transform, ImportedFrame> transformDictionary = new();
+        private readonly Dictionary<uint, string> morphChannelNames = new();
+        private readonly FBXService fbx = Ioc.Default.GetRequiredService<FBXService>();
 
         public ModelConverter(GameObject m_GameObject, ImageFormat imageFormat, AnimationClip[] animationList = null) {
             this.imageFormat = imageFormat;
@@ -189,7 +192,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
             return frame;
         }
 
-        private static ImportedFrame CreateFrame(string name, Vector3 t, Quaternion q, Vector3 s) {
+        private ImportedFrame CreateFrame(string name, Vector3 t, Quaternion q, Vector3 s) {
             var frame = new ImportedFrame {
                 Name = name
             };
@@ -197,9 +200,9 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
             return frame;
         }
 
-        private static void SetFrame(ImportedFrame frame, Vector3 t, Quaternion q, Vector3 s) {
+        private void SetFrame(ImportedFrame frame, Vector3 t, Quaternion q, Vector3 s) {
             frame.LocalPosition = new Vector3(-t.X, t.Y, t.Z);
-            frame.LocalRotation = Fbx.QuaternionToEuler(new Quaternion(q.X, -q.Y, -q.Z, q.W));
+            frame.LocalRotation = fbx.AsUtilQuaternionToEuler(new Quaternion(q.X, -q.Y, -q.Z, q.W));
             frame.LocalScale = s;
         }
 
@@ -568,9 +571,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
 
                 //textures
                 iMat.Textures = new List<ImportedMaterialTexture>();
-                foreach (var texEnv in mat.m_SavedProperties.m_TexEnvs) {
-                    if (!texEnv.Value.m_Texture.TryGet<Texture2D>(out var m_Texture2D)) //TODO other Texture
-                    {
+                foreach (var (key, value) in mat.m_SavedProperties.m_TexEnvs) {
+                    if (!value.m_Texture.TryGet<Texture2D>(out var m_Texture2D)) { //TODO other Texture
                         continue;
                     }
 
@@ -578,7 +580,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
                     iMat.Textures.Add(texture);
 
                     var dest = -1;
-                    switch (texEnv.Key) {
+                    switch (key) {
                         case "_MainTex":
                             dest = 0;
                             break;
@@ -586,9 +588,9 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
                             dest = 3;
                             break;
                         default: {
-                            if (texEnv.Key.Contains("Specular"))
+                            if (key.Contains("Specular"))
                                 dest = 2;
-                            else if (texEnv.Key.Contains("Normal"))
+                            else if (key.Contains("Normal"))
                                 dest = 1;
                             break;
                         }
@@ -614,8 +616,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
                         this.textureNameDictionary.Add(m_Texture2D, texture.Name);
                     }
 
-                    texture.Offset = texEnv.Value.m_Offset;
-                    texture.Scale = texEnv.Value.m_Scale;
+                    texture.Offset = value.m_Offset;
+                    texture.Scale = value.m_Scale;
                     this.ConvertTexture2D(m_Texture2D, texture.Name);
                 }
 
@@ -674,14 +676,14 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
 
                         for (var i = 0; i < numKeys; i++) {
                             var quat = quats[i];
-                            var value = Fbx.QuaternionToEuler(new Quaternion(quat.X, -quat.Y, -quat.Z, quat.W));
+                            var value = fbx.AsUtilQuaternionToEuler(new Quaternion(quat.X, -quat.Y, -quat.Z, quat.W));
                             track.Rotations.Add(new ImportedKeyframe<Vector3>(times[i], value));
                         }
                     }
                     foreach (var m_RotationCurve in animationClip.m_RotationCurves) {
                         var track = iAnim.FindTrack(this.FixBonePath(animationClip, m_RotationCurve.path));
                         foreach (var m_Curve in m_RotationCurve.curve.m_Curve) {
-                            var value = Fbx.QuaternionToEuler(new Quaternion(m_Curve.value.X, -m_Curve.value.Y, -m_Curve.value.Z, m_Curve.value.W));
+                            var value = fbx.AsUtilQuaternionToEuler(new Quaternion(m_Curve.value.X, -m_Curve.value.Y, -m_Curve.value.Z, m_Curve.value.W));
                             track.Rotations.Add(new ImportedKeyframe<Vector3>(m_Curve.time, value));
                         }
                     }
@@ -804,7 +806,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
                             )));
                             break;
                         case 2:
-                            var value = Fbx.QuaternionToEuler(new Quaternion
+                            var value = fbx.AsUtilQuaternionToEuler(new Quaternion
                             (
                                 data[curveIndex++ + offset],
                                 -data[curveIndex++ + offset],
@@ -880,8 +882,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
             var skeletonPaths = this.avatar.m_Avatar.m_AvatarSkeleton.m_ID.Select(id => this.avatar.FindBonePath(id)).ToList();
             // 2. Restore the original transform hierarchy
             // Prerequisite: skeletonPaths follow pre-order traversal
-            for (var i = 1; i < skeletonPaths.Count; i++) // start from 1, skip the root transform because it will always be there.
-            {
+            for (var i = 1; i < skeletonPaths.Count; i++) { // start from 1, skip the root transform because it will always be there.
                 var path = skeletonPaths[i];
                 var strs = path.Split('/');
                 string transformName;
@@ -911,16 +912,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
             }
         }
 
-        private string GetPathByChannelName(string channelName) {
-            foreach (var morph in this.MorphList) {
-                foreach (var channel in morph.Channels) {
-                    if (channel.Name == channelName) {
-                        return morph.Path;
-                    }
-                }
-            }
-            return null;
-        }
+        private string GetPathByChannelName(string channelName) => (from morph in this.MorphList from channel in morph.Channels where channel.Name == channelName select morph.Path).FirstOrDefault();
 
         private string GetChannelNameFromHash(uint attribute) => this.morphChannelNames.TryGetValue(attribute, out var name) ? name : null;
     }

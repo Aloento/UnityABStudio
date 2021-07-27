@@ -4,13 +4,14 @@
 #include "AsFbxAnimContext.h"
 #include "AsFbxMorphContext.h"
 
-using namespace System;
-
 namespace SoarCraft::QYun::AutoDeskFBX {
+    using namespace System;
+    using namespace AssetReader::Math;
+
     public ref class FBXService
     {
     public:
-        void AsUtilQuaternionToEuler(float qx, float qy, float qz, float qw, float* vx, float* vy, float* vz);
+        Vector3 AsUtilQuaternionToEuler(Quaternion q);
         void AsUtilEulerToQuaternion(float vx, float vy, float vz, float* qx, float* qy, float* qz, float* qw);
         AsFbxContext* AsFbxCreateContext();
         bool AsFbxInitializeContext(AsFbxContext* pContext, const char* pFileName, float scaleFactor, int32_t versionIndex, bool isAscii, bool is60Fps, const char** pErrMsg);
@@ -89,6 +90,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxMorphSetBlendShapeVertexNormal(AsFbxMorphContext* pMorphContext, uint32_t index, float x, float y, float z);
 
     private:
+        Quaternion EulerToQuaternion(Vector3 v);
 
     };
 }

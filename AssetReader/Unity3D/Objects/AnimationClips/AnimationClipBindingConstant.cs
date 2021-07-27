@@ -6,6 +6,8 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
         public GenericBinding[] genericBindings;
         public PPtr<UObject>[] pptrCurveMapping;
 
+        public AnimationClipBindingConstant() { }
+
         public AnimationClipBindingConstant(ObjectReader reader) {
             var numBindings = reader.ReadInt32();
             genericBindings = new GenericBinding[numBindings];

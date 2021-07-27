@@ -1,20 +1,12 @@
 #include "pch.h"
 #include "AutoDeskFBX.h"
-#include "Math.h"
 
 namespace SoarCraft::QYun::AutoDeskFBX {
-    void FBXService::AsUtilQuaternionToEuler(float qx, float qy, float qz, float qw, float* vx, float* vy, float* vz) {
-        Quaternion q(qx, qy, qz, qw);
-        auto v = QuaternionToEuler(q);
-
-        if (vx)
-            *vx = v.X;
-
-        if (vy)
-            *vy = v.Y;
-
-        if (vz)
-            *vz = v.Z;
+    Vector3 FBXService::AsUtilQuaternionToEuler(Quaternion q) {
+        FbxAMatrix lMatrixRot;
+        lMatrixRot.SetQ(FbxQuaternion(q.X, q.Y, q.Z, q.W));
+        FbxVector4 lEuler = lMatrixRot.GetR();
+        return Vector3((float)lEuler[0], (float)lEuler[1], (float)lEuler[2]);
     }
 
     void FBXService::AsUtilEulerToQuaternion(float vx, float vy, float vz, float* qx, float* qy, float* qz, float* qw) {
@@ -42,7 +34,10 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         FBX_2012_00_COMPATIBLE,
         FBX_2013_00_COMPATIBLE,
         FBX_2014_00_COMPATIBLE,
-        FBX_2016_00_COMPATIBLE
+        FBX_2016_00_COMPATIBLE,
+        FBX_2018_00_COMPATIBLE,
+        FBX_2019_00_COMPATIBLE,
+        FBX_2020_00_COMPATIBLE
     };
 
     AsFbxContext* FBXService::AsFbxCreateContext() {

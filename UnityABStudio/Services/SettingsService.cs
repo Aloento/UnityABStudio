@@ -8,7 +8,7 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
     using Extensions;
     using Microsoft.UI.Xaml;
 
-    public class SettingsService : ObservableRecipient {
+    public partial class SettingsService : ObservableRecipient {
         private readonly IThemeSelectorService themeSelectorService;
         private ElementTheme elementTheme;
 
@@ -24,27 +24,6 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
             get => this.versionDescription;
 
             set => _ = this.SetProperty(ref this.versionDescription, value);
-        }
-
-        private bool convertTexture = true;
-
-        public bool ConvertTexture {
-            get => this.convertTexture;
-            set => _ = SetProperty(ref this.convertTexture, value);
-        }
-
-        private bool convertAudio = true;
-
-        public bool ConvertAudio {
-            get => this.convertAudio;
-            set => _ = SetProperty(ref this.convertAudio, value);
-        }
-
-        private bool restoreExtensionName = true;
-
-        public bool RestoreExtensionName {
-            get => this.restoreExtensionName;
-            set => _ = SetProperty(ref this.restoreExtensionName, value);
         }
 
         private ImageFormat convertType;

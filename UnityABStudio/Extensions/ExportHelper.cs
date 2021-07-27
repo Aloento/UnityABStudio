@@ -45,15 +45,15 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
         private static void ExportFbx(IImported convert, string exportPath) {
             var eulerFilter = settings.EulerFilter;
-            var filterPrecision = (float)settings.FilterPrecision;
+            var filterPrecision = settings.FilterPrecision;
             var exportAllNodes = settings.ExportAllNodes;
             var exportSkins = settings.ExportSkins;
             var exportAnimations = settings.ExportAnimations;
             var exportBlendShape = settings.ExportBlendShape;
             var castToBone = settings.CastToBone;
-            var boneSize = (int)settings.BoneSize;
+            var boneSize = settings.BoneSize;
             var exportAllUvsAsDiffuseMaps = settings.ExportAllUvsAsDiffuseMaps;
-            var scaleFactor = (float)settings.ScaleFactor;
+            var scaleFactor = settings.ScaleFactor;
             var fbxVersion = settings.FbxVersion;
             var fbxFormat = settings.FbxFormat;
             ModelExporter.ExportFbx(exportPath, convert, eulerFilter, filterPrecision,

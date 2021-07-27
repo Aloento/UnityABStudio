@@ -10,6 +10,7 @@ namespace SoarCraft.QYun.AssetReader.Unity3D.Objects.AnimationClips {
         public byte customType;
         public byte isPPtrCurve;
 
+        public GenericBinding() { }
         public GenericBinding(ObjectReader reader) {
             var version = reader.version;
             path = reader.ReadUInt32();
