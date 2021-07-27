@@ -3,7 +3,6 @@ namespace SoarCraft.QYun.UnityABStudio {
     using System;
     using Activation;
     using AssetReader;
-    using AutoDeskFBX;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Contracts.Services;
     using Core.Contracts.Services;
@@ -57,7 +56,7 @@ namespace SoarCraft.QYun.UnityABStudio {
             _ = services.AddSingleton<SettingsService>();
             _ = services.AddSingleton<AssetsManager>();
             _ = services.AddSingleton<TextureDecoderService>();
-            _ = services.AddSingleton<FBXService>();
+            _ = services.AddSingleton<FBXHelpService>();
 
             // Views and ViewModels
             _ = services.AddTransient<ShellPage>();

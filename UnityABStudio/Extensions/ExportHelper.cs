@@ -56,6 +56,16 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             var scaleFactor = settings.ScaleFactor;
             var fbxVersion = settings.FbxVersion;
             var fbxFormat = settings.FbxFormat;
+
+            var dir = new FileInfo(exportPath).Directory;
+            if (dir is { Exists: false })
+                dir.Create();
+
+            var currentDir = Directory.GetCurrentDirectory();
+            Directory.SetCurrentDirectory(dir?.FullName ?? currentDir);
+
+
+
             ModelExporter.ExportFbx(exportPath, convert, eulerFilter, filterPrecision,
                 exportAllNodes, exportSkins, exportAnimations, exportBlendShape, castToBone, boneSize, exportAllUvsAsDiffuseMaps, scaleFactor, fbxVersion, fbxFormat == 1);
         }

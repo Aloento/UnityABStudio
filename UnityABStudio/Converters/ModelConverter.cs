@@ -15,10 +15,10 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
     using AssetReader.Unity3D.Objects.Materials;
     using AssetReader.Unity3D.Objects.Meshes;
     using AssetReader.Unity3D.Objects.Texture2Ds;
-    using AutoDeskFBX;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Core.Entities;
     using Core.Helpers;
+    using Core.Services;
     using Extensions;
 
     public class ModelConverter : IImported {
@@ -37,7 +37,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
         private readonly Dictionary<Texture2D, string> textureNameDictionary = new();
         private readonly Dictionary<Transform, ImportedFrame> transformDictionary = new();
         private readonly Dictionary<uint, string> morphChannelNames = new();
-        private readonly FBXService fbx = Ioc.Default.GetRequiredService<FBXService>();
+        private readonly FBXHelpService fbx = Ioc.Default.GetRequiredService<FBXHelpService>();
 
         public ModelConverter(GameObject m_GameObject, ImageFormat imageFormat, AnimationClip[] animationList = null) {
             this.imageFormat = imageFormat;
