@@ -41,7 +41,8 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             while (nodeStack.Count > 0) {
                 var parentNode = nodeStack.Pop();
                 var frame = frameStack.Pop();
-                var childNode = AsFbxExportSingleFrame(pContext, parentNode, frame.Path, frame.Name, frame.LocalPosition, frame.LocalRotation, frame.LocalScale);
+                var childNode = AsFbxExportSingleFrame(pContext, parentNode, frame.Path, frame.Name,
+                    frame.LocalPosition, frame.LocalRotation, frame.LocalScale);
 
                 if (imported.MeshList != null && ImportedHelpers.FindMesh(frame.Path, imported.MeshList) != null)
                     meshFrames.Add(frame);
@@ -52,6 +53,12 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                     frameStack.Push(frame[i]);
                 }
             }
+        }
+
+        private void ExportMesh(ImportedFrame rootFrame, List<ImportedMaterial> materialList,
+                                List<ImportedTexture> textureList, IntPtr frameNode, ImportedMesh importedMesh,
+                                bool exportSkins, bool exportAllUvsAsDiffuseMaps) {
+
         }
     }
 }

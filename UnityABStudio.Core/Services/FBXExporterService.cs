@@ -1,5 +1,6 @@
 namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     using System.Collections.Generic;
+    using System.Linq;
     using AutoDeskFBX;
     using Helpers;
 
@@ -16,7 +17,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
         private bool isAscii;
 
         public void Init(string fileName, IImported imported, bool allNodes, bool exportSkins, bool castToBone,
-                         float boneSize, bool exportAllUvsAsDiffuseMaps, float scaleFactor, int versionIndex, bool isAscii) {
+            float boneSize, bool exportAllUvsAsDiffuseMaps, float scaleFactor, int versionIndex, bool isAscii) {
             this.fileName = fileName;
             this.imported = imported;
             this.allNodes = allNodes;
@@ -41,8 +42,8 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
 
             if (imported.MeshList != null) {
                 SetJointsFromImportedMeshes();
-                PrepareMaterials();
-                ExportMeshFrames(imported.RootFrame, meshFrames);
+                AsFbxPrepareMaterials(pContext, imported.MaterialList.Count, imported.TextureList.Count);
+                ExportMeshFrames(meshFrames);
             } else {
                 SetJointsNode(imported.RootFrame, null, true);
             }
@@ -56,6 +57,27 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             ExportScene();
         }
 
+        private void ExportMeshFrames(List<ImportedFrame> meshFrames) {
+            foreach (var meshFrame in meshFrames) {
+                var meshNode = frameToNode[meshFrame];
+                var mesh = ImportedHelpers.FindMesh(meshFrame.Path, imported.MeshList);
+                ExportMesh(imported.RootFrame, imported.MaterialList,
+                           imported.TextureList, meshNode, mesh,
+                           exportSkins, exportAllUvsAsDiffuseMaps);
+            }
+        }
+
+        private void SetJointsFromImportedMeshes() {
+            if (!exportSkins)
+                return;
+
+            var bonePaths = new HashSet<string>();
+            foreach (var bone in this.imported.MeshList.Select(mesh => mesh.BoneList)
+                .Where(boneList => boneList != null).SelectMany(boneList => boneList)) {
+                _ = bonePaths.Add(bone.Path);
+            }
+        }
+
         private HashSet<string> SearchHierarchy() {
             if (this.imported.MeshList == null || this.imported.MeshList.Count == 0)
                 return null;
@@ -65,7 +87,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
         }
 
         private void SearchHierarchy(ImportedFrame rootFrame, List<ImportedMesh> meshList,
-                                     out HashSet<string> exportFrames) {
+            out HashSet<string> exportFrames) {
             exportFrames = new HashSet<string>();
             var frameStack = new Stack<ImportedFrame>();
             frameStack.Push(rootFrame);
@@ -101,6 +123,5 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                 }
             }
         }
-
     }
 }

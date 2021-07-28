@@ -48,7 +48,8 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pNode->SetNodeAttribute(pNull);
     }
 
-    void FBXService::AsFbxPrepareMaterials(AsFbxContext* pContext, int32_t materialCount, int32_t textureCount) {
+    void FBXService::AsFbxPrepareMaterials(IntPtr ptrContext, int32_t materialCount, int32_t textureCount) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
         if (pContext == nullptr)
             return;
 
