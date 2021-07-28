@@ -36,7 +36,24 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
         }
 
         public void ExportAll(bool blendShape, bool animation, bool eulerFilter, float filterPrecision) {
+            var meshFrames = new List<ImportedFrame>();
+            ExportFrame(meshFrames);
 
+            if (imported.MeshList != null) {
+                SetJointsFromImportedMeshes();
+                PrepareMaterials();
+                ExportMeshFrames(imported.RootFrame, meshFrames);
+            } else {
+                SetJointsNode(imported.RootFrame, null, true);
+            }
+
+            if (blendShape)
+                ExportMorphs();
+
+            if (animation)
+                ExportAnimations(eulerFilter, filterPrecision);
+
+            ExportScene();
         }
 
         private HashSet<string> SearchHierarchy() {

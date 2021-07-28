@@ -140,35 +140,46 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             pExporter->Export(pScene);
     }
 
-    FbxNode* FBXService::AsFbxGetSceneRootNode(AsFbxContext* pContext) {
+    IntPtr FBXService::AsFbxGetSceneRootNode(IntPtr ptrContext) {
+        // FbxNode* FBXService::AsFbxGetSceneRootNode(AsFbxContext* pContext)
+        auto pContext = (AsFbxContext*) ptrContext.ToPointer();
+
         if (pContext == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
         if (pContext->pScene == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
-        return pContext->pScene->GetRootNode();
+        return IntPtr(pContext->pScene->GetRootNode());
     }
 
-    FbxNode* FBXService::AsFbxExportSingleFrame(AsFbxContext* pContext, FbxNode* pParentNode,
-                                                const char* pFramePath, const char* pFrameName,
-                                                float localPositionX, float localPositionY, float localPositionZ,
-                                                float localRotationX, float localRotationY, float localRotationZ,
-                                                float localScaleX, float localScaleY, float localScaleZ) {
+    IntPtr FBXService::AsFbxExportSingleFrame(IntPtr ptrContext, IntPtr ptrParentNode,
+                                              String^ strFramePath, String^ strFrameName,
+                                              Vector3 localPosition, Vector3 localRotation, Vector3 localScale) {
+//  FbxNode* FBXService::AsFbxExportSingleFrame(AsFbxContext* pContext, FbxNode* pParentNode,
+//                                              const char* pFramePath, const char* pFrameName,
+//                                              float localPositionX, float localPositionY, float localPositionZ,
+//                                              float localRotationX, float localRotationY, float localRotationZ,
+//                                              float localScaleX, float localScaleY, float localScaleZ
+
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pParentNode = (FbxNode*)ptrParentNode.ToPointer();
+        auto pFramePath = msclr::interop::marshal_as<std::string>(strFramePath);
 
         if (pContext == nullptr || pContext->pScene == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
         const auto& framePaths = pContext->framePaths;
 
         if (!(framePaths.empty() || framePaths.find(pFramePath) != framePaths.end()))
-            return nullptr;
+            return IntPtr::Zero;
 
+        auto pFrameName = (const char*)(Marshal::StringToHGlobalAuto(strFrameName).ToPointer());
         auto pFrameNode = FbxNode::Create(pContext->pScene, pFrameName);
 
-        pFrameNode->LclScaling.Set(FbxDouble3(localScaleX, localScaleY, localScaleZ));
-        pFrameNode->LclRotation.Set(FbxDouble3(localRotationX, localRotationY, localRotationZ));
-        pFrameNode->LclTranslation.Set(FbxDouble3(localPositionX, localPositionY, localPositionZ));
+        pFrameNode->LclScaling.Set(FbxDouble3(localScale.X, localScale.Y, localScale.Z));
+        pFrameNode->LclRotation.Set(FbxDouble3(localRotation.X, localRotation.Y, localRotation.Z));
+        pFrameNode->LclTranslation.Set(FbxDouble3(localPosition.X, localPosition.Y, localPosition.Z));
         pFrameNode->SetPreferedAngle(pFrameNode->LclRotation.Get());
 
         pParentNode->AddChild(pFrameNode);
@@ -176,6 +187,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pContext->pBindPose != nullptr)
             pContext->pBindPose->Add(pFrameNode, pFrameNode->EvaluateGlobalTransform());
 
-        return pFrameNode;
+        Marshal::FreeHGlobal(IntPtr((void*)pFrameName));
+        return IntPtr(pFrameNode);
     }
 }

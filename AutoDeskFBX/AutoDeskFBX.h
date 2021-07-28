@@ -20,12 +20,10 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxDisposeContext(AsFbxContext** ppContext);
         void AsFbxSetFramePaths(IntPtr ptrContext, array<String^>^ ppPaths);
         void AsFbxExportScene(AsFbxContext* pContext);
-        FbxNode* AsFbxGetSceneRootNode(AsFbxContext* pContext);
-        FbxNode* AsFbxExportSingleFrame(AsFbxContext* pContext, FbxNode* pParentNode,
-                                        const char* pFramePath, const char* pFrameName,
-                                        float localPositionX, float localPositionY, float localPositionZ,
-                                        float localRotationX, float localRotationY, float localRotationZ,
-                                        float localScaleX, float localScaleY, float localScaleZ);
+        IntPtr AsFbxGetSceneRootNode(IntPtr ptrContext);
+        IntPtr AsFbxExportSingleFrame(IntPtr ptrContext, IntPtr ptrParentNode,
+                                      String^ strFramePath, String^ strFrameName,
+                                      Vector3 localPosition, Vector3 localRotation, Vector3 localScale);
         void AsFbxSetJointsNode_CastToBone(AsFbxContext* pContext, FbxNode* pNode, float boneSize);
         void AsFbxSetJointsNode_BoneInPath(AsFbxContext* pContext, FbxNode* pNode, float boneSize);
         void AsFbxSetJointsNode_Generic(AsFbxContext* pContext, FbxNode* pNode);
