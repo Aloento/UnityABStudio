@@ -28,8 +28,8 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxSetJointsNode_BoneInPath(IntPtr ptrContext, IntPtr ptrNode, float boneSize);
         void AsFbxSetJointsNode_Generic(IntPtr ptrContext, IntPtr ptrNode);
         void AsFbxPrepareMaterials(IntPtr ptrContext, int32_t materialCount, int32_t textureCount);
-        FbxFileTexture* AsFbxCreateTexture(IntPtr ptrContext, const char* pMatTexName);
-        void AsFbxLinkTexture(int32_t dest, FbxFileTexture* pTexture, FbxSurfacePhong* pMaterial,
+        IntPtr AsFbxCreateTexture(IntPtr ptrContext, String^ strMatTexName);
+        void AsFbxLinkTexture(int32_t dest, IntPtr ptrTexture, IntPtr ptrMaterial,
                               float offsetX, float offsetY, float scaleX, float scaleY);
         IntPtr AsFbxMeshCreateClusterArray(int32_t boneCount);
         void AsFbxMeshDisposeClusterArray(FbxArray<FbxCluster*>** ppArray);
@@ -43,15 +43,12 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxMeshCreateElementTangent(IntPtr ptrMesh);
         void AsFbxMeshCreateElementVertexColor(IntPtr ptrMesh);
         void AsFbxMeshCreateElementMaterial(IntPtr ptrMesh);
-        FbxSurfacePhong* AsFbxCreateMaterial(IntPtr ptrContext, const char* pMatName,
-                                             float diffuseR, float diffuseG, float diffuseB,
-                                             float ambientR, float ambientG, float ambientB,
-                                             float emissiveR, float emissiveG, float emissiveB,
-                                             float specularR, float specularG, float specularB,
-                                             float reflectR, float reflectG, float reflectB,
+        IntPtr AsFbxCreateMaterial(IntPtr ptrContext, String^ strMatName,
+                                             Color diffuse, Color ambient, Color emissive,
+                                             Color specular, Color reflect,
                                              float shininess, float transparency);
-        int AsFbxAddMaterialToFrame(FbxNode* pFrameNode, FbxSurfacePhong* pMaterial);
-        void AsFbxSetFrameShadingModeToTextureShading(FbxNode* pFrameNode);
+        int AsFbxAddMaterialToFrame(IntPtr ptrFrameNode, IntPtr ptrMaterial);
+        void AsFbxSetFrameShadingModeToTextureShading(IntPtr ptrFrameNode);
         void AsFbxMeshSetControlPoint(IntPtr ptrMesh, int32_t index, float x, float y, float z);
         void AsFbxMeshAddPolygon(IntPtr ptrMesh, int32_t materialIndex, int32_t index0, int32_t index1, int32_t index2);
         void AsFbxMeshElementNormalAdd(IntPtr ptrMesh, int32_t elementIndex, float x, float y, float z);
@@ -59,7 +56,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxMeshElementTangentAdd(IntPtr ptrMesh, int32_t elementIndex, float x, float y, float z, float w);
         void AsFbxMeshElementVertexColorAdd(IntPtr ptrMesh, int32_t elementIndex, float r, float g, float b, float a);
         void AsFbxMeshSetBoneWeight(FbxArray<FbxCluster*>* pClusterArray, int32_t boneIndex, int32_t vertexIndex, float weight);
-        AsFbxSkinContext* AsFbxMeshCreateSkinContext(IntPtr ptrContext, FbxNode* pFrameNode);
+        AsFbxSkinContext* AsFbxMeshCreateSkinContext(IntPtr ptrContext, IntPtr ptrFrameNode);
         void AsFbxMeshDisposeSkinContext(AsFbxSkinContext** ppSkinContext);
         bool FbxClusterArray_HasItemAt(FbxArray<FbxCluster*>* pClusterArray, int32_t index);
         void AsFbxMeshSkinAddCluster(AsFbxSkinContext* pSkinContext, FbxArray<FbxCluster*>* pClusterArray, int32_t index, float pBoneMatrix[16]);

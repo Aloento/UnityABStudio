@@ -69,12 +69,14 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pContext->pTextures->Reserve(textureCount);
     }
 
-    FbxFileTexture* FBXService::AsFbxCreateTexture(IntPtr ptrContext, const char* pMatTexName) {
+    IntPtr FBXService::AsFbxCreateTexture(IntPtr ptrContext, String^ strMatTexName) {
+        // FbxFileTexture* const char* pMatTexName
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
 
         if (pContext == nullptr || pContext->pScene == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
+        const char* pMatTexName = (const char*)(Marshal::StringToHGlobalAuto(strMatTexName).ToPointer());
         auto pTex = FbxFileTexture::Create(pContext->pScene, pMatTexName);
         pTex->SetFileName(pMatTexName);
         pTex->SetTextureUse(FbxTexture::eStandard);
@@ -88,11 +90,14 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pContext->pTextures != nullptr) 
             pContext->pTextures->Add(pTex);
 
-        return pTex;
+        Marshal::FreeHGlobal(IntPtr((void*)pMatTexName));
+        return IntPtr(pTex);
     }
 
-    void FBXService::AsFbxLinkTexture(int32_t dest, FbxFileTexture* pTexture, FbxSurfacePhong* pMaterial,
+    void FBXService::AsFbxLinkTexture(int32_t dest, IntPtr ptrTexture, IntPtr ptrMaterial,
                                       float offsetX, float offsetY, float scaleX, float scaleY) {
+        auto pTexture = (FbxFileTexture*)ptrTexture.ToPointer();
+        auto pMaterial = (FbxSurfacePhong*)ptrMaterial.ToPointer();
 
         if (pTexture == nullptr || pMaterial == nullptr)
             return;

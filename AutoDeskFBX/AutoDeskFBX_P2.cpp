@@ -35,28 +35,26 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pMaterial->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
     }
 
-    FbxSurfacePhong* FBXService::AsFbxCreateMaterial(IntPtr ptrContext, const char* pMatName,
-                                                     float diffuseR, float diffuseG, float diffuseB,
-                                                     float ambientR, float ambientG, float ambientB,
-                                                     float emissiveR, float emissiveG, float emissiveB,
-                                                     float specularR, float specularG, float specularB,
-                                                     float reflectR, float reflectG, float reflectB,
+    IntPtr FBXService::AsFbxCreateMaterial(IntPtr ptrContext, String^ strMatName,
+                                                     Color diffuse, Color ambient, Color emissive,
+                                                     Color specular, Color reflect,
                                                      float shininess, float transparency) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
 
         if (pContext == nullptr || pContext->pScene == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
-        if (pMatName == nullptr)
-            return nullptr;
+        if (String::IsNullOrWhiteSpace(strMatName))
+            return IntPtr::Zero;
 
+        const char* pMatName = (const char*)(Marshal::StringToHGlobalAuto(strMatName).ToPointer());
         auto pMat = FbxSurfacePhong::Create(pContext->pScene, pMatName);
 
-        pMat->Diffuse.Set(FbxDouble3(diffuseR, diffuseG, diffuseB));
-        pMat->Ambient.Set(FbxDouble3(ambientR, ambientG, ambientB));
-        pMat->Emissive.Set(FbxDouble3(emissiveR, emissiveG, emissiveB));
-        pMat->Specular.Set(FbxDouble3(specularR, specularG, specularB));
-        pMat->Reflection.Set(FbxDouble3(reflectR, reflectG, reflectB));
+        pMat->Diffuse.Set(FbxDouble3(diffuse.R, diffuse.G, diffuse.B));
+        pMat->Ambient.Set(FbxDouble3(ambient.R, ambient.G, ambient.B));
+        pMat->Emissive.Set(FbxDouble3(emissive.R, emissive.G, emissive.B));
+        pMat->Specular.Set(FbxDouble3(specular.R, specular.G, specular.B));
+        pMat->Reflection.Set(FbxDouble3(reflect.R, reflect.G, reflect.B));
         pMat->Shininess.Set(FbxDouble(shininess));
         pMat->TransparencyFactor.Set(FbxDouble(transparency));
         pMat->ShadingModel.Set("Phong");
@@ -64,17 +62,23 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pContext->pMaterials)
             pContext->pMaterials->Add(pMat);
 
-        return pMat;
+        Marshal::FreeHGlobal(IntPtr((void*)pMatName));
+        return IntPtr(pMat);
     }
 
-    int FBXService::AsFbxAddMaterialToFrame(FbxNode* pFrameNode, FbxSurfacePhong* pMaterial) {
+    int FBXService::AsFbxAddMaterialToFrame(IntPtr ptrFrameNode, IntPtr ptrMaterial) {
+        auto pFrameNode = (FbxNode*)ptrFrameNode.ToPointer();
+        auto pMaterial = (FbxSurfacePhong*)ptrMaterial.ToPointer();
+
         if (pFrameNode == nullptr || pMaterial == nullptr)
             return 0;
 
         return pFrameNode->AddMaterial(pMaterial);
     }
 
-    void FBXService::AsFbxSetFrameShadingModeToTextureShading(FbxNode* pFrameNode) {
+    void FBXService::AsFbxSetFrameShadingModeToTextureShading(IntPtr ptrFrameNode) {
+        auto pFrameNode = (FbxNode*)ptrFrameNode.ToPointer();
+
         if (pFrameNode == nullptr)
             return;
 
@@ -162,8 +166,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             pCluster->AddControlPointIndex(vertexIndex, weight);
     }
 
-    AsFbxSkinContext* FBXService::AsFbxMeshCreateSkinContext(IntPtr ptrContext, FbxNode* pFrameNode) {
+    AsFbxSkinContext* FBXService::AsFbxMeshCreateSkinContext(IntPtr ptrContext, IntPtr ptrFrameNode) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pFrameNode = (FbxNode*)ptrFrameNode.ToPointer();
         return new AsFbxSkinContext(pContext, pFrameNode);
     }
 

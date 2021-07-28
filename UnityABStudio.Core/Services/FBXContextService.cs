@@ -1,6 +1,7 @@
 namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using Helpers;
 
     public partial class FBXHelpService {
@@ -56,7 +57,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
         }
 
         private void ExportMesh(ImportedFrame rootFrame, List<ImportedMaterial> materialList,
-                                List<ImportedTexture> textureList, IntPtr frameNode, ImportedMesh importedMesh) {
+            List<ImportedTexture> textureList, IntPtr frameNode, ImportedMesh importedMesh) {
             var boneList = importedMesh.BoneList;
             var totalBoneCount = 0;
             var hasBones = false;
@@ -107,9 +108,72 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             AsFbxMeshCreateElementMaterial(mesh);
 
             foreach (var meshObj in importedMesh.SubmeshList) {
+                var materialIndex = 0;
+                var mat = ImportedHelpers.FindMaterial(meshObj.Material, materialList);
+
+                if (mat != null) {
+                    var foundMat = createdMaterials.FindIndex(kv => kv.Key == mat.Name);
+                    IntPtr pMat;
+
+                    if (foundMat >= 0) {
+                        pMat = createdMaterials[foundMat].Value;
+                    } else {
+                        var diffuse = mat.Diffuse;
+                        var ambient = mat.Ambient;
+                        var emissive = mat.Emissive;
+                        var specular = mat.Specular;
+                        var reflection = mat.Reflection;
+
+                        pMat = AsFbxCreateMaterial(pContext, mat.Name, diffuse, ambient, emissive,
+                                                   specular, reflection, mat.Shininess, mat.Transparency);
+                        createdMaterials.Add(new KeyValuePair<string, IntPtr>(mat.Name, pMat));
+                    }
+
+                    materialIndex = AsFbxAddMaterialToFrame(frameNode, pMat);
+                    var hasTexture = false;
+
+                    foreach (var texture in mat.Textures) {
+                        var tex = ImportedHelpers.FindTexture(texture.Name, textureList);
+                        var pTexture = ExportTexture(tex);
+
+                        if (pTexture != IntPtr.Zero) {
+                            switch (texture.Dest) {
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3: {
+                                    AsFbxLinkTexture(texture.Dest, pTexture, pMat, texture.Offset.X, texture.Offset.Y, texture.Scale.X, texture.Scale.Y);
+                                    hasTexture = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (hasTexture)
+                        AsFbxSetFrameShadingModeToTextureShading(frameNode);
+                }
+
 
             }
-
         }
+
+        private IntPtr ExportTexture(ImportedTexture texture) {
+            if (texture == null)
+                return IntPtr.Zero;
+
+            if (createdTextures.ContainsKey(texture.Name))
+                return createdTextures[texture.Name];
+
+            var pTex = AsFbxCreateTexture(pContext, texture.Name);
+            createdTextures.Add(texture.Name, pTex);
+            var file = new FileInfo(texture.Name);
+
+            using var writer = new BinaryWriter(file.Create());
+            writer.Write(texture.Data);
+
+            return pTex;
+        }
+
     }
 }
