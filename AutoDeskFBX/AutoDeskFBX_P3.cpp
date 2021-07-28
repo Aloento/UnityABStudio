@@ -2,7 +2,9 @@
 #include "AutoDeskFBX.h"
 
 namespace SoarCraft::QYun::AutoDeskFBX {
-    void FBXService::AsFbxMeshAddDeformer(AsFbxSkinContext* pSkinContext, FbxMesh* pMesh) {
+    void FBXService::AsFbxMeshAddDeformer(AsFbxSkinContext* pSkinContext, IntPtr ptrMesh) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pSkinContext == nullptr || pSkinContext->pSkin == nullptr)
             return;
 
@@ -25,7 +27,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         *ppAnimContext = nullptr;
     }
 
-    void FBXService::AsFbxAnimPrepareStackAndLayer(AsFbxContext* pContext, AsFbxAnimContext* pAnimContext, const char* pTakeName) {
+    void FBXService::AsFbxAnimPrepareStackAndLayer(IntPtr ptrContext, AsFbxAnimContext* pAnimContext, const char* pTakeName) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
 
@@ -41,7 +45,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pAnimContext->lAnimStack->AddMember(pAnimContext->lAnimLayer);
     }
 
-    void FBXService::AsFbxAnimLoadCurves(FbxNode* pNode, AsFbxAnimContext* pAnimContext) {
+    void FBXService::AsFbxAnimLoadCurves(IntPtr ptrNode, AsFbxAnimContext* pAnimContext) {
+        auto pNode = (FbxNode*)ptrNode.ToPointer();
+
         if (pNode == nullptr)
             return;
 
@@ -141,7 +147,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         eulerFilter->Apply(lCurve, 3);
     }
 
-    int32_t FBXService::AsFbxAnimGetCurrentBlendShapeChannelCount(AsFbxAnimContext* pAnimContext, FbxNode* pNode) {
+    int32_t FBXService::AsFbxAnimGetCurrentBlendShapeChannelCount(AsFbxAnimContext* pAnimContext, IntPtr ptrNode) {
+        auto pNode = (FbxNode*)ptrNode.ToPointer();
+
         if (pAnimContext == nullptr)
             return 0;
 

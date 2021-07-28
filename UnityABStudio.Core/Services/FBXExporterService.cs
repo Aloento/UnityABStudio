@@ -62,8 +62,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                 var meshNode = frameToNode[meshFrame];
                 var mesh = ImportedHelpers.FindMesh(meshFrame.Path, imported.MeshList);
                 ExportMesh(imported.RootFrame, imported.MaterialList,
-                           imported.TextureList, meshNode, mesh,
-                           exportSkins, exportAllUvsAsDiffuseMaps);
+                           imported.TextureList, meshNode, mesh);
             }
         }
 

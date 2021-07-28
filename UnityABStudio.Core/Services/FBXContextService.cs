@@ -56,8 +56,59 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
         }
 
         private void ExportMesh(ImportedFrame rootFrame, List<ImportedMaterial> materialList,
-                                List<ImportedTexture> textureList, IntPtr frameNode, ImportedMesh importedMesh,
-                                bool exportSkins, bool exportAllUvsAsDiffuseMaps) {
+                                List<ImportedTexture> textureList, IntPtr frameNode, ImportedMesh importedMesh) {
+            var boneList = importedMesh.BoneList;
+            var totalBoneCount = 0;
+            var hasBones = false;
+
+            if (this.exportSkins && boneList.Count > 0) {
+                totalBoneCount = boneList.Count;
+                hasBones = true;
+            }
+
+            var pClusterArray = IntPtr.Zero;
+            if (hasBones) {
+                pClusterArray = AsFbxMeshCreateClusterArray(totalBoneCount);
+
+                foreach (var bone in boneList) {
+                    if (bone.Path != null) {
+                        var frame = rootFrame.FindFrameByPath(bone.Path);
+                        var boneNode = this.frameToNode[frame];
+                        var cluster = AsFbxMeshCreateCluster(pContext, boneNode);
+                        AsFbxMeshAddCluster(pClusterArray, cluster);
+                    } else {
+                        AsFbxMeshAddCluster(pClusterArray, IntPtr.Zero);
+                    }
+                }
+            }
+
+            var mesh = AsFbxMeshCreateMesh(this.pContext, frameNode);
+            AsFbxMeshInitControlPoints(mesh, importedMesh.VertexList.Count);
+
+            if (importedMesh.hasNormal)
+                AsFbxMeshCreateElementNormal(mesh);
+
+            for (var i = 0; i < importedMesh.hasUV.Length; i++) {
+                if (!importedMesh.hasUV[i])
+                    continue;
+
+                if (i == 1 && !this.exportAllUvsAsDiffuseMaps)
+                    AsFbxMeshCreateNormalMapUV(mesh, 1);
+                else
+                    AsFbxMeshCreateDiffuseUV(mesh, i);
+            }
+
+            if (importedMesh.hasTangent)
+                AsFbxMeshCreateElementTangent(mesh);
+
+            if (importedMesh.hasColor)
+                AsFbxMeshCreateElementVertexColor(mesh);
+
+            AsFbxMeshCreateElementMaterial(mesh);
+
+            foreach (var meshObj in importedMesh.SubmeshList) {
+
+            }
 
         }
     }

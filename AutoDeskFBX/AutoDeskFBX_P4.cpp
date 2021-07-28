@@ -25,7 +25,10 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         return new AsFbxMorphContext();
     }
 
-    void FBXService::AsFbxMorphInitializeContext(AsFbxContext* pContext, AsFbxMorphContext* pMorphContext, FbxNode* pNode) {
+    void FBXService::AsFbxMorphInitializeContext(IntPtr ptrContext, AsFbxMorphContext* pMorphContext, IntPtr ptrNode) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pNode = (FbxNode*)ptrNode.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
 
@@ -52,7 +55,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         *ppMorphContext = nullptr;
     }
 
-    void FBXService::AsFbxMorphAddBlendShapeChannel(AsFbxContext* pContext, AsFbxMorphContext* pMorphContext, const char* channelName) {
+    void FBXService::AsFbxMorphAddBlendShapeChannel(IntPtr ptrContext, AsFbxMorphContext* pMorphContext, const char* channelName) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
 
@@ -69,7 +74,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             pMorphContext->lBlendShape->AddBlendShapeChannel(lBlendShapeChannel);
     }
 
-    void FBXService::AsFbxMorphAddBlendShapeChannelShape(AsFbxContext* pContext, AsFbxMorphContext* pMorphContext, float weight, const char* shapeName) {
+    void FBXService::AsFbxMorphAddBlendShapeChannelShape(IntPtr ptrContext, AsFbxMorphContext* pMorphContext, float weight, const char* shapeName) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
 

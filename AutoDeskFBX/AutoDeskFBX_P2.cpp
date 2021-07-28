@@ -2,7 +2,9 @@
 #include "AutoDeskFBX.h"
 
 namespace SoarCraft::QYun::AutoDeskFBX {
-    void FBXService::AsFbxMeshCreateElementTangent(FbxMesh* pMesh) {
+    void FBXService::AsFbxMeshCreateElementTangent(IntPtr ptrMesh) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -11,7 +13,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pTangent->SetReferenceMode(FbxGeometryElement::eDirect);
     }
 
-    void FBXService::AsFbxMeshCreateElementVertexColor(FbxMesh* pMesh) {
+    void FBXService::AsFbxMeshCreateElementVertexColor(IntPtr ptrMesh) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -20,7 +24,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pVertexColor->SetReferenceMode(FbxGeometryElement::eDirect);
     }
 
-    void FBXService::AsFbxMeshCreateElementMaterial(FbxMesh* pMesh) {
+    void FBXService::AsFbxMeshCreateElementMaterial(IntPtr ptrMesh) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -29,14 +35,14 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pMaterial->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
     }
 
-    FbxSurfacePhong* FBXService::AsFbxCreateMaterial(AsFbxContext* pContext, const char* pMatName,
+    FbxSurfacePhong* FBXService::AsFbxCreateMaterial(IntPtr ptrContext, const char* pMatName,
                                                      float diffuseR, float diffuseG, float diffuseB,
                                                      float ambientR, float ambientG, float ambientB,
                                                      float emissiveR, float emissiveG, float emissiveB,
                                                      float specularR, float specularG, float specularB,
                                                      float reflectR, float reflectG, float reflectB,
                                                      float shininess, float transparency) {
-
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
 
         if (pContext == nullptr || pContext->pScene == nullptr)
             return nullptr;
@@ -75,7 +81,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pFrameNode->SetShadingMode(FbxNode::eTextureShading);
     }
 
-    void FBXService::AsFbxMeshSetControlPoint(FbxMesh* pMesh, int32_t index, float x, float y, float z) {
+    void FBXService::AsFbxMeshSetControlPoint(IntPtr ptrMesh, int32_t index, float x, float y, float z) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -83,7 +91,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pControlPoints[index] = FbxVector4(x, y, z, 0);
     }
 
-    void FBXService::AsFbxMeshAddPolygon(FbxMesh* pMesh, int32_t materialIndex, int32_t index0, int32_t index1, int32_t index2) {
+    void FBXService::AsFbxMeshAddPolygon(IntPtr ptrMesh, int32_t materialIndex, int32_t index0, int32_t index1, int32_t index2) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -94,7 +104,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pMesh->EndPolygon();
     }
 
-    void FBXService::AsFbxMeshElementNormalAdd(FbxMesh* pMesh, int32_t elementIndex, float x, float y, float z) {
+    void FBXService::AsFbxMeshElementNormalAdd(IntPtr ptrMesh, int32_t elementIndex, float x, float y, float z) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -104,7 +116,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         array.Add(FbxVector4(x, y, z, 0));
     }
 
-    void FBXService::AsFbxMeshElementUVAdd(FbxMesh* pMesh, int32_t elementIndex, float u, float v) {
+    void FBXService::AsFbxMeshElementUVAdd(IntPtr ptrMesh, int32_t elementIndex, float u, float v) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -114,7 +128,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         array.Add(FbxVector2(u, v));
     }
 
-    void FBXService::AsFbxMeshElementTangentAdd(FbxMesh* pMesh, int32_t elementIndex, float x, float y, float z, float w) {
+    void FBXService::AsFbxMeshElementTangentAdd(IntPtr ptrMesh, int32_t elementIndex, float x, float y, float z, float w) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -124,7 +140,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         array.Add(FbxVector4(x, y, z, w));
     }
 
-    void FBXService::AsFbxMeshElementVertexColorAdd(FbxMesh* pMesh, int32_t elementIndex, float r, float g, float b, float a) {
+    void FBXService::AsFbxMeshElementVertexColorAdd(IntPtr ptrMesh, int32_t elementIndex, float r, float g, float b, float a) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -144,7 +162,8 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             pCluster->AddControlPointIndex(vertexIndex, weight);
     }
 
-    AsFbxSkinContext* FBXService::AsFbxMeshCreateSkinContext(AsFbxContext* pContext, FbxNode* pFrameNode) {
+    AsFbxSkinContext* FBXService::AsFbxMeshCreateSkinContext(IntPtr ptrContext, FbxNode* pFrameNode) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
         return new AsFbxSkinContext(pContext, pFrameNode);
     }
 

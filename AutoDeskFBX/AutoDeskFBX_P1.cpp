@@ -2,7 +2,10 @@
 #include "AutoDeskFBX.h"
 
 namespace SoarCraft::QYun::AutoDeskFBX {
-    void FBXService::AsFbxSetJointsNode_CastToBone(AsFbxContext* pContext, FbxNode* pNode, float boneSize) {
+    void FBXService::AsFbxSetJointsNode_CastToBone(IntPtr ptrContext, IntPtr ptrNode, float boneSize) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pNode = (FbxNode*)ptrNode.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
 
@@ -15,7 +18,10 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pNode->SetNodeAttribute(pJoint);
     }
 
-    void FBXService::AsFbxSetJointsNode_BoneInPath(AsFbxContext* pContext, FbxNode* pNode, float boneSize) {
+    void FBXService::AsFbxSetJointsNode_BoneInPath(IntPtr ptrContext, IntPtr ptrNode, float boneSize) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pNode = (FbxNode*)ptrNode.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
 
@@ -33,7 +39,10 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pNode->GetParent()->SetNodeAttribute(pJoint);
     }
 
-    void FBXService::AsFbxSetJointsNode_Generic(AsFbxContext* pContext, FbxNode* pNode) {
+    void FBXService::AsFbxSetJointsNode_Generic(IntPtr ptrContext, IntPtr ptrNode) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pNode = (FbxNode*)ptrNode.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
 
@@ -60,7 +69,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pContext->pTextures->Reserve(textureCount);
     }
 
-    FbxFileTexture* FBXService::AsFbxCreateTexture(AsFbxContext* pContext, const char* pMatTexName) {
+    FbxFileTexture* FBXService::AsFbxCreateTexture(IntPtr ptrContext, const char* pMatTexName) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
             return nullptr;
 
@@ -113,8 +124,8 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             pProp->ConnectSrcObject(pTexture);
     }
 
-    FbxArray<FbxCluster*>* FBXService::AsFbxMeshCreateClusterArray(int32_t boneCount) {
-        return new FbxArray<FbxCluster*>(boneCount);
+    IntPtr FBXService::AsFbxMeshCreateClusterArray(int32_t boneCount) {
+        return IntPtr(new FbxArray<FbxCluster*>(boneCount));
     }
 
     void FBXService::AsFbxMeshDisposeClusterArray(FbxArray<FbxCluster*>** ppArray) {
@@ -125,49 +136,62 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         *ppArray = nullptr;
     }
 
-    FbxCluster* FBXService::AsFbxMeshCreateCluster(AsFbxContext* pContext, FbxNode* pBoneNode) {
+    IntPtr FBXService::AsFbxMeshCreateCluster(IntPtr ptrContext, IntPtr ptrBoneNode) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pBoneNode = (FbxNode*)ptrBoneNode.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
         if (pBoneNode == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
         FbxString lClusterName = pBoneNode->GetNameOnly() + FbxString("Cluster");
         FbxCluster* pCluster = FbxCluster::Create(pContext->pScene, lClusterName.Buffer());
         pCluster->SetLink(pBoneNode);
         pCluster->SetLinkMode(FbxCluster::eTotalOne);
 
-        return pCluster;
+        return IntPtr(pCluster);
     }
 
-    void FBXService::AsFbxMeshAddCluster(FbxArray<FbxCluster*>* pArray, FbxCluster* pCluster) {
+    void FBXService::AsFbxMeshAddCluster(IntPtr ptrArray, IntPtr ptrCluster) {
+        auto pArray = (FbxArray<FbxCluster*>*)ptrArray.ToPointer();
+        auto pCluster = (FbxCluster*)ptrCluster.ToPointer();
+
         if (pArray == nullptr)
             return;
 
         pArray->Add(pCluster);
     }
 
-    FbxMesh* FBXService::AsFbxMeshCreateMesh(AsFbxContext* pContext, FbxNode* pFrameNode) {
+    IntPtr FBXService::AsFbxMeshCreateMesh(IntPtr ptrContext, IntPtr ptrFrameNode) {
+        auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pFrameNode = (FbxNode*)ptrFrameNode.ToPointer();
+
         if (pContext == nullptr || pContext->pScene == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
         if (pFrameNode == nullptr)
-            return nullptr;
+            return IntPtr::Zero;
 
         FbxMesh* pMesh = FbxMesh::Create(pContext->pScene, pFrameNode->GetName());
         pFrameNode->SetNodeAttribute(pMesh);
 
-        return pMesh;
+        return IntPtr(pMesh);
     }
 
-    void FBXService::AsFbxMeshInitControlPoints(FbxMesh* pMesh, int32_t vertexCount) {
+    void FBXService::AsFbxMeshInitControlPoints(IntPtr ptrMesh, int32_t vertexCount) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
         pMesh->InitControlPoints(vertexCount);
     }
 
-    void FBXService::AsFbxMeshCreateElementNormal(FbxMesh* pMesh) {
+    void FBXService::AsFbxMeshCreateElementNormal(IntPtr ptrMesh) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -176,7 +200,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pNormal->SetReferenceMode(FbxGeometryElement::eDirect);
     }
 
-    void FBXService::AsFbxMeshCreateDiffuseUV(FbxMesh* pMesh, int32_t uv) {
+    void FBXService::AsFbxMeshCreateDiffuseUV(IntPtr ptrMesh, int32_t uv) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
@@ -185,7 +211,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pUV->SetReferenceMode(FbxGeometryElement::eDirect);
     }
 
-    void FBXService::AsFbxMeshCreateNormalMapUV(FbxMesh* pMesh, int32_t uv) {
+    void FBXService::AsFbxMeshCreateNormalMapUV(IntPtr ptrMesh, int32_t uv) {
+        auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
+
         if (pMesh == nullptr)
             return;
 
