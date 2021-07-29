@@ -47,7 +47,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (String::IsNullOrWhiteSpace(strMatName))
             return IntPtr::Zero;
 
-        const char* pMatName = (const char*)(Marshal::StringToHGlobalAuto(strMatName).ToPointer());
+        const char* pMatName = context->marshal_as<const char*>(strMatName);
         auto pMat = FbxSurfacePhong::Create(pContext->pScene, pMatName);
 
         pMat->Diffuse.Set(FbxDouble3(diffuse.R, diffuse.G, diffuse.B));
@@ -62,7 +62,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pContext->pMaterials)
             pContext->pMaterials->Add(pMat);
 
-        Marshal::FreeHGlobal(IntPtr((void*)pMatName));
+        delete pMatName;
         return IntPtr(pMat);
     }
 

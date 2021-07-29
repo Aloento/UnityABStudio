@@ -76,7 +76,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pContext == nullptr || pContext->pScene == nullptr)
             return IntPtr::Zero;
 
-        const char* pMatTexName = (const char*)(Marshal::StringToHGlobalAuto(strMatTexName).ToPointer());
+        const char* pMatTexName = context->marshal_as<const char*>(strMatTexName);
         auto pTex = FbxFileTexture::Create(pContext->pScene, pMatTexName);
         pTex->SetFileName(pMatTexName);
         pTex->SetTextureUse(FbxTexture::eStandard);
@@ -90,7 +90,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pContext->pTextures != nullptr) 
             pContext->pTextures->Add(pTex);
 
-        Marshal::FreeHGlobal(IntPtr((void*)pMatTexName));
+        delete pMatTexName;
         return IntPtr(pTex);
     }
 

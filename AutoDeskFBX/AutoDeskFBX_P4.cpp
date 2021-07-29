@@ -65,7 +65,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
     void FBXService::AsFbxMorphAddBlendShapeChannel(IntPtr ptrContext, IntPtr ptrMorphContext, String^ strChannelName) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
         auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
-        auto channelName = (const char*)(Marshal::StringToHGlobalAuto(strChannelName).ToPointer());
+        auto channelName = context->marshal_as<const char*>(strChannelName);
 
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
@@ -82,13 +82,13 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pMorphContext->lBlendShape != nullptr)
             pMorphContext->lBlendShape->AddBlendShapeChannel(lBlendShapeChannel);
 
-        Marshal::FreeHGlobal(IntPtr((void*)channelName));
+        delete channelName;
     }
 
     void FBXService::AsFbxMorphAddBlendShapeChannelShape(IntPtr ptrContext, IntPtr ptrMorphContext, float weight, String^ strShapeName) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
         auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
-        auto shapeName = (const char*)(Marshal::StringToHGlobalAuto(strShapeName).ToPointer());
+        auto shapeName = context->marshal_as<const char*>(strShapeName);
 
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
@@ -102,7 +102,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pMorphContext->lBlendShapeChannel != nullptr)
             pMorphContext->lBlendShapeChannel->AddTargetShape(lShape, weight);
 
-        Marshal::FreeHGlobal(IntPtr((void*)shapeName));
+        delete shapeName;
     }
 
     void FBXService::AsFbxMorphCopyBlendShapeControlPoints(IntPtr ptrMorphContext) {

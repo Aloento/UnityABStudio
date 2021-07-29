@@ -34,7 +34,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
     void FBXService::AsFbxAnimPrepareStackAndLayer(IntPtr ptrContext, IntPtr ptrAnimContext, String^ strTakeName) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
         auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
-        auto pTakeName = (const char*)(Marshal::StringToHGlobalAuto(strTakeName).ToPointer());
+        auto pTakeName = context->marshal_as<const char*>(strTakeName);
 
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
@@ -49,7 +49,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pAnimContext->lAnimLayer = FbxAnimLayer::Create(pContext->pScene, "Base Layer");
 
         pAnimContext->lAnimStack->AddMember(pAnimContext->lAnimLayer);
-        Marshal::FreeHGlobal(IntPtr((void*)pTakeName));
+        delete pTakeName;
     }
 
     void FBXService::AsFbxAnimLoadCurves(IntPtr ptrNode, IntPtr ptrAnimContext) {
@@ -202,7 +202,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
     bool FBXService::AsFbxAnimIsBlendShapeChannelMatch(IntPtr ptrAnimContext, int32_t channelIndex, String^ strChannelName) {
         // const char* channelName
         auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
-        auto channelName = (const char*)(Marshal::StringToHGlobalAuto(strChannelName).ToPointer());
+        auto channelName = context->marshal_as<const char*>(strChannelName);
 
         if (pAnimContext == nullptr || pAnimContext->lBlendShape == nullptr)
             return false;
@@ -215,7 +215,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
 
         FbxString chanName(channelName);
 
-        Marshal::FreeHGlobal(IntPtr((void*)channelName));
+        delete channelName;
         return lChannelName == chanName;
     }
 

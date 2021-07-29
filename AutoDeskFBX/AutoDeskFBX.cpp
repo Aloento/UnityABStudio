@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "AutoDeskFBX.h"
-#include <msclr\marshal_cppstd.h>
 
 namespace SoarCraft::QYun::AutoDeskFBX {
     Vector3 FBXService::AsUtilQuaternionToEuler(Quaternion q) {
@@ -97,7 +96,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             }
         }
 
-        const char* pFileName = (const char*)(Marshal::StringToHGlobalAuto(fileName).ToPointer());
+        auto pFileName = context->marshal_as<const char*>(fileName);
         if (!pExporter->Initialize(pFileName, pFileFormat, pSdkManager->GetIOSettings())) {
             errorMessage = gcnew String(pExporter->GetStatus().GetErrorString());
             return false;
@@ -107,7 +106,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pContext->pBindPose = pBindPose;
 
         pScene->AddPose(pBindPose);
-        Marshal::FreeHGlobal(IntPtr((void*)pFileName));
+        delete pFileName;
         return true;
     }
 
@@ -168,8 +167,8 @@ namespace SoarCraft::QYun::AutoDeskFBX {
 
         if (!(framePaths.empty() || framePaths.find(pFramePath) != framePaths.end()))
             return IntPtr::Zero;
-
-        auto pFrameName = (const char*)(Marshal::StringToHGlobalAuto(strFrameName).ToPointer());
+        
+        auto pFrameName = context->marshal_as<const char*>(strFrameName);
         auto pFrameNode = FbxNode::Create(pContext->pScene, pFrameName);
 
         pFrameNode->LclScaling.Set(FbxDouble3(localScale.X, localScale.Y, localScale.Z));
@@ -182,7 +181,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         if (pContext->pBindPose != nullptr)
             pContext->pBindPose->Add(pFrameNode, pFrameNode->EvaluateGlobalTransform());
 
-        Marshal::FreeHGlobal(IntPtr((void*)pFrameName));
+        delete pFrameName;
         return IntPtr(pFrameNode);
     }
 }

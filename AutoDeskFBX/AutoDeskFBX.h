@@ -3,11 +3,14 @@
 #include "AsFbxSkinContext.h"
 #include "AsFbxAnimContext.h"
 #include "AsFbxMorphContext.h"
+#include <msclr/marshal_cppstd.h>
+#include <msclr/marshal.h>
 
 namespace SoarCraft::QYun::AutoDeskFBX {
     using namespace System;
     using namespace System::Runtime::InteropServices;
     using namespace AssetReader::Math;
+    using namespace msclr::interop;
 
     public ref class FBXService
     {
@@ -87,6 +90,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         void AsFbxMorphSetBlendShapeVertexNormal(IntPtr ptrMorphContext, uint32_t index, Vector3 v);
 
     private:
+        marshal_context^ context = gcnew marshal_context();
         Quaternion EulerToQuaternion(Vector3 v);
 
     };

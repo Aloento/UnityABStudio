@@ -2,7 +2,6 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using AssetReader.Math;
     using Helpers;
 
     public partial class FBXHelpService {
