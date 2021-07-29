@@ -336,7 +336,56 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
 
         private void ExportKeyframedAnimation(ImportedFrame rootFrame, ImportedKeyframedAnimation parser,
                                               IntPtr pAnimContext, float filterPrecision) {
+            foreach (var track in parser.TrackList) {
+                if (track.Path == null)
+                    continue;
 
+                var frame = rootFrame.FindFrameByPath(track.Path);
+                if (frame == null)
+                    continue;
+
+                var pNode = frameToNode[frame];
+                AsFbxAnimLoadCurves(pNode, pAnimContext);
+                AsFbxAnimBeginKeyModify(pAnimContext);
+
+                foreach (var scaling in track.Scalings) {
+                    var value = scaling.value;
+                    AsFbxAnimAddScalingKey(pAnimContext, scaling.time, value);
+                }
+
+                foreach (var rotation in track.Rotations) {
+                    var value = rotation.value;
+                    AsFbxAnimAddRotationKey(pAnimContext, rotation.time, value);
+                }
+
+                foreach (var translation in track.Translations) {
+                    var value = translation.value;
+                    AsFbxAnimAddTranslationKey(pAnimContext, translation.time, value);
+                }
+
+                AsFbxAnimEndKeyModify(pAnimContext);
+                AsFbxAnimApplyEulerFilter(pAnimContext, filterPrecision);
+
+                var blendShape = track.BlendShape;
+                if (blendShape != null) {
+                    var channelCount = AsFbxAnimGetCurrentBlendShapeChannelCount(pAnimContext, pNode);
+
+                    if (channelCount > 0) {
+                        for (var channelIndex = 0; channelIndex < channelCount; channelIndex += 1) {
+                            if (!AsFbxAnimIsBlendShapeChannelMatch(pAnimContext, channelIndex, blendShape.ChannelName))
+                                continue;
+
+                            AsFbxAnimBeginBlendShapeAnimCurve(pAnimContext, channelIndex);
+
+                            foreach (var keyframe in blendShape.Keyframes) {
+                                AsFbxAnimAddBlendShapeKeyframe(pAnimContext, keyframe.time, keyframe.value);
+                            }
+
+                            AsFbxAnimEndBlendShapeAnimCurve(pAnimContext);
+                        }
+                    }
+                }
+            }
         }
     }
 }
