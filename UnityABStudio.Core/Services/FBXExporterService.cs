@@ -49,12 +49,12 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             }
 
             if (blendShape)
-                ExportMorphs();
+                ExportMorphs(this.imported.RootFrame, this.imported.MorphList);
 
             if (animation)
-                ExportAnimations(eulerFilter, filterPrecision);
+                ExportAnimations(imported.RootFrame, imported.AnimationList, eulerFilter, filterPrecision);
 
-            ExportScene();
+            AsFbxExportScene(this.pContext);
         }
 
         private void ExportMeshFrames(List<ImportedFrame> meshFrames) {

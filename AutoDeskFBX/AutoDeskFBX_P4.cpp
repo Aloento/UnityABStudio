@@ -2,14 +2,18 @@
 #include "AutoDeskFBX.h"
 
 namespace SoarCraft::QYun::AutoDeskFBX {
-    void FBXService::AsFbxAnimEndBlendShapeAnimCurve(AsFbxAnimContext* pAnimContext) {
+    void FBXService::AsFbxAnimEndBlendShapeAnimCurve(IntPtr ptrAnimContext) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr || pAnimContext->lAnimCurve == nullptr)
             return;
 
         pAnimContext->lAnimCurve->KeyModifyEnd();
     }
 
-    void FBXService::AsFbxAnimAddBlendShapeKeyframe(AsFbxAnimContext* pAnimContext, float time, float value) {
+    void FBXService::AsFbxAnimAddBlendShapeKeyframe(IntPtr ptrAnimContext, float time, float value) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr || pAnimContext->lAnimCurve == nullptr)
             return;
 
@@ -21,13 +25,14 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pAnimContext->lAnimCurve->KeySetInterpolation(keyIndex, FbxAnimCurveDef::eInterpolationCubic);
     }
 
-    AsFbxMorphContext* FBXService::AsFbxMorphCreateContext() {
-        return new AsFbxMorphContext();
+    IntPtr FBXService::AsFbxMorphCreateContext() {
+        return IntPtr(new AsFbxMorphContext());
     }
 
-    void FBXService::AsFbxMorphInitializeContext(IntPtr ptrContext, AsFbxMorphContext* pMorphContext, IntPtr ptrNode) {
+    void FBXService::AsFbxMorphInitializeContext(IntPtr ptrContext, IntPtr ptrMorphContext, IntPtr ptrNode) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
         auto pNode = (FbxNode*)ptrNode.ToPointer();
+        auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
 
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
@@ -47,7 +52,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pMesh->AddDeformer(lBlendShape);
     }
 
-    void FBXService::AsFbxMorphDisposeContext(AsFbxMorphContext** ppMorphContext) {
+    void FBXService::AsFbxMorphDisposeContext(IntPtr pptrMorphContext) {
+        auto ppMorphContext = (AsFbxMorphContext**)pptrMorphContext.ToPointer();
+
         if (ppMorphContext == nullptr)
             return;
 
@@ -55,8 +62,10 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         *ppMorphContext = nullptr;
     }
 
-    void FBXService::AsFbxMorphAddBlendShapeChannel(IntPtr ptrContext, AsFbxMorphContext* pMorphContext, const char* channelName) {
+    void FBXService::AsFbxMorphAddBlendShapeChannel(IntPtr ptrContext, IntPtr ptrMorphContext, String^ strChannelName) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
+        auto channelName = (const char*)(Marshal::StringToHGlobalAuto(strChannelName).ToPointer());
 
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
@@ -72,10 +81,14 @@ namespace SoarCraft::QYun::AutoDeskFBX {
 
         if (pMorphContext->lBlendShape != nullptr)
             pMorphContext->lBlendShape->AddBlendShapeChannel(lBlendShapeChannel);
+
+        Marshal::FreeHGlobal(IntPtr((void*)channelName));
     }
 
-    void FBXService::AsFbxMorphAddBlendShapeChannelShape(IntPtr ptrContext, AsFbxMorphContext* pMorphContext, float weight, const char* shapeName) {
+    void FBXService::AsFbxMorphAddBlendShapeChannelShape(IntPtr ptrContext, IntPtr ptrMorphContext, float weight, String^ strShapeName) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
+        auto shapeName = (const char*)(Marshal::StringToHGlobalAuto(strShapeName).ToPointer());
 
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
@@ -88,14 +101,17 @@ namespace SoarCraft::QYun::AutoDeskFBX {
 
         if (pMorphContext->lBlendShapeChannel != nullptr)
             pMorphContext->lBlendShapeChannel->AddTargetShape(lShape, weight);
+
+        Marshal::FreeHGlobal(IntPtr((void*)shapeName));
     }
 
-    void FBXService::AsFbxMorphCopyBlendShapeControlPoints(AsFbxMorphContext* pMorphContext) {
+    void FBXService::AsFbxMorphCopyBlendShapeControlPoints(IntPtr ptrMorphContext) {
+        auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
+
         if (pMorphContext == nullptr || pMorphContext->pMesh == nullptr || pMorphContext->lShape == nullptr)
             return;
 
         auto vectorCount = pMorphContext->pMesh->GetControlPointsCount();
-
         auto srcControlPoints = pMorphContext->pMesh->GetControlPoints();
 
         pMorphContext->lShape->InitControlPoints(vectorCount);
@@ -105,24 +121,30 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         }
     }
 
-    void FBXService::AsFbxMorphSetBlendShapeVertex(AsFbxMorphContext* pMorphContext, uint32_t index, float x, float y, float z) {
+    void FBXService::AsFbxMorphSetBlendShapeVertex(IntPtr ptrMorphContext, uint32_t index, Vector3 v) {
+        auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
+
         if (pMorphContext == nullptr || pMorphContext->lShape == nullptr)
             return;
 
-        pMorphContext->lShape->SetControlPointAt(FbxVector4(x, y, z, 0), index);
+        pMorphContext->lShape->SetControlPointAt(FbxVector4(v.X, v.Y, v.Z, 0), index);
     }
 
-    void FBXService::AsFbxMorphCopyBlendShapeControlPointsNormal(AsFbxMorphContext* pMorphContext) {
+    void FBXService::AsFbxMorphCopyBlendShapeControlPointsNormal(IntPtr ptrMorphContext) {
+        auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
+
         if (pMorphContext == nullptr || pMorphContext->pMesh == nullptr || pMorphContext->lShape == nullptr)
             return;
 
         pMorphContext->lShape->InitNormals(pMorphContext->pMesh);
     }
 
-    void FBXService::AsFbxMorphSetBlendShapeVertexNormal(AsFbxMorphContext* pMorphContext, uint32_t index, float x, float y, float z) {
+    void FBXService::AsFbxMorphSetBlendShapeVertexNormal(IntPtr ptrMorphContext, uint32_t index, Vector3 v) {
+        auto pMorphContext = (AsFbxMorphContext*)ptrMorphContext.ToPointer();
+
         if (pMorphContext == nullptr || pMorphContext->lShape == nullptr)
             return;
 
-        pMorphContext->lShape->SetControlPointNormalAt(FbxVector4(x, y, z, 0), index);
+        pMorphContext->lShape->SetControlPointNormalAt(FbxVector4(v.X, v.Y, v.Z, 0), index);
     }
 }

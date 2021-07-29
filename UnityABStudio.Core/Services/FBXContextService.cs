@@ -57,6 +57,36 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             }
         }
 
+        private void SetJointsNode(ImportedFrame rootFrame, HashSet<string> bonePaths, bool castToBone) {
+            var frameStack = new Stack<ImportedFrame>();
+            frameStack.Push(rootFrame);
+
+            while (frameStack.Count > 0) {
+                var frame = frameStack.Pop();
+
+                if (frameToNode.TryGetValue(frame, out var node)) {
+                    if (node == IntPtr.Zero)
+                        throw new NullReferenceException($"node：{node}");
+
+                    if (castToBone) {
+                        AsFbxSetJointsNode_CastToBone(pContext, node, boneSize);
+                    } else {
+                        if (bonePaths == null)
+                            throw new NullReferenceException($"bonePaths：{bonePaths}");
+
+                        if (bonePaths.Contains(frame.Path))
+                            AsFbxSetJointsNode_BoneInPath(pContext, node, boneSize);
+                        else
+                            AsFbxSetJointsNode_Generic(pContext, node);
+                    }
+                }
+
+                for (var i = frame.Count - 1; i >= 0; i -= 1) {
+                    frameStack.Push(frame[i]);
+                }
+            }
+        }
+
         private void ExportMesh(ImportedFrame rootFrame, List<ImportedMaterial> materialList,
             List<ImportedTexture> textureList, IntPtr frameNode, ImportedMesh importedMesh) {
             var boneList = importedMesh.BoneList;
@@ -143,7 +173,8 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                                 case 1:
                                 case 2:
                                 case 3: {
-                                    this.AsFbxLinkTexture(texture.Dest, pTexture, pMat, texture.Offset.X, texture.Offset.Y,
+                                    this.AsFbxLinkTexture(texture.Dest, pTexture, pMat, texture.Offset.X,
+                                        texture.Offset.Y,
                                         texture.Scale.X, texture.Scale.Y);
                                     hasTexture = true;
                                     break;
@@ -241,6 +272,71 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             writer.Write(texture.Data);
 
             return pTex;
+        }
+
+        private void ExportMorphs(ImportedFrame rootFrame, List<ImportedMorph> morphList) {
+            if (morphList == null || morphList.Count == 0)
+                return;
+
+            foreach (var morph in morphList) {
+                var frame = rootFrame.FindFrameByPath(morph.Path);
+                if (frame == null)
+                    continue;
+
+                var pNode = this.frameToNode[frame];
+                var pMorphContext = AsFbxMorphCreateContext();
+
+                AsFbxMorphInitializeContext(this.pContext, pMorphContext, pNode);
+                foreach (var channel in morph.Channels) {
+                    AsFbxMorphAddBlendShapeChannel(this.pContext, pMorphContext, channel.Name);
+
+                    for (var i = 0; i < channel.KeyframeList.Count; i++) {
+                        var keyframe = channel.KeyframeList[i];
+
+                        AsFbxMorphAddBlendShapeChannelShape(pContext, pMorphContext,
+                            keyframe.Weight, i == 0 ? channel.Name : $"{channel.Name}_{i + 1}");
+                        AsFbxMorphCopyBlendShapeControlPoints(pMorphContext);
+
+                        foreach (var vertex in keyframe.VertexList) {
+                            var v = vertex.Vertex.Vertex;
+                            AsFbxMorphSetBlendShapeVertex(pMorphContext, vertex.Index, v);
+                        }
+
+                        if (keyframe.hasNormals) {
+                            AsFbxMorphCopyBlendShapeControlPointsNormal(pMorphContext);
+
+                            foreach (var vertex in keyframe.VertexList) {
+                                var v = vertex.Vertex.Normal;
+                                AsFbxMorphSetBlendShapeVertexNormal(pMorphContext, vertex.Index, v);
+                            }
+                        }
+                    }
+                }
+
+                AsFbxMorphDisposeContext(pMorphContext);
+            }
+        }
+
+        private void ExportAnimations(ImportedFrame rootFrame, List<ImportedKeyframedAnimation> animationList,
+            bool eulerFilter, float filterPrecision) {
+            if (animationList == null || animationList.Count == 0)
+                return;
+
+            var pAnimContext = AsFbxAnimCreateContext(eulerFilter);
+            for (var i = 0; i < animationList.Count; i++) {
+                var importedAnimation = animationList[i];
+                var takeName = importedAnimation.Name ?? $"Take{i}";
+
+                AsFbxAnimPrepareStackAndLayer(pContext, pAnimContext, takeName);
+                ExportKeyframedAnimation(rootFrame, importedAnimation, pAnimContext, filterPrecision);
+            }
+
+            AsFbxAnimDisposeContext(pAnimContext);
+        }
+
+        private void ExportKeyframedAnimation(ImportedFrame rootFrame, ImportedKeyframedAnimation parser,
+                                              IntPtr pAnimContext, float filterPrecision) {
+
         }
     }
 }

@@ -17,11 +17,13 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             pMesh->AddDeformer(pSkinContext->pSkin);
     }
 
-    AsFbxAnimContext* FBXService::AsFbxAnimCreateContext(bool eulerFilter) {
-        return new AsFbxAnimContext(eulerFilter);
+    IntPtr FBXService::AsFbxAnimCreateContext(bool eulerFilter) {
+        return IntPtr(new AsFbxAnimContext(eulerFilter));
     }
 
-    void FBXService::AsFbxAnimDisposeContext(AsFbxAnimContext** ppAnimContext) {
+    void FBXService::AsFbxAnimDisposeContext(IntPtr pptrAnimContext) {
+        auto ppAnimContext = (AsFbxAnimContext**)pptrAnimContext.ToPointer();
+
         if (ppAnimContext == nullptr)
             return;
 
@@ -29,8 +31,10 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         *ppAnimContext = nullptr;
     }
 
-    void FBXService::AsFbxAnimPrepareStackAndLayer(IntPtr ptrContext, AsFbxAnimContext* pAnimContext, const char* pTakeName) {
+    void FBXService::AsFbxAnimPrepareStackAndLayer(IntPtr ptrContext, IntPtr ptrAnimContext, String^ strTakeName) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+        auto pTakeName = (const char*)(Marshal::StringToHGlobalAuto(strTakeName).ToPointer());
 
         if (pContext == nullptr || pContext->pScene == nullptr)
             return;
@@ -45,10 +49,12 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pAnimContext->lAnimLayer = FbxAnimLayer::Create(pContext->pScene, "Base Layer");
 
         pAnimContext->lAnimStack->AddMember(pAnimContext->lAnimLayer);
+        Marshal::FreeHGlobal(IntPtr((void*)pTakeName));
     }
 
-    void FBXService::AsFbxAnimLoadCurves(IntPtr ptrNode, AsFbxAnimContext* pAnimContext) {
+    void FBXService::AsFbxAnimLoadCurves(IntPtr ptrNode, IntPtr ptrAnimContext) {
         auto pNode = (FbxNode*)ptrNode.ToPointer();
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
 
         if (pNode == nullptr)
             return;
@@ -67,7 +73,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pAnimContext->lCurveTZ = pNode->LclTranslation.GetCurve(pAnimContext->lAnimLayer, FBXSDK_CURVENODE_COMPONENT_Z, true);
     }
 
-    void FBXService::AsFbxAnimBeginKeyModify(AsFbxAnimContext* pAnimContext) {
+    void FBXService::AsFbxAnimBeginKeyModify(IntPtr ptrAnimContext) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr)
             return;
 
@@ -82,7 +90,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pAnimContext->lCurveTZ->KeyModifyBegin();
     }
 
-    void FBXService::AsFbxAnimEndKeyModify(AsFbxAnimContext* pAnimContext) {
+    void FBXService::AsFbxAnimEndKeyModify(IntPtr ptrAnimContext) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr)
             return;
 
@@ -97,43 +107,51 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pAnimContext->lCurveTZ->KeyModifyEnd();
     }
 
-    void FBXService::AsFbxAnimAddScalingKey(AsFbxAnimContext* pAnimContext, float time, float x, float y, float z) {
+    void FBXService::AsFbxAnimAddScalingKey(IntPtr ptrAnimContext, float time, Vector3 v) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr)
             return;
 
         FbxTime lTime;
         lTime.SetSecondDouble(time);
 
-        pAnimContext->lCurveSX->KeySet(pAnimContext->lCurveSX->KeyAdd(lTime), lTime, x);
-        pAnimContext->lCurveSY->KeySet(pAnimContext->lCurveSY->KeyAdd(lTime), lTime, y);
-        pAnimContext->lCurveSZ->KeySet(pAnimContext->lCurveSZ->KeyAdd(lTime), lTime, z);
+        pAnimContext->lCurveSX->KeySet(pAnimContext->lCurveSX->KeyAdd(lTime), lTime, v.X);
+        pAnimContext->lCurveSY->KeySet(pAnimContext->lCurveSY->KeyAdd(lTime), lTime, v.Y);
+        pAnimContext->lCurveSZ->KeySet(pAnimContext->lCurveSZ->KeyAdd(lTime), lTime, v.Z);
     }
 
-    void FBXService::AsFbxAnimAddRotationKey(AsFbxAnimContext* pAnimContext, float time, float x, float y, float z) {
+    void FBXService::AsFbxAnimAddRotationKey(IntPtr ptrAnimContext, float time, Vector3 v) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr)
             return;
 
         FbxTime lTime;
         lTime.SetSecondDouble(time);
 
-        pAnimContext->lCurveRX->KeySet(pAnimContext->lCurveRX->KeyAdd(lTime), lTime, x);
-        pAnimContext->lCurveRY->KeySet(pAnimContext->lCurveRY->KeyAdd(lTime), lTime, y);
-        pAnimContext->lCurveRZ->KeySet(pAnimContext->lCurveRZ->KeyAdd(lTime), lTime, z);
+        pAnimContext->lCurveRX->KeySet(pAnimContext->lCurveRX->KeyAdd(lTime), lTime, v.X);
+        pAnimContext->lCurveRY->KeySet(pAnimContext->lCurveRY->KeyAdd(lTime), lTime, v.Y);
+        pAnimContext->lCurveRZ->KeySet(pAnimContext->lCurveRZ->KeyAdd(lTime), lTime, v.Z);
     }
 
-    void FBXService::AsFbxAnimAddTranslationKey(AsFbxAnimContext* pAnimContext, float time, float x, float y, float z) {
+    void FBXService::AsFbxAnimAddTranslationKey(IntPtr ptrAnimContext, float time, Vector3 v) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr)
             return;
 
         FbxTime lTime;
         lTime.SetSecondDouble(time);
 
-        pAnimContext->lCurveTX->KeySet(pAnimContext->lCurveTX->KeyAdd(lTime), lTime, x);
-        pAnimContext->lCurveTY->KeySet(pAnimContext->lCurveTY->KeyAdd(lTime), lTime, y);
-        pAnimContext->lCurveTZ->KeySet(pAnimContext->lCurveTZ->KeyAdd(lTime), lTime, z);
+        pAnimContext->lCurveTX->KeySet(pAnimContext->lCurveTX->KeyAdd(lTime), lTime, v.X);
+        pAnimContext->lCurveTY->KeySet(pAnimContext->lCurveTY->KeyAdd(lTime), lTime, v.Y);
+        pAnimContext->lCurveTZ->KeySet(pAnimContext->lCurveTZ->KeyAdd(lTime), lTime, v.Z);
     }
 
-    void FBXService::AsFbxAnimApplyEulerFilter(AsFbxAnimContext* pAnimContext, float filterPrecision) {
+    void FBXService::AsFbxAnimApplyEulerFilter(IntPtr ptrAnimContext, float filterPrecision) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr || pAnimContext->lFilter == nullptr)
             return;
 
@@ -149,8 +167,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         eulerFilter->Apply(lCurve, 3);
     }
 
-    int32_t FBXService::AsFbxAnimGetCurrentBlendShapeChannelCount(AsFbxAnimContext* pAnimContext, IntPtr ptrNode) {
+    int32_t FBXService::AsFbxAnimGetCurrentBlendShapeChannelCount(IntPtr ptrAnimContext, IntPtr ptrNode) {
         auto pNode = (FbxNode*)ptrNode.ToPointer();
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
 
         if (pAnimContext == nullptr)
             return 0;
@@ -180,7 +199,11 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         return lBlendShapeChannelCount;
     }
 
-    bool FBXService::AsFbxAnimIsBlendShapeChannelMatch(AsFbxAnimContext* pAnimContext, int32_t channelIndex, const char* channelName) {
+    bool FBXService::AsFbxAnimIsBlendShapeChannelMatch(IntPtr ptrAnimContext, int32_t channelIndex, String^ strChannelName) {
+        // const char* channelName
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+        auto channelName = (const char*)(Marshal::StringToHGlobalAuto(strChannelName).ToPointer());
+
         if (pAnimContext == nullptr || pAnimContext->lBlendShape == nullptr)
             return false;
 
@@ -192,10 +215,13 @@ namespace SoarCraft::QYun::AutoDeskFBX {
 
         FbxString chanName(channelName);
 
+        Marshal::FreeHGlobal(IntPtr((void*)channelName));
         return lChannelName == chanName;
     }
 
-    void FBXService::AsFbxAnimBeginBlendShapeAnimCurve(AsFbxAnimContext* pAnimContext, int32_t channelIndex) {
+    void FBXService::AsFbxAnimBeginBlendShapeAnimCurve(IntPtr ptrAnimContext, int32_t channelIndex) {
+        auto pAnimContext = (AsFbxAnimContext*)ptrAnimContext.ToPointer();
+
         if (pAnimContext == nullptr || pAnimContext->pMesh == nullptr || pAnimContext->lAnimLayer == nullptr)
             return;
 
