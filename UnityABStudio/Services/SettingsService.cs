@@ -4,7 +4,6 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.Input;
     using Contracts.Services;
-    using Core.Entities;
     using Extensions;
     using Microsoft.UI.Xaml;
 
@@ -26,13 +25,6 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
             set => _ = this.SetProperty(ref this.versionDescription, value);
         }
 
-        private ImageFormat convertType;
-
-        public ImageFormat ConvertType {
-            get => this.convertType;
-            set => _ = SetProperty(ref this.convertType, value);
-        }
-
         private ICommand switchThemeCommand;
 
         public ICommand SwitchThemeCommand => this.switchThemeCommand ??= new RelayCommand<ElementTheme>(
@@ -42,6 +34,9 @@ namespace SoarCraft.QYun.UnityABStudio.Services {
                     await this.themeSelectorService.SetThemeAsync(param);
                 }
             });
+
+        public SettingsService() {
+        }
 
         public SettingsService(IThemeSelectorService themeSelectorService) {
             this.themeSelectorService = themeSelectorService;

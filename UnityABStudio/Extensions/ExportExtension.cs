@@ -40,17 +40,17 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             });
 
         private static bool ExportAnimator(AssetItem item, string exportPath,
-            IReadOnlyCollection<AssetItem> animationList = null) {
+                                           IReadOnlyCollection<AssetItem> animationList = null) {
             var exportFullPath = Path.Combine(exportPath, item.Name, item.Name + ".fbx");
-            if (File.Exists(exportFullPath)) {
+            if (File.Exists(exportFullPath))
                 exportFullPath = Path.Combine(exportPath, item.Name + item.BaseID, item.Name + ".fbx");
-            }
 
             var m_Animator = (Animator)item.Obj;
             var convert = animationList != null
                 ? new ModelConverter(m_Animator, settings.ConvertType,
                     animationList.Select(x => (AnimationClip)x.Obj).ToArray())
                 : new ModelConverter(m_Animator, settings.ConvertType);
+
             ExportFbx(convert, exportFullPath);
             return true;
         }
