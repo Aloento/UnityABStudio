@@ -39,6 +39,19 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
         }
 
         [DataTestMethod]
+        [DataRow("Assets/[pack]common.ab", 3280994511229409322)]
+        public void FontExpTest(string filePath, long PathID) {
+            new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
+            if (obj is not Font)
+                Assert.Fail($"{PathID} 不是 {nameof(Font)}");
+
+            var target = new PrivateObject(typeof(ExportExtension));
+            var res = target.Invoke("ExportFont", new AssetItem(obj, out _, out _), @"C:\CaChe\Result");
+
+            Assert.AreEqual(true, res, "导出失败");
+        }
+
+        [DataTestMethod]
         [DataRow("Assets/gacha_phase_0.ab", 133153641501856485)]
         public void AnimatorExpTest(string filePath, long PathID) {
             Ioc.Default.ConfigureServices(new ServiceCollection().
