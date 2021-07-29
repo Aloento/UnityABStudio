@@ -85,14 +85,14 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pFrameNode->SetShadingMode(FbxNode::eTextureShading);
     }
 
-    void FBXService::AsFbxMeshSetControlPoint(IntPtr ptrMesh, int32_t index, float x, float y, float z) {
+    void FBXService::AsFbxMeshSetControlPoint(IntPtr ptrMesh, int32_t index, Vector3 v) {
         auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
 
         if (pMesh == nullptr)
             return;
 
         auto pControlPoints = pMesh->GetControlPoints();
-        pControlPoints[index] = FbxVector4(x, y, z, 0);
+        pControlPoints[index] = FbxVector4(v.X, v.Y, v.Z, 0);
     }
 
     void FBXService::AsFbxMeshAddPolygon(IntPtr ptrMesh, int32_t materialIndex, int32_t index0, int32_t index1, int32_t index2) {
@@ -108,7 +108,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         pMesh->EndPolygon();
     }
 
-    void FBXService::AsFbxMeshElementNormalAdd(IntPtr ptrMesh, int32_t elementIndex, float x, float y, float z) {
+    void FBXService::AsFbxMeshElementNormalAdd(IntPtr ptrMesh, int32_t elementIndex, Vector3 v) {
         auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
 
         if (pMesh == nullptr)
@@ -117,7 +117,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         auto pElem = pMesh->GetElementNormal(elementIndex);
         auto& array = pElem->GetDirectArray();
 
-        array.Add(FbxVector4(x, y, z, 0));
+        array.Add(FbxVector4(v.X, v.Y, v.Z, 0));
     }
 
     void FBXService::AsFbxMeshElementUVAdd(IntPtr ptrMesh, int32_t elementIndex, float u, float v) {
@@ -132,7 +132,7 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         array.Add(FbxVector2(u, v));
     }
 
-    void FBXService::AsFbxMeshElementTangentAdd(IntPtr ptrMesh, int32_t elementIndex, float x, float y, float z, float w) {
+    void FBXService::AsFbxMeshElementTangentAdd(IntPtr ptrMesh, int32_t elementIndex, Vector4 v) {
         auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
 
         if (pMesh == nullptr)
@@ -141,10 +141,10 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         auto pElem = pMesh->GetElementTangent(elementIndex);
         auto& array = pElem->GetDirectArray();
 
-        array.Add(FbxVector4(x, y, z, w));
+        array.Add(FbxVector4(v.X, v.Y, v.Z, v.W));
     }
 
-    void FBXService::AsFbxMeshElementVertexColorAdd(IntPtr ptrMesh, int32_t elementIndex, float r, float g, float b, float a) {
+    void FBXService::AsFbxMeshElementVertexColorAdd(IntPtr ptrMesh, int32_t elementIndex, Color c) {
         auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
 
         if (pMesh == nullptr)
@@ -153,10 +153,12 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         auto pElem = pMesh->GetElementVertexColor(elementIndex);
         auto& array = pElem->GetDirectArray();
 
-        array.Add(FbxVector4(r, g, b, a));
+        array.Add(FbxVector4(c.R, c.G, c.B, c.A));
     }
 
-    void FBXService::AsFbxMeshSetBoneWeight(FbxArray<FbxCluster*>* pClusterArray, int32_t boneIndex, int32_t vertexIndex, float weight) {
+    void FBXService::AsFbxMeshSetBoneWeight(IntPtr ptrClusterArray, int32_t boneIndex, int32_t vertexIndex, float weight) {
+        auto pClusterArray = (FbxArray<FbxCluster*>*)ptrClusterArray.ToPointer();
+
         if (pClusterArray == nullptr)
             return;
 
@@ -166,13 +168,14 @@ namespace SoarCraft::QYun::AutoDeskFBX {
             pCluster->AddControlPointIndex(vertexIndex, weight);
     }
 
-    AsFbxSkinContext* FBXService::AsFbxMeshCreateSkinContext(IntPtr ptrContext, IntPtr ptrFrameNode) {
+    IntPtr FBXService::AsFbxMeshCreateSkinContext(IntPtr ptrContext, IntPtr ptrFrameNode) {
         auto pContext = (AsFbxContext*)ptrContext.ToPointer();
         auto pFrameNode = (FbxNode*)ptrFrameNode.ToPointer();
-        return new AsFbxSkinContext(pContext, pFrameNode);
+        return IntPtr(new AsFbxSkinContext(pContext, pFrameNode));
     }
 
-    void FBXService::AsFbxMeshDisposeSkinContext(AsFbxSkinContext** ppSkinContext) {
+    void FBXService::AsFbxMeshDisposeSkinContext(IntPtr pptrSkinContext) {
+        auto ppSkinContext = (AsFbxSkinContext**)pptrSkinContext.ToPointer();
         if (ppSkinContext == nullptr)
             return;
 
@@ -180,7 +183,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         *ppSkinContext = nullptr;
     }
 
-    bool FBXService::FbxClusterArray_HasItemAt(FbxArray<FbxCluster*>* pClusterArray, int32_t index) {
+    bool FBXService::FbxClusterArray_HasItemAt(IntPtr ptrClusterArray, int32_t index) {
+        auto pClusterArray = (FbxArray<FbxCluster*>*)ptrClusterArray.ToPointer();
+
         if (pClusterArray == nullptr)
             return false;
 
@@ -189,7 +194,12 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         return pCluster != nullptr;
     }
 
-    void FBXService::AsFbxMeshSkinAddCluster(AsFbxSkinContext* pSkinContext, FbxArray<FbxCluster*>* pClusterArray, int32_t index, float pBoneMatrix[16]) {
+    void FBXService::AsFbxMeshSkinAddCluster(IntPtr ptrSkinContext, IntPtr ptrClusterArray, int32_t index, array<float>^ aBoneMatrix) {
+        auto pSkinContext = (AsFbxSkinContext*)ptrSkinContext.ToPointer();
+        auto pClusterArray = (FbxArray<FbxCluster*>*)ptrClusterArray.ToPointer();
+        pin_ptr<float> pin = &aBoneMatrix[0];
+        auto pBoneMatrix = (float*)pin;
+
         if (pSkinContext == nullptr)
             return;
 

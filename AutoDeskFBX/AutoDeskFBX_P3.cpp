@@ -2,7 +2,9 @@
 #include "AutoDeskFBX.h"
 
 namespace SoarCraft::QYun::AutoDeskFBX {
-    void FBXService::AsFbxMeshAddDeformer(AsFbxSkinContext* pSkinContext, IntPtr ptrMesh) {
+    void FBXService::AsFbxMeshAddDeformer(IntPtr ptrSkinContext, IntPtr ptrMesh) {
+        // AsFbxSkinContext* pSkinContext
+        auto pSkinContext = (AsFbxSkinContext*)ptrSkinContext.ToPointer();
         auto pMesh = (FbxMesh*)ptrMesh.ToPointer();
 
         if (pSkinContext == nullptr || pSkinContext->pSkin == nullptr)

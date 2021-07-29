@@ -133,7 +133,9 @@ namespace SoarCraft::QYun::AutoDeskFBX {
         return IntPtr(new FbxArray<FbxCluster*>(boneCount));
     }
 
-    void FBXService::AsFbxMeshDisposeClusterArray(FbxArray<FbxCluster*>** ppArray) {
+    void FBXService::AsFbxMeshDisposeClusterArray(IntPtr pptrArray) {
+        auto ppArray = (FbxArray<FbxCluster*>**)pptrArray.ToPointer();
+
         if (ppArray == nullptr)
             return;
 

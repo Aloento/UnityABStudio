@@ -25,14 +25,12 @@ namespace SoarCraft::QYun::TextureDecoder {
 
     Byte* TextureDecoderService::Array2Ptr(array<Byte>^ array) {
         pin_ptr<Byte> pin = &array[0];
-        Byte* ptr = pin;
-        return ptr;
+        return (Byte*)pin;
     }
 
     UInt32* TextureDecoderService::Array2UIntPtr(array<Byte>^ array) {
         pin_ptr<Byte> pin = &array[0];
-        UInt32* ptr = (UInt32*)pin;
-        return ptr;
+        return (UInt32*)pin;
     }
 
     void TextureDecoderService::CopyBlockBuffer(long bx, long by, long w, long h, long bw,

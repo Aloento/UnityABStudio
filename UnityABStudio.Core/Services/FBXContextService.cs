@@ -2,6 +2,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using AssetReader.Math;
     using Helpers;
 
     public partial class FBXHelpService {
@@ -112,11 +113,11 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                 var mat = ImportedHelpers.FindMaterial(meshObj.Material, materialList);
 
                 if (mat != null) {
-                    var foundMat = createdMaterials.FindIndex(kv => kv.Key == mat.Name);
+                    var foundMat = this.createdMaterials.FindIndex(kv => kv.Key == mat.Name);
                     IntPtr pMat;
 
                     if (foundMat >= 0) {
-                        pMat = createdMaterials[foundMat].Value;
+                        pMat = this.createdMaterials[foundMat].Value;
                     } else {
                         var diffuse = mat.Diffuse;
                         var ambient = mat.Ambient;
@@ -124,17 +125,17 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                         var specular = mat.Specular;
                         var reflection = mat.Reflection;
 
-                        pMat = AsFbxCreateMaterial(pContext, mat.Name, diffuse, ambient, emissive,
-                                                   specular, reflection, mat.Shininess, mat.Transparency);
-                        createdMaterials.Add(new KeyValuePair<string, IntPtr>(mat.Name, pMat));
+                        pMat = this.AsFbxCreateMaterial(this.pContext, mat.Name, diffuse, ambient, emissive,
+                            specular, reflection, mat.Shininess, mat.Transparency);
+                        this.createdMaterials.Add(new KeyValuePair<string, IntPtr>(mat.Name, pMat));
                     }
 
-                    materialIndex = AsFbxAddMaterialToFrame(frameNode, pMat);
+                    materialIndex = this.AsFbxAddMaterialToFrame(frameNode, pMat);
                     var hasTexture = false;
 
                     foreach (var texture in mat.Textures) {
                         var tex = ImportedHelpers.FindTexture(texture.Name, textureList);
-                        var pTexture = ExportTexture(tex);
+                        var pTexture = this.ExportTexture(tex);
 
                         if (pTexture != IntPtr.Zero) {
                             switch (texture.Dest) {
@@ -142,7 +143,8 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                                 case 1:
                                 case 2:
                                 case 3: {
-                                    AsFbxLinkTexture(texture.Dest, pTexture, pMat, texture.Offset.X, texture.Offset.Y, texture.Scale.X, texture.Scale.Y);
+                                    this.AsFbxLinkTexture(texture.Dest, pTexture, pMat, texture.Offset.X, texture.Offset.Y,
+                                        texture.Scale.X, texture.Scale.Y);
                                     hasTexture = true;
                                     break;
                                 }
@@ -151,11 +153,77 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                     }
 
                     if (hasTexture)
-                        AsFbxSetFrameShadingModeToTextureShading(frameNode);
+                        this.AsFbxSetFrameShadingModeToTextureShading(frameNode);
                 }
 
+                foreach (var face in meshObj.FaceList) {
+                    var index0 = face.VertexIndices[0] + meshObj.BaseVertex;
+                    var index1 = face.VertexIndices[1] + meshObj.BaseVertex;
+                    var index2 = face.VertexIndices[2] + meshObj.BaseVertex;
 
+                    this.AsFbxMeshAddPolygon(mesh, materialIndex, index0, index1, index2);
+                }
+
+                var vertexList = importedMesh.VertexList;
+                var vertexCount = vertexList.Count;
+
+                for (var j = 0; j < vertexCount; j++) {
+                    var importedVertex = vertexList[j];
+                    var vertex = importedVertex.Vertex;
+                    this.AsFbxMeshSetControlPoint(mesh, j, vertex);
+
+                    if (importedMesh.hasNormal)
+                        AsFbxMeshElementNormalAdd(mesh, 0, importedVertex.Normal);
+
+                    for (var uvI = 0; uvI < importedMesh.hasUV.Length; uvI++) {
+                        if (importedMesh.hasUV[uvI]) {
+                            var uv = importedVertex.UV[uvI];
+                            this.AsFbxMeshElementUVAdd(mesh, uvI, uv[0], uv[1]);
+                        }
+                    }
+
+                    if (importedMesh.hasTangent)
+                        this.AsFbxMeshElementTangentAdd(mesh, 0, importedVertex.Tangent);
+
+                    if (importedMesh.hasColor)
+                        this.AsFbxMeshElementVertexColorAdd(mesh, 0, importedVertex.Color);
+
+                    if (hasBones && importedVertex.BoneIndices != null) {
+                        var boneIndices = importedVertex.BoneIndices;
+                        var boneWeights = importedVertex.Weights;
+
+                        for (var k = 0; k < 4; k++) {
+                            if (boneIndices[k] < totalBoneCount && boneWeights[k] > 0)
+                                this.AsFbxMeshSetBoneWeight(pClusterArray, boneIndices[k], j, boneWeights[k]);
+                        }
+                    }
+                }
+
+                if (hasBones) {
+                    var pSkinContext = this.AsFbxMeshCreateSkinContext(this.pContext, frameNode);
+                    var boneMatrix = new float[16];
+
+                    for (var j = 0; j < totalBoneCount; j++) {
+                        if (!this.FbxClusterArray_HasItemAt(pClusterArray, j))
+                            continue;
+
+                        var m = boneList[j].Matrix;
+                        for (var mI = 0; mI < 4; mI += 1) {
+                            for (var n = 0; n < 4; n += 1) {
+                                var index = (4 * mI) + n;
+                                boneMatrix[index] = m[mI, n];
+                            }
+                        }
+
+                        this.AsFbxMeshSkinAddCluster(pSkinContext, pClusterArray, j, boneMatrix);
+                    }
+
+                    this.AsFbxMeshAddDeformer(pSkinContext, mesh);
+                    this.AsFbxMeshDisposeSkinContext(pSkinContext);
+                }
             }
+
+            AsFbxMeshDisposeClusterArray(pClusterArray);
         }
 
         private IntPtr ExportTexture(ImportedTexture texture) {
@@ -174,6 +242,5 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
 
             return pTex;
         }
-
     }
 }
