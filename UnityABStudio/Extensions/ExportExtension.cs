@@ -1,5 +1,4 @@
 namespace SoarCraft.QYun.UnityABStudio.Extensions {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -25,7 +24,6 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
         public static Task<bool> ExportConvertFile(this AssetItem item, string exportPath) => Task.Run(() =>
             item.Type switch {
-                ClassIDType.AnimationClip => false,
                 ClassIDType.Animator => ExportAnimator(item, exportPath),
                 ClassIDType.AudioClip => ExportAudioClip(item, exportPath),
                 ClassIDType.Font => ExportFont(item, exportPath),

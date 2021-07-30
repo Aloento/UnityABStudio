@@ -12,7 +12,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using Helpers;
 
     public static partial class ExportExtension {
-        private static string FixFileName(string str) => str.Length >= 260
+        public static string FixFileName(string str) => str.Length >= 260
             ? Path.GetRandomFileName()
             : Path.GetInvalidFileNameChars().Aggregate(str, (current, c) => current.Replace(c, '_'));
 

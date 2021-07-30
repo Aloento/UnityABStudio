@@ -1,5 +1,6 @@
 namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
     using Windows.Storage;
@@ -9,13 +10,24 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Core.Models;
-    using Core.Services;
     using Microsoft.UI.Xaml.Controls;
     using Serilog;
 
     public class OverViewModel : ObservableRecipient {
         private readonly AssetsManager manager = Ioc.Default.GetRequiredService<AssetsManager>();
-        private readonly ILogger logger = Ioc.Default.GetRequiredService<LoggerService>().Logger;
+        private readonly ILogger logger = Ioc.Default.GetRequiredService<ILogger>();
+
+        internal readonly ObservableCollection<BundleItem> bundleList = new();
+
+#if DEBUG
+        internal async Task BuildTestBundleListAsync() {
+            await this.manager.LoadFolderAsync(@"C:\Codes\C#\UnityABStudio\UnitTest\Assets");
+
+            foreach (var file in this.manager.AssetsFileList) {
+                this.bundleList.Add(new BundleItem(file));
+            }
+        }
+#endif
 
         public Task<(Dictionary<string, List<string>>, List<TreeViewNode>)> LoadAssetsDataAsync(IEnumerable<StorageFile> files) => Task.Run(async () => {
             this.logger.Information("Start to load Asset Files...");

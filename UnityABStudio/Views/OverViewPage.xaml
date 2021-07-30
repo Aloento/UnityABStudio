@@ -4,55 +4,98 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:behaviors="using:SoarCraft.QYun.UnityABStudio.Behaviors"
-    behaviors:NavigationViewHeaderBehavior.HeaderContext="Quick Start!"
+    xmlns:viewmodels="using:SoarCraft.QYun.UnityABStudio.ViewModels"
+    xmlns:models="using:SoarCraft.QYun.UnityABStudio.Core.Models"
+    d:DataContext="{d:DesignInstance Type=viewmodels:OverViewModel}"
     mc:Ignorable="d"
     Style="{StaticResource PageStyle}">
 
-    <Grid Margin="{StaticResource MediumLeftRightMargin}">
-        <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+    <!--#region Resources-->
+    <Page.Resources>
+        <DataTemplate x:Key="LoadedListViewTemp" x:DataType="models:BundleItem">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="1"
+                           Text="{x:Bind CBAID}"
+                           x:Phase="1"
+                           Style="{ThemeResource BaseTextBlockStyle}"
+                           Margin="12,6,0,0" />
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           Text="{x:Bind Format(FileName, Count)}"
+                           x:Phase="2"
+                           Style="{ThemeResource BodyTextBlockStyle}"
+                           Margin="12,0,0,6" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <!--#endregion-->
 
-            <StackPanel Padding="20,0,0,0"
+    <Grid Margin="{StaticResource MediumLeftRightMargin}"
+          Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+
+        <StackPanel Padding="20,0,0,0"
                     HorizontalAlignment="Left">
 
+            <!--#region LoadFiles-->
+            <StackPanel
+                Name="LoadPanel"
+                Loaded="LoadPanel_OnLoadedAsync"
+                Margin="{StaticResource XXSmallTopMargin}">
+
+                <TextBlock Text="Load AssetBundles"
+                           Style="{StaticResource SubtitleTextBlockStyle}" />
+
                 <InfoBar
-                    Name="InfoBar"
+                    Name="LoadInfoBar"
                     IsOpen="True"
-                    x:Uid="OverInfo"
                     IsClosable="False"
-                    Margin="{StaticResource SmallTopBottomMargin}" >
-                    <InfoBar.Content>
-                        <StackPanel Margin="0, 0, 0, 12">
-                            <TextBlock x:Uid="InfoText"/>
-                            <Button Name="InfoButton"
-                                    Content="Waiting..."
-                                    IsEnabled="False"
-                                    Margin="{StaticResource SmallTopMargin}"/>
-                        </StackPanel>
-                    </InfoBar.Content>
-                </InfoBar>
+                    Margin="{StaticResource SmallTopBottomMargin}"
+                    Message="在这里打开AB文件，已经加载的文件会显示在下面的列表中。选中列表中打开的AB包，即可在其他页面查看对应详情" />
 
-                <StackPanel Margin="{StaticResource SmallTopMargin}">
-                    <TextBlock Text="Open AssetBundle" />
-                    <Button Content="Open File"
-                            Click="FileButton_OnClick"
-                            Margin="{StaticResource XXSmallTopMargin}"/>
-                    <TextBlock x:Name="ImageText"
-                               Text="Please choose a File"
-                               Margin="{StaticResource XXSmallTopMargin}"/>
-                </StackPanel>
+                <CommandBar
+                    Name="ListMenuBar"
+                    DefaultLabelPosition="Right">
+                    <AppBarButton Name="OpenFiles" Icon="OpenFile" Label="Files" />
+                    <AppBarButton Name="OpenFolders" Icon="NewFolder" Label="Folders" />
+                    <AppBarButton Name="EjectItems" Icon="Delete" Label="Ejects" />
+                </CommandBar>
 
-                <StackPanel Margin="{StaticResource SmallTopMargin}">
-                    <TextBlock Text="Save Location" />
-                    <Button Content="Set Export"
-                            Margin="{StaticResource XXSmallTopMargin}"/>
-                    <TextBlock x:Name="ExportText"
-                               Text="Please set"
-                               Margin="{StaticResource XXSmallTopMargin}"/>
-                </StackPanel>
+                <ListView
+                    Name="LoadedList"
+                    SelectionMode="Multiple"
+                    ItemsSource="{x:Bind ViewModel.bundleList}"
+                    ItemTemplate="{StaticResource LoadedListViewTemp}" />
+            </StackPanel>
+            <!--#endregion-->
 
+            <StackPanel Margin="{StaticResource SmallTopMargin}">
+                <TextBlock Text="Open AssetBundle" />
+                <Button Content="Open File"
+                        Click="FileButton_OnClick"
+                        Margin="{StaticResource XXSmallTopMargin}" />
+                <TextBlock x:Name="ImageText"
+                           Text="Please choose a File"
+                           Margin="{StaticResource XXSmallTopMargin}" />
             </StackPanel>
 
-        </Grid>
+            <StackPanel Margin="{StaticResource SmallTopMargin}">
+                <TextBlock Text="Save Location" />
+                <Button Content="Set Export"
+                        Margin="{StaticResource XXSmallTopMargin}" />
+                <TextBlock x:Name="ExportText"
+                           Text="Please set"
+                           Margin="{StaticResource XXSmallTopMargin}" />
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </Page>

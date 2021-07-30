@@ -1,4 +1,5 @@
 // To learn more about WinUI3, see: https://docs.microsoft.com/windows/apps/winui/winui3/.
+
 namespace SoarCraft.QYun.UnityABStudio {
     using System;
     using Activation;
@@ -8,8 +9,11 @@ namespace SoarCraft.QYun.UnityABStudio {
     using Core.Contracts.Services;
     using Core.Services;
     using Extensions;
+    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
+    using Serilog;
+    using Serilog.Core;
     using Services;
     using TextureDecoder;
     using ViewModels;
@@ -18,14 +22,20 @@ namespace SoarCraft.QYun.UnityABStudio {
 
     public partial class App : Application {
         public static Window MainWindow { get; set; } = new() { Title = "AppDisplayName".GetLocalized() };
+        private readonly ILogger logger;
 
         public App() {
             InitializeComponent();
             this.UnhandledException += this.App_UnhandledException;
             Ioc.Default.ConfigureServices(this.ConfigureServices());
+
+            logger = Ioc.Default.GetRequiredService<ILogger>();
+            logger.Information("-------------------------------------");
+            logger.Information("Hello, SoarCraft.QYun.UnityABStudio!");
         }
 
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) => Ioc.Default.GetService<LoggerService>()?.Logger.Error(e.Message);
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e) =>
+            logger.Error(e.Message);
 
         protected override async void OnLaunched(LaunchActivatedEventArgs args) {
             base.OnLaunched(args);
@@ -35,7 +45,10 @@ namespace SoarCraft.QYun.UnityABStudio {
 
         private IServiceProvider ConfigureServices() {
             var services = new ServiceCollection();
-            _ = services.AddSingleton<LoggerService>();
+            _ = services.AddSingleton<ILogger, Logger>(_ => new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .WriteTo.Async(a => a.File(@"C:\CaChe\UnityABStudio.log"))
+                .CreateLogger());
 
             // Default Activation Handler
             _ = services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
@@ -53,6 +66,7 @@ namespace SoarCraft.QYun.UnityABStudio {
             // Core Services
             _ = services.AddSingleton<ISampleDataService, SampleDataService>();
             _ = services.AddSingleton<IAssetDataService, AssetDataService>();
+            _ = services.AddSingleton<IMemoryCache, MemoryCache>();
             _ = services.AddSingleton<SettingsService>();
             _ = services.AddSingleton<AssetsManager>();
             _ = services.AddSingleton<TextureDecoderService>();
