@@ -1,4 +1,5 @@
 namespace SoarCraft.QYun.UnityABStudio.Extensions {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -226,11 +227,8 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
         private static bool ExportTextAsset(AssetItem item, string exportPath) {
             var m_TextAsset = (TextAsset)item.Obj;
             var extension = ".txt";
-            if (settings.RestoreExtensionName) {
-                if (!string.IsNullOrEmpty(item.Container)) {
-                    extension = Path.GetExtension(item.Container);
-                }
-            }
+            if (settings.RestoreExtensionName)
+                extension = !string.IsNullOrEmpty(item.Container) ? Path.GetExtension(item.Container) : string.Empty;
 
             if (!TryExportFile(exportPath, item, extension, out var exportFullPath))
                 return false;
