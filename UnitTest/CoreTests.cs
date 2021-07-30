@@ -1,4 +1,5 @@
 namespace SoarCraft.QYun.UnityABStudio.UnitTest {
+    using System;
     using System.IO;
     using AssetReader.Unity3D.Objects;
     using AssetReader.Unity3D.Objects.Shaders;
@@ -6,6 +7,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Converters;
     using Converters.ShaderConverters;
+    using Core.Services;
     using Extensions;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -54,6 +56,25 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
 
             var str = ((Shader)obj).Convert();
             File.WriteAllText(@"C:\CaChe\UnityABStudio_ShaderResult.txt", str);
+        }
+
+        [DataTestMethod]
+        [DataRow("Assets/[pack]common.ab")]
+        [DataRow("Assets/char_1012_skadi2.ab")]
+        [DataRow("Assets/gacha_phase_0.ab")]
+        [DataRow("Assets/m_bat_exterminate_intro.ab")]
+        [DataRow("Assets/s_background_chernobog_b.ab")]
+        public void MD5Test(string filePath) {
+            try {
+                Ioc.Default.ConfigureServices(new ServiceCollection().AddMemoryCache().AddSingleton<CacheService>().BuildServiceProvider());
+            } catch (Exception) {
+                // ignored
+            }
+
+            var cache = Ioc.Default.GetRequiredService<CacheService>();
+            var a = cache.GetFileMD5Async(filePath);
+            a.Wait();
+            Console.WriteLine(a.Result);
         }
     }
 }

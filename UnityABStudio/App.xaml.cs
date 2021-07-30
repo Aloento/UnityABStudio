@@ -45,6 +45,9 @@ namespace SoarCraft.QYun.UnityABStudio {
 
         private IServiceProvider ConfigureServices() {
             var services = new ServiceCollection();
+
+            // First Services
+            _ = services.AddMemoryCache().AddSingleton<CacheService>();
             _ = services.AddSingleton<ILogger, Logger>(_ => new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .WriteTo.Async(a => a.File(@"C:\CaChe\UnityABStudio.log"))
@@ -66,7 +69,6 @@ namespace SoarCraft.QYun.UnityABStudio {
             // Core Services
             _ = services.AddSingleton<ISampleDataService, SampleDataService>();
             _ = services.AddSingleton<IAssetDataService, AssetDataService>();
-            _ = services.AddSingleton<IMemoryCache, MemoryCache>();
             _ = services.AddSingleton<SettingsService>();
             _ = services.AddSingleton<AssetsManager>();
             _ = services.AddSingleton<TextureDecoderService>();
@@ -86,6 +88,7 @@ namespace SoarCraft.QYun.UnityABStudio {
             _ = services.AddTransient<ContentGridDetailViewModel>();
             _ = services.AddTransient<ContentGridDetailPage>();
             _ = services.AddTransient<SettingsPage>();
+
             return services.BuildServiceProvider();
         }
     }
