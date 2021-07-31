@@ -42,14 +42,17 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
         [DataTestMethod]
         [DataRow("Assets/s_background_chernobog_b.ab", 5421374963156575731)]
         public void MeshExpTest(string filePath, long PathID) {
+            TryInitIoc();
+
             new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
             if (obj is not Mesh)
                 Assert.Fail($"{PathID} 不是 {nameof(Mesh)}");
 
             var target = new PrivateObject(typeof(ExportExtension));
-            var res = target.Invoke("ExportMesh", new AssetItem(obj, out _, out _), @"C:\CaChe\Result");
+            var res = (Task<bool>)target.Invoke("ExportMeshAsync", new AssetItem(obj, out _, out _), @"C:\CaChe\Result");
+            res.Wait();
 
-            Assert.AreEqual(true, res, "导出失败");
+            Assert.AreEqual(true, res.Result, "导出失败");
         }
 
         [DataTestMethod]
