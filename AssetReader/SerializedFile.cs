@@ -69,12 +69,14 @@ namespace SoarCraft.QYun.AssetReader {
                 unityVersion = reader.ReadStringToNull();
                 SetVersion(unityVersion);
             }
+
             if (header.m_Version >= SerializedFileFormatVersion.kUnknown_8) {
                 m_TargetPlatform = (BuildTarget)reader.ReadInt32();
                 if (!Enum.IsDefined(typeof(BuildTarget), m_TargetPlatform)) {
                     m_TargetPlatform = BuildTarget.UnknownPlatform;
                 }
             }
+
             if (header.m_Version >= SerializedFileFormatVersion.kHasTypeTreeHashes) {
                 m_EnableTypeTree = reader.ReadBoolean();
             }
@@ -86,7 +88,8 @@ namespace SoarCraft.QYun.AssetReader {
                 m_Types.Add(ReadSerializedType(false));
             }
 
-            if (header.m_Version is >= SerializedFileFormatVersion.kUnknown_7 and < SerializedFileFormatVersion.kUnknown_14) {
+            if (header.m_Version is >= SerializedFileFormatVersion.kUnknown_7 and < SerializedFileFormatVersion
+                .kUnknown_14) {
                 bigIDEnabled = reader.ReadInt32();
             }
 
@@ -106,7 +109,9 @@ namespace SoarCraft.QYun.AssetReader {
                     objectInfo.m_PathID = reader.ReadInt64();
                 }
 
-                objectInfo.byteStart = this.header.m_Version >= SerializedFileFormatVersion.kLargeFilesSupport ? reader.ReadInt64() : reader.ReadUInt32();
+                objectInfo.byteStart = this.header.m_Version >= SerializedFileFormatVersion.kLargeFilesSupport
+                    ? reader.ReadInt64()
+                    : reader.ReadUInt32();
 
                 objectInfo.byteStart += header.m_DataOffset;
                 objectInfo.byteSize = reader.ReadUInt32();
@@ -124,7 +129,8 @@ namespace SoarCraft.QYun.AssetReader {
                     case < SerializedFileFormatVersion.kHasScriptTypeIndex:
                         objectInfo.isDestroyed = reader.ReadUInt16();
                         break;
-                    case >= SerializedFileFormatVersion.kHasScriptTypeIndex and < SerializedFileFormatVersion.kRefactorTypeData: {
+                    case >= SerializedFileFormatVersion.kHasScriptTypeIndex and < SerializedFileFormatVersion
+                        .kRefactorTypeData: {
                         var m_ScriptTypeIndex = reader.ReadInt16();
                         if (objectInfo.serializedType != null)
                             objectInfo.serializedType.m_ScriptTypeIndex = m_ScriptTypeIndex;
@@ -132,9 +138,11 @@ namespace SoarCraft.QYun.AssetReader {
                     }
                 }
 
-                if (header.m_Version is SerializedFileFormatVersion.kSupportsStrippedObject or SerializedFileFormatVersion.kRefactoredClassId) {
+                if (header.m_Version is SerializedFileFormatVersion.kSupportsStrippedObject or
+                    SerializedFileFormatVersion.kRefactoredClassId) {
                     objectInfo.stripped = reader.ReadByte();
                 }
+
                 m_Objects.Add(objectInfo);
             }
 
@@ -151,6 +159,7 @@ namespace SoarCraft.QYun.AssetReader {
                         reader.AlignStream();
                         m_ScriptType.localIdentifierInFile = reader.ReadInt64();
                     }
+
                     m_ScriptTypes.Add(m_ScriptType);
                 }
             }
@@ -162,10 +171,12 @@ namespace SoarCraft.QYun.AssetReader {
                 if (header.m_Version >= SerializedFileFormatVersion.kUnknown_6) {
                     var tempEmpty = reader.ReadStringToNull();
                 }
+
                 if (header.m_Version >= SerializedFileFormatVersion.kUnknown_5) {
                     m_External.guid = new Guid(reader.ReadBytes(16));
                     m_External.type = reader.ReadInt32();
                 }
+
                 m_External.pathName = reader.ReadStringToNull();
                 m_External.fileName = Path.GetFileName(m_External.pathName);
                 m_Externals.Add(m_External);
@@ -189,9 +200,11 @@ namespace SoarCraft.QYun.AssetReader {
         public void SetVersion(string stringVersion) {
             if (stringVersion != StrippedVersion) {
                 unityVersion = stringVersion;
-                var buildSplit = Regex.Replace(stringVersion, @"\d", "").Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+                var buildSplit = Regex.Replace(stringVersion, @"\d", "")
+                    .Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
                 buildType = new BuildType(buildSplit[0]);
-                var versionSplit = Regex.Replace(stringVersion, @"\D", ".").Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+                var versionSplit = Regex.Replace(stringVersion, @"\D", ".")
+                    .Split(new[] { "." }, StringSplitOptions.RemoveEmptyEntries);
                 version = versionSplit.Select(int.Parse).ToArray();
             }
         }
@@ -212,9 +225,12 @@ namespace SoarCraft.QYun.AssetReader {
             if (header.m_Version >= SerializedFileFormatVersion.kHasTypeTreeHashes) {
                 if (isRefType && type.m_ScriptTypeIndex >= 0) {
                     type.m_ScriptID = reader.ReadBytes(16);
-                } else if ((header.m_Version < SerializedFileFormatVersion.kRefactoredClassId && type.classID < 0) || (header.m_Version >= SerializedFileFormatVersion.kRefactoredClassId && type.classID == 114)) {
+                } else if ((header.m_Version < SerializedFileFormatVersion.kRefactoredClassId && type.classID < 0) ||
+                           (header.m_Version >= SerializedFileFormatVersion.kRefactoredClassId &&
+                            type.classID == 114)) {
                     type.m_ScriptID = reader.ReadBytes(16);
                 }
+
                 type.m_OldTypeHash = reader.ReadBytes(16);
             }
 
@@ -222,11 +238,13 @@ namespace SoarCraft.QYun.AssetReader {
                 type.m_Type = new TypeTree {
                     m_Nodes = new List<TypeTreeNode>()
                 };
-                if (header.m_Version is >= SerializedFileFormatVersion.kUnknown_12 or SerializedFileFormatVersion.kUnknown_10) {
+                if (header.m_Version is >= SerializedFileFormatVersion.kUnknown_12 or SerializedFileFormatVersion
+                    .kUnknown_10) {
                     TypeTreeBlobRead(type.m_Type);
                 } else {
                     ReadTypeTree(type.m_Type);
                 }
+
                 if (header.m_Version >= SerializedFileFormatVersion.kStoresTypeDependencies) {
                     if (isRefType) {
                         type.m_KlassName = reader.ReadStringToNull();
@@ -251,9 +269,11 @@ namespace SoarCraft.QYun.AssetReader {
             if (header.m_Version == SerializedFileFormatVersion.kUnknown_2) {
                 var variableCount = reader.ReadInt32();
             }
+
             if (header.m_Version != SerializedFileFormatVersion.kUnknown_3) {
                 typeTreeNode.m_Index = reader.ReadInt32();
             }
+
             typeTreeNode.m_TypeFlags = reader.ReadInt32();
             typeTreeNode.m_Version = reader.ReadInt32();
             if (header.m_Version != SerializedFileFormatVersion.kUnknown_3) {
@@ -284,6 +304,7 @@ namespace SoarCraft.QYun.AssetReader {
                     typeTreeNode.m_RefTypeHash = reader.ReadUInt64();
                 }
             }
+
             m_Type.m_StringBuffer = reader.ReadBytes(stringBufferSize);
 
             using (var stringBufferReader = new UnityReader(new MemoryStream(m_Type.m_StringBuffer))) {
@@ -300,6 +321,7 @@ namespace SoarCraft.QYun.AssetReader {
                     stringBufferReader.BaseStream.Position = value;
                     return stringBufferReader.ReadStringToNull();
                 }
+
                 var offset = value & 0x7FFFFFFF;
                 return CommonString.StringBuffer.TryGetValue(offset, out var str) ? str : offset.ToString();
             }
@@ -308,6 +330,32 @@ namespace SoarCraft.QYun.AssetReader {
         public void AddObject(UObject obj) {
             Objects.Add(obj);
             ObjectsDic.Add(obj.m_PathID, obj);
+        }
+
+        ~SerializedFile() {
+            try {
+                _ = this.assetsManager.AssetsFileList.Remove(this);
+                foreach (var (key, value) in this.assetsManager.resourceFileReaders.
+                    Where(x => x.Key.Contains(this.fileName)).ToList()) {
+                    value.Dispose();
+                    _ = this.assetsManager.resourceFileReaders.Remove(key);
+                }
+
+                this.reader.Dispose();
+                foreach (var obj in this.Objects) {
+                    obj.reader.Dispose();
+                    obj.reader = null;
+                }
+
+                this.Objects.Clear();
+                this.ObjectsDic.Clear();
+                this.m_Types.Clear();
+                this.m_ScriptTypes.Clear();
+                this.m_Externals.Clear();
+                this.m_RefTypes.Clear();
+            } catch (Exception) {
+                // ignored
+            }
         }
 
         public bool IsVersionStripped => unityVersion == StrippedVersion;

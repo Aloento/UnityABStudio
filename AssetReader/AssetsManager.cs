@@ -56,8 +56,8 @@ namespace SoarCraft.QYun.AssetReader {
             }
 
             //use a for loop because list size can change
-            foreach (var file in this.importFiles) {
-                this.LoadFile(file);
+            for (var i = 0; i < this.importFiles.Count; i++) {
+                this.LoadFile(this.importFiles[i]);
             }
 
             importFiles.Clear();
@@ -203,15 +203,16 @@ namespace SoarCraft.QYun.AssetReader {
         public void Clear() {
             foreach (var assetsFile in AssetsFileList) {
                 assetsFile.Objects.Clear();
-                assetsFile.reader.Close();
+                assetsFile.ObjectsDic.Clear();
+                assetsFile.reader.Dispose();
             }
             AssetsFileList.Clear();
 
             foreach (var resourceFileReader in resourceFileReaders) {
-                resourceFileReader.Value.Close();
+                resourceFileReader.Value.Dispose();
             }
-            resourceFileReaders.Clear();
 
+            resourceFileReaders.Clear();
             assetsFileIndexCache.Clear();
         }
 

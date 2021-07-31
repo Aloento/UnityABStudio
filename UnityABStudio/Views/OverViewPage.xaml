@@ -47,7 +47,7 @@
             <!--#region LoadFiles-->
             <StackPanel
                 Name="LoadPanel"
-                Loaded="LoadPanel_OnLoadedAsync"
+                Loaded="LoadPanel_OnLoaded"
                 Margin="{StaticResource XXSmallTopMargin}">
 
                 <TextBlock Text="Load AssetBundles"
@@ -64,7 +64,7 @@
                     Name="ListMenuBar"
                     DefaultLabelPosition="Right">
                     <AppBarButton Name="OpenFiles" Icon="OpenFile" Label="Files" />
-                    <AppBarButton Name="OpenFolders" Icon="NewFolder" Label="Folders" />
+                    <AppBarButton Name="OpenFolder" Icon="NewFolder" Label="Folder" />
                     <AppBarButton Name="EjectItems" Icon="Delete" Label="Ejects" />
                 </CommandBar>
 
@@ -75,25 +75,6 @@
                     ItemTemplate="{StaticResource LoadedListViewTemp}" />
             </StackPanel>
             <!--#endregion-->
-
-            <StackPanel Margin="{StaticResource SmallTopMargin}">
-                <TextBlock Text="Open AssetBundle" />
-                <Button Content="Open File"
-                        Click="FileButton_OnClick"
-                        Margin="{StaticResource XXSmallTopMargin}" />
-                <TextBlock x:Name="ImageText"
-                           Text="Please choose a File"
-                           Margin="{StaticResource XXSmallTopMargin}" />
-            </StackPanel>
-
-            <StackPanel Margin="{StaticResource SmallTopMargin}">
-                <TextBlock Text="Save Location" />
-                <Button Content="Set Export"
-                        Margin="{StaticResource XXSmallTopMargin}" />
-                <TextBlock x:Name="ExportText"
-                           Text="Please set"
-                           Margin="{StaticResource XXSmallTopMargin}" />
-            </StackPanel>
 
         </StackPanel>
 

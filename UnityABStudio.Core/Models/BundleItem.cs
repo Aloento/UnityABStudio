@@ -12,6 +12,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Models {
             CBAID = file.fileName;
             FileName = Path.GetFileNameWithoutExtension(file.originalPath);
             Count = file.Objects.Count.ToString();
+            Serialized = file;
         }
 
         public string Format(string name, string count) => $"In {name} with {count} Items";

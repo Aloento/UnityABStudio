@@ -9,7 +9,6 @@ namespace SoarCraft.QYun.UnityABStudio {
     using Core.Contracts.Services;
     using Core.Services;
     using Extensions;
-    using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.UI.Xaml;
     using Serilog;
@@ -75,19 +74,19 @@ namespace SoarCraft.QYun.UnityABStudio {
             _ = services.AddSingleton<FBXHelpService>();
 
             // Views and ViewModels
-            _ = services.AddTransient<ShellPage>();
-            _ = services.AddTransient<ShellViewModel>();
-            _ = services.AddTransient<OverViewModel>();
-            _ = services.AddTransient<OverViewPage>();
-            _ = services.AddTransient<ListDetailsViewModel>();
-            _ = services.AddTransient<ListDetailsPage>();
-            _ = services.AddTransient<DataGridViewModel>();
-            _ = services.AddTransient<DataGridPage>();
-            _ = services.AddTransient<ContentGridViewModel>();
-            _ = services.AddTransient<ContentGridPage>();
-            _ = services.AddTransient<ContentGridDetailViewModel>();
-            _ = services.AddTransient<ContentGridDetailPage>();
-            _ = services.AddTransient<SettingsPage>();
+            _ = services.AddSingleton<ShellPage>();
+            _ = services.AddSingleton<ShellViewModel>();
+            _ = services.AddSingleton<OverViewModel>();
+            _ = services.AddSingleton<OverViewPage>();
+            _ = services.AddSingleton<ListDetailsViewModel>();
+            _ = services.AddSingleton<ListDetailsPage>();
+            _ = services.AddSingleton<DataGridViewModel>();
+            _ = services.AddSingleton<DataGridPage>();
+            _ = services.AddSingleton<ContentGridViewModel>();
+            _ = services.AddSingleton<ContentGridPage>();
+            _ = services.AddSingleton<ContentGridDetailViewModel>();
+            _ = services.AddSingleton<ContentGridDetailPage>();
+            _ = services.AddSingleton<SettingsPage>();
 
             return services.BuildServiceProvider();
         }
