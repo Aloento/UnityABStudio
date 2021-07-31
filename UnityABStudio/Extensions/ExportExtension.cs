@@ -29,7 +29,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
                 ClassIDType.Animator => ExportAnimator(item, exportPath),
                 ClassIDType.AudioClip => await ExportAudioClipAsync(item, exportPath),
                 ClassIDType.Font => ExportFont(item, exportPath),
-                ClassIDType.Mesh => ExportMesh(item, exportPath),
+                ClassIDType.Mesh => await ExportMeshAsync(item, exportPath),
                 ClassIDType.MonoBehaviour => ExportMonoBehaviour(item, exportPath),
                 ClassIDType.MovieTexture => ExportMovieTexture(item, exportPath),
                 ClassIDType.Shader => ExportShader(item, exportPath),
@@ -96,19 +96,26 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
                 if (!TryExportFile(exportPath, item, extension, out var exportFullPath))
                     return false;
-                File.WriteAllBytes(exportFullPath, m_Font.m_FontData);
+                _ = File.WriteAllBytesAsync(exportFullPath, m_Font.m_FontData);
                 return true;
             }
 
             return false;
         }
 
-        private static bool ExportMesh(AssetItem item, string exportPath) {
+        private static async Task<bool> ExportMeshAsync(AssetItem item, string exportPath) {
             var m_Mesh = (Mesh)item.Obj;
             if (m_Mesh.m_VertexCount <= 0)
                 return false;
             if (!TryExportFile(exportPath, item, ".obj", out var exportFullPath))
                 return false;
+
+            var str = await cache.TryGetValue<string>(item.BaseID);
+            if (!string.IsNullOrWhiteSpace(str)) {
+                _ = File.WriteAllTextAsync(exportFullPath, str);
+                return true;
+            }
+
             var sb = new StringBuilder();
             _ = sb.AppendLine("g " + m_Mesh.m_Name);
 
@@ -181,7 +188,9 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             #endregion
 
             _ = sb.Replace("NaN", "0");
-            File.WriteAllText(exportFullPath, sb.ToString());
+            _ = cache.TryPutAsync(item.BaseID, sb.ToString());
+            _ = File.WriteAllTextAsync(exportFullPath, sb.ToString());
+
             return true;
         }
 
