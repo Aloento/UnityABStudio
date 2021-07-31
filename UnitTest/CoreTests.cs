@@ -12,7 +12,6 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SixLabors.ImageSharp;
-    using TextureDecoder;
 
     [TestClass]
     public class CoreTests {
@@ -32,7 +31,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
         [DataTestMethod]
         [DataRow("Assets/char_1012_skadi2.ab", 2938589673199698669)]
         public void TextureDecodeTest(string filePath, long PathID) {
-            Ioc.Default.ConfigureServices(new ServiceCollection().AddSingleton<TextureDecoderService>().BuildServiceProvider());
+            StudioTests.TryInitIoc();
 
             new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
 
@@ -65,11 +64,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
         [DataRow("Assets/m_bat_exterminate_intro.ab")]
         [DataRow("Assets/s_background_chernobog_b.ab")]
         public void MD5Test(string filePath) {
-            try {
-                Ioc.Default.ConfigureServices(new ServiceCollection().AddMemoryCache().AddSingleton<CacheService>().BuildServiceProvider());
-            } catch (Exception) {
-                // ignored
-            }
+            StudioTests.TryInitIoc();
 
             var cache = Ioc.Default.GetRequiredService<CacheService>();
             var a = cache.GetFileMD5Async(filePath);

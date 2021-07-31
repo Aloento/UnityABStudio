@@ -1,4 +1,5 @@
 namespace SoarCraft.QYun.UnityABStudio.UnitTest {
+    using System.Threading.Tasks;
     using AssetReader.Unity3D.Objects;
     using AssetReader.Unity3D.Objects.Meshes;
     using AssetReader.Unity3D.Objects.Sprites;
@@ -14,6 +15,17 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
 
     [TestClass]
     public class StudioTests {
+        private static bool init;
+
+        public static void TryInitIoc() {
+            if (!init) {
+                Ioc.Default.ConfigureServices(new ServiceCollection().AddMemoryCache().AddSingleton<CacheService>()
+                    .AddSingleton<SettingsService>().AddSingleton<TextureDecoderService>()
+                    .AddSingleton<FBXHelpService>().BuildServiceProvider());
+                init = true;
+            }
+        }
+
         [DataTestMethod]
         [DataRow("Assets/char_1012_skadi2.ab", -230973727348019624)]
         public void MonoBehaviourExpTest(string filePath, long PathID) {
@@ -56,8 +68,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
         [DataTestMethod]
         [DataRow("Assets/gacha_phase_0.ab", 133153641501856485)]
         public void AnimatorExpTest(string filePath, long PathID) {
-            Ioc.Default.ConfigureServices(new ServiceCollection().
-                AddSingleton<FBXHelpService>().AddSingleton<SettingsService>().BuildServiceProvider());
+            TryInitIoc();
 
             new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
             if (obj is not Animator)
@@ -73,9 +84,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
         [DataTestMethod]
         [DataRow("Assets/char_1012_skadi2.ab", 3197167805266407399)]
         public void SpriteExpTest(string filePath, long PathID) {
-            Ioc.Default.ConfigureServices(new ServiceCollection().
-                AddSingleton<FBXHelpService>().AddSingleton<TextureDecoderService>().
-                AddSingleton<SettingsService>().BuildServiceProvider());
+            TryInitIoc();
 
             new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
             if (obj is not Sprite)
@@ -90,9 +99,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
         [DataTestMethod]
         [DataRow("Assets/char_1012_skadi2.ab", 2927026290139671665)]
         public void TextExpTest(string filePath, long PathID) {
-            Ioc.Default.ConfigureServices(new ServiceCollection().
-                AddSingleton<FBXHelpService>().
-                AddSingleton<SettingsService>().BuildServiceProvider());
+            TryInitIoc();
 
             new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
             if (obj is not TextAsset)
@@ -102,6 +109,21 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
             var res = target.Invoke("ExportTextAsset", new AssetItem(obj, out _, out _), @"C:\CaChe\Result");
 
             Assert.AreEqual(true, res, "导出失败");
+        }
+
+        [DataTestMethod]
+        [DataRow("Assets/m_bat_exterminate_intro.ab", 4816768734469872508)]
+        public void AudioExpTest(string filePath, long PathID) {
+            new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
+            if (obj is not AudioClip)
+                Assert.Fail($"{PathID} 不是 {nameof(AudioClip)}");
+
+            var target = new PrivateObject(typeof(ExportExtension));
+            var res = (Task<bool>)target.Invoke("ExportAudioClipAsync", new AssetItem(obj, out _, out _),
+                @"C:\CaChe\Result");
+            res.Wait();
+
+            Assert.AreEqual(true, res.Result, "导出失败");
         }
     }
 }

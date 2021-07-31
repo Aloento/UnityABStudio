@@ -11,9 +11,11 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
 
         public CacheService(IMemoryCache cache) => this.cache = cache;
 
+        #region BundleCache
+
         public async Task<bool> TryCacheFileAsync(SerializedFile serialized) {
             var fullPath = Path.GetFullPath(serialized.originalPath);
-            if (await this.IsFileCached(fullPath) != null)
+            if (await this.TryGetCachedFileAsync(fullPath) != null)
                 return true;
 
             return await this.TryPutAsync(fullPath,
@@ -21,11 +23,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
                 false);
         }
 
-        public async Task<SerializedFile> TryGetCachedFileAsync(string filePath) => !File.Exists(filePath)
-            ? null
-            : await this.IsFileCached(Path.GetFullPath(filePath));
-
-        private async Task<SerializedFile> IsFileCached(string filePath) {
+        public async Task<SerializedFile> TryGetCachedFileAsync(string filePath) {
             var res = await TryGetValue<BundleCache>(filePath);
             if (res != null) {
                 if (res.Size == new FileInfo(filePath).Length) {
@@ -52,6 +50,8 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
 
             return BitConverter.ToString(await MD5.Create().ComputeHashAsync(stream)).Replace("-", "");
         }
+
+        #endregion
 
         public Task<bool> TryPutAsync(object key, object value, bool checkExist = true, int seconds = byte.MaxValue) =>
             Task.Run(() => {

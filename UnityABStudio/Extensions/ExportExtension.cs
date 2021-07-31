@@ -15,17 +15,19 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using Converters;
     using Converters.ShaderConverters;
     using Core.Models;
+    using Core.Services;
     using Helpers;
     using Newtonsoft.Json;
     using Services;
 
     public static partial class ExportExtension {
         private static readonly SettingsService settings = Ioc.Default.GetRequiredService<SettingsService>();
+        private static readonly CacheService cache = Ioc.Default.GetRequiredService<CacheService>();
 
-        public static Task<bool> ExportConvertFile(this AssetItem item, string exportPath) => Task.Run(() =>
+        public static Task<bool> ExportConvertFile(this AssetItem item, string exportPath) => Task.Run(async () =>
             item.Type switch {
                 ClassIDType.Animator => ExportAnimator(item, exportPath),
-                ClassIDType.AudioClip => ExportAudioClip(item, exportPath),
+                ClassIDType.AudioClip => await ExportAudioClipAsync(item, exportPath),
                 ClassIDType.Font => ExportFont(item, exportPath),
                 ClassIDType.Mesh => ExportMesh(item, exportPath),
                 ClassIDType.MonoBehaviour => ExportMonoBehaviour(item, exportPath),
@@ -54,23 +56,30 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
             return true;
         }
 
-        private static bool ExportAudioClip(AssetItem item, string exportPath) {
+        private static async Task<bool> ExportAudioClipAsync(AssetItem item, string exportPath) {
             var m_AudioClip = (AudioClip)item.Obj;
             var m_AudioData = m_AudioClip.m_AudioData.GetData();
             if (m_AudioData == null || m_AudioData.Length == 0)
                 return false;
             var converter = new AudioClipConverter(m_AudioClip);
+
             if (settings.ConvertAudio && converter.IsSupport) {
                 if (!TryExportFile(exportPath, item, ".wav", out var exportFullPath))
                     return false;
-                var buffer = converter.ConvertToWav();
-                if (buffer == null)
-                    return false;
-                File.WriteAllBytes(exportFullPath, buffer);
+
+                var buffer = await cache.TryGetValue<byte[]>(item.BaseID);
+                if (buffer == null) {
+                    buffer = converter.ConvertToWav();
+                    if (buffer == null)
+                        return false;
+                    _ = cache.TryPutAsync(item.BaseID, buffer);
+                }
+
+                _ = File.WriteAllBytesAsync(exportFullPath, buffer);
             } else {
                 if (!TryExportFile(exportPath, item, converter.GetExtensionName(), out var exportFullPath))
                     return false;
-                File.WriteAllBytes(exportFullPath, m_AudioData);
+                _ = File.WriteAllBytesAsync(exportFullPath, m_AudioData);
             }
 
             return true;
