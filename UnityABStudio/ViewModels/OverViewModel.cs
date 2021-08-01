@@ -1,16 +1,20 @@
 namespace SoarCraft.QYun.UnityABStudio.ViewModels {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Windows.Storage;
     using AssetReader;
+    using AssetReader.Entities.Enums;
     using AssetReader.Unity3D;
     using AssetReader.Unity3D.Objects;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using Contracts.ViewModels;
     using Core.Models;
+    using Extensions;
     using Microsoft.UI.Xaml.Controls;
     using Serilog;
 
@@ -79,6 +83,67 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
                 _ = this.manager.AssetsFileList.Remove(file?.Serialized);
                 this.logger.Information($"{file?.CBAID} Released");
             }
+        }
+
+        internal async Task<bool> QuickExportAsync(StorageFolder saveFolder) {
+            var objList = new List<UObject>();
+            var filtered = new List<UObject>();
+            var timeOuter = DateTime.Now.AddMinutes(3);
+
+            foreach (var bundle in this.bundleList) {
+                objList.AddRange(bundle.Serialized.Objects);
+            }
+
+            #region Filters
+
+            if (this.ExpAnimator)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.Animator).ToList());
+
+            if (this.ExpAudioClip)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.AudioClip).ToList());
+
+            if (this.ExpFont)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.Font).ToList());
+
+            if (this.ExpMesh)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.Mesh).ToList());
+
+            if (this.ExpMonoBehaviour)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.MonoBehaviour).ToList());
+
+            if (this.ExpMovieTexture)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.MovieTexture).ToList());
+
+            if (this.ExpShader)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.Shader).ToList());
+
+            if (this.ExpSprite)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.Sprite).ToList());
+
+            if (this.ExpTexture2D)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.Texture2D).ToList());
+
+            if (this.ExpTextAsset)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.TextAsset).ToList());
+
+            if (this.ExpVideoClip)
+                filtered.AddRange(objList.Where(x => x.type == ClassIDType.VideoClip).ToList());
+
+            #endregion
+
+            var waitingList = filtered.Select(x => new AssetItem(x, out _, out _))
+                .Select(item => item.ExportConvertFile(saveFolder.Path)).ToList();
+
+            while (waitingList.Any(x => !x.IsCompleted)) {
+                if (DateTime.Now.CompareTo(timeOuter) < 0) {
+                    _ = await waitingList.Find(x => !x.IsCompleted)?.WaitAsync(TimeSpan.FromMinutes(1));
+                } else {
+                    this.logger.Error("QuickExport Timeout");
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private void ClearList() {

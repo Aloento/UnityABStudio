@@ -48,7 +48,9 @@ namespace SoarCraft.QYun.UnityABStudio {
             // Base Services
             _ = services.AddMemoryCache().AddSingleton<CacheService>();
             _ = services.AddSingleton<ILogger, Logger>(_ => new LoggerConfiguration()
+#if DEBUG
                 .MinimumLevel.Verbose()
+#endif
                 .WriteTo.Async(a => a.File(@"C:\CaChe\UnityABStudio.log"))
                 .CreateLogger());
 

@@ -8,6 +8,7 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
     using ViewModels;
     using WinRT.Interop;
     using Microsoft.UI.Xaml.Input;
+    using System.Threading.Tasks;
 
     public sealed partial class OverViewPage : Page {
         public OverViewModel ViewModel { get; }
@@ -51,7 +52,7 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
         private async void OpenFolderCommandOnExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args) {
             this.OpenFolder.IsEnabled = false;
 
-            var picker = new FolderPicker() {
+            var picker = new FolderPicker {
                 SuggestedStartLocation = PickerLocationId.ComputerFolder
             };
             picker.FileTypeFilter.Add("*");
@@ -66,7 +67,68 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
             _ = ViewModel.LoadAssetFolderAsync(folder).ConfigureAwait(false);
         }
 
-        private async void OpenFileCommandOnExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args) {
+        private async void OpenFileCommandOnExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args) =>
+            await PickABFilesAsync();
+
+        private async void QuickExportButton_OnClick(object sender, RoutedEventArgs e) {
+            this.QuickExportButton.IsEnabled = false;
+            this.QuickInfoBar.Severity = InfoBarSeverity.Warning;
+
+            #region Debug
+
+            //#if DEBUG
+            //            this.logger.Debug($"{this.ViewModel.ExpAnimator}");
+            //            this.logger.Debug($"{this.ViewModel.ExpAudioClip}");
+            //            this.logger.Debug($"{this.ViewModel.ExpFont}");
+            //            this.logger.Debug($"{this.ViewModel.ExpMesh}");
+            //            this.logger.Debug($"{this.ViewModel.ExpMonoBehaviour}");
+            //            this.logger.Debug($"{this.ViewModel.ExpMovieTexture}");
+            //            this.logger.Debug($"{this.ViewModel.ExpShader}");
+            //            this.logger.Debug($"{this.ViewModel.ExpSprite}");
+            //            this.logger.Debug($"{this.ViewModel.ExpTexture2D}");
+            //            this.logger.Debug($"{this.ViewModel.ExpTextAsset}");
+            //            this.logger.Debug($"{this.ViewModel.ExpVideoClip}");
+            //#endif
+
+            #endregion
+
+            #region PickABFiles
+
+            if (ViewModel.bundleList.Count == 0)
+                await PickABFilesAsync();
+
+            if (ViewModel.bundleList.Count == 0) {
+                this.QuickInfoBar.Severity = InfoBarSeverity.Informational;
+                this.QuickExportButton.IsEnabled = true;
+                return;
+            }
+
+            #endregion
+
+            #region PickSaveFolder
+
+            var picker = new FolderPicker {
+                SuggestedStartLocation = PickerLocationId.Downloads
+            };
+            picker.FileTypeFilter.Add("*");
+            InitializeWithWindow.Initialize(picker, WindowNative.GetWindowHandle(App.MainWindow));
+
+            var saveFolder = await picker.PickSingleFolderAsync();
+            if (saveFolder == null) {
+                this.QuickInfoBar.Severity = InfoBarSeverity.Informational;
+                this.QuickExportButton.IsEnabled = true;
+                return;
+            }
+
+            #endregion
+
+            this.QuickInfoBar.Severity = await this.ViewModel.QuickExportAsync(saveFolder).ConfigureAwait(false)
+                ? InfoBarSeverity.Success
+                : InfoBarSeverity.Error;
+            this.QuickExportButton.IsEnabled = true;
+        }
+
+        private async Task PickABFilesAsync() {
             this.OpenFiles.IsEnabled = false;
 
             var picker = new FileOpenPicker {
@@ -78,26 +140,10 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
             var abFile = await picker.PickMultipleFilesAsync();
             this.OpenFiles.IsEnabled = true;
 
-            if (abFile == null)
+            if (abFile.Count == 0)
                 return;
 
-            _ = ViewModel.LoadAssetFilesAsync(abFile).ConfigureAwait(false);
-        }
-
-        private void QuickExportButton_OnClick(object sender, RoutedEventArgs e) {
-#if DEBUG
-            this.logger.Debug($"{this.ViewModel.ExpAnimator}");
-            this.logger.Debug($"{this.ViewModel.ExpAudioClip}");
-            this.logger.Debug($"{this.ViewModel.ExpFont}");
-            this.logger.Debug($"{this.ViewModel.ExpMesh}");
-            this.logger.Debug($"{this.ViewModel.ExpMonoBehaviour}");
-            this.logger.Debug($"{this.ViewModel.ExpMovieTexture}");
-            this.logger.Debug($"{this.ViewModel.ExpShader}");
-            this.logger.Debug($"{this.ViewModel.ExpSprite}");
-            this.logger.Debug($"{this.ViewModel.ExpTexture2D}");
-            this.logger.Debug($"{this.ViewModel.ExpTextAsset}");
-            this.logger.Debug($"{this.ViewModel.ExpVideoClip}");
-#endif
+            await ViewModel.LoadAssetFilesAsync(abFile);
         }
 
         #region QuickBoxSet

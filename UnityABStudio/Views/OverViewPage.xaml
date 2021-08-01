@@ -55,7 +55,7 @@
                          IsOpen="True"
                          IsClosable="False"
                          Margin="{StaticResource SmallTopBottomMargin}"
-                         Message="在下面加载AB文件，然后在这里快速过滤并导出！或直接点击下方按钮加载一个AB文件并立刻导出">
+                         Message="在下面加载AB文件，然后在这里快速过滤并导出！或直接点击下方按钮加载AB文件并立刻导出">
                     <InfoBar.Content>
                         <Button Name="QuickExportButton"
                                 Click="QuickExportButton_OnClick"
@@ -112,7 +112,7 @@
                          IsOpen="True"
                          IsClosable="False"
                          Margin="{StaticResource SmallTopBottomMargin}"
-                         Message="在这里打开AB文件，已经加载的文件会显示在下面的列表中。选中列表中打开的AB包，即可在其他页面查看对应详情" />
+                         Message="在这里加载AB文件，已经打开的文件会显示在下面的列表中。选中列表中打开的AB包，即可在其他页面查看对应详情，或者在上面快速导出" />
 
                 <CommandBar Name="ListMenuBar"
                             DefaultLabelPosition="Right">
