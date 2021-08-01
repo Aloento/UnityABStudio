@@ -1,9 +1,7 @@
 namespace SoarCraft.QYun.UnityABStudio.Views {
     using System;
-    using System.Collections.Generic;
     using Windows.Storage.Pickers;
     using CommunityToolkit.Mvvm.DependencyInjection;
-    using Core.Models;
     using Microsoft.UI.Xaml;
     using Microsoft.UI.Xaml.Controls;
     using Serilog;
@@ -19,7 +17,10 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
         public OverViewPage() {
             this.ViewModel = Ioc.Default.GetService<OverViewModel>();
             this.InitializeComponent();
+
+#if DEBUG
             logger.Debug($"Loading {nameof(OverViewPage)}");
+#endif
         }
 
         private void LoadPanel_OnLoaded(object sender, RoutedEventArgs e) {

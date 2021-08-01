@@ -9,11 +9,12 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using AssetReader.Unity3D.Objects;
     using CommunityToolkit.Mvvm.ComponentModel;
     using CommunityToolkit.Mvvm.DependencyInjection;
+    using Contracts.ViewModels;
     using Core.Models;
     using Microsoft.UI.Xaml.Controls;
     using Serilog;
 
-    public class OverViewModel : ObservableRecipient {
+    public class OverViewModel : ObservableRecipient, INavigationAware {
         private readonly AssetsManager manager = Ioc.Default.GetRequiredService<AssetsManager>();
         private readonly ILogger logger = Ioc.Default.GetRequiredService<ILogger>();
 
@@ -158,5 +159,12 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
 
                 return (namesDic, nodeCollection);
             });
+
+        void INavigationAware.OnNavigatedTo(object parameter) {
+            this.logger.Debug("NavigatedTo OverViewPage");
+        }
+
+        void INavigationAware.OnNavigatedFrom() {
+        }
     }
 }

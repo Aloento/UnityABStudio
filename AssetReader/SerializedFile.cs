@@ -333,29 +333,25 @@ namespace SoarCraft.QYun.AssetReader {
         }
 
         ~SerializedFile() {
-            try {
-                _ = this.assetsManager.AssetsFileList.Remove(this);
-                foreach (var (key, value) in this.assetsManager.resourceFileReaders.
-                    Where(x => x.Key.Contains(this.fileName)).ToList()) {
-                    value.Dispose();
-                    _ = this.assetsManager.resourceFileReaders.Remove(key);
-                }
-
-                this.reader.Dispose();
-                foreach (var obj in this.Objects) {
-                    obj.reader.Dispose();
-                    obj.reader = null;
-                }
-
-                this.Objects.Clear();
-                this.ObjectsDic.Clear();
-                this.m_Types.Clear();
-                this.m_ScriptTypes.Clear();
-                this.m_Externals.Clear();
-                this.m_RefTypes.Clear();
-            } catch (Exception) {
-                // ignored
+            _ = this.assetsManager.AssetsFileList.Remove(this);
+            foreach (var (key, value) in this.assetsManager.resourceFileReaders.
+                Where(x => x.Key.Contains(this.fileName)).ToList()) {
+                value.Dispose();
+                _ = this.assetsManager.resourceFileReaders.Remove(key);
             }
+
+            this.reader.Dispose();
+            foreach (var obj in this.Objects) {
+                obj.reader.Dispose();
+                obj.reader = null;
+            }
+
+            this.Objects.Clear();
+            this.ObjectsDic.Clear();
+            this.m_Types?.Clear();
+            this.m_ScriptTypes?.Clear();
+            this.m_Externals?.Clear();
+            this.m_RefTypes?.Clear();
         }
 
         public bool IsVersionStripped => unityVersion == StrippedVersion;

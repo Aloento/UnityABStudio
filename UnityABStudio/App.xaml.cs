@@ -45,7 +45,7 @@ namespace SoarCraft.QYun.UnityABStudio {
         private IServiceProvider ConfigureServices() {
             var services = new ServiceCollection();
 
-            // First Services
+            // Base Services
             _ = services.AddMemoryCache().AddSingleton<CacheService>();
             _ = services.AddSingleton<ILogger, Logger>(_ => new LoggerConfiguration()
                 .MinimumLevel.Verbose()
@@ -58,12 +58,12 @@ namespace SoarCraft.QYun.UnityABStudio {
             // Other Activation Handlers
 
             // Services
-            _ = services.AddSingleton<IThemeSelectorService, ThemeSelectorService>();
+            _ = services.AddScoped<IThemeSelectorService, ThemeSelectorService>();
             _ = services.AddTransient<INavigationViewService, NavigationViewService>();
 
-            _ = services.AddSingleton<IActivationService, ActivationService>();
-            _ = services.AddSingleton<IPageService, PageService>();
-            _ = services.AddSingleton<INavigationService, NavigationService>();
+            _ = services.AddScoped<IActivationService, ActivationService>();
+            _ = services.AddScoped<IPageService, PageService>();
+            _ = services.AddScoped<INavigationService, NavigationService>();
 
             // Core Services
             _ = services.AddSingleton<ISampleDataService, SampleDataService>();
@@ -73,20 +73,22 @@ namespace SoarCraft.QYun.UnityABStudio {
             _ = services.AddSingleton<TextureDecoderService>();
             _ = services.AddSingleton<FBXHelpService>();
 
-            // Views and ViewModels
-            _ = services.AddSingleton<ShellPage>();
-            _ = services.AddSingleton<ShellViewModel>();
+            // ViewModels
+            _ = services.AddScoped<ShellViewModel>();
             _ = services.AddSingleton<OverViewModel>();
-            _ = services.AddSingleton<OverViewPage>();
-            _ = services.AddSingleton<ListDetailsViewModel>();
-            _ = services.AddSingleton<ListDetailsPage>();
-            _ = services.AddSingleton<DataGridViewModel>();
-            _ = services.AddSingleton<DataGridPage>();
-            _ = services.AddSingleton<ContentGridViewModel>();
-            _ = services.AddSingleton<ContentGridPage>();
-            _ = services.AddSingleton<ContentGridDetailViewModel>();
-            _ = services.AddSingleton<ContentGridDetailPage>();
-            _ = services.AddSingleton<SettingsPage>();
+            _ = services.AddScoped<ListDetailsViewModel>();
+            _ = services.AddScoped<DataGridViewModel>();
+            _ = services.AddScoped<ContentGridViewModel>();
+            _ = services.AddScoped<ContentGridDetailViewModel>();
+
+            // Views
+            _ = services.AddScoped<ShellPage>();
+            _ = services.AddScoped<OverViewPage>();
+            _ = services.AddScoped<ListDetailsPage>();
+            _ = services.AddScoped<DataGridPage>();
+            _ = services.AddScoped<ContentGridPage>();
+            _ = services.AddScoped<ContentGridDetailPage>();
+            _ = services.AddScoped<SettingsPage>();
 
             return services.BuildServiceProvider();
         }
