@@ -20,6 +20,22 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
 
         internal readonly ObservableCollection<BundleItem> bundleList = new();
 
+        #region QuickProperties
+
+        internal bool ExpAnimator;
+        internal bool ExpAudioClip = true;
+        internal bool ExpFont;
+        internal bool ExpMesh;
+        internal bool ExpMonoBehaviour;
+        internal bool ExpMovieTexture;
+        internal bool ExpShader;
+        internal bool ExpSprite;
+        internal bool ExpTexture2D = true;
+        internal bool ExpTextAsset = true;
+        internal bool ExpVideoClip;
+
+        #endregion
+
 #if DEBUG
         internal async Task BuildTestBundleListAsync() {
             await this.manager.LoadFolderAsync(@"C:\Codes\C#\UnityABStudio\UnitTest\Assets");

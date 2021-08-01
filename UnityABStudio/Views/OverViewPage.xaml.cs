@@ -84,92 +84,69 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
             _ = ViewModel.LoadAssetFilesAsync(abFile).ConfigureAwait(false);
         }
 
-        private void AnimatorBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
+        private void QuickExportButton_OnClick(object sender, RoutedEventArgs e) {
+#if DEBUG
+            this.logger.Debug($"{this.ViewModel.ExpAnimator}");
+            this.logger.Debug($"{this.ViewModel.ExpAudioClip}");
+            this.logger.Debug($"{this.ViewModel.ExpFont}");
+            this.logger.Debug($"{this.ViewModel.ExpMesh}");
+            this.logger.Debug($"{this.ViewModel.ExpMonoBehaviour}");
+            this.logger.Debug($"{this.ViewModel.ExpMovieTexture}");
+            this.logger.Debug($"{this.ViewModel.ExpShader}");
+            this.logger.Debug($"{this.ViewModel.ExpSprite}");
+            this.logger.Debug($"{this.ViewModel.ExpTexture2D}");
+            this.logger.Debug($"{this.ViewModel.ExpTextAsset}");
+            this.logger.Debug($"{this.ViewModel.ExpVideoClip}");
+#endif
         }
 
-        private void AnimatorBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        #region QuickBoxSet
 
-        private void AudioClipBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void AnimatorBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpAnimator = true;
 
-        private void AudioClipBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void AnimatorBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpAnimator = false;
 
-        private void FontBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void AudioClipBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpAudioClip = true;
 
-        private void FontBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void AudioClipBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpAudioClip = false;
 
-        private void MeshBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void FontBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpFont = true;
 
-        private void MeshBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void FontBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpFont = false;
 
-        private void MonoBehaviourBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void MeshBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpMesh = true;
 
-        private void MonoBehaviourBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void MeshBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpMesh = false;
 
-        private void MovieTextureBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void MonoBehaviourBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpMonoBehaviour = true;
 
-        private void MovieTextureBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void MonoBehaviourBox_OnUnchecked(object sender, RoutedEventArgs e) =>
+            ViewModel.ExpMonoBehaviour = false;
 
-        private void ShaderBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void MovieTextureBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpMovieTexture = true;
 
-        private void ShaderBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void MovieTextureBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpMovieTexture = false;
 
-        private void SpriteBox_OnClick(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void ShaderBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpShader = true;
 
-        private void SpriteBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void ShaderBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpShader = false;
 
-        private void Texture2DBox_OnClick(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void SpriteBox_OnClick(object sender, RoutedEventArgs e) => ViewModel.ExpSprite = true;
 
-        private void Texture2DBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void SpriteBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpSprite = false;
 
-        private void TextAssetBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void Texture2DBox_OnClick(object sender, RoutedEventArgs e) => ViewModel.ExpTexture2D = true;
 
-        private void TextAssetBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void Texture2DBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpTexture2D = false;
 
-        private void VideoClipBox_OnChecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void TextAssetBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpTextAsset = true;
 
-        private void VideoClipBox_OnUnchecked(object sender, RoutedEventArgs e) {
-            throw new NotImplementedException();
-        }
+        private void TextAssetBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpTextAsset = false;
+
+        private void VideoClipBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpVideoClip = true;
+
+        private void VideoClipBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpVideoClip = false;
+
+        #endregion
     }
 }

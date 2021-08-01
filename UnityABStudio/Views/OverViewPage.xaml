@@ -58,6 +58,7 @@
                          Message="在下面加载AB文件，然后在这里快速过滤并导出！或直接点击下方按钮加载一个AB文件并立刻导出">
                     <InfoBar.Content>
                         <Button Name="QuickExportButton"
+                                Click="QuickExportButton_OnClick"
                                 Content="Quick Export"
                                 Margin="{StaticResource ButtonPadding}" />
                     </InfoBar.Content>
