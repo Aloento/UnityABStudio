@@ -44,35 +44,86 @@
         <StackPanel Padding="20,0,0,0"
                     HorizontalAlignment="Left">
 
+            <!--#region QuickStart-->
+            <StackPanel Name="QuickPanel"
+                        Margin="{StaticResource XXSmallTopMargin}">
+
+                <TextBlock Text="QuickStart"
+                           Style="{StaticResource SubtitleTextBlockStyle}" />
+
+                <InfoBar Name="QuickInfoBar"
+                         IsOpen="True"
+                         IsClosable="False"
+                         Margin="{StaticResource SmallTopBottomMargin}"
+                         Message="在下面加载AB文件，然后在这里快速过滤并导出！或直接点击下方按钮加载一个AB文件并立刻导出">
+                    <InfoBar.Content>
+                        <Button Name="QuickExportButton"
+                                Content="Quick Export"
+                                Margin="{StaticResource ButtonPadding}" />
+                    </InfoBar.Content>
+                </InfoBar>
+
+                <TextBlock Text="GameObject Filter"
+                           Style="{StaticResource BodyTextStyle}" />
+
+                <StackPanel Margin="{StaticResource XSmallTopMargin}"
+                            Padding="{StaticResource MediumLeftRightMargin}"
+                            Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}">
+
+                    <VariableSizedWrapGrid Orientation="Horizontal" ItemWidth="160">
+                        <CheckBox Name="AnimatorBox" Content="Animator"
+                                  Checked="AnimatorBox_OnChecked" Unchecked="AnimatorBox_OnUnchecked" />
+                        <CheckBox Name="AudioClipBox" Content="AudioClip" IsChecked="True"
+                                  Checked="AudioClipBox_OnChecked" Unchecked="AudioClipBox_OnUnchecked" />
+                        <CheckBox Name="FontBox" Content="Font"
+                                  Checked="FontBox_OnChecked" Unchecked="FontBox_OnUnchecked" />
+                        <CheckBox Name="MeshBox" Content="Mesh"
+                                  Checked="MeshBox_OnChecked" Unchecked="MeshBox_OnUnchecked" />
+                        <CheckBox Name="MonoBehaviourBox" Content="MonoBehaviour"
+                                  Checked="MonoBehaviourBox_OnChecked" Unchecked="MonoBehaviourBox_OnUnchecked" />
+                        <CheckBox Name="MovieTextureBox" Content="MovieTexture"
+                                  Checked="MovieTextureBox_OnChecked" Unchecked="MovieTextureBox_OnUnchecked" />
+                        <CheckBox Name="ShaderBox" Content="Shader"
+                                  Checked="ShaderBox_OnChecked" Unchecked="ShaderBox_OnUnchecked" />
+                        <CheckBox Name="SpriteBox" Content="Sprite"
+                                  Click="SpriteBox_OnClick" Unchecked="SpriteBox_OnUnchecked" />
+                        <CheckBox Name="Texture2DBox" Content="Texture2D" IsChecked="True"
+                                  Click="Texture2DBox_OnClick" Unchecked="Texture2DBox_OnUnchecked" />
+                        <CheckBox Name="TextAssetBox" Content="TextAsset" IsChecked="True"
+                                  Checked="TextAssetBox_OnChecked" Unchecked="TextAssetBox_OnUnchecked" />
+                        <CheckBox Name="VideoClipBox" Content="VideoClip"
+                                  Checked="VideoClipBox_OnChecked" Unchecked="VideoClipBox_OnUnchecked" />
+                    </VariableSizedWrapGrid>
+                </StackPanel>
+
+            </StackPanel>
+            <!--#endregion-->
+
             <!--#region LoadFiles-->
-            <StackPanel
-                Name="LoadPanel"
-                Loaded="LoadPanel_OnLoaded"
-                Margin="{StaticResource XXSmallTopMargin}">
+            <StackPanel Name="LoadPanel"
+                        Loaded="LoadPanel_OnLoaded"
+                        Margin="{StaticResource LargeTopMargin}">
 
                 <TextBlock Text="Load AssetBundles"
                            Style="{StaticResource SubtitleTextBlockStyle}" />
 
-                <InfoBar
-                    Name="LoadInfoBar"
-                    IsOpen="True"
-                    IsClosable="False"
-                    Margin="{StaticResource SmallTopBottomMargin}"
-                    Message="在这里打开AB文件，已经加载的文件会显示在下面的列表中。选中列表中打开的AB包，即可在其他页面查看对应详情" />
+                <InfoBar Name="LoadInfoBar"
+                         IsOpen="True"
+                         IsClosable="False"
+                         Margin="{StaticResource SmallTopBottomMargin}"
+                         Message="在这里打开AB文件，已经加载的文件会显示在下面的列表中。选中列表中打开的AB包，即可在其他页面查看对应详情" />
 
-                <CommandBar
-                    Name="ListMenuBar"
-                    DefaultLabelPosition="Right">
+                <CommandBar Name="ListMenuBar"
+                            DefaultLabelPosition="Right">
                     <AppBarButton Name="OpenFiles" Icon="OpenFile" Label="Files" />
                     <AppBarButton Name="OpenFolder" Icon="NewFolder" Label="Folder" />
                     <AppBarButton Name="EjectItems" Icon="Delete" Label="Ejects" />
                 </CommandBar>
 
-                <ListView
-                    Name="LoadedList"
-                    SelectionMode="Multiple"
-                    ItemsSource="{x:Bind ViewModel.bundleList}"
-                    ItemTemplate="{StaticResource LoadedListViewTemp}" />
+                <ListView Name="LoadedList"
+                          SelectionMode="Multiple"
+                          ItemsSource="{x:Bind ViewModel.bundleList}"
+                          ItemTemplate="{StaticResource LoadedListViewTemp}" />
             </StackPanel>
             <!--#endregion-->
 

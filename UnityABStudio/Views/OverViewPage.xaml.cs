@@ -83,5 +83,93 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
 
             _ = ViewModel.LoadAssetFilesAsync(abFile).ConfigureAwait(false);
         }
+
+        private void AnimatorBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void AnimatorBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void AudioClipBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void AudioClipBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void FontBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void FontBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void MeshBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void MeshBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void MonoBehaviourBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void MonoBehaviourBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void MovieTextureBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void MovieTextureBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void ShaderBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void ShaderBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void SpriteBox_OnClick(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void SpriteBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void Texture2DBox_OnClick(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void Texture2DBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void TextAssetBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void TextAssetBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void VideoClipBox_OnChecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+        private void VideoClipBox_OnUnchecked(object sender, RoutedEventArgs e) {
+            throw new NotImplementedException();
+        }
     }
 }
