@@ -50,9 +50,8 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
                 return false;
             }
 
-            var exportFullPath = Path.Combine(pathOrRes, item.Name, item.Name + ".fbx");
-            if (File.Exists(exportFullPath))
-                exportFullPath = Path.Combine(pathOrRes, item.Name + item.BaseID, item.Name + ".fbx");
+            if (!TryExportFile(pathOrRes, item, ".fbx", out string exportFullPath))
+                return false;
 
             var m_Animator = (Animator)item.Obj;
             var convert = animationList != null

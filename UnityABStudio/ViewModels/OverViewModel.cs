@@ -3,9 +3,9 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using Windows.Storage;
+    using Windows.UI.Core;
     using AssetReader;
     using AssetReader.Entities.Enums;
     using AssetReader.Unity3D;
@@ -85,7 +85,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             }
         }
 
-        internal async Task<bool> QuickExportAsync(StorageFolder saveFolder) {
+        internal Task<int> QuickExportAsync(StorageFolder saveFolder, TextBlock quickText) => Task.Run(async () => {
             var objList = new List<UObject>();
             var filtered = new List<UObject>();
             var timeOuter = DateTime.Now.AddMinutes(3);
@@ -136,15 +136,20 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
 
             while (waitingList.Any(x => !x.IsCompleted)) {
                 if (DateTime.Now.CompareTo(timeOuter) < 0) {
+                    _ = quickText.DispatcherQueue.TryEnqueue(() =>
+                        quickText.Text = $"一共{waitingList.Count}个任务，还有{waitingList.Count(task => !task.IsCompleted)}个");
+
                     _ = await waitingList.Find(x => !x.IsCompleted)?.WaitAsync(TimeSpan.FromMinutes(1));
                 } else {
-                    this.logger.Error("QuickExport Timeout");
-                    return false;
+                    this.logger.Error($"QuickExport Timeout, " +
+                                      $"{filtered.Count} items need to export, " +
+                                      $"but only {waitingList.Count(x => x.IsCompleted)} items completed");
+                    return -1;
                 }
             }
 
-            return true;
-        }
+            return filtered.Count;
+        });
 
         private void ClearList() {
             foreach (var bundle in this.bundleList) {

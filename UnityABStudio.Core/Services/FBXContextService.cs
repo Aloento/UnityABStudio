@@ -92,7 +92,7 @@ namespace SoarCraft.QYun.UnityABStudio.Core.Services {
             var totalBoneCount = 0;
             var hasBones = false;
 
-            if (this.exportSkins && boneList.Count > 0) {
+            if (this.exportSkins && boneList?.Count > 0) {
                 totalBoneCount = boneList.Count;
                 hasBones = true;
             }

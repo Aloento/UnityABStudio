@@ -20,6 +20,8 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
 
         private static bool TryExportFile(string dir, AssetItem item, string extension, out string fullPath) {
             var fileName = FixFileName(item.Name);
+            dir = Path.Combine(dir, Path.GetFileNameWithoutExtension(item.Obj.assetsFile.originalPath) ?? string.Empty);
+
             fullPath = Path.Combine(dir, fileName + extension);
             if (!File.Exists(fullPath)) {
                 _ = Directory.CreateDirectory(dir);

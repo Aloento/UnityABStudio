@@ -122,10 +122,20 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
 
             #endregion
 
-            this.QuickInfoBar.Severity = await this.ViewModel.QuickExportAsync(saveFolder).ConfigureAwait(false)
-                ? InfoBarSeverity.Success
-                : InfoBarSeverity.Error;
-            this.QuickExportButton.IsEnabled = true;
+            this.QuickText.Text = "导出中，请耐心等待，最多三分钟";
+            var res = await this.ViewModel.QuickExportAsync(saveFolder, QuickText).ConfigureAwait(false);
+
+            _ = DispatcherQueue.TryEnqueue(() => {
+                if (res != -1) {
+                    this.QuickInfoBar.Severity = InfoBarSeverity.Success;
+                    this.QuickText.Text = $"成功导出{res}个对象，IO写入还在进行中，请勿立刻关闭程序";
+                } else {
+                    this.QuickInfoBar.Severity = InfoBarSeverity.Error;
+                    this.QuickText.Text = "导出超时，错误详情请查看日志";
+                }
+
+                this.QuickExportButton.IsEnabled = true;
+            });
         }
 
         private async Task PickABFilesAsync() {
@@ -177,11 +187,11 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
 
         private void ShaderBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpShader = false;
 
-        private void SpriteBox_OnClick(object sender, RoutedEventArgs e) => ViewModel.ExpSprite = true;
+        private void SpriteBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpSprite = true;
 
         private void SpriteBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpSprite = false;
 
-        private void Texture2DBox_OnClick(object sender, RoutedEventArgs e) => ViewModel.ExpTexture2D = true;
+        private void Texture2DBox_OnChecked(object sender, RoutedEventArgs e) => ViewModel.ExpTexture2D = true;
 
         private void Texture2DBox_OnUnchecked(object sender, RoutedEventArgs e) => ViewModel.ExpTexture2D = false;
 

@@ -57,10 +57,21 @@
                          Margin="{StaticResource SmallTopBottomMargin}"
                          Message="在下面加载AB文件，然后在这里快速过滤并导出！或直接点击下方按钮加载AB文件并立刻导出">
                     <InfoBar.Content>
-                        <Button Name="QuickExportButton"
-                                Click="QuickExportButton_OnClick"
-                                Content="Quick Export"
-                                Margin="{StaticResource ButtonPadding}" />
+                        <Grid Margin="{StaticResource ButtonPadding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Name="QuickExportButton"
+                                    Click="QuickExportButton_OnClick"
+                                    Content="Quick Export" />
+                            <TextBlock Name="QuickText"
+                                       Grid.Column="1"
+                                       TextWrapping="WrapWholeWords"
+                                       Margin="12,6,12,0"/>
+                        </Grid>
                     </InfoBar.Content>
                 </InfoBar>
 
@@ -87,9 +98,9 @@
                         <CheckBox Name="ShaderBox" Content="Shader"
                                   Checked="ShaderBox_OnChecked" Unchecked="ShaderBox_OnUnchecked" />
                         <CheckBox Name="SpriteBox" Content="Sprite"
-                                  Click="SpriteBox_OnClick" Unchecked="SpriteBox_OnUnchecked" />
+                                  Checked="SpriteBox_OnChecked" Unchecked="SpriteBox_OnUnchecked" />
                         <CheckBox Name="Texture2DBox" Content="Texture2D" IsChecked="True"
-                                  Click="Texture2DBox_OnClick" Unchecked="Texture2DBox_OnUnchecked" />
+                                  Checked="Texture2DBox_OnChecked" Unchecked="Texture2DBox_OnUnchecked" />
                         <CheckBox Name="TextAssetBox" Content="TextAsset" IsChecked="True"
                                   Checked="TextAssetBox_OnChecked" Unchecked="TextAssetBox_OnUnchecked" />
                         <CheckBox Name="VideoClipBox" Content="VideoClip"
