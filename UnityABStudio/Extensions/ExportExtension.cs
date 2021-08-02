@@ -19,6 +19,7 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
     using Helpers;
     using Newtonsoft.Json;
     using Services;
+    using SixLabors.ImageSharp;
 
     public static partial class ExportExtension {
         private static readonly SettingsService settings = Ioc.Default.GetRequiredService<SettingsService>();
@@ -326,22 +327,18 @@ namespace SoarCraft.QYun.UnityABStudio.Extensions {
         private static async Task<bool> ExportTexture2DAsync(AssetItem item, dynamic pathOrRes, bool preview) {
             var m_Texture2D = (Texture2D)item.Obj;
             if (settings.ConvertTexture) {
-                var res = await cache.TryGetValue<byte[]>(item.BaseID);
+                var res = await cache.TryGetValue<Image>(item.BaseID);
                 var type = settings.ConvertType;
 
                 if (res == null) {
-                    await using var stream = m_Texture2D.ConvertToStream(type, true);
-                    if (stream == null)
-                        return false;
-
-                    res = stream.ToArray();
+                    res = m_Texture2D.ConvertToImage(true);
                     _ = cache.TryPutAsync(item.BaseID, res);
                 }
 
                 if (!TryExportFile(pathOrRes, item, $".{type.ToString().ToLower()}", out string exportFullPath))
                     return false;
 
-                _ = File.WriteAllBytesAsync(exportFullPath, res);
+                _ = res.SaveAsync(exportFullPath);
                 return true;
             } else {
                 if (!TryExportFile(pathOrRes, item, ".tex", out string exportFullPath))

@@ -85,7 +85,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             }
         }
 
-        internal Task<int> QuickExportAsync(StorageFolder saveFolder, TextBlock quickText) => Task.Run(async () => {
+        internal Task<int> QuickExportAsync(StorageFolder saveFolder) => Task.Run(async () => {
             var objList = new List<UObject>();
             var filtered = new List<UObject>();
             var timeOuter = DateTime.Now.AddMinutes(3);
@@ -131,21 +131,14 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
 
             #endregion
 
-            var waitingList = filtered.Select(x => new AssetItem(x, out _, out _))
-                .Select(item => item.ExportConvertFile(saveFolder.Path)).ToList();
-
-            while (waitingList.Any(x => !x.IsCompleted)) {
-                if (DateTime.Now.CompareTo(timeOuter) < 0) {
-                    _ = quickText.DispatcherQueue.TryEnqueue(() =>
-                        quickText.Text = $"一共{waitingList.Count}个任务，还有{waitingList.Count(task => !task.IsCompleted)}个");
-
-                    _ = await waitingList.Find(x => !x.IsCompleted)?.WaitAsync(TimeSpan.FromMinutes(1));
-                } else {
-                    this.logger.Error($"QuickExport Timeout, " +
-                                      $"{filtered.Count} items need to export, " +
-                                      $"but only {waitingList.Count(x => x.IsCompleted)} items completed");
-                    return -1;
+            if (DateTime.Now.CompareTo(timeOuter) < 0) {
+                foreach (var item in filtered.Select(x => new AssetItem(x, out _, out _))) {
+                    _ = await item.ExportConvertFile(saveFolder.Path);
                 }
+            } else {
+                this.logger.Error($"QuickExport Timeout, " +
+                                  $"{filtered.Count} items need to export, ");
+                return -1;
             }
 
             return filtered.Count;

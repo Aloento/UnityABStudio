@@ -55,7 +55,7 @@
                          IsOpen="True"
                          IsClosable="False"
                          Margin="{StaticResource SmallTopBottomMargin}"
-                         Message="在下面加载AB文件，然后在这里快速过滤并导出！或直接点击下方按钮加载AB文件并立刻导出">
+                         Message="在下面加载AB文件，然后在这里快速过滤并导出！或直接点击下方按钮加载AB文件并立刻导出。请勿一次性导出大量文件">
                     <InfoBar.Content>
                         <Grid Margin="{StaticResource ButtonPadding}">
                             <Grid.ColumnDefinitions>

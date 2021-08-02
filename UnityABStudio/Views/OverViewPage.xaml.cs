@@ -123,10 +123,10 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
             #endregion
 
             this.QuickText.Text = "导出中，请耐心等待，最多三分钟";
-            var res = await this.ViewModel.QuickExportAsync(saveFolder, QuickText).ConfigureAwait(false);
+            var res = await this.ViewModel.QuickExportAsync(saveFolder).ConfigureAwait(false);
 
             _ = DispatcherQueue.TryEnqueue(() => {
-                if (res != -1) {
+                if (res > 0) {
                     this.QuickInfoBar.Severity = InfoBarSeverity.Success;
                     this.QuickText.Text = $"成功导出{res}个对象，IO写入还在进行中，请勿立刻关闭程序";
                 } else {

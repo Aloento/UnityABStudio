@@ -9,7 +9,6 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
     using Converters.ShaderConverters;
     using Core.Services;
     using Extensions;
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SixLabors.ImageSharp;
 
@@ -30,6 +29,17 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
 
         [DataTestMethod]
         [DataRow("Assets/char_1012_skadi2.ab", 2938589673199698669)]
+        [DataRow("Assets/char_1012_skadi2.ab", -832438985796037128)]
+        [DataRow("Assets/char_1012_skadi2.ab", -403375242656156078)]
+        [DataRow("Assets/char_1012_skadi2.ab", 7717416592048335994)]
+        [DataRow("Assets/char_1012_skadi2.ab", 7422149870479952578)]
+        [DataRow("Assets/char_1012_skadi2.ab", -5194634970442144186)]
+        [DataRow("Assets/char_1012_skadi2.ab", -2020027452845813661)]
+        [DataRow("Assets/char_1012_skadi2.ab", -4093579471333325247)]
+        [DataRow("Assets/char_1012_skadi2.ab", 1035854462024827039)]
+        [DataRow("Assets/char_1012_skadi2.ab", 6003267157781619085)]
+        [DataRow("Assets/char_1012_skadi2.ab", 2222060065091517879)]
+        [DataRow("Assets/char_1012_skadi2.ab", -5045650368308443878)]
         public void TextureDecodeTest(string filePath, long PathID) {
             StudioTests.TryInitIoc();
 
@@ -42,7 +52,7 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
             if (img == null)
                 Assert.Fail("img 是 Null");
 
-            img.SaveAsPng(@"C:\CaChe\UnityABStudio_TextureResult.png");
+            img.SaveAsPng($@"C:\CaChe\UnityABStudio_TextureResult{DateTime.Now.Ticks}.png");
         }
 
         [DataTestMethod]
