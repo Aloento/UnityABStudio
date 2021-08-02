@@ -123,7 +123,7 @@ namespace SoarCraft.QYun.UnityABStudio.Views {
             #endregion
 
             this.QuickText.Text = "导出中，请耐心等待，最多三分钟";
-            var res = await this.ViewModel.QuickExportAsync(saveFolder).ConfigureAwait(false);
+            var res = await this.ViewModel.QuickExportAsync(saveFolder, QuickText).ConfigureAwait(false);
 
             _ = DispatcherQueue.TryEnqueue(() => {
                 if (res > 0) {

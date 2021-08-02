@@ -15,6 +15,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
     using Contracts.ViewModels;
     using Core.Models;
     using Extensions;
+    using Microsoft.UI.Dispatching;
     using Microsoft.UI.Xaml.Controls;
     using Serilog;
 
@@ -85,7 +86,7 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             }
         }
 
-        internal Task<int> QuickExportAsync(StorageFolder saveFolder) => Task.Run(async () => {
+        internal Task<int> QuickExportAsync(StorageFolder saveFolder, TextBlock quickText) => Task.Run(async () => {
             var objList = new List<UObject>();
             var filtered = new List<UObject>();
             var timeOuter = DateTime.Now.AddMinutes(3);
@@ -132,7 +133,11 @@ namespace SoarCraft.QYun.UnityABStudio.ViewModels {
             #endregion
 
             if (DateTime.Now.CompareTo(timeOuter) < 0) {
+                var i = 0;
                 foreach (var item in filtered.Select(x => new AssetItem(x, out _, out _))) {
+                    _ = quickText.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Low,
+                        () => quickText.Text = $"一共{filtered.Count}个任务，进行到第{++i}个");
+
                     _ = await item.ExportConvertFile(saveFolder.Path);
                 }
             } else {
