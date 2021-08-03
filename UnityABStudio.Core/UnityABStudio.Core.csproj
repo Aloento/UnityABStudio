@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AssetReader\AssetReader.csproj" />
     <ProjectReference Include="..\AutoDeskFBX\AutoDeskFBX.vcxproj" />
+    <ProjectReference Include="..\TextureDecoder.NET\TextureDecoderNET.csproj" />
     <ProjectReference Include="..\TextureDecoder\TextureDecoder.vcxproj" />
   </ItemGroup>
 
