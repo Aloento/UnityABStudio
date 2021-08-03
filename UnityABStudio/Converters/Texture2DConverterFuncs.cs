@@ -4,6 +4,7 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
     using AssetReader.Entities.Enums;
     using CommunityToolkit.Mvvm.DependencyInjection;
     using TextureDecoder;
+    using TextureDecoderNET;
     using Half = AssetReader.Math.Half;
 
     public partial class Texture2DConverter {
@@ -290,8 +291,8 @@ namespace SoarCraft.QYun.UnityABStudio.Converters {
         }
 
         private byte[] DecodeETC1() {
-            var buff = new byte[this.width * this.height * 4];
-            return this.decoder.DecodeETC1(this.image_data, this.width, this.height, buff) ? buff : null;
+            _ = new ETC1Decoder(this.image_data, (ulong)this.width, (ulong)this.height, out var buff);
+            return buff;
         }
 
         private byte[] DecodeATCRGB4() {
