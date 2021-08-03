@@ -1,5 +1,6 @@
 namespace SoarCraft.QYun.TextureDecoderNET {
     public class ETC1Decoder {
+
         private readonly byte[] writeOrderTable = { 0, 4, 8, 12, 1, 5, 9, 13, 2, 6, 10, 14, 3, 7, 11, 15 };
 
         private readonly byte[,] etc1SubBlockTable = {
@@ -25,18 +26,7 @@ namespace SoarCraft.QYun.TextureDecoderNET {
                 for (ulong y = 0; y < blocksY; y++) {
                     for (ulong x = 0; x < blocksX; x++, d += 8) {
                         this.DecodeETC1Block(d, out var block);
-
-                        #region ArrayCopy
-
-                        var xl = (4 * (x + 1) > width ? width - (4 * x) : 4) * 4;
-                        var buffer_end = block + (4 * 4);
-                        for (var y1 = y * 4; block < buffer_end && y1 < height; block += 4, y1++) {
-                            for (ulong i = 0; i < xl / sizeof(uint); i++) {
-                                ((uint*)pImage + (y1 * width) + (4 * x))[i] = block[i];
-                            }
-                        }
-
-                        #endregion
+                        Helpers.CopyBlockBuffer(width, height, x, y, block, pImage);
                     }
                 }
             }
@@ -80,16 +70,9 @@ namespace SoarCraft.QYun.TextureDecoderNET {
                     var s = this.etc1SubBlockTable[dimension, i];
                     var m = this.etc1ModifierTable[code[s], j & 1];
 
-                    block[writeOrderTable[i]] = ApplicateColor(c, (k & 1) != 0 ? -m : m, s);
+                    block[writeOrderTable[i]] = Helpers.ApplicateColor(c, (k & 1) != 0 ? -m : m, s);
                 }
             }
         }
-
-        private uint ApplicateColor(byte[,] c, int m, int d) =>
-            Color(Clamp(c[d, 0] + m), Clamp(c[d, 1] + m), Clamp(c[d, 2] + m), 255);
-
-        private uint Color(byte r, byte g, byte b, byte a) => (uint)(b | (g << 8) | (r << 16) | (a << 24));
-
-        private byte Clamp(int n) => (byte)(n < 0 ? 0 : n > 255 ? 255 : n);
     }
 }
