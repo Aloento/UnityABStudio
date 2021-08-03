@@ -11,6 +11,9 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
     using Extensions;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using SixLabors.ImageSharp;
+    using SixLabors.ImageSharp.PixelFormats;
+    using SixLabors.ImageSharp.Processing;
+    using TextureDecoderNET;
 
     [TestClass]
     public class CoreTests {
@@ -80,6 +83,26 @@ namespace SoarCraft.QYun.UnityABStudio.UnitTest {
             var a = cache.GetFileMD5Async(filePath);
             a.Wait();
             Console.WriteLine(a.Result);
+        }
+
+        [DataTestMethod]
+        [DataRow("Assets/char_1012_skadi2.ab", 2938589673199698669)]
+        public void ETC1Test(string filePath, long PathID) {
+            new AssetReaderTests().TryGetObjectByID(filePath, PathID, out var obj);
+
+            if (obj is not Texture2D)
+                Assert.Fail($"{PathID} 不是 {nameof(Texture2D)}");
+
+            var texture = (Texture2D)obj;
+            _ = new ETC1Decoder(texture.image_data.GetData(), (ulong)texture.m_Width, (ulong)texture.m_Height, out var data);
+
+            if (data is { Length: > 0 }) {
+                var image = Image.LoadPixelData<Bgra32>(data, texture.m_Width, texture.m_Height);
+                image.Mutate(x => x.Flip(FlipMode.Vertical));
+                image.SaveAsPng($@"C:\CaChe\UnityABStudio_TextureResult{DateTime.Now.Ticks}.png");
+            } else {
+                Assert.Fail("数组为空");
+            }
         }
     }
 }
